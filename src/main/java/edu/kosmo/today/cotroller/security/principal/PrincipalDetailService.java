@@ -10,7 +10,7 @@ import edu.kosmo.today.mapper.UserMapper;
 import edu.kosmo.today.vo.UserVO;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-@Slf4j
+@Slf4j//스프링부트는 Slf4j
 @Service //Bean 등록
 public class PrincipalDetailService implements UserDetailsService{
 	

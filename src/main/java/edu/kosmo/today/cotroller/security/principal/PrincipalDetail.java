@@ -10,10 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import edu.kosmo.today.vo.AuthVO;
 import edu.kosmo.today.vo.UserVO;
+import lombok.Data;
 
 
 //스프링 시큐리티가 로그인 요청을 가로채서 로그인을 진행학 완료가 되면 UserDetails 타입의 오브젝트를
 //스프링 시큐리티의 고유한 세션 저장소에 저장을 해 준다. 그 때 저장되는 게 UserDtails타입의 PrincipalDetail(현재 클래스)
+@Data
 public class PrincipalDetail implements UserDetails{
 	private UserVO user;//컴포지션 - 객체를 품고 있는 것.
 
