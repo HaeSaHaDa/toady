@@ -49,13 +49,26 @@
 				<li><a href="./team.html">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
 				<li><a href="gymlist">시설찾기</a></li>
-
-
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+			<c:choose>
+				<c:when test="${empty principal}">
+					<ul class="navbar-nav">
+						<a href="${pageContext.request.contextPath}/common/login">로그인</a>
+						<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+					</ul>
+				</c:when>
+				<c:otherwise>
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
