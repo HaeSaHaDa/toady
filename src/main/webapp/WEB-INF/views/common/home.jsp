@@ -44,7 +44,7 @@
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 
-				<li class="active"><a href="./index.html">Home</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 				<li><a href="./services.html">mypage</a></li>
 				<li><a href="./team.html">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
@@ -79,14 +79,14 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="./index.html"> <img src="img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="./index.html">Home</a></li>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="mypage">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
