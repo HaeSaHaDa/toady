@@ -14,4 +14,12 @@ public class MainCotroller {
 		return "common/home"; 
 	}
 	
+	@GetMapping("/common/adminPage")
+	public String joinForm() {
+		System.out.println("adminPage");
+		return "common/adminPage";
+	}
+	
+	
+	
 }
