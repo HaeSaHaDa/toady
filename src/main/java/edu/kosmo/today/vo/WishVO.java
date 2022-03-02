@@ -20,6 +20,9 @@ public class WishVO {
 	private int mnum; //회원번호
 	private int tnum; //티켓번호
 
-	private List<TicketVO> ticketList; //티켓정보를 가져오는 리스트
+	private String gname; //헬스장 이름
+	private String tname; //이용권이름
+	private int tcost; //이용권 가격
+	private int tdate; //이용권 기간
 	
 }
