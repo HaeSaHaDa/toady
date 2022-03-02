@@ -1,6 +1,7 @@
 package edu.kosmo.today.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,5 +39,5 @@ public class MemberVO {
 	private int mphone;
 	private String mbirth;
 	private String socialid;
-	
+
 }

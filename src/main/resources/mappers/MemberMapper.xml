@@ -7,7 +7,7 @@
   			
    <select id="getList" resultType="edu.kosmo.today.vo.MemberVO">
    <![CDATA[
-      select mnum, memail, mnickname from member order by mnum
+      select mnum, memail, mnickname, auth from member order by mnum
    ]]>
    </select>  
    
