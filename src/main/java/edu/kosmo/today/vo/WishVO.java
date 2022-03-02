@@ -16,5 +16,10 @@ TNUM             NUMBER
 @Builder
 public class WishVO {
 
+	private int wishnum; //찜번호
+	private int mnum; //회원번호
+	private int tnum; //티켓번호
+
+	private List<TicketVO> ticketList; //티켓정보를 가져오는 리스트
 	
 }
