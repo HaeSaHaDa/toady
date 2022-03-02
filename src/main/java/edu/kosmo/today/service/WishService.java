@@ -40,5 +40,11 @@ public class WishService {
 		
 		return list;
 	}
+	
+	public int deleteWishTicket(int wishNum) {
+		log.info(wishNum+"번의 이용권 삭제중");
+		
+		return mapper.deleteWishTicket(wishNum);
+	}
 
 }

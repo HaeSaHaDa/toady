@@ -31,5 +31,11 @@
 		select * from member where memail = #{memail} 
 		
 	</select>
+	
+	<delete id="deleteWishTicket" >
+		
+	delete form wish where wishnum =#{wishnum}
+		
+	</delete>
 
 </mapper>
