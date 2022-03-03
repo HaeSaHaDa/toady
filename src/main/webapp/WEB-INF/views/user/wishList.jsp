@@ -9,6 +9,9 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- csrf meta tag -->
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <title>오늘의 짐</title>
 <!-- ajax -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -332,8 +335,10 @@
                   </tr>
                 </thead>
                 <tbody> 
-                <c:forEach items="${wishList}" var="wish">                
-                    <tr>
+                <c:forEach items="${wishList}" var="wish">   
+                <div>            
+                    <tr id="select">
+                    <input type="hidden" name="wishnum"  value="${wish.wishnum}">
                     <td class="cart-pic first-row">
                       <img class="cart-img" src="img/hero/hero-2.jpg" alt="" />
                     </td>
@@ -355,6 +360,7 @@
                     <td class="total-price first-row">150000</td>
                     <th><span  class="delete-ticket">X</span></th>
                   </tr>
+                  </div> 
               </c:forEach> 
                 </tbody>
               </table>
@@ -578,21 +584,47 @@ $(document).ready(function(){
        $(".cart-total span").text(sum);
 
     });
+    /*<!-- csrf meta tag -->
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>*/
 
     $(".delete-ticket").on("click",function(){
-        console.log("삭제버튼 누르는 중");
+       console.log("삭제버튼 누르는 중");
        console.log(this);       
        let ticketnumber = $(this).parents("tr").find("input").val();
-       console.log(ticketnumber);
-       
-       wishDelete(ticketnumber);      
-        
+       console.log(ticketnumber+"찜번호");
+       var trname = $(this).parents("div").find("#select");
+       console.log(typeof ticketnumber);
+       console.log($(this).parents("tr")+"............");
+       var token = $("meta[name='_csrf']").attr("content");
+       var header = $("meta[name='_csrf_header']").attr("content");
+
+		console.log(token+","+header);
+		
+    	$.ajax({
+    		url : "/deleteWish/"+ticketnumber,
+    		type : 'DELETE',
+    		beforeSend : function(xhr){
+    			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+    		},
+    		cache : false,
+    		   success: function (result) {       
+    	           console.log(result);
+    			   
+    			   if(result=="ok"){    	                	 
+    				   $(trname).remove();  
+    	                 }     
+    	              },
+    	              error: function (e) {
+    	                  console.log(e);
+    	              }         
+    	       
+    	       });   
+    	    
+    	    });   
+
     
-      });
     
-    fuction wishDelete(ticketnumber){
-    	
-    }
    
 });
 </script>

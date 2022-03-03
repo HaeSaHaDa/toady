@@ -41,6 +41,8 @@ public class WishService {
 		return list;
 	}
 	
+	//찜 이용권 삭제 서비스
+	@Transactional
 	public int deleteWishTicket(int wishNum) {
 		log.info(wishNum+"번의 이용권 삭제중");
 		

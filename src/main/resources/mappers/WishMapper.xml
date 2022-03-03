@@ -34,7 +34,7 @@
 	
 	<delete id="deleteWishTicket" >
 		
-	delete form wish where wishnum =#{wishnum}
+	delete from wish where wishnum =#{wishnum}
 		
 	</delete>
 
