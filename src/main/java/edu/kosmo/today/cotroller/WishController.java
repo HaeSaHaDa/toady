@@ -56,7 +56,7 @@ public class WishController {
 	}
 	
 	//찜에 담긴 이용권 한개만 삭제
-	@DeleteMapping(value = "/deleteWish/{wishnum}")
+	@DeleteMapping("/deleteWish/{wishnum}")
 	@ResponseBody
 	public ResponseEntity<String> deleteWish(@PathVariable("wishnum") String wishnum){
 		ResponseEntity<String> entity = null;
@@ -74,28 +74,32 @@ public class WishController {
 		return entity;
 	}
 
+	
+	//찜목록 전체 삭제
+	@DeleteMapping("/deleteWish/{wishnum}")
+	@ResponseBody
+	public ResponseEntity<String> deleteWishList(){
+		ResponseEntity<String> entity = null;
+		
+		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 
+		int mnum = wishServise.getMemberNum(member.getUsername());
+		
+		System.out.println("찜 목록 삭제중..."+mnum+">>회원번호");
+		
+		try {
+			wishServise.deleteWishList(mnum);
+			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+	
+		return entity;
+	}
+	
+	
 }
-/*
- * $('.deleteComment').on('click', function(){ //this -> 지금 클릭된 문서 객체(태그) 여기서
- * <input type="button" value="삭제" class="deleteComment"> 중에 클릭된 아이 //$(this) ->
- * 그 태그를 선택 (자바스크립트 객체) 여기서 $('.deleteComment') 중에 선택된 아이 중요 문서객체(태그)와 자바스크립트
- * 객체를 나타내는 this, $(this) var num = $(this).attr('data_num'); //속성을 꺼내는 attr함수,
- * 클릭할 때마다 기본키를 받을 수 있도록 console.log(num);
- * 
- * //비동기식으로 pk값을 DB로 전달한 후 //삭제후 성공시 목록 재출력 $.ajax({
- * 
- * url : "deleteComment", type : "POST",
- * 
- * data :{ num : num }, success : function(){ alert("삭제했습니다."); init(); }, error
- * : function(error){ console.log(error); }
- * 
- * });
- * 
- * @ResponseBody
- * 
- * @RequestMapping(value="deleteComment", method = RequestMethod.POST) public
- * void deleteComment(int num){ System.out.println(num); dao.deleteComment(num);
- * 
- * }
- */
+
+

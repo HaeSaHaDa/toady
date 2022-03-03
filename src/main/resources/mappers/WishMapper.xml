@@ -37,5 +37,11 @@
 	delete from wish where wishnum =#{wishnum}
 		
 	</delete>
+	
+	<delete id="deleteWishList" >
+		
+	delete from wish where mnum =#{mnum}
+		
+	</delete>
 
 </mapper>

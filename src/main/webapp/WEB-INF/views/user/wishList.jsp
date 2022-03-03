@@ -263,14 +263,14 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="./index.html"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+						<a href="/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="./index.html">Home</a></li>
+							<li class="active"><a href="/today">Home</a></li>
 							<li><a href="mypage">mypage</a></li>
 							<li><a href="/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
@@ -368,7 +368,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="cart-buttons">
-                  <a href="#" class="primary-btn continue-shop">찜 비우기</a>
+                  <a href="/deleteWishAll" class="primary-btn continue-shop">찜 비우기</a>
                   <a href="#" class="primary-btn continue-shop">더 둘러보기</a>
                 </div>
               
@@ -622,7 +622,9 @@ $(document).ready(function(){
     	       });   
     	    
     	    });   
-
+		//<a href="/deleteWishAll" class="primary-btn continue-shop">찜 비우기</a>
+		//console.log($(this).attr("href"));
+		
     
     
    

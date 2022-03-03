@@ -23,5 +23,8 @@ public interface WishMapper {
 	  
 	//찜 선택한 것 한개만 삭제하는 것
 	public int deleteWishTicket(int wishNum);
+	
+	//찜 목록 전체 삭제
+	public void deleteWishList(int mnum);
 
 }
