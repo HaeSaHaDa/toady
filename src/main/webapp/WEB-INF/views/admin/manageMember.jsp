@@ -214,7 +214,9 @@
 									<td><a href="./manageMember/${member.mnum}">${member.mnickname}</a>
 									</td>
 
-									<td>${member.memail}</td>
+									<td>${member.auth}</td>
+									
+									
 									<td><a class="m-delete" data-bid='${member.mnum}'
 										href="./manageMember/${member.mnum}">삭제</a></td>
 								</tr>

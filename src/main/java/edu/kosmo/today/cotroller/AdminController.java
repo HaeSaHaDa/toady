@@ -27,24 +27,29 @@ public class AdminController {
 	@Autowired
 	private MemberService memberService;
 			
-//	@GetMapping("/manageMember")
-//	public ModelAndView memberList(ModelAndView mav) {
-//		log.info("memberList()");
-//		
-//		mav.setViewName("/admin/member/manageMember");
-//	mav.addObject("memberList", memberService.getList());
-//
-//		return mav;		
-//	}
+	
+	/*
+	@GetMapping("/manageMember")
+	public ModelAndView memberList(ModelAndView mav) {
+		log.info("memberList()");
+		
+		mav.setViewName("/admin/manageMember");
+	mav.addObject("memberList", memberService.getList());
+		return mav;		
+	}
+	*/
 	
 	@GetMapping("/manageMember")
-	public ModelAndView memberList(Criteria cri, ModelAndView mav) {
+	public ModelAndView getListPage(Criteria cri, ModelAndView mav) {
 		
-		log.info("list() ..");
+		System.out.println("pageList");
+		log.info("pagelist() ..");
 		log.info("Criteria" + cri);
 		
 		mav.setViewName("/admin/manageMember");
-		mav.addObject("memberList", memberService.getList(cri));
+		mav.addObject("memberList", memberService.getListPage(cri));
+		
+		log.info("memberService.getList(cri)" + memberService.getListPage(cri));
 		
 		int total = memberService.getTotal();
 		log.info("total" + total);
@@ -52,7 +57,6 @@ public class AdminController {
 		
 		return mav;
 	}
-	
 	
 	@DeleteMapping("/manageMember/{mnum}")
 	public ResponseEntity<String> delete(MemberVO memberVO, Model model) {

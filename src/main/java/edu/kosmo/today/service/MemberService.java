@@ -10,6 +10,7 @@ public interface MemberService {
 	public MemberVO get(int mnum);
 	public void remove(int mnum);
 	
+	
 	public int getTotal();  //페이징 처리 함수
-	public List<MemberVO> getList(Criteria criteria);
+	public List<MemberVO> getListPage(Criteria criteria);
 }

@@ -7,9 +7,9 @@
   			
    <select id="getList" resultType="edu.kosmo.today.vo.MemberVO">
    <![CDATA[
-      select mnum, memail, mnickname, auth from member order by mnum
+      select * from member,authority where member.memail = authority.memail
    ]]>
-   </select>  
+   </select> 
    
    <select id="read" resultType="edu.kosmo.today.vo.MemberVO">
 	<![CDATA[
@@ -30,23 +30,15 @@
 	]]>
 	</select>
 	
-	<!-- 	열개씩 뽑아내는거 한페이지에 출력해주는 역할 -->
-	<select id="getListWithPaging" resultType = "edu.kosmo.today.vo.MemberVO">
+	<select id="getListPage" resultType = "edu.kosmo.today.vo.MemberVO">
 	<![CDATA[
-		         SELECT * FROM (
+ 		          SELECT * FROM (
               SELECT ROWNUM AS RNUM, A.* FROM (
-                       SELECT
-                             *
-                         FROM
-                             member 
-                         order by mnum   
+                  select mnum , member.memail, mnickname, auth from member,authority where member.memail = authority.memail
              ) A WHERE ROWNUM <= #{pageNum} * #{amount}
          ) WHERE RNUM > (#{pageNum}-1) * #{amount}
 			
 	]]>
 	</select>
 	
-	
-
-   
 </mapper>

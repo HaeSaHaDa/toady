@@ -43,11 +43,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.getTotalCount();
 	}
 
+
 	@Override
-	public List<MemberVO> getList(Criteria criteria) {
-		
-		log.info("getList() ..");
-		return memberMapper.getListWithPaging(criteria);
+	public List<MemberVO> getListPage(Criteria criteria) {
+		log.info("getListPage() ..");
+		return memberMapper.getListPage(criteria);
 	}
 	
 }
