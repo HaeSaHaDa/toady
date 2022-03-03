@@ -57,6 +57,8 @@ public class WishController {
 	*/
 	
 	
+	
+	
 }
 /*  $('.deleteComment').on('click', function(){
 //this -> 지금 클릭된 문서 객체(태그) 여기서 <input type="button" value="삭제" class="deleteComment"> 중에 클릭된 아이
