@@ -13,4 +13,5 @@ public interface MemberService {
 	
 	public int getTotal();  //페이징 처리 함수
 	public List<MemberVO> getListPage(Criteria criteria);
+	public void modify(MemberVO memberVO); //권한 수정
 }

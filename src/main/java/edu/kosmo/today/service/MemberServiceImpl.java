@@ -49,5 +49,10 @@ public class MemberServiceImpl implements MemberService{
 		log.info("getListPage() ..");
 		return memberMapper.getListPage(criteria);
 	}
+
+	@Override
+	public void modify(MemberVO memberVO) {
+		memberMapper.update(memberVO);
+	}
 	
 }

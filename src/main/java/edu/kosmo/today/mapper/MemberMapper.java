@@ -17,6 +17,7 @@ public interface MemberMapper {
 		
 	public int getTotalCount();  //페이징 처리 관련
 	public List<MemberVO> getListPage(Criteria criteria);
+	void update(MemberVO memberVO); //권한 수정
 	
 	
 	

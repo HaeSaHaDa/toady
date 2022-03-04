@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html;charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <head>
@@ -24,14 +27,74 @@
 	rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/flaticon.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/barfiller.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/magnific-popup.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/slicknav.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	    
+		$("#updateAuth").submit(function(event){
+			
+			event.preventDefault();
+			
+	        var memail = $("#memail").val(); 
+	        var auth = $("#auth").val();
+	        	        
+	        console.log($(this).attr("action"));
+	        
+	        var form = {
+	        		memail: memail,
+	        		auth: auth
+	                
+	        };       
+			
+			
+	        console.log(JSON.stringify(form));
+
+	        $.ajax({
+			    type : "PUT",
+			    url : $(this).attr("action"),
+			    cache : false,
+			    contentType:'application/json; charset=utf-8',
+ 			    data: JSON.stringify(form), 
+			    success: function (result) {       
+					if(result == "SUCCESS"){
+						//list로					
+						$(location).attr('href', '${pageContext.request.contextPath}/admin/manageMember');				      	       
+					}					        
+			    },
+			    error: function (e) {
+			        console.log(e);
+			    }
+			})	       
+	
+	    }); // end submit()
+	    
+	}); // end ready()
+</script>
+
 
 </head>
 
@@ -78,7 +141,9 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+						<a href="index"> <img
+							src="${pageContext.request.contextPath}/img/logo.png" alt=""
+							width="500">
 						</a>
 					</div>
 				</div>
@@ -125,8 +190,10 @@
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/common/adminPage">MAIN</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원관리</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/common/adminPage">MAIN</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/admin/manageMember">회원관리</a></li>
 						<li><a href="#">헬스장 사장님 관리</a></li>
 						<li><a href="#">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
@@ -142,52 +209,52 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h4 class="text-white">회원 관리</h4>
-						
-						<table class="text-white" width="600" border="1" cellpadding="0"
-							cellspacing="0" border="1">
-							<form action="modify" method="post">
-								<input type="hidden" name="mnum" value="${memberDetail}">
-							
-							<input type="submit" value="블랙리스트 차단">
-							
-							
-							<tr>
-								<td width="25%">회원번호</td>
-								<td width="25%">${memberDetail.mnum}</td>
-								<td width="25%">닉네임</td>
-								<td width="25%">${memberDetail.mnickname}</td>
-							</tr>
 
-							<tr>
-								<td>이메일</td>
-								<td  colspan="3">${memberDetail.memail}</td>
-							</tr>
+						<table class="text-white" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+							<form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}" >
+								<input type="hidden" id="memail" name="memail" value="${memberDetail.memail}">
+								
+								
+								<tr>
+									<td width="25%">회원번호</td>
+									<td width="25%">${memberDetail.mnum}</td>
+									<td width="25%">닉네임</td>
+                           			<td width="25%">${memberDetail.mnickname}</td>
+									
+								</tr>
 
-							<tr>
-								<td>연락처</td>
-								<td  colspan="3">${memberDetail.mphone}</td>
-							</tr>
+								<tr>
+									<td>이메일</td>
+									<td colspan="3">${memberDetail.memail}</td>
+								</tr>
 
-							<tr>
-								<td>생년월일</td>
-								<td colspan="3">${memberDetail.mbirth}</td>
-							</tr>
+								<tr>
+									<td>연락처</td>
+									<td colspan="3">${memberDetail.mphone}</td>
+								</tr>
 
-							<tr>
-								<td>권한자리 수정필요</td>
-								<td> <input type="text" id="auth" name="auth" value="${memberDetail.mbirth}"></td>
-							</tr>
+								<tr>
+									<td>생년월일</td>
+									<td colspan="3">${memberDetail.mbirth}</td>
+								</tr>
 
-							<tr>
-								<td>구매이용권 자리 수정필요</td>
-							</tr>
-							
+								<tr>
+									<td>회원구분</td>
+									<td><input type="text" id="auth" name="auth"
+										value="${memberDetail.auth}"></td>
+								</tr>
+
+								<tr>
+									<td>구매이용권 자리 수정필요</td>
+									<td colspan="3">${memberDetail.memail}</td>
+								</tr>
+
+								<tr>
+									<td width="100%"><input type="submit" value="수정하기"> &nbsp;&nbsp; 
+									<a href="list">쪽지보내기</a></td>
+								</tr>
 							</form>
 						</table>
-
-						<input type="submit" value="수정하기"> 
-						<input type="submit" value="쪽지보내기">
-
 					</div>
 				</div>
 			</div>
@@ -236,7 +303,8 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="#"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
+								<a href="#"><img
+									src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
@@ -334,7 +402,8 @@
 	<!-- Js Plugins -->
 	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
