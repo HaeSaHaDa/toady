@@ -101,6 +101,7 @@ public class WishController {
 		return "redirect:/user/wishlist";
 	}
 	
+	//주문하기
 	
 }
 
