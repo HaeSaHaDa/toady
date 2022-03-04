@@ -358,7 +358,7 @@
                         </div>
                     </td>
                     </td>
-                    <td class="total-price first-row">150000</td>
+                    <td class="total-price first-row">${wish.tcost}</td>
                     <th><span  class="delete-ticket">X</span></th>
                   </tr>
                   </div> 
@@ -369,7 +369,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="cart-buttons">
-                  <a href="javascript:void(0)" class="primary-btn delete-wishall" onClick="javascript:goDeleteAll()">찜 비우기</a>
+                  <a href="/deletewishall" class="primary-btn .continue-shop">찜 비우기</a>
                   <a href="#" class="primary-btn continue-shop">더 둘러보기</a>
                 </div>
               
@@ -377,7 +377,7 @@
               <div class="col-lg-4 offset-lg-4">
                 <div class="proceed-checkout">
                   <ul>
-                    <li class="cart-total">Total <span>150000</span></li>
+                    <li class="cart-total">Total <span>${wishPrice}</span></li>
                   </ul>
                   <a href="#" class="proceed-btn">결제하기</a>
                 </div>
@@ -532,7 +532,27 @@
 
 <script>
 $(document).ready(function(){	
-    
+	
+	
+	let list = "<c:out value="${wishlist}"/>"
+	console.log("목록"+list);
+	
+	let htmls ="";
+	htmls += '<tr>';
+	htmls += '<td colspan="7"></td>';
+	htmls += '</tr>';
+	htmls += '<tr>';
+	htmls += '<td colspan="7"><h5>찜한 이용권이 없습니다.</h5></td>';
+	htmls += '</tr>';
+	htmls += '<tr>';
+	htmls += '<td colspan="7"></td>';
+	htmls += '</tr>';
+	
+	if(list == ""){
+		$(".cart-table tbody").append(htmls);
+		
+	}
+	    
     $(".dec").on("click",function(e){
         var thisRow = $(this).closest('tr');
         console.log(thisRow.find('td:eq(3)').text());
@@ -544,6 +564,7 @@ $(document).ready(function(){
 
         let coast = thisRow.find('td:eq(3)').text();
         console.log(Number(tdate)*Number(coast));
+        let total = Number(tdate)*Number(coast);
         thisRow.find('td:eq(5)').text(total);
    
     }
@@ -565,9 +586,11 @@ $(document).ready(function(){
     });
 
     $(".qtybtn").on("click",function(e){
-        console.log("이거는 최종가격넣는것");
-        const total = $(".cart-total span").text();
-        console.log(total);
+       console.log("총 가격 넣는중");
+       const total = $(".cart-total span").text();
+       
+        console.log("총가격은 >>"+total);
+        
 
        let arr = $(".total-price").length;
 
@@ -626,38 +649,12 @@ $(document).ready(function(){
 		// <a href="javascript:void(0)" class="primary-btn delete-wishall" onClick="javascript:goDeleteAll()">찜 비우기</a>
 		//console.log($(this).attr("href"));
 		//<div id="wishtable">  
-		function goDeleteAll(){
-			console.log("장바구니비우기버튼누름");
-			let list = $(${wishlist});
-			
-			$.ajax({
-	    		url : $(this).attr("href") ,
-	    		type : "GET",
-	    		beforeSend : function(xhr){
-	    			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
-	    		},
-	    		cache : false,
-	    		   success: function (result) {       
-	    	           console.log(result);
-	    			   
-	    			   if(result=="ok"){    	                	 
-	    				   $("#select").remove();  
-	    	                 }
-	    			   if(list ==""){
-	    				   $("<tr>",{
-	    					   html : "<td colspan"+" ='7'>"+"찜한 이용권이 없습니다."+"</td>"}).appendTo("#wishtable");
-	    			   }
-	    	              },
-	    	              error: function (e) {
-	    	                  console.log(e);
-	    	              }         
-	    	       
-	    	       });   
-		}
+		
 		    
-    
-   
+     
 });
+
+
 </script>
 
 

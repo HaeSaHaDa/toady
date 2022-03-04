@@ -1,5 +1,6 @@
 package edu.kosmo.today.cotroller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
 import edu.kosmo.today.service.WishService;
@@ -48,9 +49,19 @@ public class WishController {
 		List<WishVO> wishlist = wishServise.getWishList(mnum);
 
 		System.out.println("회원번호는" + mnum);
+		
+		List<Integer> cost = wishServise.getPriceWish(mnum);
+		log.info("......"+cost);
+		int sum =0;
+		
+		for(Integer i : cost) {
+			sum += i;
+		}
+		log.info("찜최종가격은"+sum);
 
 		mav.setViewName("user/wishList");
 		mav.addObject("wishList", wishlist);
+		mav.addObject("wishPrice", sum);
 
 		return mav;
 	}
@@ -76,27 +87,18 @@ public class WishController {
 
 	
 	//찜목록 전체 삭제
-	@GetMapping("/deleteWishAll")
-	@ResponseBody
-	public ResponseEntity<String> deleteWishList(){
-		ResponseEntity<String> entity = null;
-		
+	@GetMapping("/deletewishall")
+	public String deleteWish() {
+		log.info("찜목록비우는중...");
+
 		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
 		int mnum = wishServise.getMemberNum(member.getUsername());
 		
-		System.out.println("찜 목록 삭제중..."+mnum+">>회원번호");
+		wishServise.deleteWishList(mnum);
 		
-		try {
-			wishServise.deleteWishList(mnum);
-			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
-		}
-	
-		return entity;
+		return "redirect:/user/wishlist";
 	}
 	
 	

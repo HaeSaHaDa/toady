@@ -20,6 +20,8 @@ public interface WishMapper {
 	
 	//찜 목록 가져오기 회원번호를 이용하여 로그인한 회원의 찜목록을 가져온다
 	public List<WishVO> getWishList(int mnum); 
+	//찜목록의 이용권들의 가격만 리스트로 뽑아오는 mapper
+	public List<Integer> priceList(int mnum);
 	  
 	//찜 선택한 것 한개만 삭제하는 것
 	public int deleteWishTicket(int wishNum);

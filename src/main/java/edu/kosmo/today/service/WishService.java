@@ -30,7 +30,8 @@ public class WishService {
 
 		return mapper.getMemberNum(memail);
 	}
-
+	
+	//찜 목록을 가져오는 서비스
 	public List<WishVO> getWishList(int mnum) {
 		log.info("getWishList...");
 		log.info(mnum + "의 찜목록을 불러오는중");
@@ -39,6 +40,15 @@ public class WishService {
 
 		return list;
 	}
+	//찜 목록의 최종가격을 가져오는 서비스
+	public List<Integer> getPriceWish(int mnum){
+		log.info(mnum+"의 장바구니 가격구하는중..");
+		
+		List<Integer> price = mapper.priceList(mnum);
+		
+		return price;
+	}
+	
 
 	// 찜 이용권 삭제 서비스
 	@Transactional

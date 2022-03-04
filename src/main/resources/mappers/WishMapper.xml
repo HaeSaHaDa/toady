@@ -43,5 +43,11 @@
 	delete from wish where mnum =#{mnum}
 		
 	</delete>
+	
+	<select id="priceList" resultType="_int">
+
+		SELECT	tcost	FROM wish,ticket WHERE wish.tnum = ticket.tnum and wish.mnum = #{mnum}
+
+	</select>
 
 </mapper>
