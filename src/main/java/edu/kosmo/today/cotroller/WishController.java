@@ -76,7 +76,7 @@ public class WishController {
 
 	
 	//찜목록 전체 삭제
-	@DeleteMapping("/deleteWish/{wishnum}")
+	@GetMapping("/deleteWishAll")
 	@ResponseBody
 	public ResponseEntity<String> deleteWishList(){
 		ResponseEntity<String> entity = null;

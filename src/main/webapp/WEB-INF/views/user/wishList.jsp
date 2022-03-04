@@ -155,7 +155,7 @@
         margin-bottom: 34px;
       }
 
-      .cart-buttons .continue-shop {
+      .cart-buttons .continue-shop .delete-wishall {
         color: #b2b2b2;
         border: 2px solid #ebebeb;
         background: #ffffff;
@@ -331,15 +331,16 @@
                     <th>가격</th>
                     <th>기간(개월)</th>
                     <th>합계</th>
-                    <th>X</th>
+                    <th>삭제</th>
                   </tr>
                 </thead>
                 <tbody> 
                 <c:forEach items="${wishList}" var="wish">   
-                <div>            
+                <div id="wishtable">            
                     <tr id="select">
                     <input type="hidden" name="wishnum"  value="${wish.wishnum}">
                     <td class="cart-pic first-row">
+                    <!-- 여기는 나중에 이미지이름넣기 -->
                       <img class="cart-img" src="img/hero/hero-2.jpg" alt="" />
                     </td>
                     <td class="cart-title first-row">
@@ -368,7 +369,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="cart-buttons">
-                  <a href="/deleteWishAll" class="primary-btn continue-shop">찜 비우기</a>
+                  <a href="javascript:void(0)" class="primary-btn delete-wishall" onClick="javascript:goDeleteAll()">찜 비우기</a>
                   <a href="#" class="primary-btn continue-shop">더 둘러보기</a>
                 </div>
               
@@ -622,10 +623,38 @@ $(document).ready(function(){
     	       });   
     	    
     	    });   
-		//<a href="/deleteWishAll" class="primary-btn continue-shop">찜 비우기</a>
+		// <a href="javascript:void(0)" class="primary-btn delete-wishall" onClick="javascript:goDeleteAll()">찜 비우기</a>
 		//console.log($(this).attr("href"));
-		
-    
+		//<div id="wishtable">  
+		function goDeleteAll(){
+			console.log("장바구니비우기버튼누름");
+			let list = $(${wishlist});
+			
+			$.ajax({
+	    		url : $(this).attr("href") ,
+	    		type : "GET",
+	    		beforeSend : function(xhr){
+	    			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+	    		},
+	    		cache : false,
+	    		   success: function (result) {       
+	    	           console.log(result);
+	    			   
+	    			   if(result=="ok"){    	                	 
+	    				   $("#select").remove();  
+	    	                 }
+	    			   if(list ==""){
+	    				   $("<tr>",{
+	    					   html : "<td colspan"+" ='7'>"+"찜한 이용권이 없습니다."+"</td>"}).appendTo("#wishtable");
+	    			   }
+	    	              },
+	    	              error: function (e) {
+	    	                  console.log(e);
+	    	              }         
+	    	       
+	    	       });   
+		}
+		    
     
    
 });
