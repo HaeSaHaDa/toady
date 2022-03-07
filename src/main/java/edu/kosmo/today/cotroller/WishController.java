@@ -1,7 +1,10 @@
 package edu.kosmo.today.cotroller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +16,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 
 import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
 import edu.kosmo.today.service.WishService;
@@ -100,8 +107,71 @@ public class WishController {
 		
 		return "redirect:/user/wishlist";
 	}
+	/*@RequestMapping(value="URL이 들어가는 자리") 
+	 * public void MemberInfo( @RequestBody HashMap<String, Object> params ) throws Exception { 
+	 * List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
+	 *  map = JSONArray.fromObject(params); 
+	 *  for(Map<String, Object> for_map : map){ 
+	 *  System.out.println("ID : " + for_map.get("id") + "/" + 
+	 *  "PASSWORD : " + for_map.get("pw")); } 
+	 *  }
+	 */
+	/*<dependency>
+<groupId>net.sf.json-lib</groupId>
+<artifactId>json-lib</artifactId>
+<version>2.4</version>
+<classifier>jdk15</classifier>
+</dependency>
+
+
+출처: https://smile-place.tistory.com/entry/SPRING-파라미터-속-json-배열-꺼내쓰기 [Smile Place]*/
 	
-	//주문하기
+	//찜 수량 업데이트하기
+	@RequestMapping("/updatewishlist")
+	public ResponseEntity<String> update_wishlist(@RequestBody HashMap<String, Integer> params){
+		ResponseEntity<String> entity = null;
+		
+		List<Map<String,Integer>> map = new ArrayList<Map<String,Integer>>();
+		//map = JSONArray.fromObject(params); 
+		
+		try {
+
+			for(Map<String,Integer> for_map : map) {
+				wishServise.updateWishList(for_map.get("wishnum"), for_map.get("tdate"));
+			}
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+		
+		
+		return entity;
+	}
+	
+	//주문하기(결제페이지로 이동)
+	@GetMapping("/user/checkoutpage")
+	public ModelAndView goCheckOut(ModelAndView mav) {
+		
+		
+		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+
+		int mnum = wishServise.getMemberNum(member.getUsername()); //회원번호 구하기
+		List<WishVO> wishlist = wishServise.getWishList(mnum); //해당회원의 찜목록 불러오기
+		
+		log.info(mnum+"회원의 결제페이지로 가는중");		
+		
+		mav.setViewName("user/checkOut");
+		mav.addObject("checklist", wishlist);
+			
+		return mav;
+	}
+	
+	
+	
+	
 	
 }
 

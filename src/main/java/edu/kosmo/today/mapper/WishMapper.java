@@ -28,5 +28,8 @@ public interface WishMapper {
 	
 	//찜 목록 전체 삭제
 	public void deleteWishList(int mnum);
+	
+	//찜 소량 수정
+	public void updateWishList(int wishnum,int tdate);
 
 }

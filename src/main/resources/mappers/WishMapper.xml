@@ -49,5 +49,8 @@
 		SELECT	tcost	FROM wish,ticket WHERE wish.tnum = ticket.tnum and wish.mnum = #{mnum}
 
 	</select>
+	<update id="updateWishList">
+		update wish set tdate = #{tdate} where wishnum = #{wishnum}
+	</update>
 
 </mapper>

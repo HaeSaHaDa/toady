@@ -57,7 +57,7 @@
 
       .cart-table table tr th {
         font-size: 16px;
-        color: #252525;
+        color:  whitesmoke;  <!--#252525;-->
         font-weight: 700;
         border-bottom: 1px solid #ebebeb;
         text-align: center;
@@ -338,7 +338,7 @@
                 <c:forEach items="${wishList}" var="wish">   
                 <div id="wishtable">            
                     <tr id="select">
-                    <input type="hidden" name="wishnum"  value="${wish.wishnum}">
+                    <input type="hidden" id="wishnum" name="wishnum"  value="${wish.wishnum}">
                     <td class="cart-pic first-row">
                     <!-- 여기는 나중에 이미지이름넣기 -->
                       <img class="cart-img" src="img/hero/hero-2.jpg" alt="" />
@@ -352,7 +352,7 @@
                         <div class="quantity">
                             <div class="pro-qty">
                                 <span class="dec qtybtn">-</span>
-                                <input type="text" name="tdate"  value="${wish.tdate}">
+                                <input type="text" id="tdate" name="tdate"  value="${wish.tdate}">
                                 <span class="inc qtybtn">+</span>
                             </div>
                         </div>
@@ -379,7 +379,7 @@
                   <ul>
                     <li class="cart-total">Total <span>${wishPrice}</span></li>
                   </ul>
-                  <a href="#" class="proceed-btn">결제하기</a>
+                  <a href="/user/checkoutpage" class="proceed-btn">결제하기</a>
                 </div>
               </div>
             </div>
@@ -595,6 +595,7 @@ $(document).ready(function(){
        let arr = $(".total-price").length;
 
        let arr2 = new Array(arr);
+       
 
         let sum =0;
 
@@ -646,10 +647,61 @@ $(document).ready(function(){
     	       });   
     	    
     	    });   
-		// <a href="javascript:void(0)" class="primary-btn delete-wishall" onClick="javascript:goDeleteAll()">찜 비우기</a>
-		//console.log($(this).attr("href"));
-		//<div id="wishtable">  
-		
+		/*
+    let arr = $(".total-price").length;
+
+    let arr2 = new Array(arr);
+    
+
+     let sum =0;
+
+    for(let i =0; i<arr;i++){
+        arr2[i]=Number($(".total-price").eq(i).text());
+        console.log(i+"번째 텍스트"+arr2[i]);
+        sum += arr2[i];
+    }
+    console.log(sum);
+
+    $(".cart-total span").text(sum);*/
+    
+    $(".proceed-btn").on("click",function(){
+    	console.log("결제페이지로 이동 버튼 누름");
+    	
+    	let num = $(".wishnum").length;
+    	console.log("목록 갯수 : "+num);
+    	
+    	let list = new Array(num);
+
+    	
+    	for(let i =0; i< num; i++){
+    		let wishdata = {
+    			wishnum : Number($(".wishnum").eq(i).value());
+    			tdate : Number($(".tdate").eq(i).value());	
+    		}
+    		
+    	}
+    	list.push(wishdata);
+    	
+    	
+    	   $.ajax({
+               type : "POST",
+               url : "/updatewishlist",
+               cache : false,
+               contentType:'application/json; charset=utf-8',
+                data: JSON.stringify(list), 
+               success: function (result) {       
+                 if(result == "SUCCESS"){
+                    //list로               
+                    $(location).attr('href', '/user/checkoutpage');                            
+                 }                       
+               },
+               error: function (e) {
+                   console.log(e);
+               }
+           })  
+    	
+    });
+    
 		    
      
 });
