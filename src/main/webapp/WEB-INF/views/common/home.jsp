@@ -74,7 +74,7 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="./index.html">Home</a></li>
-							<li><a href="mypage">mypage</a></li>
+							<li><a href="myPage">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>
