@@ -32,6 +32,7 @@ import edu.kosmo.today.vo.UserVO;
 import edu.kosmo.today.vo.WishVO;
 import lombok.extern.slf4j.Slf4j;
 
+
 /*
  * 찜 기능을 위한 controller 0302 작성(김보람)
  * */
@@ -107,44 +108,23 @@ public class WishController {
 		
 		return "redirect:/user/wishlist";
 	}
-	/*@RequestMapping(value="URL이 들어가는 자리") 
-	 * public void MemberInfo( @RequestBody HashMap<String, Object> params ) throws Exception { 
-	 * List<Map<String,Object>> map = new ArrayList<Map<String,Object>>();
-	 *  map = JSONArray.fromObject(params); 
-	 *  for(Map<String, Object> for_map : map){ 
-	 *  System.out.println("ID : " + for_map.get("id") + "/" + 
-	 *  "PASSWORD : " + for_map.get("pw")); } 
-	 *  }
-	 */
-	/*<dependency>
-<groupId>net.sf.json-lib</groupId>
-<artifactId>json-lib</artifactId>
-<version>2.4</version>
-<classifier>jdk15</classifier>
-</dependency>
-
-
-출처: https://smile-place.tistory.com/entry/SPRING-파라미터-속-json-배열-꺼내쓰기 [Smile Place]*/
 	
 	//찜 수량 업데이트하기
-	@RequestMapping("/updatewishlist")
-	public ResponseEntity<String> update_wishlist(@RequestBody HashMap<String, Integer> params){
+	@RequestMapping(value = "/updateWish" , method=RequestMethod.POST)
+	public ResponseEntity<String> update_wishlist(@RequestBody WishVO wish){
+		log.info("수량 업데이트 중");
+		log.info(wish+"...");
 		ResponseEntity<String> entity = null;
 		
-		List<Map<String,Integer>> map = new ArrayList<Map<String,Integer>>();
-		//map = JSONArray.fromObject(params); 
-		
 		try {
-
-			for(Map<String,Integer> for_map : map) {
-				wishServise.updateWishList(for_map.get("wishnum"), for_map.get("tdate"));
-			}
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			
+			wishServise.updateWishList(wish);
+			 entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			 e.printStackTrace();
+
+	            entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
 		}
+		
 		
 		
 		return entity;

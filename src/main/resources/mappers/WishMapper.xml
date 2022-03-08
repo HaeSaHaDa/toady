@@ -9,7 +9,7 @@
 		<result property="wishnum" column="wishnum" />
 		<result property="mnum" column="mnum" />
 		<result property="tnum" column="tnum" />
-
+		<result property="wdate" column="wdate" />
 		<result property="gname" column="gname" />
 		<result property="tname" column="tname" />
 		<result property="tcost" column="tcost" />
@@ -50,7 +50,7 @@
 
 	</select>
 	<update id="updateWishList">
-		update wish set tdate = #{tdate} where wishnum = #{wishnum}
+		update wish set wdate = #{wdate} where wishnum = #{wishnum}
 	</update>
 
 </mapper>

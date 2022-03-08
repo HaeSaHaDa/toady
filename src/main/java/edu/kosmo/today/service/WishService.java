@@ -66,10 +66,10 @@ public class WishService {
 	}
 	
 	//찜 수량 수정 
-	public void updateWishList(int wishnum, int tdate) {
+	public void updateWishList(WishVO vo) {
 		log.info("수량수정중..");
 		
-		mapper.updateWishList(wishnum, tdate);
+		mapper.updateWishList(vo);
 	}
 
 }

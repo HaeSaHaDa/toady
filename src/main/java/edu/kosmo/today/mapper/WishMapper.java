@@ -30,6 +30,6 @@ public interface WishMapper {
 	public void deleteWishList(int mnum);
 	
 	//찜 소량 수정
-	public void updateWishList(int wishnum,int tdate);
+	public void updateWishList(WishVO wish);
 
 }

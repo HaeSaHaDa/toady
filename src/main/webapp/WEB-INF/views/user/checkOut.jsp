@@ -16,51 +16,31 @@
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 <title>오늘의 짐</title>
 <!-- ajax -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet"	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+<script	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
+<link	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
 	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
+<link	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
 	rel="stylesheet">
-
+<!-- 다음 주소 -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- Css Styles -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/bootstrap.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/font-awesome.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/flaticon.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/barfiller.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/magnific-popup.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/slicknav.min.css"
 	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/flaticon.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/barfiller.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/magnific-popup.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 </head>
 <style>
 .checkout-form .checkout-title {
@@ -266,12 +246,10 @@
 								<div class="col-md-8">
 									<div class="form-group">
 										<input class="form-control"
-											style="width: 50%; display: inline;" placeholder="우편번호"
+											style="width: 40%; display: inline;" placeholder="우편번호"
 											name="addr1" id="addr1" type="text" readonly="readonly">
-										<button type="button" class="btn btn-default"
-											onclick="execPostCode();">
-											<i class="fa fa-search"></i> 우편번호 찾기
-										</button>
+										<button type="button" class="btn btn-default" onclick="execPostCode();">
+											<i class="fa fa-search"></i> 우편번호 찾기	</button>
 									</div>
 									<div class="form-group">
 										<input class="form-control" style="top: 5px;"
@@ -282,6 +260,9 @@
 										<input class="form-control" placeholder="상세주소" name="addr3"
 											id="addr3" type="text" />
 									</div>
+
+
+
 
 								</div>
 							</div>
@@ -300,12 +281,12 @@
 												</tr>
 											</thead>
 											<tbody>
-											<c:forEach items="${checklist}" var="check">
-												<tr>
-													<td>${check.tname}</td>
-													<td>${check.tdate}</td>
-													<td class="price">${check.tcost}*${check.tdate}</td>
-												</tr>
+												<c:forEach items="${checklist}" var="check">
+													<tr>
+														<td>${check.tname}</td>
+														<td class="wdate">${check.wdate}</td>
+														<td class="price">${check.tcost}</td>
+													</tr>
 												</c:forEach>
 											</tbody>
 											<tfoot>
@@ -473,74 +454,84 @@
 	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
-	<script
-		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/js/daumpost.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 	<script>
-	$(document).ready(function(){	
-	let arr = $(".price").length;
+		$(document)	.ready(	function() {
+							let arr = $(".price").length;
 
-    let arr2 = new Array(arr);
-    
-    let sum =0;
-    
-    for(let i =0; i<arr;i++){
-        arr2[i]=Number($(".price").eq(i).text());
-        console.log(i+"번째 텍스트"+arr2[i]);
-        sum += arr2[i];
-    }
-    console.log(sum);
+							console.log(arr);
 
-    $(".totalprice").text(sum);
-	
-	function execPostCode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-               // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+							let arr2 = new Array(arr);
 
-               // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-               // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-               var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-               var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+							let sum = 0;
 
-               // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-               // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-               if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                   extraRoadAddr += data.bname;
-               }
-               // 건물명이 있고, 공동주택일 경우 추가한다.
-               if(data.buildingName !== '' && data.apartment === 'Y'){
-                  extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-               }
-               // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-               if(extraRoadAddr !== ''){
-                   extraRoadAddr = ' (' + extraRoadAddr + ')';
-               }
-               // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-               if(fullRoadAddr !== ''){
-                   fullRoadAddr += extraRoadAddr;
-               }
+							for (let i = 0; i < arr; i++) {
+								arr2[i] = Number($(".price").eq(i).text());
+								console.log(i + "번째 텍스트" + arr2[i]);
+								sum += arr2[i];
+								$(".price").eq(i).text(
+										arr2[i]
+												* Number($(".wdate").eq(i)
+														.text()));
+							}
+							console.log(sum);
 
-               // 우편번호와 주소 정보를 해당 필드에 넣는다.
-               console.log(data.zonecode);
-               console.log(fullRoadAddr);
-               
-               
-               $("[name=addr1]").val(data.zonecode);
-               $("[name=addr2]").val(fullRoadAddr);
-               
-               /* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
-               document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
-               document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
-           }
-        }).open();
-    }
-	}
+							$(".totalprice").text(sum);
+							
 
+						});//ready끝
+		
+		function execPostCode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-</script>
+							// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+							if (data.bname !== ''
+									&& /[동|로|가]$/g
+											.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+							// 건물명이 있고, 공동주택일 경우 추가한다.
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName
+										: data.buildingName);
+							}
+							// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' ('
+										+ extraRoadAddr
+										+ ')';
+							}
+							// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+							if (fullRoadAddr !== '') {
+								fullRoadAddr += extraRoadAddr;
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							console.log(data.zonecode);
+							console.log(fullRoadAddr);
+
+							$("[name=addr1]").val(data.zonecode);
+							$("[name=addr2]").val(fullRoadAddr);
+
+							/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
+							document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
+							document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
+						}
+					}).open();
+		}
+	</script>
 
 
 </body>
