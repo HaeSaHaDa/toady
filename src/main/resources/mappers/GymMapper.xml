@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.kosmo.today.mapper.GymMapper">
+
+	<resultMap id="gymList" type="edu.kosmo.today.vo.GymVO">
+		<result property="gnum" column="gnum" />
+		
+		<result property="gname" column="gname" />
+		<result property="gcategory" column="gcategory" />
+		<result property="gadress" column="gadress" />
+		<result property="gphone" column="gphone" />
+		<result property="ginform" column="ginform" />
+		<result property="gtime" column="gtime" />
+		<result property="gfacility" column="gfacility" />
+		<result property="gsns" column="gsns" />
+		<result property="filename" column="filename" />
+	</resultMap>
+	
+	<resultMap id="ticket" type="edu.kosmo.today.vo.TicketVO">
+		<result property="tnum" column="tnum" />		
+		<result property="gnum" column="gnum" />
+		<result property="tcost" column="tcost" />
+		<result property="tdate" column="tdate" />
+		<result property="tname" column="tname" />
+
+	</resultMap>
+
+
+
+
+	<select id="gymList" resultMap="gymList">
+		
+		select * from gympage
+		
+	</select>
+	
+	<select id="gymdetail" resultMap="gymList">
+		
+		select * from gympage where gnum = #{gnum}
+		
+	</select>
+	
+	<select id="getticket" resultMap="ticket">
+		
+		select * from ticket where gnum = #{gnum}
+		
+	</select>
+	
+
+</mapper>
