@@ -47,7 +47,7 @@ public class GymPageController {
 	private GymServicce service;
 
 	//시설목록으로 가기
-	@GetMapping("/gymlist")
+	@GetMapping("/common/gymlist")
 	public ModelAndView gymList(ModelAndView mav) {
 		log.info("시설목록으로 들어가는 중");
 
@@ -60,7 +60,7 @@ public class GymPageController {
 	}
 	
 	//시설 상세 페이지 보기
-	@GetMapping("/gymdetail/{gnum}")
+	@GetMapping("/common/gymdetail/{gnum}")
 	public ModelAndView gymDetailPage(ModelAndView mav,GymVO vo){
 		log.info("시설 상세페이지로 가는 중");
 		

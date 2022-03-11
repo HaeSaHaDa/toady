@@ -65,9 +65,9 @@
 				
 							<li class="active"><a href="./index.html">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
+							<li><a href="/user/wish">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="./team.html">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 
 						
 			</ul>
@@ -88,7 +88,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="img/logo.png" alt="" width="500">
+						<a href="index"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -97,9 +97,9 @@
 						<ul>
 							<li class="active"><a href="./index.html">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="./team.html">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 
 						</ul>
 					</nav>
@@ -138,12 +138,12 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="class-item">
 						<div class="ci-pic">
-							<img src="img/classes/class-3.jpg" alt="">
+							<img src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="">
 						</div>
 						<div class="ci-text">
 							<span>${gym.gcategory}</span>
 							<h5>${gym.gname}</h5>
-							<a href="/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+							<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>

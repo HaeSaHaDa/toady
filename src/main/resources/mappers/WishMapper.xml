@@ -52,7 +52,7 @@
 
 	<insert id="insertWish">
 		
-		insert into wish (wishnum,mnum,tnum,wdate) value (wish_seq.nextval,#{mnum},#{tnum},1)
+		insert into wish (wishnum,mnum,tnum,wdate) values (wish_seq.nextval,#{mnum},#{tnum},1)
 		
 	</insert>
 

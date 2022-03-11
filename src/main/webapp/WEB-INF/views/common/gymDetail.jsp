@@ -193,7 +193,7 @@
 						<ul>
 							<li class="active"><a href="./index.html">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="./team.html">시설찾기</a></li>
 
@@ -534,10 +534,10 @@ $(document).ready(function(){
 	    var header = $("meta[name='_csrf_header']").attr("content");
 		console.log("장바구니 추가 버튼 누르는 중..");
 		
-		let login = ${principal.username};
+		let login = "${principal.username}";
 		
 		if(login == ""){
-			if(confirm("로그인이 필요합니다.") == true){
+			if(confirm("로그인이 필요합니다.")){
 				 location.href = "/login";				
 			}
 		}else{
@@ -574,7 +574,7 @@ $(document).ready(function(){
 	
 	
 	
-}
+})
 
 
 </script>

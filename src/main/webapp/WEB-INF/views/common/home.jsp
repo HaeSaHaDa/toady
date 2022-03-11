@@ -48,7 +48,7 @@
 				<li><a href="./services.html">mypage</a></li>
 				<li><a href="/user/wishlist">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
-				<li><a href="gymlist">시설찾기</a></li>
+				<li><a href="/common/gymlist">시설찾기</a></li>
 
 
 			</ul>
@@ -77,7 +77,7 @@
 							<li><a href="mypage">mypage</a></li>
 							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="/gymlist">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 							<li><a href="./common/adminPage">AdminPage</a></li>
 						</ul>
 					</nav>
