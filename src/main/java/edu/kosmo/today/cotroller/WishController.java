@@ -149,7 +149,28 @@ public class WishController {
 		return mav;
 	}
 	
+	//찜에 이용권 추가하기
+	@RequestMapping(value = "/insertWish/{tnum}" , method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> insertWish(@PathVariable("tnum") String tnum){
+		ResponseEntity<String> entity = null;
+		System.out.println("이용권 찜하는중..."+tnum+">>이용권번호");
+		int ticket = Integer.parseInt(tnum);
+		
+		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+
+		int mnum = wishServise.getMemberNum(member.getUsername());
+		try {
+			wishServise.insertWish(mnum, ticket);
+			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
 	
+		return entity;
+	}
 	
 	
 	

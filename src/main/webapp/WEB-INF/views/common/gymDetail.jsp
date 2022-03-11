@@ -10,10 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-    />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"  />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -241,13 +238,13 @@
           <br/>
           <h3>${gym.gphone}</h3>
           <br/>
-          <select name="order">
+          <select name="order" id="order">
           <c:forEach items="${ticketList}" var="ticket">
             <option value="${ticket.tnum}">${ticket.tname}</option>
           </c:forEach>
         </select><br>
           <br/>
-          <button type="button" class="btn btn-primary">찜하기</button>
+          <button type="button" id="insertWish" class="btn btn-primary">찜하기</button>
         </div>
       </div>
     </div>
@@ -526,9 +523,60 @@
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
 	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-
-
-
 </body>
+<script>
+$(document).ready(function(){	
+	
+	$("#insertWish").on("click",function(e){
+		var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+		console.log("장바구니 추가 버튼 누르는 중..");
+		
+		let login = ${principal.username};
+		
+		if(login == ""){
+			if(confirm("로그인이 필요합니다.") == true){
+				 location.href = "/login";				
+			}
+		}else{
+			
+			let ticketNumber =$("#order option:selected").val();
+			console.log(ticketNumber);
+			
+			$.ajax({
+	    		url : "/insertWish/"+ticketNumber,
+	    		type : 'POST',
+	    		beforeSend : function(xhr){
+	    			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+	    		},
+	    		cache : false,
+	    		   success: function (result) {       
+	    	           console.log(result);
+	    			   
+	    			   if(result=="ok"){    	                	 
+	    				   alert("찜에 담았습니다.");
+	    	                 }     
+	    	              },
+	    	              error: function (e) {
+	    	                  console.log(e);
+	    	              }         
+	    	       
+	    	       });  
+			
+			
+		}
+		
+		
+	});
+	
+	
+	
+	
+}
+
+
+</script>
+
+
 
 </html>

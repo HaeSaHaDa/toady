@@ -71,5 +71,12 @@ public class WishService {
 		
 		mapper.updateWishList(vo);
 	}
+	
+	//찜에 이용권 담기
+	public void insertWish(int mnum,int tnum) {
+		log.info("이용권 담는 중..."+mnum,tnum);
+		
+		mapper.insertWish(mnum, tnum);
+	}
 
 }
