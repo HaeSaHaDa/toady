@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.kosmo.today.mapper.StoreMapper">
+	
+	<select id="getRequestList" resultType="edu.kosmo.today.vo.RequestBoardVO">
+		<![CDATA[
+		select * from Store order by storenum
+	]]>
+	</select>
+	
+	
+	<insert id="registration">
+	<![CDATA[
+		insert into store (storenum,storename,storeadr,storetel)
+		values (store_seq.nextval, #{storename}, #{storeadr}, #{storetel})
+      ]]>
+	</insert>
+	
+</mapper>
