@@ -29,5 +29,5 @@ public interface FaqMapper {
 	public void insertFaqBoard(FaqVO vo);
 	
 	//faq 글보기
-	public String getContent(int bid);
+	public FaqVO getContent(int bid);
 }

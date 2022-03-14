@@ -85,37 +85,44 @@
 				
 				let bid = $(this).parents("tr").find("input").val();
 				console.log("faq글번호"+bid);
-				let divcontent = $(this).parent("div");
+				let divcontent = $(this).parents("tr");
 				console.log(divcontent+".....");
 				
 				let url = "${pageContext.request.contextPath}/admin/faqpage/"+bid;
 				
-				 $.ajax({
-		               type: 'POST',
-		               url: url,
-		               beforeSend : function(xhr){
-			    		 xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
-			    		},
-		               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
-		               success: function(result) {
-							
-		            	console.log(result);
-		            	   
-		               var htmls="";
-		               
-		           		htmls += '<tr>';
-		          		htmls += '<td colspan="3">'+result+'</td>'
-		           		htmls += '</tr>';
-		           		
-		           		
+				let faqContent = divcontent.next("tr").find("input").val();
+				console.log(faqContent);
+				
+				if(faqContent == bid){
+					divcontent.next("tr").remove();
+				}else{
+					 $.ajax({
+			               type: 'POST',
+			               url: url,
+			               dataType: 'JSON',
+			               beforeSend : function(xhr){
+				    		 xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+				    		},
+			               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
+			               success: function(result) {
+								
+			            	console.log(result);
+			            	   
+			               var htmls="";
+			               
 
-		           		divcontent.append(htmls);
-		           		
-		           		
-		               
-		              }
+			           		htmls += '<tr>';
+			           		htmls += '<input type="hidden" value='+result.bid+'>';
+			          		htmls += '<td colspan="3">'+result.bcontent+'</td>';
+			           		htmls += '</tr>';	           		
 
-		         });
+			           		divcontent.after(htmls);		           		
+			               
+			              }
+
+			         });
+				}
+
 				
 			});
 			
@@ -236,21 +243,19 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h4 class="text-white">FAQ 관리</h4>
-						<table class="text-white" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
+						<table class="text-white" style="text-align: center;" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
 							<tr>
 								<td>FAQ번호</td>
 								<td>제목</td>
 								<td>+</td>								
 							</tr>
-							<c:forEach items="${faqList}" var="faq">
-							<div class="content">
+							<c:forEach items="${faqList}" var="faq">					
 							<tr>
 							<input type="hidden" value="${faq.bid}">
 								<td>${faq.bid}</td>
 								<td>${faq.btitle}</td>
 								<td class="view-content">+</td>															
 							</tr>
-							</div>
 							</c:forEach>
 						</table>
 							

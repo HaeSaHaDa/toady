@@ -18,11 +18,12 @@
 
 	<select id="getTicketList" resultMap="OrderList">
 
-		select ordernum,mnum,orderdate,tnum,tname,cost,gnum,gname from
+		select orderlist.ordernum,orderlist.mnum,orderlist.orderdate,orderdetail.tnum,
+		ticket.tname,orderdetail.cost,gympage.gnum,gympage.gname from
 		orderlist,orderdetail,ticket,gympage
 		where orderlist.ordernum =
 		orderdetail.ordernum and orderdetail.tnum = ticket.tnum and ticket.gnum = gympage.gnum
-		orderlist.mnum = #{mnum}
+        and orderlist.mnum = #{mnum}
 
 	</select>
 

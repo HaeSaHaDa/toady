@@ -1,18 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<!-- Google Font -->
+<link	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
-<style type="text/css">
-</style>
+<!-- Css Styles -->
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/bootstrap.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/font-awesome.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/flaticon.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/barfiller.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/magnific-popup.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/slicknav.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	$(".view-content").on("click",function(){	
+		
+	    
+		console.log("FAQ글보기");
+		
+		let bid = $(this).parents("tr").find("input").val();
+		console.log("faq글번호"+bid);
+		let divcontent = $(this).parents("tr");
+		console.log(divcontent+".....");
+		
+		let url = "${pageContext.request.contextPath}/admin/faqpage/"+bid;
+		
+		let faqContent = divcontent.next("tr").find("input").val();
+		console.log(faqContent);
+		
+		if(faqContent == bid){
+			divcontent.next("tr").remove();
+		}else{
+			 $.ajax({
+	               type: 'POST',
+	               url: url,
+	               dataType: 'JSON',	               
+	               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
+	               success: function(result) {
+						
+	            	console.log(result);
+	            	   
+	               var htmls="";
+	               
+
+	           		htmls += '<tr>';
+	           		htmls += '<input type="hidden" value='+result.bid+'>';
+	          		htmls += '<td colspan="3">'+result.bcontent+'</td>';
+	           		htmls += '</tr>';	           		
+
+	           		divcontent.after(htmls);		           		
+	               
+	              }
+
+	         });
+		}
+
+		
+	});
+	
+})
+	
+	
 
 
+</script>
 <title>마이페이지</title>
 
 <!-- Google Font -->
@@ -99,9 +167,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img
-							src="${pageContext.request.contextPath}/img/logo.png" alt=""
-							width="500">
+						<a href="index"> <img src="${pageContext.request.contextPath}/img/logo.png" alt=""	width="500">
 						</a>
 					</div>
 				</div>
@@ -165,19 +231,15 @@
 						<h4 class="text-white">FAQ</h4>
 						<table class="text-white" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
 							<tr>
-								<td>FAQ번호</td>
 								<td>제목</td>
 								<td>+</td>								
 							</tr>
 							<c:forEach items="${faqList}" var="faq">
-							<div class="content">
 							<tr>
 							<input type="hidden" value="${faq.bid}">
-								<td>${faq.bid}</td>
 								<td>${faq.btitle}</td>
-								<td class="view-content">+</td>															
+								<td class="view-content">+</td>				
 							</tr>
-							</div>
 							</c:forEach>
 						</table>
 							
