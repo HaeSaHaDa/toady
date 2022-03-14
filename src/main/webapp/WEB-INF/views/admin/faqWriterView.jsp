@@ -140,7 +140,7 @@
 						<li><a href="#">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
 						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="/admin/faqpage">FAQ 관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
 						<li><a href="#">1:1 답변 관리</a></li>
 						<li><a href="#">공지/이벤트 관리</a></li>
 						<li><a href="#">매출 관리</a></li>
@@ -166,20 +166,22 @@
 						<button class="btn btn-light">FAQ작성</button>	
 						
 						<c:if test="${pageMaker.pre}">
-							<a href="list2${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+							<a href="faqpage${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
 						<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage }">
-							<a href="manageMember${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="faqpage${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="manageMember${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+							<a href="faqpage${pageMaker.makeQuery(pageMaker.endPage + 1) }">
 								» </a>
 						</c:if>					
 						<br>
-
+					<table>
+						
+					</table>
 					</div>
 				</div>
 			</div>
