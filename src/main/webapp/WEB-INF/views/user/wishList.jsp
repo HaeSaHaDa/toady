@@ -630,8 +630,7 @@ $(document).ready(function(){
            contentType:'application/json; charset=utf-8',
             data: JSON.stringify(form), 
            success: function (result) {       
-             if(result == "SUCCESS"){
-                //list로               
+             if(result == "SUCCESS"){              
                console.log("업데이트 완료");                            
              }                       
            },

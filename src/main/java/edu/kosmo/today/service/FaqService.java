@@ -42,5 +42,28 @@ public class FaqService {
 		
 		return mapper.faqList(cri);
 	}
+	
+	//faq작성
+	public void insertFaq(FaqVO vo) {
+		log.info("faq입력중..");
 
+		mapper.insertFaqBoard(vo);
+	}
+
+	//회원번호 구하기
+	public int getMemberNum(String memail) {
+		log.info("회원번호 구하기");
+		
+		return mapper.getMemberNum(memail);
+	}
+	
+	//faq글보기
+	public FaqVO getContent(int bid){
+		log.info("faq글보기");
+		
+		FaqVO faq = mapper.getContent(bid);
+		
+		return faq;
+		
+	}
 }

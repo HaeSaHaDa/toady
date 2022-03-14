@@ -16,10 +16,18 @@ import edu.kosmo.today.vo.WishVO;
 
 @Mapper
 public interface FaqMapper {
+	
+	//회원번호 가져오기
+	public int getMemberNum(String memail);
 
 	//글 갯수(페이징)
 	public int getTotal();
 	//faq글 목록
 	public List<FaqVO> faqList(Criteria criteria);
 
+	//faq 작성
+	public void insertFaqBoard(FaqVO vo);
+	
+	//faq 글보기
+	public FaqVO getContent(int bid);
 }
