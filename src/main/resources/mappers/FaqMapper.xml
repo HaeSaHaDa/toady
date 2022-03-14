@@ -36,7 +36,7 @@
 		
 	</select>
 	
-	<select id="getContent" resultType = "edu.kosmo.today.vo.FaqVO">
+	<select id="getContent" resultType = "String">
 		select * from boardlist where bid = #{bid}
 	</select>
 

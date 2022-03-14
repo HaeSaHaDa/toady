@@ -58,10 +58,10 @@ public class FaqService {
 	}
 	
 	//faq글보기
-	public FaqVO getContent(int bid){
+	public String getContent(int bid){
 		log.info("faq글보기");
 		
-		FaqVO faq = mapper.getContent(bid);
+		String faq = mapper.getContent(bid);
 		
 		return faq;
 		

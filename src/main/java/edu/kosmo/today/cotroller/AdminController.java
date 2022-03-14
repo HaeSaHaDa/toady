@@ -152,9 +152,9 @@ public class AdminController {
 
 	// FAQ글보기
 	@RequestMapping(value = "/faqpage/{bid}", method = RequestMethod.POST)
-	public FaqVO getFaqContent(@PathVariable("bid") int bid) {
+	public String getFaqContent(@PathVariable("bid") int bid) {
 		System.out.println("faq글보기");
-		FaqVO vo = faqService.getContent(bid);		
+		String vo = faqService.getContent(bid);		
 		
 		return vo;
 	}

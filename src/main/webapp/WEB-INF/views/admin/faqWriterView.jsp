@@ -85,7 +85,8 @@
 				
 				let bid = $(this).parents("tr").find("input").val();
 				console.log("faq글번호"+bid);
-				
+				let divcontent = $(this).parent("div");
+				console.log(divcontent+".....");
 				
 				let url = "${pageContext.request.contextPath}/admin/faqpage/"+bid;
 				
@@ -95,8 +96,7 @@
 		               beforeSend : function(xhr){
 			    		 xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
 			    		},
-		               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐
-		               dataType: 'json',// 데이터 타입을 제이슨 꼭해야함, 다른방법도 2가지있음
+		               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
 		               success: function(result) {
 							
 		            	console.log(result);
@@ -104,11 +104,14 @@
 		               var htmls="";
 		               
 		           		htmls += '<tr>';
-		          		htmls += '<td colspan="3">'+ result.bcontent + '</td>'
+		          		htmls += '<td colspan="3">'+result+'</td>'
 		           		htmls += '</tr>';
-		           
+		           		
+		           		
 
-		           		$(this).parents("table").find("div").append(htmls);
+		           		divcontent.append(htmls);
+		           		
+		           		
 		               
 		              }
 
@@ -117,7 +120,7 @@
 			});
 			
 		
-		});
+		})
 		
 	
 		
@@ -240,13 +243,14 @@
 								<td>+</td>								
 							</tr>
 							<c:forEach items="${faqList}" var="faq">
+							<div class="content">
 							<tr>
 							<input type="hidden" value="${faq.bid}">
 								<td>${faq.bid}</td>
 								<td>${faq.btitle}</td>
 								<td class="view-content">+</td>															
 							</tr>
-							<div class="faq-content"></div>
+							</div>
 							</c:forEach>
 						</table>
 							

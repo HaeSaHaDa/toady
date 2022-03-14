@@ -31,8 +31,6 @@ public class FaqVO {
 	private String bcontent; // 글 내용
 	private Timestamp bdate; //작성일
 	private int mnum; //작성회원
-	private int tnum; //글 타입 예> 공지,이벤트,1:1문의
-
-	
+	private int tnum; //글 타입 예> 공지,이벤트,1:1문의	
 	
 }
