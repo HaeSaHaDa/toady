@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <style >
 
 </style>
@@ -35,10 +37,93 @@
 <script type="text/javascript">
 		$(document).ready(function () {
 			
+		    
+			$("#submitfaq").on("click",function(e){
+				var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+				
+				 var btitle = $("#btitle").val();
+		         var bcontent = $("#bcontent").val();
+				
+		         console.log(bcontent);
+		         
+		         
+		         var form = {
+		        		 btitle : btitle,
+		        		 bcontent : bcontent
+		         }
+		         
+		         console.log(JSON.stringify(form));
+		         
+		         $.ajax({
+		             type : "POST",
+		             url : "/admin/insertfaq",
+		             beforeSend : function(xhr){
+		    			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+		    		},
+		             cache : false,
+		             contentType:'application/json; charset=utf-8',
+		             data: JSON.stringify(form), 
+		             success: function (result) {       
+		               if(result == "SUCCESS"){
+		                  //list로               
+		                  $(location).attr('href', '${pageContext.request.contextPath}/admin/faqpage');                            
+		               }                       
+		             },
+		             error: function (e) {
+		                 console.log(e);
+		             }
+		         })		         
+			});
 			
+			
+			$(".view-content").on("click",function(){	
+				var token = $("meta[name='_csrf']").attr("content");
+			    var header = $("meta[name='_csrf_header']").attr("content");
+			    
+				console.log("FAQ글보기");
+				
+				let bid = $(this).parents("tr").find("input").val();
+				console.log("faq글번호"+bid);
+				let divcontent = $(this).parent("div");
+				console.log(divcontent+".....");
+				
+				let url = "${pageContext.request.contextPath}/admin/faqpage/"+bid;
+				
+				 $.ajax({
+		               type: 'POST',
+		               url: url,
+		               beforeSend : function(xhr){
+			    		 xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+			    		},
+		               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
+		               success: function(result) {
+							
+		            	console.log(result);
+		            	   
+		               var htmls="";
+		               
+		           		htmls += '<tr>';
+		          		htmls += '<td colspan="3">'+result+'</td>'
+		           		htmls += '</tr>';
+		           		
+		           		
+
+		           		divcontent.append(htmls);
+		           		
+		           		
+		               
+		              }
+
+		         });
+				
+			});
 			
 		
-		});
+		})
+		
+	
+		
 	
 	</script>
 </head>
@@ -61,11 +146,11 @@
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 
-				<li class="active"><a href="./index.html">Home</a></li>
+				<li class="active"><a href="/">Home</a></li>
 				<li><a href="${pageContext.request.contextPath}/services.html">mypage</a></li>
 				<li><a href="${pageContext.request.contextPath}/team.html">찜</a></li>
 				<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/gymlist">시설찾기</a></li>
+				<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 
 
 			</ul>
@@ -99,7 +184,7 @@
 							<li><a href="./services.html">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="gymlist">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 
 						</ul>
 					</nav>
@@ -155,15 +240,20 @@
 							<tr>
 								<td>FAQ번호</td>
 								<td>제목</td>
-								<td>등록일</td>
 								<td>+</td>								
 							</tr>
+							<c:forEach items="${faqList}" var="faq">
+							<div class="content">
 							<tr>
-								
-															
+							<input type="hidden" value="${faq.bid}">
+								<td>${faq.bid}</td>
+								<td>${faq.btitle}</td>
+								<td class="view-content">+</td>															
 							</tr>
+							</div>
+							</c:forEach>
 						</table>
-						<button class="btn btn-light">FAQ작성</button>	
+							
 						
 						<c:if test="${pageMaker.pre}">
 							<a href="faqpage${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
@@ -179,9 +269,20 @@
 								» </a>
 						</c:if>					
 						<br>
-					<table>
-						
-					</table>
+						<table class="text-white" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
+							<form:form id="insertfaq" action="${pageContext.request.contextPath}/insertfaq" method="post">
+								<tr>
+									<td>제목</td>
+									<td><input width="200" type="text" id="btitle" name="btitle"></td>
+								</tr>
+								 <tr>
+            						<td> 내용 </td>
+           							 <td><textarea rows="10" cols="60" id="bcontent" name="bcontent" ></textarea></td>
+         						</tr>
+							</form:form>							
+						</table>
+						<button id="submitfaq" class="btn btn-light">FAQ작성</button>
+
 					</div>
 				</div>
 			</div>
@@ -343,5 +444,7 @@
 
 
 </body>
+
+
 
 </html>

@@ -3,8 +3,10 @@ package edu.kosmo.today.vo;
 import java.sql.Timestamp;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //0311 FAQ게시판
 
@@ -20,6 +22,8 @@ TNUM              NUMBER
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FaqVO {
 
 	private int bid; //글번호
@@ -27,8 +31,6 @@ public class FaqVO {
 	private String bcontent; // 글 내용
 	private Timestamp bdate; //작성일
 	private int mnum; //작성회원
-	private int tnum; //글 타입 예> 공지,이벤트,1:1문의
-
-	
+	private int tnum; //글 타입 예> 공지,이벤트,1:1문의	
 	
 }

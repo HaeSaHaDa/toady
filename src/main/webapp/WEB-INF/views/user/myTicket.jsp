@@ -237,7 +237,7 @@
 				<div class="col-4">
 					<ul>
 						<li><a href="#">내 정보</a></li>
-						<li><a href="#">내 이용권</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 						<li><a href="#">쪽지</a></li>
 						<li><a href="#">FAQ</a></li>
 						<li><a href="#">1:1문의</a></li>
@@ -251,21 +251,23 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					
 					<div class="container">
+					<c:forEach items="${ticket}" var="myticket">
      					 <div class="ticket">
        						 <div class="first">
-          						<p>2022.03.01</p>
-          						<p>구매번호</p>
+          						<p>${myticket.orderdate}</p>
+          						<p>${myticket.ordernum}</p>
          						<p>2010203</p>
         						</div>
        						 <div class="second">
-          						<a href="#" class="gogym"> <p title="헬스장 정보보기">xxxx헬스장</p> </a>
-         						 <p>이용권이름 <span>-3개월</span></p>
+          						<a href="${pageContext.request.contextPath}/common/gymdetail/${myticket.gnum}" class="gogym"> <p title="헬스장 정보보기">${myticket.gname}</p> </a>
+         						 <p>${myticket.tname}<span>-3개월</span></p>
          				 	<div class="last">
-           					 <p>결제한가격</p>
+           					 <p>${myticket.cost}</p>
            					 	<button class="goback">환불하기</button>
           					</div>
         					</div>
       						</div>
+      						</c:forEach>
     						</div>  
 					
 					
