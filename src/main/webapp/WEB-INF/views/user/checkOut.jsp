@@ -238,10 +238,11 @@
 						<div class="col-lg-6">
 							<h4 class="checkout-title">주문정보입력</h4>
 							<div class="row">
-								<div class="col-md-8">
-									<input type="text" placeholder="이름을 입력해주세요"> <input
-										type="text" placeholder="핸드폰번호"> <input type="email"
-										placeholder="이메일주소">
+								<div class="col-md-8 mb-2">
+									<input type="text" placeholder="이름을 입력해주세요">
+									 <input	type="text" placeholder="핸드폰번호"> 
+									 <input type="email"  placeholder="이메일주소">
+									 <input type="date" id="startDate" >
 								</div>
 								<div class="col-md-8">
 									<div class="form-group">
@@ -292,7 +293,7 @@
 											<tfoot>
 												<tr class="order-total">
 													<th colspan="2">Total</th>
-													<th class="totalprice">230000</th>
+													<th class="totalprice"></th>
 												</tr>
 											</tfoot>
 										</table>
@@ -457,7 +458,7 @@
 
 
 	<script>
-		$(document)	.ready(	function() {
+		$(document).ready(	function() {
 							let arr = $(".price").length;
 
 							console.log(arr);
@@ -467,13 +468,10 @@
 							let sum = 0;
 
 							for (let i = 0; i < arr; i++) {
-								arr2[i] = Number($(".price").eq(i).text());
+								arr2[i] = Number($(".price").eq(i).text());								
 								console.log(i + "번째 텍스트" + arr2[i]);
-								sum += arr2[i];
-								$(".price").eq(i).text(
-										arr2[i]
-												* Number($(".wdate").eq(i)
-														.text()));
+								sum += arr2[i]*Number($(".wdate").eq(i).text());
+								$(".price").eq(i).text(arr2[i]* Number($(".wdate").eq(i).text()));								
 							}
 							console.log(sum);
 
@@ -481,6 +479,14 @@
 							
 
 						});//ready끝
+						
+						 $('#startDate').change(function (){
+					            var date = $('#startDate').val();
+					            console.log(date);
+					        });
+
+
+					출처: https://minaminaworld.tistory.com/13 [미나미 블로그]
 		
 		function execPostCode() {
 			new daum.Postcode(

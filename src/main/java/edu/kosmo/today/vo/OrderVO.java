@@ -10,16 +10,23 @@ import lombok.NoArgsConstructor;
 
 //0314 이용권구매내역
 /*
-ORDERNUM  NOT NULL NUMBER 
-MNUM               NUMBER 
-ORDERDATE          DATE
+주문목록
+이름        널? 유형            
+--------- -- ------------- 
+ORDERNUM     NUMBER        
+MNUM         NUMBER        
+ORDERDATE    DATE          
+PAYID        VARCHAR2(100) 
 
-디테일
-이름       널? 유형     
--------- -- ------ 
-TNUM        NUMBER 
-COST        NUMBER 
-ORDERNUM    NUMBER
+주문상세(이용권정보)
+이름        널? 유형     
+--------- -- ------ 
+TNUM         NUMBER 
+COST         NUMBER 
+ORDERNUM     NUMBER 
+STARTDATE    DATE   
+TDATE        NUMBER  
+
  */
 @Data
 @Builder
@@ -29,16 +36,11 @@ public class OrderVO {
 
 	private int ordernum; //주문번호
 	private int mnum; //회원번호
-	private Timestamp orderdate; //주문날짜
+	private Timestamp oderdate; //주문일
+	private String payid; //
 	
-	//Db에 수량컬럼부분 추가하기
 	
-	private int tnum;
-	private String tname;
-	private int cost;
 	
-	private int gnum;
-	private String gname;
 	
 
 	

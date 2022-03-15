@@ -88,7 +88,7 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="mypage">mypage</a></li>
+							<li><a href="/user/myTicket">mypage</a></li>
 							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>

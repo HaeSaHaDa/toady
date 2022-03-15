@@ -63,8 +63,6 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 				.permitAll() //모두 허용.
 				.antMatchers("/user/**")
 				.access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
-				.anyRequest() //그외의 모든 요청은
-				.authenticated() //권한을 얻어야 해.
 			.and() 
 				.formLogin()
 				.loginPage("/common/login") //인증이 필요한 곳으로 접근하면 이동할 페이지
