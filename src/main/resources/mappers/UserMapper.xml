@@ -6,8 +6,14 @@
 <mapper namespace="edu.kosmo.today.mapper.UserMapper">
 
 	<resultMap id="userMap" type="edu.kosmo.today.vo.UserVO">
+<<<<<<< HEAD
 		<result property="mid" column="mid" />
+=======
+		<result property="mnum" column="mnum" />
+		<result property="mid" column="mid" />		
+>>>>>>> 4d46fdba26ae5018a247bc13d51a64b2235e2576
 		<result property="mpassword" column="mpassword" />
+		<result property="memail" column="memail" />
 		<result property="mnickname" column="mnickname" />
 		<result property="mphone" column="mphone" />
 		<result property="mbirth" column="mbirth" />
@@ -20,7 +26,13 @@
 	</resultMap>
 
 	<select id="getUser" resultMap="userMap">
+<<<<<<< HEAD
 		select * from member , authority where member.mid = authority.mid and member.mid = #{mid}
+=======
+		select * from member , authority
+		where member.mid = authority.mid and member.mid = #{mid}
+>>>>>>> 4d46fdba26ae5018a247bc13d51a64b2235e2576
 	</select>
 
+	
 </mapper>

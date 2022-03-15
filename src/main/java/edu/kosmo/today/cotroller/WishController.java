@@ -1,37 +1,22 @@
 package edu.kosmo.today.cotroller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
-
-import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
+import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.service.WishService;
-import edu.kosmo.today.userservice.UserService;
-import edu.kosmo.today.vo.UserVO;
 import edu.kosmo.today.vo.WishVO;
 import lombok.extern.slf4j.Slf4j;
-
 
 /*
  * 찜 기능을 위한 controller 0302 작성(김보람)
@@ -50,7 +35,7 @@ public class WishController {
 
 		log.info("wishList...controller");
 
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
 		int mnum = wishServise.getMemberNum(member.getUsername());
@@ -99,7 +84,7 @@ public class WishController {
 	public String deleteWish() {
 		log.info("찜목록비우는중...");
 
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
 		int mnum = wishServise.getMemberNum(member.getUsername());
@@ -109,70 +94,7 @@ public class WishController {
 		return "redirect:/user/wishlist";
 	}
 	
-	//찜 수량 업데이트하기
-	@RequestMapping(value = "/updateWish" , method=RequestMethod.POST)
-	public ResponseEntity<String> update_wishlist(@RequestBody WishVO wish){
-		log.info("수량 업데이트 중");
-		log.info(wish+"...");
-		ResponseEntity<String> entity = null;
-		
-		try {
-			wishServise.updateWishList(wish);
-			 entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		} catch (Exception e) {
-			 e.printStackTrace();
-
-	            entity = new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
-		}
-		
-		
-		
-		return entity;
-	}
-	
-	//주문하기(결제페이지로 이동)
-	@GetMapping("/user/checkoutpage")
-	public ModelAndView goCheckOut(ModelAndView mav) {
-		
-		
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
-				.getPrincipal();
-
-		int mnum = wishServise.getMemberNum(member.getUsername()); //회원번호 구하기
-		List<WishVO> wishlist = wishServise.getWishList(mnum); //해당회원의 찜목록 불러오기
-		
-		log.info(mnum+"회원의 결제페이지로 가는중");		
-		
-		mav.setViewName("user/checkOut");
-		mav.addObject("checklist", wishlist);
-			
-		return mav;
-	}
-	
-	//찜에 이용권 추가하기
-	@RequestMapping(value = "/insertWish/{tnum}" , method=RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<String> insertWish(@PathVariable("tnum") String tnum){
-		ResponseEntity<String> entity = null;
-		System.out.println("이용권 찜하는중..."+tnum+">>이용권번호");
-		int ticket = Integer.parseInt(tnum);
-		
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
-				.getPrincipal();
-
-		int mnum = wishServise.getMemberNum(member.getUsername());
-		try {
-			wishServise.insertWish(mnum, ticket);
-			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
-		}
-	
-		return entity;
-	}
-	
-	
+	//주문하기
 	
 }
 

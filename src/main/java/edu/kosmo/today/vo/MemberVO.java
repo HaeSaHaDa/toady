@@ -33,8 +33,8 @@ SOCIALID           VARCHAR2(100)
 
 public class MemberVO {	
 	private int mnum;
-	private String mid;
-	private String mpassword;
+	private String memail;
+	private String password;
 	private String mnickname;
 	private int mphone;
 	private String mbirth;

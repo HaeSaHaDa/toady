@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
-<sec:authorize access="isAuthenticated()">
+<!--<sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
-</sec:authorize>
+</sec:authorize>-->
+
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
@@ -26,6 +27,7 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -43,19 +45,37 @@
 		</div>
 		<nav class="canvas-menu mobile-menu">
 			<ul>
-
-				<li class="active"><a href="./index.html">Home</a></li>
+				<li class="active"><a href="/today">Home</a></li>
 				<li><a href="./services.html">mypage</a></li>
 				<li><a href="/user/wishlist">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
+<<<<<<< HEAD
 				<li><a href="/common/gymlist">시설찾기</a></li>
 
 
+=======
+				<li><a href="gymlist">시설찾기</a></li>
+>>>>>>> 4d46fdba26ae5018a247bc13d51a64b2235e2576
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+			<c:choose>
+				<c:when test="${empty principal}">
+					<ul class="navbar-nav">
+						<a href="${pageContext.request.contextPath}/common/login">로그인</a>
+						<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+					</ul>
+				</c:when>
+				<c:otherwise>
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -66,15 +86,20 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="./index.html"> <img src="img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
+<<<<<<< HEAD
 							<li class="active"><a href="./index.html">Home</a></li>
 							<li><a href="/user/myTicket">mypage</a></li>
+=======
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="mypage">mypage</a></li>
+>>>>>>> 4d46fdba26ae5018a247bc13d51a64b2235e2576
 							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="/common/gymlist">시설찾기</a></li>
@@ -93,14 +118,16 @@
 									<ul class="navbar-nav">
 										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
 										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+										<a href="https://kauth.kakao.com/oauth/authorize?client_id=8aa2491b3e3f9c3b26767c823c29dfb2&redirect_uri=http://localhost:8282/auth/kakao/callback&response_type=code"> <img height="38px"
+											src="/img/kakao_login_button.png" /></a>
+										<a href="/oauth2/authorization/google" >구글로그인</a>
 									</ul>
 								</c:when>
 								<c:otherwise>
 									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
-										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberupdate">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+										<li class="nav-item"><a class="nav-link"><sec:authentication property="principal.user.memail"/>님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>
