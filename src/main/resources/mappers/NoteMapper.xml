@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<!-- namespace는 패키지 명 + 인터페이스명과 맞춰줘야한다. -->
+<mapper namespace="edu.kosmo.today.mapper.NoteMapper">
+  			
+	<!-- 쪽지 목록 조회 -->	
+	<select id="getNoteList" resultType="edu.kosmo.today.vo.NoteVO">
+		select * from boardlist where tnum = 4 and boardlist.mnum = #{mnum} 
+	</select>
+
+	<!-- 회원 번호 가져오기 -->	
+	<select id="getMemberNum" resultType="int">
+		select * from member where memail = #{memail} 		
+	</select>
+	
+	
+</mapper>

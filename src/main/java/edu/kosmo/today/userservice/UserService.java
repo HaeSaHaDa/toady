@@ -2,12 +2,14 @@ package edu.kosmo.today.userservice;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.kosmo.today.mapper.UserMapper;
 import edu.kosmo.today.vo.UserVO;
+
 @Service
 public class UserService {
 	   @Autowired

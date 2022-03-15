@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller	
 public class MainCotroller {
 	
-	@GetMapping({"/today"})
+	@GetMapping("/today")
 	public String index() {
 		System.out.println("컨트롤러를 타는가?'");
 
@@ -15,9 +15,14 @@ public class MainCotroller {
 	}
 	
 	@GetMapping("/common/adminPage")
-	public String joinForm() {
-		System.out.println("adminPage");
+	public String adminPage() {
+		System.out.println("adminPage진입");
 		return "common/adminPage";
+	}
+	@GetMapping("/common/myPage")
+	public String myPage() {
+		System.out.println("myPage진입");
+		return "common/myPage";
 	}
 	
 	

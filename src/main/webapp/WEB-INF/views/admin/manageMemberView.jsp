@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html;charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -116,7 +115,7 @@
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 
-				<li class="active"><a href="./index.html">Home</a></li>
+				<li class="active"><a href="/today">Home</a></li>
 				<li><a href="./services.html">mypage</a></li>
 				<li><a href="./team.html">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
@@ -150,7 +149,7 @@
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="./index.html">Home</a></li>
+							<li class="active"><a href="/today">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
@@ -165,8 +164,22 @@
 							<i class="fa fa-search"></i>
 						</div>
 						<div class="to-social">
-							<a href="#">로그인</a> <a href="#">회원가입</a>
-
+							<c:choose>
+								<c:when test="${empty principal}">
+									<ul class="navbar-nav">
+										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
+										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
+										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>
@@ -208,50 +221,48 @@
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
-						<h4 class="text-white">회원 관리</h4>
-
-						<table class="text-white" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
 							<form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}" >
 								<input type="hidden" id="memail" name="memail" value="${memberDetail.memail}">
-								
-								
+				
+								<thead class="thead-light">
 								<tr>
-									<td width="25%">회원번호</td>
-									<td width="25%">${memberDetail.mnum}</td>
-									<td width="25%">닉네임</td>
-                           			<td width="25%">${memberDetail.mnickname}</td>
-									
+									<th>회원번호</td>
+									<th>${memberDetail.mnum}</th>
+									<th>닉네임</th>
+                           			<th>${memberDetail.mnickname}</th>
 								</tr>
+								<thead>
 
-								<tr>
+								<tr class="table-light">
 									<td>이메일</td>
 									<td colspan="3">${memberDetail.memail}</td>
 								</tr>
 
-								<tr>
+								<tr class="table-light">
 									<td>연락처</td>
 									<td colspan="3">${memberDetail.mphone}</td>
 								</tr>
 
-								<tr>
+								<tr class="table-light">
 									<td>생년월일</td>
 									<td colspan="3">${memberDetail.mbirth}</td>
 								</tr>
 
-								<tr>
+								<tr class="table-light">
 									<td>회원구분</td>
-									<td><input type="text" id="auth" name="auth"
-										value="${memberDetail.auth}"></td>
+									<td colspan="3"><input type="text" id="auth" name="auth" value="${memberDetail.auth}"></td>
 								</tr>
 
-								<tr>
-									<td>구매이용권 자리 수정필요</td>
-									<td colspan="3">${memberDetail.memail}</td>
+								<tr class="table-light">
+									<td>구매이용권</td>
+									<td colspan="3">수정필요</td>
 								</tr>
 
-								<tr>
-									<td width="100%"><input type="submit" value="수정하기"> &nbsp;&nbsp; 
-									<a href="list">쪽지보내기</a></td>
+								<tr class="table-light">
+									<td colspan="3"><input type="submit" value="수정하기"> &nbsp;&nbsp; 
+									
+									<td><a href="/admin/notePost/${memberDetail.mnum}">쪽지보내기</a></td>
 								</tr>
 							</form>
 						</table>

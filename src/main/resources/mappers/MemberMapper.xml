@@ -50,4 +50,14 @@
 	]]>
 	</update>
 	
+	<!-- 쪽지 작성 -->
+	 <insert id="nboardinsert" >
+	<![CDATA[
+		 insert into boardlist (bid, bcontent, mnum, tnum) values (board_seq.nextval, #{bcontent}, #{mnum}, 4)	
+	]]>
+	</insert>
+	
+	
+	
+	
 </mapper>

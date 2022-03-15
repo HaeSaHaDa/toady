@@ -1,23 +1,26 @@
 package edu.kosmo.today.cotroller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
+import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.vo.MemberVO;
+import edu.kosmo.today.vo.NoteVO;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
@@ -95,6 +98,7 @@ public class AdminController {
 		return mav;
 	}
 	
+	//회원구분 수정
 	@PutMapping("/manageMember/{memail}")  //@RequestBody를 사용하면 json으로 온 데이터를 객체로 자동변환해줌
 	public ResponseEntity<String> authUpdate(@RequestBody MemberVO memberVO, Model model) {
 		
@@ -115,5 +119,27 @@ public class AdminController {
 
 	}
 	
+	@GetMapping("/notePost/{mnum}") //쪽지 작성 페이지 진입
+	public ModelAndView notePostList(MemberVO memberVO,ModelAndView mav) {
+		log.info("notePostList..()");
+			
+		mav.setViewName("/admin/notePost");
+		mav.addObject("notePostList", memberService.get(memberVO.getMnum()));
+		
+		log.info("memberService :" + memberService.get(memberVO.getMnum()));
+		return mav;				
+	}	
+	
+		
+	@PostMapping("/notePost")  //쪽지 작성
+	public ModelAndView notePost(NoteVO NoteVO, ModelAndView mav) {
+		log.info("notePost()..");
+		log.info("NoteVO:" + NoteVO);
+		
+		memberService.nboardRegister(NoteVO);	
+		mav.setViewName("/common/home");
+			
+		return mav;		
+	}	
 }
 

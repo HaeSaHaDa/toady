@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%><head>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -15,7 +17,7 @@
 </style>
 
 
-<title>회원 관리페이지</title>
+<title>마이페이지</title>
 
 <!-- Google Font -->
 <link
@@ -26,70 +28,49 @@
 	rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/flaticon.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/barfiller.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/magnific-popup.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/css/barfiller.css" type="text/css">
+<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script type="text/javascript">
-		$(document).ready(function () {
-			
-			$(".m-delete").click(function(event) {
-				 
-				if(confirm("정말 삭제하시겠습니까 ?") == true){
-				        
-				    }
-				    else{
-				    	return false;
-				    }
-								
-				event.preventDefault();
-				console.log("ajax 호출전");
-					
-				var trObj = $(this).parent().parent();
-				console.log($(this).attr("href"));
+	
+	$(document).ready(function () {
+		
+		$("#member-delete").click(function(event) {
+									
+			event.preventDefault();
+			console.log("ajax 호출전");
 				
-				$.ajax({
-					 type : "DELETE",  
-					 url : $(this).attr("href"),
-					 success: function (result) {       
-					 console.log(result); 
-						if(result == "SUCCESS"){
-						      $(trObj).remove();  		      	       
-							}					        
-					    },
-					    error: function (e) {
-					        console.log(e);
-					    }			
-				});	
+			var trObj = $(this).parent().parent();
+			console.log($(this).attr("href"));
 			
+			$.ajax({
+				 type : "DELETE",  
+				 url : $(this).attr("href"),
+				 success: function (result) {       
+				 console.log(result); 
+					if(result == "SUCCESS"){
+					      $(trObj).remove();
+					      $(location).attr('href', '${pageContext.request.contextPath}/today');
+						}					        
+				    },
+				    error: function (e) {
+				        console.log(e);
+				    }			
 			});	
 		
-		});
+		});	
 	
-	</script>
+	});
+	
+</script>
 </head>
 
 <body>
@@ -111,10 +92,10 @@
 			<ul>
 
 				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/services.html">mypage</a></li>
-				<li><a href="${pageContext.request.contextPath}/team.html">찜</a></li>
-				<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/gymlist">시설찾기</a></li>
+				<li><a href="/mypage">mypage</a></li>
+				<li><a href="./team.html">찜</a></li>
+				<li><a href="./services.html">지도</a></li>
+				<li><a href="gymlist">시설찾기</a></li>
 
 
 			</ul>
@@ -135,9 +116,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img
-							src="${pageContext.request.contextPath}/img/logo.png" alt=""
-							width="500">
+						<a href="index"> <img src="/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -145,8 +124,8 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="/today">Home</a></li>
-							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
+							<li><a href="/common/myPage">mypage</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>
 
@@ -171,10 +150,12 @@
 										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
 										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.username}님
+												환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>
+
 						</div>
 					</div>
 				</div>
@@ -198,75 +179,40 @@
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
-						<li><a href="#">헬스장 관리</a></li>
-						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="#">FAQ 관리</a></li>
-						<li><a href="#">1:1 답변 관리</a></li>
-						<li><a href="#">공지/이벤트 관리</a></li>
-						<li><a href="#">매출 관리</a></li>
+						<li><a href="/user/memberInfo">내 정보</a></li>
+						<li><a href="#">내 이용권</a></li>
+						<li><a href="/user/note">쪽지</a></li>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">1:1문의</a></li>
+						<li><a href="#">공지/이벤트</a></li>
+						<li><a href="#">시설 등록하기</a></li>
+						<li><a href="#">시설 등록내역</a></li>
+
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
-					<div>
-						<table class="table table table-bordered" width="600" border="1" cellpadding="0"
-							cellspacing="0" border="1">
-							<thead class="thead-light">
-							<tr>
-								<th scope="col">회원번호</th>
-								<th scope="col">이메일</th>
-								<th scope="col">닉네임</th>
-								<th scope="col">회원구분</th>
-								<th scope="col">삭제</th>
-							</tr>
-							</thead>
-							<c:forEach var="member" items="${memberList}">
-								<tr class="table-light">
-									<td>${member.mnum}</td>
-									<td>${member.memail}</td>
-									<td><a href="./manageMember/${member.mnum}">${member.mnickname}</a>
-									</td>
-
-									<td>${member.auth}</td>
-									
-									
-									<td><a class="m-delete" data-bid='${member.mnum}'
-										href="./manageMember/${member.mnum}">삭제</a></td>
-								</tr>
-							</c:forEach>
-						</table>
-
-						<c:if test="${pageMaker.pre}">
-							<a href="list2${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
-						</c:if>
-
-						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-						<c:forEach var="idx" begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage }">
-							<a href="manageMember${pageMaker.makeQuery(idx)}">${idx}</a>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a
-								href="manageMember${pageMaker.makeQuery(pageMaker.endPage + 1) }">
-								» </a>
-						</c:if>
+					<div class="text-white">
+						<h2 style="color: white;">오늘의 짐 회원탈퇴</h2><br>
+						<h4>탈퇴 계정</h4> <br>
+						<h6>아래 계정을 탈퇴 처리합니다.</h6>
+						<h6>${memberInfoList.mnickname}</h6><br>
+						
+						<h4>탈퇴 시 유의사항</h4> <br>
+						<h6>-탈퇴 후에는 위의 계정으로 로그인하실 수 없습니다.</h6>
+						<h6>-작성하신 이용 후기는 탈퇴 후에도 삭제되지 않습니다.</h6>
+						
 						<br>
-
+						 <a class="btn btn-primary" id="member-delete" data-bid='${memberInfoList.memail}' href="./memberLeave/${memberInfoList.memail}" role="button">회원탈퇴</a></td>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
-
-
-
-	<!-- 내용물 끝 -->
+	<!-- 마이페이지 내용물 끝 -->
 
 
 	<!-- Get In Touch Section Begin -->
@@ -309,7 +255,7 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="#"><img src="img/logo.png" alt=""></a>
+								<a href="#"><img src="/img/logo.png" alt=""></a>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
@@ -405,15 +351,14 @@
 	<!-- Search model end -->
 
 	<!-- Js Plugins -->
-	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
-	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/masonry.pkgd.min.js"></script>
+	<script src="/js/jquery.barfiller.js"></script>
+	<script src="/js/jquery.slicknav.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/main.js"></script>
 
 
 

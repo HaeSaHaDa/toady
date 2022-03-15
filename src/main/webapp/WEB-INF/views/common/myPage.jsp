@@ -4,16 +4,28 @@
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
+<head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>오늘의 짐</title>
+
+<style type="text/css">
+	
+	
+</style>
+
+
+<title>마이페이지</title>
 
 <!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
+	rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
@@ -43,19 +55,22 @@
 		</div>
 		<nav class="canvas-menu mobile-menu">
 			<ul>
+				
+							<li class="active"><a href="/today">Home</a></li>
+							<li><a href="/mypage">mypage</a></li>
+							<li><a href="./team.html">찜</a></li>
+							<li><a href="./services.html">지도</a></li>
+							<li><a href="gymlist">시설찾기</a></li>
 
-				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="./services.html">mypage</a></li>
-				<li><a href="/user/wishlist">찜</a></li>
-				<li><a href="./services.html">지도</a></li>
-				<li><a href="gymlist">시설찾기</a></li>
-
-
+						
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+				class="fa fa-twitter"></i></a> <a href="#"><i
+				class="fa fa-youtube-play"></i></a> <a href="#"><i
+				class="fa fa-instagram"></i></a>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -66,7 +81,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="./index.html"> <img src="/img/logo.png" alt="" width="500">
+						<a href="index"> <img src="/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -78,7 +93,7 @@
 							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>
-							<li><a href="./common/adminPage">AdminPage</a></li>
+
 						</ul>
 					</nav>
 				</div>
@@ -104,9 +119,8 @@
 									</ul>
 								</c:otherwise>
 							</c:choose>
+
 						</div>
-
-
 					</div>
 				</div>
 			</div>
@@ -117,106 +131,48 @@
 	</header>
 	<!-- Header End -->
 
-	<!-- Hero Section Begin -->
-	<section class="hero-section">
-		<div class="hs-slider owl-carousel">
-			<div class="hs-item set-bg" data-setbg="/img/hero/hero-1.jpg">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6 offset-lg-6">
-							<div class="hi-text">
-								<span>Shape your body</span>
-								<h1>
-									Be <strong>strong</strong> traning hard
-								</h1>
-								<a href="#" class="primary-btn">Get info</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="hs-item set-bg" data-setbg="/img/hero/hero-2.jpg">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-6 offset-lg-6">
-							<div class="hi-text">
-								<span>Shape your body</span>
-								<h1>
-									Be <strong>strong</strong> traning hard
-								</h1>
-								<a href="#" class="primary-btn">Get info</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Hero Section End -->
-
+	
 
 	<!-- ChoseUs Section End -->
 
-	<!-- Classes Section Begin -->
-	<section class="classes-section spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title">
-						<span>Our Classes</span>
-						<h2>WHAT WE CAN OFFER</h2>
-					</div>
-				</div>
+	<!--마이페이지 내용물 시작-->
+<section class="classes-section spad">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">			
+		<div class="row" style="margin-top: 100px;">
+		<!-- 사이드바 -->
+			<div class="col-4">
+				<ul>
+					<li><a href="/user/memberInfo">내 정보</a></li>
+					<li><a href="#">내 이용권</a></li>
+					<li><a href="/user/note">쪽지</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">1:1문의</a></li>
+					<li><a href="#">공지/이벤트</a></li>
+					<li><a href="#">시설 등록하기</a></li>
+					<li><a href="#">시설 등록내역</a></li>
+					
+				</ul>
 			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-1.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Weightlifting</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
+		<!-- 사이드바 끝 -->
+		<!-- 내용물 -->
+			<div class="col-8">
+			<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+				<div>
+				<h2 style="color: white;">MYPAGE 메인</h2>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-2.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>Cardio</span>
-							<h5>Indoor cycling</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-
+			
 			</div>
+		
+		
+		</div>
 		</div>
 	</section>
-	<!-- ChoseUs Section End -->
-
-
-
-
+	<!-- 마이페이지 내용물 끝 -->
+	
 
 	<!-- Get In Touch Section Begin -->
-	<div class="gettouch-section">
+	<div>
+	<div class="gettouch-section" >
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
@@ -256,10 +212,15 @@
 						<div class="fa-logo">
 							<a href="#"><img src="/img/logo.png" alt=""></a>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore dolore magna aliqua
+							endisse ultrices gravida lorem.</p>
 						<div class="fa-social">
-							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> <a
-								href="#"><i class="fa  fa-envelope-o"></i></a>
+							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+								class="fa fa-twitter"></i></a> <a href="#"><i
+								class="fa fa-youtube-play"></i></a> <a href="#"><i
+								class="fa fa-instagram"></i></a> <a href="#"><i
+								class="fa  fa-envelope-o"></i></a>
 						</div>
 					</div>
 				</div>
@@ -290,7 +251,8 @@
 						<h4>Tips & Guides</h4>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Physical fitness may help prevent depression, anxiety</a>
+								<a href="#">Physical fitness may help prevent depression,
+									anxiety</a>
 							</h6>
 							<ul>
 								<li>3 min read</li>
@@ -299,7 +261,8 @@
 						</div>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
+								<a href="#">Fitness: The best exercise to lose belly fat and
+									tone up...</a>
 							</h6>
 							<ul>
 								<li>3 min read</li>
@@ -318,7 +281,9 @@
 							<script>
 								document.write(new Date().getFullYear());
 							</script>
-							All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							All rights reserved | This template is made with <i
+								class="fa fa-heart" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
 					</div>
@@ -327,6 +292,7 @@
 		</div>
 	</section>
 	<!-- Footer Section End -->
+	</div>
 
 	<!-- Search model Begin -->
 	<div class="search-model">
@@ -348,6 +314,8 @@
 	<script src="/js/jquery.slicknav.js"></script>
 	<script src="/js/owl.carousel.min.js"></script>
 	<script src="/js/main.js"></script>
+
+
 
 </body>
 

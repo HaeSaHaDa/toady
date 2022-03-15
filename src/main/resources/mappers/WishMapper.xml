@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.kosmo.today.mapper.WishMapper">
+
+	<resultMap id="wishList" type="edu.kosmo.today.vo.WishVO">
+		<result property="wishnum" column="wishnum" />
+		<result property="mnum" column="mnum" />
+		<result property="tnum" column="tnum" />
+
+		<result property="gname" column="gname" />
+		<result property="tname" column="tname" />
+		<result property="tcost" column="tcost" />
+		<result property="tdate" column="tdate" />
+	</resultMap>
+
+
+
+	<select id="getWishList" resultMap="wishList">
+		
+		select * from wish, ticket,gympage 
+		where wish.tnum = ticket.tnum and ticket.gnum = gympage.gnum and wish.mnum = #{mnum}
+		
+	</select>
+	
+	<select id="getMemberNum" resultType="_int">
+		
+		select * from member where memail = #{memail} 
+		
+	</select>
+	
+	<delete id="deleteWishTicket" >
+		
+	delete form wish where wishnum =#{wishnum}
+		
+	</delete>
+
+</mapper>
