@@ -59,12 +59,10 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable() //csrf 토큰 비활성화(테스트시 걸어두는 게 좋음.)
 			.authorizeRequests() 	//요청이 들어오면
-				.antMatchers("/common/**","/js/**","/css/**", "/img/**", "/fonts/**","/Source/**")
-				.permitAll() //모두 허용.
+				.antMatchers("/common/**","/js/**","/css/**", "/img/**", "/fonts/**","/Source/**","/gethersource/**")
+				.permitAll()
 				.antMatchers("/user/**")
 				.access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
-				.anyRequest() //그외의 모든 요청은
-				.authenticated() //권한을 얻어야 해.
 			.and() 
 				.formLogin()
 				.loginPage("/common/login") //인증이 필요한 곳으로 접근하면 이동할 페이지

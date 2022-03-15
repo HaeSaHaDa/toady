@@ -107,9 +107,6 @@
 									<ul class="navbar-nav">
 										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
 										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
-										<a href="https://kauth.kakao.com/oauth/authorize?client_id=8aa2491b3e3f9c3b26767c823c29dfb2&redirect_uri=http://localhost:8282/auth/kakao/callback&response_type=code"> <img height="38px"
-											src="/img/kakao_login_button.png" /></a>
-										<a href="/oauth2/authorization/google" >구글로그인</a>
 									</ul>
 								</c:when>
 								<c:otherwise>
