@@ -6,7 +6,7 @@
 <mapper namespace="edu.kosmo.today.mapper.UserMapper">
 
 	<resultMap id="userMap" type="edu.kosmo.today.vo.UserVO">
-		<result property="memail" column="memail" />
+		<result property="mid" column="mid" />
 		<result property="mpassword" column="mpassword" />
 		<result property="mnickname" column="mnickname" />
 		<result property="mphone" column="mphone" />
@@ -15,12 +15,12 @@
 	</resultMap>
 
 	<resultMap id="authMap" type="edu.kosmo.today.vo.AuthVO">
-		<result property="memail" column="memail" />
+		<result property="mid" column="mid" />
 		<result property="auth" column="auth" />
 	</resultMap>
 
 	<select id="getUser" resultMap="userMap">
-		select * from member , authority where member.memail = authority.memail and member.memail = #{memail}
+		select * from member , authority where member.mid = authority.mid and member.mid = #{mid}
 	</select>
 
 </mapper>

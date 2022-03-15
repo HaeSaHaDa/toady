@@ -23,7 +23,7 @@
 		<result property="tnum" column="tnum" />		
 		<result property="gnum" column="gnum" />
 		<result property="tcost" column="tcost" />
-		<result property="tdate" column="tdate" />
+		<!-- <result property="tdate" column="tdate" /> -->
 		<result property="tname" column="tname" />
 
 	</resultMap>

@@ -7,7 +7,7 @@
 	<form action="/common/loginProc" method="post">
 		<div class="form-group">
 			<label for="memail">Username:</label> 
-			<input type="text" name="memail" class="form-control" placeholder="Enter Username" id="memail">
+			<input type="text" name="mid" class="form-control" placeholder="Enter Username" id="mid">
 		</div>
 		<div class="form-group">
 			<label for="mpassword">Password:</label> 

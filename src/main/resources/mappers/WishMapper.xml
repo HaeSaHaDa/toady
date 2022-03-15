@@ -13,7 +13,6 @@
 		<result property="gname" column="gname" />
 		<result property="tname" column="tname" />
 		<result property="tcost" column="tcost" />
-		<result property="tdate" column="tdate" />
 	</resultMap>
 	<select id="getWishList" resultMap="wishList">
 		
