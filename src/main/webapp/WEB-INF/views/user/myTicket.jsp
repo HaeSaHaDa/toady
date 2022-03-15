@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -16,133 +16,27 @@
 <title>마이페이지</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
-	rel="stylesheet">
+<link	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"	rel="stylesheet">
+
 
 <!-- Css Styles -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/flaticon.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/barfiller.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/magnific-popup.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/bootstrap.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/font-awesome.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/flaticon.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/barfiller.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/magnific-popup.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/slicknav.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style2.css" type="text/css">
+<!-- 별점라이브러리 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-.ticket {
-        width: 385px;
-        height: 250px;
-        border: 1px solid #cccc;
-        border-radius: 30px 30px;
-        margin-top: 50px;
-        background-color: white;
-      }
-      .first {
-        display: flex;
-        line-height: 2;
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-      .first p:first-child {
-        margin-right: 100px;
-        margin-left: 30px;
-      }
-      .first p:nth-child(2) {
-        margin-right: 20px;
-      }
-      .second {
-        margin-left: 30px;
-        line-height: 10px;
-      }
-      .gogym p{
-        color: rgb(39, 129, 107);
-        text-decoration: none;
-        text-shadow: 0 0 24px;
-      }
-      .last {
-        display: flex;
-      }
-      @import url(https://fonts.googleapis.com/css?family=BenchNine:700);
 
-      .goback {
-        background-color: #c47135;
-        border: none;
-        color: #ffffff;
-        cursor: pointer;
-        display: inline-block;
-        font-family: "BenchNine", Arial, sans-serif;
-        font-size: 1em;
-        font-size: 10px;
-        outline: none;
-        padding: 12px 30px 10px;
-        position: relative;
-        text-transform: uppercase;
-        margin-left: 150px;
-        margin-bottom: 50px;
-      }
-      .goback:before,
-      .goback:after {
-        border-color: transparent;
-        -webkit-transition: all 0.25s;
-        transition: all 0.25s;
-        border-style: solid;
-        border-width: 0;
-        content: "";
-        height: 24px;
-        position: absolute;
-        width: 24px;
-      }
-      .goback:before {
-        border-color: #c47135;
-        border-right-width: 2px;
-        border-top-width: 2px;
-        right: -5px;
-        top: -5px;
-      }
-      .goback:after {
-        border-bottom-width: 2px;
-        border-color: #c47135;
-        border-left-width: 2px;
-        bottom: -5px;
-        left: -5px;
-      }
-      .goback:hover,
-      .goback.hover {
-        background-color: #c47135;
-      }
-      .goback:hover:before,
-      .goback.hover:before,
-      .goback:hover:after,
-      .goback.hover:after {
-        height: 100%;
-        width: 100%;
-      }
-</style>
-
-<script>
-	
-</script>
 </head>
 
 <body>
@@ -254,24 +148,46 @@
      					 <div class="ticket">
        						 <div class="first">
        						 <input type="hidden" id="payid" value="${myticket.payid}">
-          						<p>${myticket.oderdate}</p>
-          						<p>주문번호</p>
-         						<p>${myticket.ordernum}</p>
+          						<p class="mr-3 ml-3"><fmt:formatDate value="${myticket.orderdate}" pattern="yyyy/MM/dd"/></p>
+          						<p class="mr-3" style="margin-left: 150px;">주문번호</p>
+         						<p>${myticket.ordernum}</p>         						
         						</div>
        						 <div class="second">
           						<a href="${pageContext.request.contextPath}/common/gymdetail/${myticket.gnum}" class="gogym"> <p title="헬스장 정보보기">${myticket.gname}</p> </a>
          						 <p>${myticket.tname}<span>${myticket.tdate}개월</span></p>
-         						 <p>시작날짜<span>${myticket.startdate}</span></p>
+         						 <p>시작날짜<span><fmt:formatDate value="${myticket.startdate}" pattern="yyyy/MM/dd"/></span></p>
          				 	<div class="last">
-           					 <p>${myticket.cost}</p>
+           					 <p>${myticket.cost}원</p>
+           					 	<button type="button" class="goRivew" data-toggle="modal" data-target="#form">리뷰작성</button>           					 
            					 	<button class="goback">환불하기</button>
           					</div>
         					</div>
       						</div>
-      						</c:forEach>
-    						</div>  
-					
-					
+      					<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    						<div class="modal-dialog modal-dialog-centered" role="document">
+       							<div class="modal-content">
+           							 <div class="text-right cross"> <i class="fa fa-times mr-2"></i> </div>
+            						<div class="card-body text-center"><img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
+                	<div class="comment-box text-center">
+                    <h4>${myticket.gname}의 리뷰를 남겨주세요! </h4>
+                    <div class="rating"> 
+                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
+                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
+                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
+                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
+                    </div>
+                    <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?" rows="4"></textarea> </div>
+                    <div class="text-center mt-4"> <button class="btn btn-success send px-5">Send message <i class="fa fa-long-arrow-right ml-1"></i></button> </div>
+                </div>
+            		</div>
+        			</div>
+    			</div>
+				</div>	
+      					</c:forEach>
+    					</div> 						
+    						
+						
 				</div>
 			</div>
 		</div>
@@ -424,20 +340,34 @@
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
 	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-
+	
 
 
 </body>
 
 <script>
       $(document).ready(function () {
-        $(".goback").mouseleave(function () {
+    	  
+        $("goRivew").mouseleave(function () {
           $(this).removeClass("hover");
         });
+        
+       $(".fa").on("click",function(){
+    	   $('.modal').modal('hide');
+    	   
+       });
+       $(".rating").on("change",function(){
+    	    var tmp_value = $('input:radio[name=rating]:checked').val();
+    	       console.log(tmp_value);
+       });
+       
+
         
         
         
       });
+      
+      
     </script>
 
 </html>

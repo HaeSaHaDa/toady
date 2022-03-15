@@ -8,7 +8,7 @@
 	<resultMap id="OrderList" type="edu.kosmo.today.vo.OrderVO">
 		<result property="ordernum" column="ordernum" />
 		<result property="mnum" column="mnum" />
-		<result property="oderdate" column="oderdate" />
+		<result property="orderdate" column="orderdate" />
 		<result property="payid" column="payid" />
 		<result property="tnum" column="tnum" />
 		<result property="cost" column="cost" />

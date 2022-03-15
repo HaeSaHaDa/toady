@@ -37,7 +37,7 @@ public class OrderVO {
 	//orderlist
 	private int ordernum; //주문번호
 	private int mnum; //회원번호
-	private Timestamp oderdate; //주문일
+	private Timestamp orderdate; //주문일
 	private String payid; //아임포트 결제 후 받은 결제번호
 	//orderdetail
 	private int tnum; //티켓번호

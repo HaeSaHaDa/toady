@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+.ticket {
+        width: 385px;
+        height: 250px;
+        border: 1px solid #cccc;
+        border-radius: 30px 30px;
+        margin-top: 20px;
+        background-color: white;
+      }
+      .first {
+        display: flex;
+        line-height: 2;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .first p:first-child {
+        margin-right: 100px;
+        margin-left: 30px;
+      }
+      .first p:nth-child(2) {
+        margin-right: 20px;
+      }
+      .second {
+
+        margin-left: 30px;
+        line-height: 8px;
+      }
+      .gogym p{
+        color: rgb(39, 129, 107);
+        text-decoration: none;
+        text-shadow: 0 0 24px;
+      }
+      .last {
+        display: flex;
+      }
+      @import url(https://fonts.googleapis.com/css?family=BenchNine:700);
+	
+	.goback{
+		background-color: #50586C;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "BenchNine", Arial, sans-serif;
+        font-size: 1em;
+        font-size: 10px;
+        outline: none;
+        padding: 12px 30px 10px;
+        position: relative;
+        text-transform: uppercase;
+        margin-left: 25px;
+        margin-bottom: 30px;
+	}
+		
+      .goRivew{
+        background-color: #c47135;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "BenchNine", Arial, sans-serif;
+        font-size: 1em;
+        font-size: 10px;
+        outline: none;
+        padding: 12px 30px 10px;
+        position: relative;
+        text-transform: uppercase;
+        margin-left: 50px;
+        margin-bottom: 30px;
+      }
+      .goRivew:before,
+      .goRivew:after {
+        border-color: transparent;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+        border-style: solid;
+        border-width: 0;
+        content: "";
+        height: 24px;
+        position: absolute;
+        width: 24px;
+      }
+      .goRivew:before {
+        border-color: #c47135;
+        border-right-width: 2px;
+        border-top-width: 2px;
+        right: -5px;
+        top: -5px;
+      }
+      .goRivew:after {
+        border-bottom-width: 2px;
+        border-color: #c47135;
+        border-left-width: 2px;
+        bottom: -5px;
+        left: -5px;
+      }
+      .goRivew:hover,
+      .goRivew.hover {
+        background-color: #c47135;
+      }
+      .goRivew:hover:before,
+      .goRivew.hover:before,
+      .goRivew:hover:after,
+      .goRivew.hover:after {
+        height: 100%;
+        width: 100%;
+      }
+      .cross {
+    padding: 10px;
+    color: #d6312d;
+    cursor: pointer;
+    font-size: 23px
+}
+
+.cross i {
+    margin-top: -5px;
+    cursor: pointer
+}
+
+.comment-box {
+    padding: 5px
+}
+
+.comment-area textarea {
+    resize: none;
+    border: 1px solid #ff0000
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 1px rgb(255, 0, 0) !important
+}
+
+.send {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #ff0000
+}
+
+.send:hover {
+    color: #fff;
+    background-color: #f50202;
+    border-color: #f50202
+}
+
+.rating {
+    display: inline-flex;
+    margin-top: -10px;
+    flex-direction: row-reverse
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 28px;
+    font-size: 35px;
+    color: #ff0000;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
