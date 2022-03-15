@@ -26,7 +26,7 @@ public class PrincipalDetail implements UserDetails{
 	public String getPassword() { return user.getMpassword();}
 
 	@Override
-	public String getUsername() { return user.getMemail();}
+	public String getUsername() { return user.getMid();}
 	
 	//계정이 만료되지 않았는지 리턴(true:만료 안 됨)
 	@Override
