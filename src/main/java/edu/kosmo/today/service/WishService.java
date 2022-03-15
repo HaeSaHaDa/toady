@@ -1,6 +1,5 @@
 package edu.kosmo.today.service;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,29 +21,48 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class WishService {
-	  
+
 	@Autowired
-	private WishMapper mapper; //찜기능을 위한 mapper
-	
+	private WishMapper mapper; // 찜기능을 위한 mapper
+
 	public int getMemberNum(String memail) {
-		log.info("getMemberNum" + memail +"의 회원번호 가져오는 중");
-		
+		log.info("getMemberNum" + memail + "의 회원번호 가져오는 중");
+
 		return mapper.getMemberNum(memail);
 	}
 	
-	public List<WishVO> getWishList(int mnum){
+	//찜 목록을 가져오는 서비스
+	public List<WishVO> getWishList(int mnum) {
 		log.info("getWishList...");
-		log.info(mnum+"의 찜목록을 불러오는중");
-		
+		log.info(mnum + "의 찜목록을 불러오는중");
+
 		List<WishVO> list = mapper.getWishList(mnum);
-		
+
 		return list;
 	}
-	
-	public int deleteWishTicket(int wishNum) {
-		log.info(wishNum+"번의 이용권 삭제중");
+	//찜 목록의 최종가격을 가져오는 서비스
+	public List<Integer> getPriceWish(int mnum){
+		log.info(mnum+"의 장바구니 가격구하는중..");
 		
+		List<Integer> price = mapper.priceList(mnum);
+		
+		return price;
+	}
+	
+
+	// 찜 이용권 삭제 서비스
+	@Transactional
+	public int deleteWishTicket(int wishNum) {
+		log.info(wishNum + "번의 이용권 삭제중");
+
 		return mapper.deleteWishTicket(wishNum);
+	}
+
+	// 찜 목록 전체 삭제 서비스
+	public void deleteWishList(int mnum) {
+		log.info(mnum+"회원의 찜목록 전체 삭제중...");
+		
+		mapper.deleteWishList(mnum);
 	}
 
 }

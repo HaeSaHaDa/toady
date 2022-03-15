@@ -49,6 +49,7 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.getListPage(criteria);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void modify(MemberVO memberVO) {
 		memberMapper.update(memberVO);
@@ -59,4 +60,7 @@ public class MemberServiceImpl implements MemberService{
 	public void nboardRegister(NoteVO noteVO) {
 		memberMapper.nboardinsert(noteVO);
 	}	
+=======
+
+>>>>>>> 7a5f6b61d5b4f379c160769aa35470cb8a865435
 }

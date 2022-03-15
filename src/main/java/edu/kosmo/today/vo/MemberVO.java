@@ -27,7 +27,7 @@ SOCIALID           VARCHAR2(100)
 public class MemberVO {	
 	private int mnum;
 	private String memail;
-	private String mpassword;
+	private String password;
 	private String mnickname;
 	private Integer mphone;
 	private String mbirth;
