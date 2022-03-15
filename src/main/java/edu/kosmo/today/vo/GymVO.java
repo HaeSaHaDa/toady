@@ -2,8 +2,10 @@ package edu.kosmo.today.vo;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //03-02찜기능 구현 김보람 (이용권VO)
 
@@ -24,6 +26,8 @@ FILENAME           VARCHAR2(2000)
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class GymVO {
 
 	private int gnum; //시설번호

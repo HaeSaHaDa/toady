@@ -2,8 +2,10 @@ package edu.kosmo.today.vo;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //03-02찜기능 구현 김보람
 
@@ -14,6 +16,8 @@ TNUM             NUMBER
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class WishVO {
 
 	private int wishnum; //찜번호
