@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
-import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
+import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
@@ -130,7 +130,7 @@ public class AdminController {
 		System.out.println("faq입력중");
 		ResponseEntity<String> entity = null;
 
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
 		int mnum = faqService.getMemberNum(member.getUsername());

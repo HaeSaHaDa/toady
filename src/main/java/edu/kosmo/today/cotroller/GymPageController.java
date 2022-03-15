@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 
-import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
+
 import edu.kosmo.today.service.GymServicce;
 import edu.kosmo.today.service.WishService;
 import edu.kosmo.today.userservice.UserService;
