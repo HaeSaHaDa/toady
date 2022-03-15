@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.MemberVO;
+import edu.kosmo.today.vo.UserVO;
 
 @Mapper
 public interface MemberMapper { 
@@ -15,7 +16,6 @@ public interface MemberMapper {
 		
 	public int getTotalCount();  //페이징 처리 관련
 	public List<MemberVO> getListWithPaging(Criteria criteria);
-	
 	
 	
 }
