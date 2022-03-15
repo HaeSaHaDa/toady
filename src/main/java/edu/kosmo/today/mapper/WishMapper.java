@@ -34,5 +34,11 @@ public interface WishMapper {
 	
 	//찜에 이용권 담기
 	public void insertWish(int mnum,int tnum);
+	
+	//찜에 이용권이 담겼는지 확인하기
+	public int checkWish(int mnum,int tnum);
+	
+	//찜 수량
+	public void updateWish(int mnum,int tnum);
 
 }

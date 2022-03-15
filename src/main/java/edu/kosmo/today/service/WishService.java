@@ -76,7 +76,15 @@ public class WishService {
 	public void insertWish(int mnum,int tnum) {
 		log.info("이용권 담는 중..."+mnum,tnum);
 		
-		mapper.insertWish(mnum, tnum);
+		int check = mapper.checkWish(mnum, tnum);
+		
+		if(check == 0) {
+			mapper.insertWish(mnum, tnum);
+		}else {
+			mapper.updateWish(mnum, tnum);
+		}
+		
+		
 	}
 
 }

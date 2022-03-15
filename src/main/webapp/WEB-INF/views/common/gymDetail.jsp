@@ -11,11 +11,13 @@
 <meta name="_csrf" content="${_csrf.token}"/>
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"  />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"  />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <style>
       #gympage1 {
@@ -116,6 +118,14 @@
 
 .tab-content > .active {
   display: block; }
+.card-img-top{
+	width: 100px;
+	height: 250px;
+	
+}
+.card{
+	margin: 10px;
+}
 
     </style>
 
@@ -283,19 +293,19 @@
                             <div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
                              <div class="container row">
                               <div class="card" style="width:400px">
-                                <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+                                <img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width:100%">
                                 <div class="card-body">
-                                  <h4 class="card-title">John Doe</h4>
+                                  <h4 class="card-title">Jane Doe</h4>
                                   <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                                  <a href="#" class="btn btn-primary">See Profile</a>
+                                  
                                 </div>
                               </div>
                               <div class="card" style="width:400px">
-                                <img class="card-img-top" src="img_avatar1.png" alt="Card image" style="width:100%">
+                                <img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width:100%">
                                 <div class="card-body">
-                                  <h4 class="card-title">John Doe</h4>
+                                  <h4 class="card-title">Jane Doe</h4>
                                   <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                                  <a href="#" class="btn btn-primary">See Profile</a>
+                                  
                                 </div>
                               </div>
                              
@@ -524,7 +534,7 @@
 	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
 	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>		
 </body>
 <script>
 $(document).ready(function(){	
@@ -538,7 +548,7 @@ $(document).ready(function(){
 		
 		if(login == ""){
 			if(confirm("로그인이 필요합니다.")){
-				 location.href = "/login";				
+				 location.href = "/common/login";				
 			}
 		}else{
 			
@@ -563,16 +573,11 @@ $(document).ready(function(){
 	    	                  console.log(e);
 	    	              }         
 	    	       
-	    	       });  
+	    	       });			
 			
-			
-		}
+		}		
 		
-		
-	});
-	
-	
-	
+	});	
 	
 })
 

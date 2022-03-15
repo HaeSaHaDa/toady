@@ -54,5 +54,15 @@
 		insert into wish (wishnum,mnum,tnum,wdate) values (wish_seq.nextval,#{mnum},#{tnum},1)
 		
 	</insert>
+	
+	<select id="checkWish" resultType="_int">
+		
+		select count(*) from wish where mnum = #{mnum} and tnum = #{tnum}
+		 
+	</select>
+	
+	<update id="updateWish">
+		update wish set wdate = wdate+1 where mnum = #{mnum} and tnum = #{tnum}
+	</update>
 
 </mapper>

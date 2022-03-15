@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -91,6 +93,28 @@ public class WishController {
 		wishServise.deleteWishList(mnum);
 
 		return "redirect:/user/wishlist";
+	}
+	
+	@RequestMapping(value = "/insertWish/{tnum}" , method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> insertWish(@PathVariable("tnum") String tnum){
+		ResponseEntity<String> entity = null;
+		System.out.println("이용권 찜하는중..."+tnum+">>이용권번호");
+		int ticket = Integer.parseInt(tnum);
+
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+
+		int mnum = wishServise.getMemberNum(member.getUsername());
+		try {
+			wishServise.insertWish(mnum, ticket);
+			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+
+		return entity;
 	}
 
 	// 주문하기(결제페이지로 이동)

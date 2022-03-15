@@ -242,7 +242,7 @@
 				<li><a href="./services.html">mypage</a></li>
 				<li><a href="/wishlist">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
-				<li><a href="gymlist">시설찾기</a></li>
+				<li><a href="/common/gymlist">시설찾기</a></li>
 
 
 			</ul>
@@ -271,7 +271,7 @@
 							<li><a href="mypage">mypage</a></li>
 							<li><a href="/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="gymlist">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 
 						</ul>
 					</nav>
@@ -528,27 +528,13 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 <script>
+
+
 $(document).ready(function(){	
+	//<div class="cart-table">	
 	
+	check();
 	
-	let list = $(".total-price").length;
-	console.log("목록"+list);
-	
-	let htmls ="";
-	htmls += '<tr>';
-	htmls += '<td colspan="7"></td>';
-	htmls += '</tr>';
-	htmls += '<tr>';
-	htmls += '<td colspan="7"><h5>찜한 이용권이 없습니다.</h5></td>';
-	htmls += '</tr>';
-	htmls += '<tr>';
-	htmls += '<td colspan="7"></td>';
-	htmls += '</tr>';
-	
-	if(list == ""){
-		$(".cart-table tbody").append(htmls);
-		
-	}
 	
     $(".dec").on("click",function(e){
         var thisRow = $(this).closest('tr');
@@ -583,27 +569,8 @@ $(document).ready(function(){
     });
 
     $(".qtybtn").on("click",function(e){
-       console.log("총 가격 넣는중");
-       const total = $(".cart-total span").text();
+       getTotal();
        
-        console.log("총가격은 >>"+total);
-        
-
-       let arr = $(".total-price").length;
-
-       let arr2 = new Array(arr);
-       
-
-        let sum =0;
-
-       for(let i =0; i<arr;i++){
-           arr2[i]=Number($(".total-price").eq(i).text());
-           console.log(i+"번째 텍스트"+arr2[i]);
-           sum += arr2[i];
-       }
-       console.log(sum);
-
-       $(".cart-total span").text(sum);
        var thisRow = $(this).closest('tr');
        //수량 업데이트 중
        var token = $("meta[name='_csrf']").attr("content");
@@ -656,6 +623,8 @@ $(document).ready(function(){
        var header = $("meta[name='_csrf_header']").attr("content");
 
 		console.log(token+","+header);
+		let p = $(".cart-total span").text();
+		console.log(p);
 		
     	$.ajax({
     		url : "/deleteWish/"+ticketnumber,
@@ -669,13 +638,17 @@ $(document).ready(function(){
     			   
     			   if(result=="ok"){    	                	 
     				   $(trname).remove();  
-    	                 }     
+    				   getTotal();    				  
+    	                 }
+    			   check();
+    			  
     	              },
     	              error: function (e) {
     	                  console.log(e);
     	              }         
     	       
-    	       });   
+    	       }); 
+    	
     	    
     	    });   
  
@@ -683,6 +656,56 @@ $(document).ready(function(){
      
 });
 
+function getTotal(){
+	console.log("총 가격 넣는중");
+    const total = $(".cart-total span").text();
+    
+     console.log("총가격은 >>"+total);
+     
+
+    let arr = $(".total-price").length;
+
+    let arr2 = new Array(arr);
+    
+
+     let sum =0;
+     
+     
+     for(let i =0; i<arr;i++){
+          arr2[i]=Number($(".total-price").eq(i).text());
+          console.log(i+"번째 텍스트"+arr2[i]);
+           sum += arr2[i];
+       }      
+
+    
+    console.log(sum);
+
+    $(".cart-total span").text(sum);
+}
+
+function nolist(){
+	
+	let htmls ="";
+	htmls += '<tr>';
+	htmls += '<td colspan="7"></td>';
+	htmls += '</tr>';
+	htmls += '<tr>';
+	htmls += '<td colspan="7"><h5>찜한 이용권이 없습니다.</h5></td>';
+	htmls += '</tr>';
+	htmls += '<tr>';
+	htmls += '<td colspan="7"></td>';
+	htmls += '</tr>';
+	
+	$(".cart-table tbody").append(htmls);
+}
+
+function check(){
+	let checkNum = $(".cart-total span").text();
+	
+	if(checkNum == 0){
+		nolist();
+	}
+}
 
 </script>
 

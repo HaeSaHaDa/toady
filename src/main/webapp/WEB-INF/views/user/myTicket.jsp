@@ -55,7 +55,7 @@
         height: 250px;
         border: 1px solid #cccc;
         border-radius: 30px 30px;
-        margin-top: 100px;
+        margin-top: 50px;
         background-color: white;
       }
       .first {
@@ -231,8 +231,7 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container"
-			style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
@@ -249,8 +248,7 @@
 				</div>
 				<!-- 사이드바 끝 -->
 				<div class="col-8">
-					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
-					
+					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->					
 					<div class="container">
 					<c:forEach items="${myTicket}" var="myticket">
      					 <div class="ticket">
