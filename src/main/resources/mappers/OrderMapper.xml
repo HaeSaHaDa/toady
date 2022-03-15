@@ -8,22 +8,24 @@
 	<resultMap id="OrderList" type="edu.kosmo.today.vo.OrderVO">
 		<result property="ordernum" column="ordernum" />
 		<result property="mnum" column="mnum" />
-		<result property="orderdate" column="orderdate" />
+		<result property="oderdate" column="oderdate" />
+		<result property="payid" column="payid" />
 		<result property="tnum" column="tnum" />
-		<result property="tname" column="tname" />
 		<result property="cost" column="cost" />
+		<result property="startdate" column="startdate" />
+		<result property="tdate" column="tdate" />
+		<result property="tname" column="tname" />
 		<result property="gnum" column="gnum" />
-		<result property="gname" column="gname" />
+		<result property="gname" column="gname" />		
 	</resultMap>
 
 	<select id="getTicketList" resultMap="OrderList">
 
-		select orderlist.ordernum,orderlist.mnum,orderlist.orderdate,orderdetail.tnum,
-		ticket.tname,orderdetail.cost,gympage.gnum,gympage.gname from
-		orderlist,orderdetail,ticket,gympage
-		where orderlist.ordernum =
-		orderdetail.ordernum and orderdetail.tnum = ticket.tnum and ticket.gnum = gympage.gnum
-        and orderlist.mnum = #{mnum}
+		SELECT
+    *
+FROM orderlist,orderdetail,ticket,gympage
+WHERE orderlist.ordernum= orderdetail.ordernum and orderdetail.tnum=ticket.tnum 
+and ticket.gnum=gympage.gnum and orderlist.mnum = #{mnum} ORDER by orderlist.orderdate desc
 
 	</select>
 

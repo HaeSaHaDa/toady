@@ -51,11 +51,12 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .ticket {
-        width: 380px;
-        height: 170px;
+        width: 385px;
+        height: 250px;
         border: 1px solid #cccc;
         border-radius: 30px 30px;
         margin-top: 100px;
+        background-color: white;
       }
       .first {
         display: flex;
@@ -74,7 +75,7 @@
         margin-left: 30px;
         line-height: 10px;
       }
-      .gogym {
+      .gogym p{
         color: rgb(39, 129, 107);
         text-decoration: none;
         text-shadow: 0 0 24px;
@@ -251,16 +252,18 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					
 					<div class="container">
-					<c:forEach items="${ticket}" var="myticket">
+					<c:forEach items="${myTicket}" var="myticket">
      					 <div class="ticket">
        						 <div class="first">
-          						<p>${myticket.orderdate}</p>
-          						<p>${myticket.ordernum}</p>
-         						<p>2010203</p>
+       						 <input type="hidden" id="payid" value="${myticket.payid}">
+          						<p>${myticket.oderdate}</p>
+          						<p>주문번호</p>
+         						<p>${myticket.ordernum}</p>
         						</div>
        						 <div class="second">
           						<a href="${pageContext.request.contextPath}/common/gymdetail/${myticket.gnum}" class="gogym"> <p title="헬스장 정보보기">${myticket.gname}</p> </a>
-         						 <p>${myticket.tname}<span>-3개월</span></p>
+         						 <p>${myticket.tname}<span>${myticket.tdate}개월</span></p>
+         						 <p>시작날짜<span>${myticket.startdate}</span></p>
          				 	<div class="last">
            					 <p>${myticket.cost}</p>
            					 	<button class="goback">환불하기</button>

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
@@ -80,10 +82,16 @@ public class UserController {
 	//내 이용권 조회
 	@GetMapping("/user/myTicket")
 	public ModelAndView getTicketList(ModelAndView mav) {
-		System.out.println("내 이용권 가져오는 중");
+		
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		
+		System.out.println(member.getUsername()+"의 이용권 가져오는 중");
+		
+		
 		
 		mav.setViewName("/user/myTicket");
-		
+		mav.addObject("myTicket", orderService.getTicketList(member.getUsername()));
 		
 		return mav;
 	}
