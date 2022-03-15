@@ -9,10 +9,10 @@ import edu.kosmo.today.vo.UserVO;
 
 @Controller	
 public class MainCotroller {
-	
-	
+		
 	@GetMapping({"/today"})
 	public String index(Principal principal, UserVO user) {
+
 		System.out.println("컨트롤러를 타는가?'");
 		System.out.println("principal" + principal);
 		return "common/home"; 
