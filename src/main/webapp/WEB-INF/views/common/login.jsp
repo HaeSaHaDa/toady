@@ -6,11 +6,7 @@
 	<!-- form이용하려면 name 값이 필요. -->
 	<form action="/common/loginProc" method="post">
 		<div class="form-group">
-<<<<<<< HEAD
-			<label for="memail">Username:</label> 
-=======
 			<label for="mid">Username:</label> 
->>>>>>> 4d46fdba26ae5018a247bc13d51a64b2235e2576
 			<input type="text" name="mid" class="form-control" placeholder="Enter Username" id="mid">
 		</div>
 		<div class="form-group">

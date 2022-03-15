@@ -49,13 +49,7 @@
 				<li><a href="./services.html">mypage</a></li>
 				<li><a href="/user/wishlist">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
-<<<<<<< HEAD
-				<li><a href="/common/gymlist">시설찾기</a></li>
-
-
-=======
 				<li><a href="gymlist">시설찾기</a></li>
->>>>>>> 4d46fdba26ae5018a247bc13d51a64b2235e2576
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
@@ -93,16 +87,11 @@
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-<<<<<<< HEAD
-							<li class="active"><a href="./index.html">Home</a></li>
-							<li><a href="/user/myTicket">mypage</a></li>
-=======
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="mypage">mypage</a></li>
->>>>>>> 4d46fdba26ae5018a247bc13d51a64b2235e2576
 							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="/common/gymlist">시설찾기</a></li>
+							<li><a href="gymlist">시설찾기</a></li>
 							<li><a href="./common/adminPage">AdminPage</a></li>
 						</ul>
 					</nav>
