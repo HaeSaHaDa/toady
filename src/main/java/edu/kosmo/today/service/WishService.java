@@ -64,5 +64,27 @@ public class WishService {
 		
 		mapper.deleteWishList(mnum);
 	}
+	
+	//찜 수량 수정 
+	public void updateWishList(WishVO vo) {
+		log.info("수량수정중..");
+		
+		mapper.updateWishList(vo);
+	}
+	
+	//찜에 이용권 담기
+	public void insertWish(int mnum,int tnum) {
+		log.info("이용권 담는 중..."+mnum,tnum);
+		
+		int check = mapper.checkWish(mnum, tnum);
+		
+		if(check == 0) {
+			mapper.insertWish(mnum, tnum);
+		}else {
+			mapper.updateWish(mnum, tnum);
+		}
+		
+		
+	}
 
 }

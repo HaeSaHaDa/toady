@@ -8,21 +8,16 @@
 	<resultMap id="wishList" type="edu.kosmo.today.vo.WishVO">
 		<result property="wishnum" column="wishnum" />
 		<result property="mnum" column="mnum" />
-		<result property="tnum" column="tnum" />
-
+		<result property="tknum" column="tknum" />
+		<result property="wdate" column="wdate" />
 		<result property="gname" column="gname" />
 		<result property="tname" column="tname" />
 		<result property="tcost" column="tcost" />
-		<result property="tdate" column="tdate" />
 	</resultMap>
-
-
-
-
 	<select id="getWishList" resultMap="wishList">
 		
 		select * from wish, ticket,gympage 
-		where wish.tnum = ticket.tnum and ticket.gnum = gympage.gnum and wish.mnum = #{mnum}
+		where wish.tknum = ticket.tknum and ticket.gnum = gympage.gnum and wish.mnum = #{mnum}
 		
 	</select>
 	
@@ -46,8 +41,28 @@
 	
 	<select id="priceList" resultType="_int">
 
-		SELECT	tcost	FROM wish,ticket WHERE wish.tnum = ticket.tnum and wish.mnum = #{mnum}
+		SELECT	tcost	FROM wish,ticket WHERE wish.tknum = ticket.tknum and wish.mnum = #{mnum}
 
 	</select>
+	
+	<update id="updateWishList">
+		update wish set wdate = #{wdate} where wishnum = #{wishnum}
+	</update>
+
+	<insert id="insertWish">
+		
+		insert into wish (wishnum,mnum,tknum,wdate) values (wish_seq.nextval,#{mnum},#{tknum},1)
+		
+	</insert>
+	
+	<select id="checkWish" resultType="_int">
+		
+		select count(*) from wish where mnum = #{mnum} and tknum = #{tknum}
+		 
+	</select>
+	
+	<update id="updateWish">
+		update wish set wdate = wdate+1 where mnum = #{mnum} and tknum = #{tknum}
+	</update>
 
 </mapper>
