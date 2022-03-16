@@ -63,10 +63,9 @@
 				</c:when>
 				<c:otherwise>
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberupdate">회원정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-						<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+						<li class="nav-item"><a class="nav-link"><sec:authentication property="principal.user.memail"/>님 환영합니다.</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>
