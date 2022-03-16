@@ -15,10 +15,7 @@
 <title>오늘의 짐</title>
 <!-- ajax -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-    />
+    <link  rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -57,7 +54,7 @@
 
       .cart-table table tr th {
         font-size: 16px;
-        color: #252525;
+        color:  #252525;
         font-weight: 700;
         border-bottom: 1px solid #ebebeb;
         text-align: center;
@@ -245,7 +242,7 @@
 				<li><a href="./services.html">mypage</a></li>
 				<li><a href="/wishlist">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
-				<li><a href="gymlist">시설찾기</a></li>
+				<li><a href="/common/gymlist">시설찾기</a></li>
 
 
 			</ul>
@@ -274,7 +271,7 @@
 							<li><a href="mypage">mypage</a></li>
 							<li><a href="/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="gymlist">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 
 						</ul>
 					</nav>
@@ -338,7 +335,7 @@
                 <c:forEach items="${wishList}" var="wish">   
                 <div id="wishtable">            
                     <tr id="select">
-                    <input type="hidden" name="wishnum"  value="${wish.wishnum}">
+                    <input type="hidden" id="wishnum" name="wishnum"  value="${wish.wishnum}">
                     <td class="cart-pic first-row">
                     <!-- 여기는 나중에 이미지이름넣기 -->
                       <img class="cart-img" src="img/hero/hero-2.jpg" alt="" />
@@ -352,7 +349,7 @@
                         <div class="quantity">
                             <div class="pro-qty">
                                 <span class="dec qtybtn">-</span>
-                                <input type="text" name="tdate"  value="${wish.tdate}">
+                                <input type="text" id="wdate" name="wdate"  value="${wish.wdate}">
                                 <span class="inc qtybtn">+</span>
                             </div>
                         </div>
@@ -379,7 +376,7 @@
                   <ul>
                     <li class="cart-total">Total <span>${wishPrice}</span></li>
                   </ul>
-                  <a href="#" class="proceed-btn">결제하기</a>
+                  <a href="/user/checkoutpage" class="proceed-btn">결제하기</a>
                 </div>
               </div>
             </div>
@@ -531,28 +528,14 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 <script>
+
+
 $(document).ready(function(){	
+	//<div class="cart-table">	
+	
+	check();
 	
 	
-	let list = "<c:out value="${wishlist}"/>"
-	console.log("목록"+list);
-	
-	let htmls ="";
-	htmls += '<tr>';
-	htmls += '<td colspan="7"></td>';
-	htmls += '</tr>';
-	htmls += '<tr>';
-	htmls += '<td colspan="7"><h5>찜한 이용권이 없습니다.</h5></td>';
-	htmls += '</tr>';
-	htmls += '<tr>';
-	htmls += '<td colspan="7"></td>';
-	htmls += '</tr>';
-	
-	if(list == ""){
-		$(".cart-table tbody").append(htmls);
-		
-	}
-	    
     $(".dec").on("click",function(e){
         var thisRow = $(this).closest('tr');
         console.log(thisRow.find('td:eq(3)').text());
@@ -586,26 +569,42 @@ $(document).ready(function(){
     });
 
     $(".qtybtn").on("click",function(e){
-       console.log("총 가격 넣는중");
-       const total = $(".cart-total span").text();
+       getTotal();
        
-        console.log("총가격은 >>"+total);
-        
-
-       let arr = $(".total-price").length;
-
-       let arr2 = new Array(arr);
-
-        let sum =0;
-
-       for(let i =0; i<arr;i++){
-           arr2[i]=Number($(".total-price").eq(i).text());
-           console.log(i+"번째 텍스트"+arr2[i]);
-           sum += arr2[i];
-       }
-       console.log(sum);
-
-       $(".cart-total span").text(sum);
+       var thisRow = $(this).closest('tr');
+       //수량 업데이트 중
+       var token = $("meta[name='_csrf']").attr("content");
+       var header = $("meta[name='_csrf_header']").attr("content");
+       
+       let wishNum = thisRow.find('[name=wishnum]').val();
+       let tval = thisRow.find('[name=wdate]').val();
+       console.log(wishNum,tval);
+       
+       var form = {
+    		 wishnum : wishNum,
+    		 wdate : tval
+       };
+       
+       console.log(JSON.stringify(form));
+       
+       $.ajax({
+           type : "POST",
+           url : "/updateWish",
+           beforeSend : function(xhr){
+ 			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+ 		},
+           cache : false,
+           contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(form), 
+           success: function (result) {       
+             if(result == "SUCCESS"){              
+               console.log("업데이트 완료");                            
+             }                       
+           },
+           error: function (e) {
+               console.log(e);
+           }
+       }) 
 
     });
     /*<!-- csrf meta tag -->
@@ -624,6 +623,8 @@ $(document).ready(function(){
        var header = $("meta[name='_csrf_header']").attr("content");
 
 		console.log(token+","+header);
+		let p = $(".cart-total span").text();
+		console.log(p);
 		
     	$.ajax({
     		url : "/deleteWish/"+ticketnumber,
@@ -637,23 +638,74 @@ $(document).ready(function(){
     			   
     			   if(result=="ok"){    	                	 
     				   $(trname).remove();  
-    	                 }     
+    				   getTotal();    				  
+    	                 }
+    			   check();
+    			  
     	              },
     	              error: function (e) {
     	                  console.log(e);
     	              }         
     	       
-    	       });   
+    	       }); 
+    	
     	    
     	    });   
-		// <a href="javascript:void(0)" class="primary-btn delete-wishall" onClick="javascript:goDeleteAll()">찜 비우기</a>
-		//console.log($(this).attr("href"));
-		//<div id="wishtable">  
-		
+ 
 		    
      
 });
 
+function getTotal(){
+	console.log("총 가격 넣는중");
+    const total = $(".cart-total span").text();
+    
+     console.log("총가격은 >>"+total);
+     
+
+    let arr = $(".total-price").length;
+
+    let arr2 = new Array(arr);
+    
+
+     let sum =0;
+     
+     
+     for(let i =0; i<arr;i++){
+          arr2[i]=Number($(".total-price").eq(i).text());
+          console.log(i+"번째 텍스트"+arr2[i]);
+           sum += arr2[i];
+       }      
+
+    
+    console.log(sum);
+
+    $(".cart-total span").text(sum);
+}
+
+function nolist(){
+	
+	let htmls ="";
+	htmls += '<tr>';
+	htmls += '<td colspan="7"></td>';
+	htmls += '</tr>';
+	htmls += '<tr>';
+	htmls += '<td colspan="7"><h5>찜한 이용권이 없습니다.</h5></td>';
+	htmls += '</tr>';
+	htmls += '<tr>';
+	htmls += '<td colspan="7"></td>';
+	htmls += '</tr>';
+	
+	$(".cart-table tbody").append(htmls);
+}
+
+function check(){
+	let checkNum = $(".cart-total span").text();
+	
+	if(checkNum == 0){
+		nolist();
+	}
+}
 
 </script>
 

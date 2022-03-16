@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.kosmo.today.mapper.OrderMapper">
+
+	<resultMap id="OrderList" type="edu.kosmo.today.vo.OrderVO">
+		<result property="ordernum" column="ordernum" />
+		<result property="mnum" column="mnum" />
+		<result property="orderdate" column="orderdate" />
+		<result property="payid" column="payid" />
+		<result property="tknum" column="tknum" />
+		<result property="cost" column="cost" />
+		<result property="startdate" column="startdate" />
+		<result property="tdate" column="tdate" />
+		<result property="tname" column="tname" />
+		<result property="gnum" column="gnum" />
+		<result property="gname" column="gname" />
+	</resultMap>
+
+
+	<select id="getTicketList" resultMap="OrderList">
+	<![CDATA[
+		SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (
+                 SELECT orderlist.ordernum, orderlist.mnum, orderlist.orderdate, orderlist.payid, 
+                 orderdetail.tknum, orderdetail.cost, orderdetail.startdate,
+                 orderdetail.tdate, ticket.tname, ticket.gnum, gympage.gname 
+                 FROM orderlist,orderdetail,ticket,gympage
+		WHERE orderlist.ordernum= orderdetail.ordernum and
+		orderdetail.tknum=ticket.tknum	and ticket.gnum=gympage.gnum and orderlist.mnum = #{mnum}
+             ) A WHERE ROWNUM <= #{criteria.pagenum} * #{criteria.amount}
+         ) WHERE RNUM > (#{criteria.pagenum}-1) * #{criteria.amount}
+	]]>
+	</select>
+
+	<select id="getTotal" resultType="_int">
+	<![CDATA[
+		select count(*) from orderlist,orderdetail where orderlist.ordernum = orderdetail.ordernum 
+		and orderlist.mnum = #{mnum}
+	]]>
+	</select>
+
+	<select id="getMemberNum" resultType="_int">
+
+		select * from member where
+		mid = #{mid}
+
+	</select>
+
+	<insert id="inserReview">
+		insert all
+		into boardlist (bid,bcontent,mnum,tnum)
+		values (BOARD_SEQ.nextval,#{bcontent},#{mnum},5)
+		into gymreview values
+		(#{grstar},#{gnum},BOARD_SEQ.currval,#{ordernum})
+		select * from dual
+	</insert>
+
+	<select id="checkReview" resultType="_int">
+		select count(gymreview.bid)
+		from
+		gymreview ,orderdetail , ticket WHERE
+		gymreview.ordernum=orderdetail.ordernum and orderdetail.tknum =
+		ticket.tknum and ticket.gnum=gymreview.gnum
+		and gymreview.ordernum = #{ordernum} and orderdetail.tknum = #{tknum}
+	</select>
+
+</mapper>
