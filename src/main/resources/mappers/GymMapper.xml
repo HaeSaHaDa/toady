@@ -6,8 +6,7 @@
 <mapper namespace="edu.kosmo.today.mapper.GymMapper">
 
 	<resultMap id="gymList" type="edu.kosmo.today.vo.GymVO">
-		<result property="gnum" column="gnum" />
-		
+		<result property="gnum" column="gnum" />		
 		<result property="gname" column="gname" />
 		<result property="gcategory" column="gcategory" />
 		<result property="gadress" column="gadress" />
@@ -20,7 +19,7 @@
 	</resultMap>
 	
 	<resultMap id="ticket" type="edu.kosmo.today.vo.TicketVO">
-		<result property="tnum" column="tnum" />		
+		<result property="tknum" column="tknum" />		
 		<result property="gnum" column="gnum" />
 		<result property="tcost" column="tcost" />
 		<!-- <result property="tdate" column="tdate" /> -->

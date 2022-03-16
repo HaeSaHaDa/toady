@@ -252,7 +252,7 @@
           <br/>
           <select name="order" id="order">
           <c:forEach items="${ticketList}" var="ticket">
-            <option value="${ticket.tnum}">${ticket.tname}</option>
+            <option value="${ticket.tknum}">${ticket.tname}</option>
           </c:forEach>
         </select><br>
           <br/>

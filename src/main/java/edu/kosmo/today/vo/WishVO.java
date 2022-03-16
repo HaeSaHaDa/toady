@@ -22,7 +22,7 @@ public class WishVO {
 
 	private int wishnum; //찜번호
 	private int mnum; //회원번호
-	private int tnum; //티켓번호
+	private int tknum; //티켓번호
 	private int wdate; //찜목록에 담긴 이용권 기간
 
 	private String gname; //헬스장 이름

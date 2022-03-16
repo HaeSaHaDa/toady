@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
 
 .ticket {
-        width: 385px;
-        height: 250px;
+        width: 400px;
+        height: 240px;
         border: 1px solid #cccc;
         border-radius: 30px 30px;
-        margin-top: 20px;
+        margin-top: 5px;
         background-color: white;
+        margin-left: 100px;
       }
       .first {
         display: flex;

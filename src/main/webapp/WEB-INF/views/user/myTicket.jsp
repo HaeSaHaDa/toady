@@ -32,7 +32,7 @@
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style2.css" type="text/css">
 <!-- 별점라이브러리 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -162,14 +162,14 @@
            					 	<button class="goback">환불하기</button>
           					</div>
         					</div>
-      						</div>
-      					<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        						<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     						<div class="modal-dialog modal-dialog-centered" role="document">
        							<div class="modal-content">
            							 <div class="text-right cross"> <i class="fa fa-times mr-2"></i> </div>
             						<div class="card-body text-center"><img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
                 	<div class="comment-box text-center">
                     <h4>${myticket.gname}의 리뷰를 남겨주세요! </h4>
+                    <input type="hidden" id="tknum" value="${myticket.tknum}"> 
                     <div class="rating"> 
                     <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
                     <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
@@ -177,16 +177,35 @@
                     <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
                     <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> 
                     </div>
-                    <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?" rows="4"></textarea> </div>
-                    <div class="text-center mt-4"> <button class="btn btn-success send px-5">Send message <i class="fa fa-long-arrow-right ml-1"></i></button> </div>
-                </div>
+                    <div class="comment-area"> 
+                    	<textarea class="form-control" placeholder="what is your view?" rows="4"></textarea> 
+                    </div>
+                    <div class="text-center mt-4">
+                   	 	<input type="hidden" id="gnum" value="${myticket.gnum}"> 
+                    	<button class="btn btn-success send px-5">Send message <i class="fa fa-long-arrow-right ml-1"></i></button> 
+                    </div>
+                	</div>
             		</div>
         			</div>
     			</div>
 				</div>	
+      						</div>      				
       					</c:forEach>
     					</div> 						
-    						
+    				<c:if test="${pageMaker.pre}">
+							<a href="${pageContext.request.contextPath}/user/myTicket${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+						</c:if>
+
+						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+						<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage}">
+							<a href="${pageContext.request.contextPath}/user/myTicket${pageMaker.makeQuery(idx)}">${idx}</a>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<a href="${pageContext.request.contextPath}/user/myTicket${pageMaker.makeQuery(pageMaker.endPage + 1)}">
+								» </a>
+						</c:if>					
+						<br>		
 						
 				</div>
 			</div>
@@ -360,12 +379,64 @@
     	    var tmp_value = $('input:radio[name=rating]:checked').val();
     	       console.log(tmp_value);
        });
+ 
+       $(".send").on("click",function(){
+    	  console.log(this);
+    	   
+    	  let parent = $(this).parent("div").parent("div");
+    	  let parent2 = parent.parent("div").parent("div");
+    	  let parent3 = parent2.parent("div").parent("div");
+    	  let lastParent = parent3.parent("div");
+    	  
+    	  let ordernum =  Number(lastParent.find("p").eq(2).text());
+		  let bcontent = $("textarea").val();
+		  let grstar =  $('input:radio[name=rating]:checked').val();
+		  let gnum = Number($(this).parent("div").find("input").val());
+		  let tknum = Number(parent.parent("div").find("input").val());
+		  
+		  let form = {
+				  bcontent : bcontent,
+				  grstar : grstar,
+				  gnum : gnum,
+				  ordernum : ordernum,
+				  tknum : tknum
+		  }
+    	   
+    	  console.log(tknum+"..."+ordernum);
+		  
+		  $.ajax({
+	           type : "POST",
+	           url : "/insertReview",	         
+	           cache : false,
+	           contentType:'application/json; charset=utf-8',
+	            data: JSON.stringify(form), 
+	           success: function (result) { 
+	        	   
+	        	   if(result=="SUCCESS"){
+	        		   closeModal();	                     
+		               console.log("작성완료");
+	        	   }else{
+	        		   alert("이미 작성했습니다");
+	        		   closeModal();
+	        	   }
+	        	  	               
+	                                   
+	           },
+	           error: function (e) {
+	               console.log(e);
+	           }
+	       }) 
+		  
+		  
+       });      
        
-
-        
-        
-        
+       
+       
       });
+    
+      function closeModal(){
+    	  $('.modal').modal('hide');
+      }
       
       
     </script>

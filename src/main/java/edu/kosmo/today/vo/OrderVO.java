@@ -40,12 +40,12 @@ public class OrderVO {
 	private Timestamp orderdate; //주문일
 	private String payid; //아임포트 결제 후 받은 결제번호
 	//orderdetail
-	private int tnum; //티켓번호
+	private int tknum; //티켓번호
 	private int cost; //해당 이용권의 결제가격
 	private Timestamp startdate; //시작날짜
 	private int tdate; //개월수(수량)	
-	
-	private String tname;
+	//조인 뒤 받을 컬럼들
+	private String tname;//이용권이름
 	private int gnum; //시설번호
 	private String gname; //시설이름
 	
