@@ -99,9 +99,7 @@ public class UserController {
 		log.info("total:..." + total);
 	
 		mav.setViewName("/user/myTicket");
-		mav.addObject("myTicket", orderService.getTicketList(criteria, member.getUsername()));
-		
-		
+		mav.addObject("myTicket", orderService.getTicketList(criteria, member.getUsername()));	
 		
 		
 		mav.addObject("pageMaker", new PageVO2(criteria, total));
