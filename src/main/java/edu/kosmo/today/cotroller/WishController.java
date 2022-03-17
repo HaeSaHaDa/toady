@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,15 +44,15 @@ public class WishController {
 		List<WishVO> wishlist = wishServise.getWishList(mnum);
 
 		System.out.println("회원번호는" + mnum);
-		
+
 		List<Integer> cost = wishServise.getPriceWish(mnum);
-		log.info("......"+cost);
-		int sum =0;
-		
-		for(Integer i : cost) {
+		log.info("......" + cost);
+		int sum = 0;
+
+		for (Integer i : cost) {
 			sum += i;
 		}
-		log.info("찜최종가격은"+sum);
+		log.info("찜최종가격은" + sum);
 
 		mav.setViewName("user/wishList");
 		mav.addObject("wishList", wishlist);
@@ -58,15 +60,15 @@ public class WishController {
 
 		return mav;
 	}
-	
-	//찜에 담긴 이용권 한개만 삭제
+
+	// 찜에 담긴 이용권 한개만 삭제
 	@DeleteMapping("/deleteWish/{wishnum}")
 	@ResponseBody
-	public ResponseEntity<String> deleteWish(@PathVariable("wishnum") String wishnum){
+	public ResponseEntity<String> deleteWish(@PathVariable("wishnum") String wishnum) {
 		ResponseEntity<String> entity = null;
-		System.out.println("찜 하나 삭제중..."+wishnum+">>이용권번호");
+		System.out.println("찜 하나 삭제중..." + wishnum + ">>이용권번호");
 		int wnum = Integer.parseInt(wishnum);
-		
+
 		try {
 			wishServise.deleteWishTicket(wnum);
 			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
@@ -74,12 +76,11 @@ public class WishController {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 		}
-	
+
 		return entity;
 	}
 
-	
-	//찜목록 전체 삭제
+	// 찜목록 전체 삭제
 	@GetMapping("/deletewishall")
 	public String deleteWish() {
 		log.info("찜목록비우는중...");
@@ -88,14 +89,50 @@ public class WishController {
 				.getPrincipal();
 
 		int mnum = wishServise.getMemberNum(member.getUsername());
-		
+
 		wishServise.deleteWishList(mnum);
-		
+
 		return "redirect:/user/wishlist";
 	}
 	
-	//주문하기
-	
+	@RequestMapping(value = "/insertWish/{tnum}" , method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> insertWish(@PathVariable("tnum") String tnum){
+		ResponseEntity<String> entity = null;
+		System.out.println("이용권 찜하는중..."+tnum+">>이용권번호");
+		int ticket = Integer.parseInt(tnum);
+
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+
+		int mnum = wishServise.getMemberNum(member.getUsername());
+		try {
+			wishServise.insertWish(mnum, ticket);
+			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+
+		return entity;
+	}
+
+	// 주문하기(결제페이지로 이동)
+	@GetMapping("/user/checkoutpage")
+	public ModelAndView goCheckOut(ModelAndView mav) {
+
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+
+		int mnum = wishServise.getMemberNum(member.getUsername()); // 회원번호 구하기
+		List<WishVO> wishlist = wishServise.getWishList(mnum); // 해당회원의 찜목록 불러오기
+
+		log.info(mnum + "회원의 결제페이지로 가는중");
+
+		mav.setViewName("user/checkOut");
+		mav.addObject("checklist", wishlist);
+
+		return mav;
+	}
+
 }
-
-

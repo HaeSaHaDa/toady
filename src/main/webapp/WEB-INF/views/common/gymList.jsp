@@ -1,11 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 <style type="text/css">
 
@@ -24,14 +35,14 @@
 	rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/barfiller.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -54,9 +65,9 @@
 				
 							<li class="active"><a href="./index.html">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
+							<li><a href="/user/wish">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="./team.html">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 
 						
 			</ul>
@@ -77,7 +88,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="img/logo.png" alt="" width="500">
+						<a href="index"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -86,9 +97,9 @@
 						<ul>
 							<li class="active"><a href="./index.html">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="./team.html">시설찾기</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 
 						</ul>
 					</nav>
@@ -123,79 +134,20 @@
 	</div>
 		<div class="container">
 			<div class="row">
+			<c:forEach items="${gymList}" var="gym">
 				<div class="col-lg-4 col-md-6">
 					<div class="class-item">
 						<div class="ci-pic">
-							<img src="img/classes/class-1.jpg" alt="">
+							<img src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="">
 						</div>
 						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Weightlifting</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
+							<span>${gym.gcategory}</span>
+							<h5>${gym.gname}</h5>
+							<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="img/classes/class-2.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>Cardio</span>
-							<h5>Indoor cycling</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-
+			</c:forEach>
 			</div>
 		</div>
 	</section>
@@ -340,14 +292,14 @@
 	<!-- Search model end -->
 
 	<!-- Js Plugins -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/masonry.pkgd.min.js"></script>
-	<script src="js/jquery.barfiller.js"></script>
-	<script src="js/jquery.slicknav.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 
 
