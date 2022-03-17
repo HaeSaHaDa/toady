@@ -210,19 +210,19 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="./index.html">Home</a></li>
-							<li><a href="./services.html">mypage</a></li>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="/user/myTicket">mypage</a></li>
 							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
-							<li><a href="./team.html">시설찾기</a></li>
-
+							<li><a href="/common/gymlist">시설찾기</a></li>
+							<li><a href="./common/adminPage">AdminPage</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -349,7 +349,7 @@
           					<li>
             				<div >
             				<c:forEach items="${gymReview}" var="review">              			
-             			 <div class="right ml-3 mt-3">
+             			 <div class="right ml-3 mt-3 r-content">
                 		<h4>  ${review.mnickname}  <span class="gig-rating text-body-2">
                     <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 1792 1792" width="15"  height="15" >
                       <path   fill="currentColor"  d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
@@ -546,6 +546,8 @@
 </body>
 <script>
 $(document).ready(function(){	
+	check();
+	
 	
 	$("#insertWish").on("click",function(e){
 		var token = $("meta[name='_csrf']").attr("content");
@@ -588,7 +590,27 @@ $(document).ready(function(){
 	});	
 	
 })
+function nolist(){
+	
+	let htmls ="";
+	
+	htmls += '<div class = "text-center pb-5">';
+	htmls += '<h3 style="color:black;">아직 작성한 리뷰가 없습니다. 리뷰를 작성해주세요</h3>';
+	htmls += '</div>'
+	
+	
+	$(".review-list").append(htmls);
+}
 
+function check(){
+	let checkNum = $(".review-description p").text();
+	
+	console.log(checkNum);
+	
+	if(checkNum == ""){
+		nolist();
+	}
+}
 
 </script>
 
