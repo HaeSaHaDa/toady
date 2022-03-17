@@ -1,7 +1,5 @@
 package edu.kosmo.today.cotroller;
 
-<<<<<<< HEAD
-=======
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +10,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
->>>>>>> origin/dev-yja-main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
