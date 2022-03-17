@@ -5,7 +5,7 @@
 <!-- namespace는 패키지 명 + 인터페이스명과 맞춰줘야한다. -->
 <mapper namespace="edu.kosmo.today.mapper.MemberMapper">
 
-	<select id="getList" resultType="edu.kosmo.today.vo.MemberVO">
+	<select id="getList" resultType="edu.kosmo.today.vo.UserVO">
    <![CDATA[
       select * from member,authority where member.mid = authority.mid
    ]]>
@@ -13,7 +13,7 @@
 
 
 	<!--회원 목록 상세보기 -->
-	<select id="read" resultType="edu.kosmo.today.vo.MemberVO">
+	<select id="read" resultType="edu.kosmo.today.vo.UserVO">
 	<![CDATA[
 		select * from member,authority where member.mid = authority.mid and mnum = #{mnum}
 	]]>
@@ -33,7 +33,7 @@
 	</select>
 
 	<select id="getListPage"
-		resultType="edu.kosmo.today.vo.MemberVO">
+		resultType="edu.kosmo.today.vo.UserVO">
 	<![CDATA[
  		          SELECT * FROM (
               SELECT ROWNUM AS RNUM, A.* FROM (
