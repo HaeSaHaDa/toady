@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
+import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.vo.NoteVO;
@@ -26,7 +26,7 @@ public class NoteController {
 	public ModelAndView noteList(ModelAndView mav) {
 		log.info("noteList..");
 	
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기	
 		List<NoteVO> noteVO = noteService.getNoteList(mnum); // 쪽지 목록 가져오기

@@ -28,7 +28,6 @@ public class UserVO {
 	private String mphone;
 	private String mbirth;
 
-
 	private List<AuthVO> authList;//memail, auth
 
 	@Builder

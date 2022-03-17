@@ -58,13 +58,13 @@
 			
 			event.preventDefault();
 			
-	        var memail = $("#memail").val(); 
+	        var mid = $("#mid").val(); 
 	        var auth = $("#auth").val();
 	        	        
 	        console.log($(this).attr("action"));
 	        
 	        var form = {
-	        		memail: memail,
+	        		mid: mid,
 	        		auth: auth
 	                
 	        };       
@@ -176,7 +176,7 @@
 										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
 										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>
@@ -222,8 +222,8 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
-							<form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}" >
-								<input type="hidden" id="memail" name="memail" value="${memberDetail.memail}">
+							<form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mid}" >
+								<input type="hidden" id="mid" name="mid" value="${memberDetail.mid}">
 				
 								<thead class="thead-light">
 								<tr>

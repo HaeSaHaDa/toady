@@ -158,7 +158,7 @@
             <div> 
             <table class="table table-striped table-light" width="600" border="1" cellpadding="0">
                      <form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}" >
-                        <input type="hidden" id="memail" name="memail" value="${memberDetail.memail}">
+                        <input type="hidden" id="mid" name="mid" value="${memberDetail.mid}">
                          
                         <thead class="thead-light">                       
                         <tr>

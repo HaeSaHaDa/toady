@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
+import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.service.OwnerService;
@@ -29,7 +29,7 @@ public class OwnerController {
 	@GetMapping("/gymMemberList") //회원 조회
 	public ModelAndView gymMemberList(ModelAndView mav) {
 			
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
 		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기	
 		System.out.println("회원번호는" + mnum);		
@@ -46,7 +46,7 @@ public class OwnerController {
 		public ModelAndView ownerMemberDetail(MemberVO memberVO,ModelAndView mav) {
 			
 			log.info("gymMemberListDetail()..");
-			PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기	
 			
 			mav.addObject("gymMemberListDetail", ownerService.getOrderList(mnum));

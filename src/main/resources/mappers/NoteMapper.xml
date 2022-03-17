@@ -12,8 +12,7 @@
 
 	<!-- 회원 번호 가져오기 -->	
 	<select id="getMemberNum" resultType="int">
-		select * from member where memail = #{memail} 		
+		select * from member where mid = #{mid} 		
 	</select>
-	
 	
 </mapper>

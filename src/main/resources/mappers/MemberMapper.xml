@@ -7,15 +7,15 @@
   			
    <select id="getList" resultType="edu.kosmo.today.vo.MemberVO">
    <![CDATA[
-      select * from member,authority where member.memail = authority.memail
+      select * from member,authority where member.mid = authority.mid
    ]]>
    </select> 
    
-   
+
    <!--회원 목록 상세보기  -->
    <select id="read" resultType="edu.kosmo.today.vo.MemberVO">
 	<![CDATA[
-		select * from member,authority where member.memail = authority.memail and mnum = #{mnum}
+		select * from member,authority where member.mid = authority.mid and mnum = #{mnum}
 	]]>
 	</select>
 	
@@ -36,7 +36,7 @@
 	<![CDATA[
  		          SELECT * FROM (
               SELECT ROWNUM AS RNUM, A.* FROM (
-                  select mnum , member.memail, mnickname, auth from member,authority where member.memail = authority.memail
+                  select mnum , memail, mnickname, auth from member,authority where member.mid = authority.mid
              ) A WHERE ROWNUM <= #{pageNum} * #{amount}
          ) WHERE RNUM > (#{pageNum}-1) * #{amount}
 			
@@ -46,7 +46,7 @@
 	<!--권한 수정하기 -->
 	<update id="update">
 	<![CDATA[
-		update authority set auth = #{auth} where memail = #{memail}
+		update authority set auth = #{auth} where mid = #{mid}
 	]]>
 	</update>
 	

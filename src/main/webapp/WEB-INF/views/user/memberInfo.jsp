@@ -47,15 +47,14 @@
 			
 			event.preventDefault();
 			
-	        var memail = $("#memail").val();  
+	        var mid = $("#mid").val();  
 	        var mnickname = $("#mnickname").val(); 
 	        var mphone = $("#mphone").val(); 
 	           	        
 	        console.log($(this).attr("action"));
 	        
 	        var form = {
-	        		memail: memail,
-	  
+	        		mid: mid,
 	        		mnickname: mnickname,
 	        		mphone: mphone
 	        };       
@@ -211,10 +210,10 @@
 					<div>
 						<h2 style="color: white;">회원 정보</h2>
 						<form class="text-white"  id="updateMemberinfo" action="${pageContext.request.contextPath}/user/memberInfo">
-							<input type="hidden" id="memail" name="memail" value="${memberInfoList.memail}">
+							<input type="hidden" id="mid" name="mid" value="${memberInfoList.mid}">
 							
 							<p>
-								아이디  <input type="text" value="${memberInfoList.memail}" disabled />
+								아이디  <input type="text" value="${memberInfoList.mid}" disabled />
 							</p>
 							
 							

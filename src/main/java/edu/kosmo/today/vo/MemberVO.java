@@ -1,5 +1,7 @@
 package edu.kosmo.today.vo;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -27,11 +29,11 @@ SOCIALID           VARCHAR2(100)
 public class MemberVO {	
 	private int mnum;
 	private String memail;
-	private String password;
+	private String mpassword;
 	private String mnickname;
 	private Integer mphone;
 	private String mbirth;
-	private String socialid;
+	private String mid;
 	
 	private String auth;
 

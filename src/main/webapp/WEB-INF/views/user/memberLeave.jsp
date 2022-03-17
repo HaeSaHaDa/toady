@@ -198,14 +198,14 @@
 						<h2 style="color: white;">오늘의 짐 회원탈퇴</h2><br>
 						<h4>탈퇴 계정</h4> <br>
 						<h6>아래 계정을 탈퇴 처리합니다.</h6>
-						<h6>${memberInfoList.mnickname}</h6><br>
+						<h6>${memberInfoList.mid}</h6><br>
 						
 						<h4>탈퇴 시 유의사항</h4> <br>
 						<h6>-탈퇴 후에는 위의 계정으로 로그인하실 수 없습니다.</h6>
 						<h6>-작성하신 이용 후기는 탈퇴 후에도 삭제되지 않습니다.</h6>
 						
 						<br>
-						 <a class="btn btn-primary" id="member-delete" data-bid='${memberInfoList.memail}' href="./memberLeave/${memberInfoList.memail}" role="button">회원탈퇴</a></td>
+						 <a class="btn btn-primary" id="member-delete" data-bid='${memberInfoList.mid}' href="./memberLeave/${memberInfoList.mid}" role="button">회원탈퇴</a></td>
 						
 					</div>
 				</div>

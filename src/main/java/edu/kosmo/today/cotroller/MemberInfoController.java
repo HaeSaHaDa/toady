@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import edu.kosmo.today.cotroller.security.principal.PrincipalDetail;
+import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.MemberInfoService;
@@ -37,8 +37,7 @@ public class MemberInfoController {
 	@GetMapping("/memberInfo")
 	public ModelAndView memberInfo(ModelAndView mav) {
 
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication()
-				.getPrincipal();
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int mnum = memberInfoService.getInfoNum(member.getUsername()); // 회원 번호 가져오기
 
 		System.out.println("memberInfo 회원번호 " + mnum);
@@ -72,7 +71,7 @@ public class MemberInfoController {
 	@GetMapping("/memberLeave")
 	public ModelAndView memberLeave(ModelAndView mav) {
 
-		PrincipalDetail member = (PrincipalDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int mnum = memberInfoService.getInfoNum(member.getUsername()); // 회원 번호 가져오기
 
 		System.out.println("memberInfo 회원번호 " + mnum);

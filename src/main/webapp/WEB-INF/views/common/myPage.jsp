@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal" />
+   <sec:authentication property="principal" var="principal" />
 </sec:authorize>
 <head>
 <meta charset="UTF-8">
@@ -115,7 +115,7 @@
 										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
 										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>

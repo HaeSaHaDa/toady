@@ -115,7 +115,7 @@
 										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
 										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>
@@ -161,15 +161,13 @@
 			<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 				<div>
 				<h2 style="color: white;">회원 목록</h2>
-				<table class="table table table-bordered" width="600" border="1" cellpadding="0"
-							cellspacing="0" border="1">
+				<table class="table table table-bordered" width="600" border="1" cellpadding="0">
 							<thead class="thead-light">
 							<tr>
 								<th scope="col">회원번호</th>
 								<th scope="col">이메일</th>
-								<th scope="col">닉네임</th>
-								<th scope="col">연락처</th>
-								<th scope="col">생년월일</th>
+								<th scope="col">이용권</th>
+								<th scope="col">삭제</th>
 							</tr>
 							</thead>
 							
@@ -177,9 +175,8 @@
 								<tr class="table-light">
 									<td>${member.mnum}</td>
 									<td>${member.memail}</td>
-									<td><a href="/owner/gymMemberList/${member.mnum}">${member.mnickname}</a></td>
-									<td>${member.mphone}</td>
-									<td>${member.mbirth}</td>									
+									<td><a href="/owner/gymMemberList/${member.mnum}">${member.tname}</a></td>
+									<td>삭제추가</td>				
 								</tr>
 							</c:forEach>
 							
