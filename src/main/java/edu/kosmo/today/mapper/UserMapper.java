@@ -15,24 +15,20 @@ public interface UserMapper {
 
 	@Select("select * from authority where mid = #{mid}")
 	public AuthVO findAuth(String mid);
-	
+
 	@Insert("insert into member(mnum,mid,memail,mpassword,mnickname, mphone, mbirth) values(member_seq.nextval,#{mid},#{memail},#{mpassword},#{mnickname},#{mphone},#{mbirth})")
 	public void save(UserVO userVO);
 
 	@Insert("insert into member(mnum,mid,memail, social) values(member_seq.nextval,#{mid},#{memail},1)")
 	public void socialSave(UserVO userVO);
-	
 
 	@Insert("insert into AUTHORITY (mid,auth) values(#{mid},'ROLE_USER')")
 	public void insertAuthority(UserVO UserVO);
-
 
 	@Update("update  member set mnickname=#{mnickname}, mphone=#{mphone}, mbirth=#{mbirth}, memail=#{memail} where mnum=#{mnum}")
 	public void update(UserVO user);
 
 	@Update("update  member set mpassword=#{mpassword} where mnum=#{mnum}")
 	public void updatePassword(UserVO user);
-
-
 
 }

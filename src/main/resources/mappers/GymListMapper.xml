@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.kosmo.today.mapper.GymListMapper">
+
+	<select id="getGymLists" resultType="edu.kosmo.today.vo.GymListVO">
+	<![CDATA[
+		select * from gympage
+	]]>
+	</select>
+
+	<select id="read" resultType="edu.kosmo.today.vo.GymListVO">
+	<![CDATA[
+		select * from gympage where gnum = #{gnum}
+	]]>
+	</select>
+
+	<insert id="addGymList">
+	<![CDATA[
+		insert into gympage (gnum, mnum, gname, gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, imagename) values (gnum_seq.nextval, #{mnum}, #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns}, #{imagename})
+		
+	]]>
+	</insert>
+
+	<insert id="insertReply">
+	<![CDATA[
+		insert into gympage (gnum, mnum, gname,  gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, imagename) values (gnum_seq.nextval, #{mnum},  #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns}, #{imagename})
+	]]>
+	</insert>
+
+	<select id="correctGymList">
+	<![CDATA[
+		select * from gympage where gnum= #{gnum}
+	]]>
+	</select>
+
+
+	<delete id="deleteGymList">
+	<![CDATA[
+		delete from gympage where gnum = #{gnum}
+	]]>
+	</delete>
+
+	<update id="updateGymList" >
+	<![CDATA[
+	update gympage set mnum=#{mnum}, gname = #{gname}, gcategory = #{gcategory}, gaddress = #{gaddress},
+	gphone = #{gphone}, ginform = #{ginform}, gtime = #{gtime}, gfacility = #{gfacility}, gsns = #{gsns}, imagename=#{imagename} where gnum = #{gnum}
+
+	]]>
+	</update>
+
+
+</mapper>

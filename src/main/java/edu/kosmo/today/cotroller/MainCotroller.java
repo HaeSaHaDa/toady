@@ -1,5 +1,6 @@
 package edu.kosmo.today.cotroller;
 
+
 import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,6 @@ public class MainCotroller {
 		System.out.println("adminPage");
 		return "common/adminPage";
 	}
-	
 	
 	
 }
