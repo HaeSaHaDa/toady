@@ -306,23 +306,18 @@
                             </div>                            
 
                             <div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-                             <div class="container row">
-                              <div class="card" style="width:400px">
-                                <img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width:100%">
+                             <div class="container row justify-content-center">
+                              <div class="card" style="width:230px; height: 400px; margin:30px;">
+                                <img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg"
+                                 alt="Card image" style="width:100%; height: 60%; ">
                                 <div class="card-body">
                                   <h4 class="card-title">Jane Doe</h4>
                                   <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
                                   
                                 </div>
-                              </div>
-                              <div class="card" style="width:400px">
-                                <img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width:100%">
-                                <div class="card-body">
-                                  <h4 class="card-title">Jane Doe</h4>
-                                  <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                                  
-                                </div>
-                              </div>
+                              </div>                              
+                              
+                             
                              
                             </div>
                             </div>

@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+
 </head>
     <style>
       .shopping-cart {
@@ -299,8 +300,6 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
@@ -367,7 +366,7 @@
               <div class="col-lg-4">
                 <div class="cart-buttons">
                   <a href="/deletewishall" class="primary-btn .continue-shop">찜 비우기</a>
-                  <a href="#" class="primary-btn continue-shop">더 둘러보기</a>
+                  <a href="/common/gymlist" class="primary-btn continue-shop">더 둘러보기</a>
                 </div>
               
               </div>
@@ -388,11 +387,6 @@
 		<!-- 찜끝 -->
 	</section>
 	<!-- ChoseUs Section End -->
-
-
-
-
-
 	<!-- Get In Touch Section Begin -->
 	<div class="gettouch-section">
 		<div class="container">
@@ -651,10 +645,18 @@ $(document).ready(function(){
     	
     	    
     	    });
-
-
- 
-		    
+    	    
+    	    $(".proceed-btn").on("click",function(e){
+    	    	console.log("결제페이지버튼누름");
+    	    	
+    	    	let check = $(".cart-total span").text();
+    	    	
+    	    	if(check == 0){
+    	    		e.preventDefault();
+    	    		alert("결제할 이용권이 없습니다.");
+    	    	}
+    	    	
+    	    });	    
      
 });
 

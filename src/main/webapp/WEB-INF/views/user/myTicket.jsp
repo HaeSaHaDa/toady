@@ -95,19 +95,33 @@
 				<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/gymlist">시설찾기</a></li>
+				<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 
 						</ul>
 					</nav>
 				</div>
-				<div class="col-lg-3">
+					<div class="col-lg-3">
 					<div class="top-option">
 						<div class="to-search search-switch">
 							<i class="fa fa-search"></i>
 						</div>
 						<div class="to-social">
-							<a href="#">로그인</a> <a href="#">회원가입</a>
-
+							<c:choose>
+								<c:when test="${empty principal}">
+									<ul class="navbar-nav">
+										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
+										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
+										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.username}님 환영합니다.</a></li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>
@@ -147,7 +161,7 @@
 					<c:forEach items="${myTicket}" var="myticket">
      					 <div class="ticket">
        						 <div class="first">
-       						 <input type="hidden" id="payid" value="${myticket.payid}">
+       						 
           						<p class="mr-3 ml-3"><fmt:formatDate value="${myticket.orderdate}" pattern="yyyy/MM/dd"/></p>
           						<p class="mr-3" style="margin-left: 150px;">주문번호</p>
          						<p>${myticket.ordernum}</p>         						
@@ -157,6 +171,9 @@
          						 <p>${myticket.tname}<span>${myticket.tdate}개월</span></p>
          						 <p>시작날짜<span><fmt:formatDate value="${myticket.startdate}" pattern="yyyy/MM/dd"/></span></p>
          				 	<div class="last">
+         				 	<input type="hidden" id="payid" name="payid" value="${myticket.payid}">
+         				 	<input type="hidden" id="ordernum" name="ordernum" value="${myticket.ordernum}">
+         				 	<input type="hidden" id="tknum" name="tknum" value="${myticket.tknum}">
            					 <p>${myticket.cost}원</p>
            					 	<button type="button" class="goRivew" data-toggle="modal" data-target="#form">리뷰작성</button>           					 
            					 	<button class="goback">환불하기</button>
@@ -212,8 +229,6 @@
 		</div>
 	</section>
 	<!-- 내용물 끝 -->
-
-
 	<!-- Get In Touch Section Begin -->
 	<div>
 		<div class="gettouch-section">
@@ -428,7 +443,43 @@
 	       }) 
 		  
 		  
-       });      
+       });
+       
+       $(".goback").on("click",function(){
+    	  console.log("환불신청버튼누름");
+    	  
+    	  let payid = $(this).parent("div").find('input:[name=payid]').val();
+    	  let ordernum = $(this).parent("div").find('input:[name=ordernum]').val();
+    	  let tknum = $(this).parent("div").find('input:[name=tknum]').val();
+    	  
+    	  let form = {
+    			  payid : payid,
+    			  ordernum : ordernum,
+				  gnum : gnum,
+				  tknum : tknum,
+		  }
+    	   
+    	  console.log(payid+"..."+ordernum);
+    	  
+    	  $.ajax({
+	           type : "POST",
+	           url : "/insertBack",	         
+	           cache : false,
+	           contentType:'application/json; charset=utf-8',
+	            data: JSON.stringify(form), 
+	           success: function (result) { 
+	        	   
+	        	   if(result=="SUCCESS"){                     
+	        		   alert("환불신청완료");
+	        	   }               
+	                                   
+	           },
+	           error: function (e) {
+	               console.log(e);
+	           }
+	       })    	  
+    	   
+       });
        
        
        
