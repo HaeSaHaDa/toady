@@ -1,22 +1,29 @@
 package edu.kosmo.today.cotroller;
 
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.kosmo.today.vo.UserVO;
 
-@Controller
+@Controller	
 public class MainCotroller {
+		
+	@GetMapping("/today")
+	public String index(Principal principal, UserVO user) {
 
-	@GetMapping({ "/today" })
-	public String index() {
 		System.out.println("컨트롤러를 타는가?'");
-
-		return "common/home";
+		System.out.println("principal" + principal);
+		return "common/home"; 
 	}
-
+	
+	@GetMapping("/common/adminPage")
+	public String joinForm() {
+		System.out.println("adminPage");
+		return "common/adminPage";
+	}
+	
+	
 }
