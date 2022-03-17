@@ -18,5 +18,6 @@ public interface UserMapper {
 	   @Insert("insert into AUTHORITY (memail,auth) values(#{memail},'ROLE_USER')")
 	   public void insertAuthority(UserVO UserVO);
 	   
+	   
 
 }
