@@ -71,7 +71,7 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 				.and()
 				.oauth2Login()
 				.loginPage("/common/login")
-				.defaultSuccessUrl("/user/memberupdate")
+				.defaultSuccessUrl("/today")
 				.userInfoEndpoint()
 				.userService(principalOauth2UserService)
 				;

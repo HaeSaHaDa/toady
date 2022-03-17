@@ -193,7 +193,8 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> 
+							<img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -215,8 +216,21 @@
 							<i class="fa fa-search"></i>
 						</div>
 						<div class="to-social">
-							<a href="#">로그인</a> <a href="#">회원가입</a>
+							<c:choose>
+								<c:when test="${empty principal}">
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
 
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>

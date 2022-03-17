@@ -79,7 +79,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>

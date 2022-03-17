@@ -198,7 +198,7 @@ function month(){
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="/img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -303,7 +303,7 @@ function month(){
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="#"><img src="/img/logo.png" alt=""></a>
+								<a href="${pageContext.request.contextPath}/today"><img src="/img/logo.png" alt=""></a>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">

@@ -140,7 +140,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img
+						<a href="${pageContext.request.contextPath}/today"> <img
 							src="${pageContext.request.contextPath}/img/logo.png" alt=""
 							width="500">
 						</a>
@@ -314,7 +314,7 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="#"><img
+								<a href="${pageContext.request.contextPath}/today"><img
 									src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,

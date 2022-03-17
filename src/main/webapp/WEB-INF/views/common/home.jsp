@@ -46,10 +46,12 @@
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="/common/myPage">mypage</a></li>
 				<li><a href="/user/wishlist">찜</a></li>
 				<li><a href="./services.html">지도</a></li>
 				<li><a href="gymlist">시설찾기</a></li>
+				<sec:authorize access="hasRole('USER')">
+					<li><a href="./user/myTicket">mypage</a></li>
+				</sec:authorize>
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
@@ -57,8 +59,8 @@
 			<c:choose>
 				<c:when test="${empty principal}">
 					<ul class="navbar-nav">
-						<a href="${pageContext.request.contextPath}/common/login">로그인</a>
-						<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
@@ -87,11 +89,12 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="/user/myTicket">mypage</a></li>
-							<li><a href="common/myPage">mypage</a></li>
 							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="/common/gymlist">시설찾기</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="./user/myTicket">mypage</a></li>
+							</sec:authorize>
 							<li><a href="./common/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
@@ -107,21 +110,19 @@
 							<c:choose>
 								<c:when test="${empty principal}">
 									<ul class="navbar-nav">
-										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
-										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+
 									</ul>
 								</c:when>
 								<c:otherwise>
 									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberupdate">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>
 						</div>
-
-
 					</div>
 				</div>
 			</div>

@@ -33,7 +33,7 @@
                     alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
                     form.userId.value = "";
                     form
-                        .userId
+                        .id
                         .focus();
                     return false;
                 }
@@ -100,87 +100,6 @@
                 return true; //확인이 완료되었을 때
             }
 
-            function checkName(name) {
-                if (!checkExistData(name, "이름을")) 
-                    return false;
-                
-                var nameRegExp = /^[가-힣]{2,4}$/;
-                if (!nameRegExp.test(name)) {
-                    alert("이름이 올바르지 않습니다.");
-                    return false;
-                }
-                return true; //확인이 완료되었을 때
-            }
-            function checkBirth(identi1, identi2) {
-                //birth이 입력되었는지 확인하기
-                if (!checkExistData(identi1, "주민등록번호를 ") || !checkExistData(identi2, "주민등록번호를 ")) 
-                    return false;
-                
-                var totalIdenti = "" + identi1 + identi2;
-
-                var identiArr = new Array();
-                var sum = 0;
-                var plus = 2;
-
-                //배열에 주민등록번호 입력 후 유효값 확인하기 위해 sum에 저장
-                for (var i = 0; i < 12; i++) {
-                    identiArr[i] = totalIdenti.charAt(i);
-                    if (i >= 0 && i <= 7) {
-                        sum += totalIdenti[i] * plus;
-                        plus++;
-                        if (i == 7) 
-                            plus = 2;
-                        }
-                    else {
-                        sum += totalIdenti[i] * plus;
-                        plus++;
-                    }
-                }
-                //주민등록번호 길이 확인하기
-                if (identiArr.length < 12) {
-                    alert("주민등록번호는 13자리입니다.");
-                    form.identi1.value = "";
-                    form.identi2.value = "";
-                    form
-                        .identi1
-                        .focus();
-                    return false;
-                }
-                //주민등록번호 유효한지 확인
-                var result = 11 - (sum % 11) % 10
-                if (result != totalIdenti.charAt(12)) { //주민등록번호가 유효하지 않은 경우
-                    alert("유효하지않은 주민번호입니다.");
-                    form.identi1.value = "";
-                    form.identi2.value = "";
-                    form
-                        .identi1
-                        .focus();
-                    return false;
-                }
-                return true; //확인이 완료되었을 때
-            }
-
-            function checkFavorite() {
-                var checkedFavorite = document.getElementsByName("favorite");
-
-                //체크된 값이 하나라도 있을경우 바로 true
-                for (var i = 0; i < checkedFavorite.length; i++) {
-                    if (checkedFavorite[i].checked == true) {
-                        return true;
-                    }
-                }
-                alert("관심분야를 체크해주세요!");
-                return false;
-            }
-
-            function checkIntro() {
-                var text = document.getElementById("intro");
-                if (!checkExistData(text.value, "자기소개를")) {
-                    alert("자기소개를 입력해 주세요!");
-                    return false;
-                } else 
-                    return true;
-                }
 
                 
         </script>

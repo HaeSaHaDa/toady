@@ -9,14 +9,7 @@
 <%-- 		<div class="form-group">
 			<label for="mid"></label> <input type="hidden" value="${principal.user.mid}" class=" form-control" placeholder="Enter Id" id="mid" readonly>
 		</div>  --%>
-		<c:choose>
-			<c:when test="${principal.user.social!=1}">
-				<a href="/user/updatePassword" class="btn btn-primary">비밀번호 변경</a>
-				<br />
-			</c:when>
-			<c:otherwise>
-			</c:otherwise>
-		</c:choose>
+
 		<br />
 		<div class="form-group">
 			<label for="memail">Emial:</label> <input type="email" value="${principal.user.memail}" class=" form-control" placeholder="Enter Email" id="memail" readonly>

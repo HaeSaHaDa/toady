@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
 <sec:authorize access="isAuthenticated()">
-   <sec:authentication property="principal" var="principal" />
+	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
 <head>
 <meta charset="UTF-8">
@@ -18,78 +18,56 @@
 <title>회원 관리페이지</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/flaticon.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/barfiller.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/magnific-popup.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/barfiller.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-		$(document).ready(function () {
-			
-			$(".m-delete").click(function(event) {
-				 
-				if(confirm("정말 삭제하시겠습니까 ?") == true){
-				        
-				    }
-				    else{
-				    	return false;
-				    }
-								
-				event.preventDefault();
-				console.log("ajax 호출전");
-					
-				var trObj = $(this).parent().parent();
-				console.log($(this).attr("href"));
-				
-				$.ajax({
-					 type : "DELETE",  
-					 url : $(this).attr("href"),
-					 success: function (result) {       
-					 console.log(result); 
-						if(result == "SUCCESS"){
-						      $(trObj).remove();  		      	       
-							}					        
-					    },
-					    error: function (e) {
-					        console.log(e);
-					    }			
-				});	
-			
-			});	
-		
+	$(document).ready(function() {
+
+		$(".m-delete").click(function(event) {
+
+			if (confirm("정말 삭제하시겠습니까 ?") == true) {
+
+			} else {
+				return false;
+			}
+
+			event.preventDefault();
+			console.log("ajax 호출전");
+
+			var trObj = $(this).parent().parent();
+			console.log($(this).attr("href"));
+
+			$.ajax({
+				type : "DELETE",
+				url : $(this).attr("href"),
+				success : function(result) {
+					console.log(result);
+					if (result == "SUCCESS") {
+						$(trObj).remove();
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+
 		});
-	
-	</script>
+
+	});
+</script>
 </head>
 
 <body>
@@ -121,10 +99,7 @@
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i
-				class="fa fa-youtube-play"></i></a> <a href="#"><i
-				class="fa fa-instagram"></i></a>
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -135,9 +110,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img
-							src="${pageContext.request.contextPath}/img/logo.png" alt=""
-							width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -162,14 +135,12 @@
 							<c:choose>
 								<c:when test="${empty principal}">
 									<ul class="navbar-nav">
-										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
-										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
 									</ul>
 								</c:when>
 								<c:otherwise>
 									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
-										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
@@ -192,8 +163,7 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container"
-			style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
@@ -213,24 +183,22 @@
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
-						<table class="table table table-bordered" width="600" border="1" cellpadding="0"
-							cellspacing="0" border="1">
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
 							<thead class="thead-light">
-							<tr>
-								<th scope="col">회원번호</th>
-								<th scope="col">이메일</th>
-								<th scope="col">회원구분</th>
-								<th scope="col">삭제</th>
-							</tr>
+								<tr>
+									<th scope="col">회원번호</th>
+									<th scope="col">이메일</th>
+									<th scope="col">회원구분</th>
+									<th scope="col">삭제</th>
+								</tr>
 							</thead>
 							<c:forEach var="member" items="${memberList}">
 								<tr class="table-light">
 									<td>${member.mnum}</td>
 									<td><a href="./manageMember/${member.mnum}">${member.memail}</a></td>
 									<td>${member.auth}</td>
-									
-									<td><a class="m-delete" data-bid='${member.mnum}'
-										href="./manageMember/${member.mnum}">삭제</a></td>
+
+									<td><a class="m-delete" data-bid='${member.mnum}' href="./manageMember/${member.mnum}">삭제</a></td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -240,15 +208,12 @@
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-						<c:forEach var="idx" begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage }">
+						<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
 							<a href="manageMember${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a
-								href="manageMember${pageMaker.makeQuery(pageMaker.endPage + 1) }">
-								» </a>
+							<a href="manageMember${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
 						</c:if>
 						<br>
 
@@ -304,17 +269,12 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="#"><img src="img/logo.png" alt=""></a>
+								<a href="${pageContext.request.contextPath}/today"><img src="img/logo.png" alt=""></a>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
-								endisse ultrices gravida lorem.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-youtube-play"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
-									class="fa  fa-envelope-o"></i></a>
+								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+								<a href="#"><i class="fa  fa-envelope-o"></i></a>
 							</div>
 						</div>
 					</div>
@@ -345,8 +305,7 @@
 							<h4>Tips & Guides</h4>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Physical fitness may help prevent depression,
-										anxiety</a>
+									<a href="#">Physical fitness may help prevent depression, anxiety</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -355,8 +314,7 @@
 							</div>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Fitness: The best exercise to lose belly fat
-										and tone up...</a>
+									<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -375,9 +333,7 @@
 								<script>
 									document.write(new Date().getFullYear());
 								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
+								All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</p>
 						</div>
@@ -402,8 +358,7 @@
 	<!-- Js Plugins -->
 	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
