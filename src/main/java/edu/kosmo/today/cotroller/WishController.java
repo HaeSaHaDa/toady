@@ -136,3 +136,6 @@ public class WishController {
 	}
 
 }
+	//주문하기
+	
+

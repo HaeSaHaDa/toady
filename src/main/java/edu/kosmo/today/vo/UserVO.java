@@ -29,6 +29,7 @@ public class UserVO {
 	private String mbirth;
 	private int social;
 
+
 	private List<AuthVO> authList;//memail, auth
 
 	@Builder

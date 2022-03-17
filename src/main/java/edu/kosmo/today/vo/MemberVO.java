@@ -1,14 +1,5 @@
 package edu.kosmo.today.vo;
 
-import java.sql.Timestamp;
-import java.util.List;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,11 +25,11 @@ SOCIALID           VARCHAR2(100)
 public class MemberVO {	
 	private int mnum;
 	private String memail;
-	private String password;
+	private String mpassword;
 	private String mnickname;
-	private int mphone;
+	private Integer mphone;
 	private String mbirth;
-	private String socialid;
+	private String mid;
 	
 	private String auth;
 

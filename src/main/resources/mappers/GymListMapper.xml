@@ -18,18 +18,20 @@
 
 	<insert id="addGymList">
 	<![CDATA[
-		insert into gympage (gnum, mnum, gname, gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, imagename) values (gnum_seq.nextval, #{mnum}, #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns}, #{imagename})
+		insert into gympage (gnum, mnum, gname, gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, imagename) 
+		values (gnum_seq.nextval, #{mnum}, #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns}, #{imagename})
 		
 	]]>
 	</insert>
 
 	<insert id="insertReply">
 	<![CDATA[
-		insert into gympage (gnum, mnum, gname,  gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, imagename) values (gnum_seq.nextval, #{mnum},  #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns}, #{imagename})
+		insert into gympage (gnum, mnum, gname,  gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, imagename) 
+		values (gnum_seq.nextval, #{mnum},  #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns}, #{imagename})
 	]]>
 	</insert>
 
-	<select id="correctGymList">
+	<select id="correctGymList" resultType="edu.kosmo.today.vo.GymListVO">
 	<![CDATA[
 		select * from gympage where gnum= #{gnum}
 	]]>

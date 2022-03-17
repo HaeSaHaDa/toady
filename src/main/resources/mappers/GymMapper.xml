@@ -6,7 +6,7 @@
 <mapper namespace="edu.kosmo.today.mapper.GymMapper">
 
 	<resultMap id="gymList" type="edu.kosmo.today.vo.GymVO">
-		<result property="gnum" column="gnum" />
+		<result property="gnum" column="gnum" />		
 		<result property="gname" column="gname" />
 		<result property="gcategory" column="gcategory" />
 		<result property="gadress" column="gadress" />
@@ -17,9 +17,9 @@
 		<result property="gsns" column="gsns" />
 		<result property="filename" column="filename" />
 	</resultMap>
-
+	
 	<resultMap id="ticket" type="edu.kosmo.today.vo.TicketVO">
-		<result property="tknum" column="tknum" />
+		<result property="tknum" column="tknum" />		
 		<result property="gnum" column="gnum" />
 		<result property="tcost" column="tcost" />
 		<!-- <result property="tdate" column="tdate" /> -->
@@ -31,22 +31,22 @@
 
 
 	<select id="gymList" resultMap="gymList">
-
+		
 		select * from gympage
-
+		
 	</select>
-
+	
 	<select id="gymdetail" resultMap="gymList">
-
+		
 		select * from gympage where gnum = #{gnum}
-
+		
 	</select>
-
+	
 	<select id="getticket" resultMap="ticket">
-
+		
 		select * from ticket where gnum = #{gnum}
-
+		
 	</select>
-
+	
 
 </mapper>
