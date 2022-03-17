@@ -121,8 +121,8 @@ public class UserController {
 		log.info("insert review.."+vo);
 		
 		try {
-			vo.setBid(mnum);
-			
+			vo.setMnum(mnum);
+			System.out.println("......"+mnum);
 			int success = orderService.insertReivew(vo);
 			
 			if(success == 0) {

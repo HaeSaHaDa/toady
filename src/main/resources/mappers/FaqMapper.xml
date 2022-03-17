@@ -39,5 +39,7 @@
 	<select id="getContent" resultType = "edu.kosmo.today.vo.FaqVO">
 		select * from boardlist where bid = #{bid}
 	</select>
+	
+	
 
 </mapper>
