@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
-<!--<sec:authorize access="isAuthenticated()">
+<sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
-</sec:authorize>-->
+</sec:authorize>
 
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -65,7 +65,7 @@
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberupdate">회원정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-						<li class="nav-item"><a class="nav-link"><sec:authentication property="principal.user.memail"/>님 환영합니다.</a></li>
+						<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>
@@ -92,6 +92,8 @@
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>
 							<li><a href="./common/adminPage">AdminPage</a></li>
+							<sec:authorize access="hasRole('ADMIN')">
+							</sec:authorize>
 						</ul>
 					</nav>
 				</div>
@@ -112,7 +114,7 @@
 									<ul class="navbar-nav">
 										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberupdate">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link"><sec:authentication property="principal.user.memail"/>님 환영합니다.</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>

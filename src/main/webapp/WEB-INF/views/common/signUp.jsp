@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 헤더 불러오는 부분 -->
 <%@ include file="../layout/header.jsp"%>
-
+<script type="text/javascript">
+	
+</script>
 <div class="container">
 	<form>
 		<div class="form-group">
-			<label for="mid">Username:</label> <input type="text" class="form-control" placeholder="Enter password" id="mid">
+			<label for="mid">Username:</label> 
+			<input type="text" class="form-control" placeholder="Enter password" id="mid" name="id">
 		</div>
 		<div class="form-group">
-			<label for="password">Password:</label> <input type="password" class="form-control" placeholder="Enter password" id="mpassword">
+			<label for="password">Password:</label> 
+			<input type="password" class="form-control" placeholder="Enter password" id="mpassword" name="password1">
+		</div>
+		<div class="form-group">
+			<label for="password">Password:</label> 
+			<input type="password" class="form-control" placeholder="Enter password" id="mpassword" name="password2">
 		</div>
 		<div class="form-group">
 			<label for="memail">Emial:</label> <input type="email" class="form-control" placeholder="Enter Email" id="memail">

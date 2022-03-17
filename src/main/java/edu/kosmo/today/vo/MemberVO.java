@@ -38,7 +38,7 @@ public class MemberVO {
 	private String mnickname;
 	private int mphone;
 	private String mbirth;
-	private String mid;
+	private String socialid;
 	
 	private String auth;
 

@@ -1,5 +1,14 @@
 package edu.kosmo.today.mapper;
 
-public class IncomeMapper {
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import edu.kosmo.today.vo.OrderVO;
+@Mapper
+public interface IncomeMapper {
+	public List<OrderVO> getWeekendIncome();
+	public List<OrderVO> getMonthIncome();
+
 
 }

@@ -1,8 +1,10 @@
 package edu.kosmo.today.cotroller.security.Oauth2Principal;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -24,6 +26,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 	@Autowired(required=true)
 	private UserMapper userMapper;
 
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	// userRequest 는 code를 받아서 accessToken을 응답 받은 객체
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -67,6 +71,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		UserVO member = userMapper.getUser(mid);		
 		System.out.println("객체 찾기");
 		if (member==null) {
+					
 			member=UserVO.builder().mid(mid).memail(email).build();
 			
 			System.out.println("======소셜 회원가입============================");

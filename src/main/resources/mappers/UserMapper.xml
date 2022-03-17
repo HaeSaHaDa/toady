@@ -13,6 +13,8 @@
 		<result property="mnickname" column="mnickname" />
 		<result property="mphone" column="mphone" />
 		<result property="mbirth" column="mbirth" />
+		<result property="social" column="social" />
+		
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
 

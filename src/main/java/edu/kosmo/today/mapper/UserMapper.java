@@ -19,7 +19,7 @@ public interface UserMapper {
 	@Insert("insert into member(mnum,mid,memail,mpassword,mnickname, mphone, mbirth) values(member_seq.nextval,#{mid},#{memail},#{mpassword},#{mnickname},#{mphone},#{mbirth})")
 	public void save(UserVO userVO);
 
-	@Insert("insert into member(mnum,mid,memail) values(member_seq.nextval,#{mid},#{memail})")
+	@Insert("insert into member(mnum,mid,memail, social) values(member_seq.nextval,#{mid},#{memail},1)")
 	public void socialSave(UserVO userVO);
 	
 

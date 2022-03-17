@@ -52,7 +52,7 @@
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 				
-							<li class="active"><a href="./index.html">Home</a></li>
+							<li class="active"><a href="./today">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
@@ -84,7 +84,7 @@
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="./index.html">Home</a></li>
+							<li class="active"><a href="./today">Home</a></li>
 							<li><a href="./services.html">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
@@ -121,7 +121,7 @@
 					<li><a href="#">FAQ 관리</a></li>
 					<li><a href="#">1:1 답변 관리</a></li>
 					<li><a href="#">공지/이벤트 관리</a></li>
-					<li><a href="#">매출 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/totalSales">매출 관리</a></li>
 					
 				</ul>
 			</div>
@@ -130,7 +130,8 @@
 			<div class="col-8">
 			<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 				<div>
-				<h2 style="color: white;">(admin page 메인)</h2>
+				
+				
 				</div>
 			
 			</div>

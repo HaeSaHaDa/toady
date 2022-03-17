@@ -27,7 +27,7 @@ public class UserVO {
 	private String mnickname;
 	private String mphone;
 	private String mbirth;
-
+	private int social;
 
 	private List<AuthVO> authList;//memail, auth
 
