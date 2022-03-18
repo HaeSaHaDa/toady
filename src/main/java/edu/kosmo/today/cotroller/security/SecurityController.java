@@ -61,8 +61,6 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 			.authorizeRequests() 	//요청이 들어오면
 				.antMatchers("/common/**","/js/**","/css/**", "/img/**", "/fonts/**","/Source/**","/gethersource/**")
 				.permitAll()
-				.antMatchers("/user/**")
-				.access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
 			.and() 
 				.formLogin()
 				.loginPage("/common/login") //인증이 필요한 곳으로 접근하면 이동할 페이지

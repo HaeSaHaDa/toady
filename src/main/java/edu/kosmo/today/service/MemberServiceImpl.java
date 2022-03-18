@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.kosmo.today.mapper.MemberMapper;
 import edu.kosmo.today.page.Criteria;
-import edu.kosmo.today.vo.MemberVO;
+import edu.kosmo.today.vo.NoteVO;
 import edu.kosmo.today.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,13 +20,13 @@ public class MemberServiceImpl implements MemberService{
 	private MemberMapper memberMapper ;
 	
 	@Override
-	public List<MemberVO> getList() {
+	public List<UserVO> getList() {
 		log.info("getList()..");
 		return memberMapper.getList();
 	}
 
 	@Override
-	public MemberVO get(int mnum) {
+	public UserVO get(int mnum) {
 		log.info("get()..");
 		return memberMapper.read(mnum);
 	}
@@ -46,10 +46,20 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
-	public List<MemberVO> getListPage(Criteria criteria) {
+	public List<UserVO> getListPage(Criteria criteria) {
 		log.info("getListPage() ..");
 		return memberMapper.getListPage(criteria);
 	}
 
 
+	@Override
+	public void modify(UserVO memberVO) {
+		memberMapper.update(memberVO);
+	}
+
+	
+	@Override
+	public void nboardRegister(NoteVO noteVO) {
+		memberMapper.nboardinsert(noteVO);
+	}	
 }

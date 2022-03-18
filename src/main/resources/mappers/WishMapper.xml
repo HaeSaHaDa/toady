@@ -14,6 +14,7 @@
 		<result property="tname" column="tname" />
 		<result property="tcost" column="tcost" />
 	</resultMap>
+
 	<select id="getWishList" resultMap="wishList">
 		
 		select * from wish, ticket,gympage 
@@ -23,7 +24,7 @@
 	
 	<select id="getMemberNum" resultType="_int">
 		
-		select * from member where mid = #{mid} 
+		select * from member where mnum = #{mnum} 
 		
 	</select>
 	
