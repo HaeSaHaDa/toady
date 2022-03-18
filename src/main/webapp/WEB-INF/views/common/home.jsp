@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
 
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>오늘의 짐</title>
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -25,6 +30,12 @@
 <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="<c:url value ="css/main.css"/>">
+
+<!--Script -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<title>오늘의 짐</title>
 </head>
 
 
@@ -45,11 +56,16 @@
 		</div>
 		<nav class="canvas-menu mobile-menu">
 			<ul>
-				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="/common/myPage">mypage</a></li>
-				<li><a href="/user/wishlist">찜</a></li>
-				<li><a href="./services.html">지도</a></li>
-				<li><a href="gymlist">시설찾기</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+				<li><a href="${pageContext.request.contextPath}/usergymlist">시설찾기</a></li>
+				<sec:authorize access="hasRole('USER')">
+					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+				</sec:authorize>
+				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+				<sec:authorize access="hasRole('ADMIN')">
+				</sec:authorize>
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
@@ -57,13 +73,13 @@
 			<c:choose>
 				<c:when test="${empty principal}">
 					<ul class="navbar-nav">
-						<a href="${pageContext.request.contextPath}/common/login">로그인</a>
-						<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberupdate">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 						<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 					</ul>
@@ -87,12 +103,13 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="/user/myTicket">mypage</a></li>
-							<li><a href="common/myPage">mypage</a></li>
-							<li><a href="/user/wishlist">찜</a></li>
-							<li><a href="./services.html">지도</a></li>
-							<li><a href="/common/gymlist">시설찾기</a></li>
-							<li><a href="./common/adminPage">AdminPage</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+							</sec:authorize>
+							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
 						</ul>
@@ -107,21 +124,20 @@
 							<c:choose>
 								<c:when test="${empty principal}">
 									<ul class="navbar-nav">
-										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
-										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+
 									</ul>
 								</c:when>
 								<c:otherwise>
 									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberupdate">회원정보</a></li>
+										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>
 						</div>
-
-
 					</div>
 				</div>
 			</div>

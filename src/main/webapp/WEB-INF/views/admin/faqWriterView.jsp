@@ -1,8 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
+
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -11,28 +16,26 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="_csrf" content="${_csrf.token}"/>
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
-<style >
-
-</style>
-
-
-<title>FAQ관리</title>
 
 <!-- Google Font -->
-<link	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/bootstrap.min.css"	type="text/css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/font-awesome.min.css"	type="text/css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/flaticon.css"	type="text/css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"	type="text/css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/barfiller.css"	type="text/css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/magnific-popup.css"	type="text/css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/slicknav.min.css"	type="text/css">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/css/barfiller.css" type="text/css">
+<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="<c:url value ="css/main.css"/>">
 
+<!--Script -->
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<title>FAQ관리</title>
 
 <script type="text/javascript">
 		$(document).ready(function () {
@@ -152,22 +155,35 @@
 		</div>
 		<nav class="canvas-menu mobile-menu">
 			<ul>
-
-				<li class="active"><a href="/">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/services.html">mypage</a></li>
-				<li><a href="${pageContext.request.contextPath}/team.html">찜</a></li>
-				<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
-
-
+				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+				<li><a href="${pageContext.request.contextPath}/usergymlist">시설찾기</a></li>
+				<sec:authorize access="hasRole('USER')">
+					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+				</sec:authorize>
+				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+				<sec:authorize access="hasRole('ADMIN')">
+				</sec:authorize>
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i
-				class="fa fa-youtube-play"></i></a> <a href="#"><i
-				class="fa fa-instagram"></i></a>
+			<c:choose>
+				<c:when test="${empty principal}">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+					</ul>
+				</c:when>
+				<c:otherwise>
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -178,21 +194,23 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img
-							src="${pageContext.request.contextPath}/img/logo.png" alt=""
-							width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="$./index.html">Home</a></li>
-							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
-							<li><a href="./services.html">지도</a></li>
-							<li><a href="/common/gymlist">시설찾기</a></li>
-
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+							</sec:authorize>
+							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							<sec:authorize access="hasRole('ADMIN')">
+							</sec:authorize>
 						</ul>
 					</nav>
 				</div>
@@ -202,8 +220,22 @@
 							<i class="fa fa-search"></i>
 						</div>
 						<div class="to-social">
-							<a href="#">로그인</a> <a href="#">회원가입</a>
+							<c:choose>
+								<c:when test="${empty principal}">
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
 
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>

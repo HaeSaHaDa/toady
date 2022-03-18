@@ -1,31 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%><head>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
+
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-<style type="text/css">
-</style>
-
-
-<title>마이페이지</title>
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
@@ -36,53 +30,66 @@
 <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="<c:url value ="css/main.css"/>">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--Script -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<title>마이페이지</title>
+
 <script type="text/javascript">
-	$(document).ready(function(){
-	    
-		$("#updateMemberinfo").submit(function(event){
-			
-			
-			event.preventDefault();
-			
-	        var mid = $("#mid").val();  
-	        var mnickname = $("#mnickname").val(); 
-	        var mphone = $("#mphone").val(); 
-	           	        
-	        console.log($(this).attr("action"));
-	        
-	        var form = {
-	        		mid: mid,
-	        		mnickname: mnickname,
-	        		mphone: mphone
-	        };       
-			
-			
-	        console.log(JSON.stringify(form));
+	$(document)
+			.ready(
+					function() {
 
-	        $.ajax({
-			    type : "PUT",
-			    url : $(this).attr("action"),
-			    cache : false,
-			    contentType:'application/json; charset=utf-8',
- 			    data: JSON.stringify(form), 
-			    success: function (result) {       
-					if(result == "SUCCESS"){
-						alert("회원 정보를 수정했습니다!")				
-						$(location).attr('href', '${pageContext.request.contextPath}/user/memberInfo');				      	       
-					}					        
-			    },
-			    error: function (e) {
-			        console.log(e);
-			    }
-			})	       
-	
-	    }); // end submit()
-	    
-	}); // end ready()
-	
+						$("#updateMemberinfo")
+								.submit(
+										function(event) {
+
+											event.preventDefault();
+
+											var mid = $("#mid").val();
+											var mnickname = $("#mnickname")
+													.val();
+											var mphone = $("#mphone").val();
+
+											console.log($(this).attr("action"));
+
+											var form = {
+												mid : mid,
+												mnickname : mnickname,
+												mphone : mphone
+											};
+
+											console.log(JSON.stringify(form));
+
+											$
+													.ajax({
+														type : "PUT",
+														url : $(this).attr(
+																"action"),
+														cache : false,
+														contentType : 'application/json; charset=utf-8',
+														data : JSON
+																.stringify(form),
+														success : function(
+																result) {
+															if (result == "SUCCESS") {
+																alert("회원 정보를 수정했습니다!")
+																$(location)
+																		.attr(
+																				'href',
+																				'${pageContext.request.contextPath}/user/memberInfo');
+															}
+														},
+														error : function(e) {
+															console.log(e);
+														}
+													})
+
+										}); // end submit()
+
+					}); // end ready()
 </script>
 </head>
 
@@ -103,22 +110,35 @@
 		</div>
 		<nav class="canvas-menu mobile-menu">
 			<ul>
-
-				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="/mypage">mypage</a></li>
-				<li><a href="./team.html">찜</a></li>
-				<li><a href="./services.html">지도</a></li>
-				<li><a href="gymlist">시설찾기</a></li>
-
-
+				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+				<li><a href="${pageContext.request.contextPath}/usergymlist">시설찾기</a></li>
+				<sec:authorize access="hasRole('USER')">
+					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+				</sec:authorize>
+				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+				<sec:authorize access="hasRole('ADMIN')">
+				</sec:authorize>
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i
-				class="fa fa-youtube-play"></i></a> <a href="#"><i
-				class="fa fa-instagram"></i></a>
+			<c:choose>
+				<c:when test="${empty principal}">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+					</ul>
+				</c:when>
+				<c:otherwise>
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -129,19 +149,23 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="/img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="/today">Home</a></li>
-							<li><a href="/common/myPage">mypage</a></li>
-							<li><a href="/user/wishlist">찜</a></li>
-							<li><a href="./services.html">지도</a></li>
-							<li><a href="gymlist">시설찾기</a></li>
-
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+							</sec:authorize>
+							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							<sec:authorize access="hasRole('ADMIN')">
+							</sec:authorize>
 						</ul>
 					</nav>
 				</div>
@@ -154,21 +178,19 @@
 							<c:choose>
 								<c:when test="${empty principal}">
 									<ul class="navbar-nav">
-										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
-										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+
 									</ul>
 								</c:when>
 								<c:otherwise>
 									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
-										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
 										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.username}님
-												환영합니다.</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 								</c:otherwise>
 							</c:choose>
-
 						</div>
 					</div>
 				</div>
@@ -186,8 +208,7 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container"
-			style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
@@ -209,35 +230,34 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h2 style="color: white;">회원 정보</h2>
-						<form class="text-white"  id="updateMemberinfo" action="${pageContext.request.contextPath}/user/memberInfo">
+						<form class="text-white" id="updateMemberinfo" action="${pageContext.request.contextPath}/user/memberInfo">
 							<input type="hidden" id="mid" name="mid" value="${memberInfoList.mid}">
-							
 							<p>
-								아이디  <input type="text" value="${memberInfoList.mid}" disabled />
+								<label for="memail">Emial:</label> <input type="text" value="${memberInfoList.memail}" disabled />
 							</p>
-							
-							
-							
+							<c:choose>
+								<c:when test="${principal.user.social!=1}">
+									<br />
+								</c:when>
+								<c:otherwise>
+									<a href="/user/updatePassword" class="btn btn-primary">비밀번호 변경</a>
+								</c:otherwise>
+							</c:choose>
 							<p>
-								비밀번호 <input type="password" value="${memberInfoList.mpassword}" disabled/>
+								닉네임 <input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" />
 							</p>
-						
-										
+
 							<p>
-								닉네임  <input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" />
+								연락처 <input type="text" id="mphone" name="mphone" value="${memberInfoList.mphone}" />
 							</p>
-							
-						
-							<p>
-								연락처  <input type="text" id="mphone" name="mphone" value="${memberInfoList.mphone}" />
-							</p>
-							
-						  <input class="btn btn-primary m-2" type="submit" value="수정하기"> 
-						  <a class="btn btn-primary " href="/user/memberLeave">회원 탈퇴하기</a>
-						
-						
+							<div class="form-group">
+								<label for="mbirth">생년월일:</label> <input type="text" value="${principal.user.mbirth}" class="form-control" placeholder="Enter birthday" id="mbirth">
+							</div>
+							<input class="btn btn-primary m-2" type="submit" value="수정하기"> <a class="btn btn-primary " href="/user/memberLeave">회원 탈퇴하기</a>
+
+
 						</form>
-						
+
 						<form class="needs-validation" novalidate>
 					</div>
 				</div>
@@ -245,10 +265,10 @@
 		</div>
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
-	
-	
-	
-	
+
+
+
+
 
 	<!-- Get In Touch Section Begin -->
 	<div>
@@ -292,15 +312,10 @@
 							<div class="fa-logo">
 								<a href="#"><img src="/img/logo.png" alt=""></a>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
-								endisse ultrices gravida lorem.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-youtube-play"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
-									class="fa  fa-envelope-o"></i></a>
+								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+								<a href="#"><i class="fa  fa-envelope-o"></i></a>
 							</div>
 						</div>
 					</div>
@@ -331,8 +346,7 @@
 							<h4>Tips & Guides</h4>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Physical fitness may help prevent depression,
-										anxiety</a>
+									<a href="#">Physical fitness may help prevent depression, anxiety</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -341,8 +355,7 @@
 							</div>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Fitness: The best exercise to lose belly fat
-										and tone up...</a>
+									<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -361,9 +374,7 @@
 								<script>
 									document.write(new Date().getFullYear());
 								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
+								All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</p>
 						</div>
