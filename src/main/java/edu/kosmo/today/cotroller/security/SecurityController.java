@@ -63,16 +63,20 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 				.permitAll()
 
 			.and() 
+				.logout()
+				.logoutSuccessUrl("/today")
+				.and()
 				.formLogin()
 				.loginPage("/common/login") //인증이 필요한 곳으로 접근하면 이동할 페이지
 				.usernameParameter("mid")
 				.passwordParameter("mpassword")
 				.loginProcessingUrl("/common/loginProc") //스프링 시큐리티가 해당 주소로 요청오면 로그인을 가로채서 대신 로그인을 해 => 가로채서 로그인 할 때 만들어야 할 클래스가 있어. UserDetails타입의 User클래스 
 				.defaultSuccessUrl("/today") //로그인이 정상적으로 완료가 되면 /로 이동. =>.failureUrl("")은 로그인 실패시 이동하는 url
+				.failureUrl("/today")
 				.and()
 				.oauth2Login()
 				.loginPage("/common/login")
-				.defaultSuccessUrl("/user/memberupdate")
+				.defaultSuccessUrl("/today")
 				.userInfoEndpoint()
 				.userService(principalOauth2UserService)
 				;

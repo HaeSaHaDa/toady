@@ -17,23 +17,8 @@
 <meta name="_csrf" content="${_csrf.token}"/>
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+<%@ include file="../layout/head_tags.jsp"%>
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="/css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="/css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="/css/style.css" type="text/css">
-<link rel="stylesheet" href="<c:url value ="css/main.css"/>">
-
-<!--Script -->
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- 별점라이브러리 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -45,28 +30,21 @@
 </head>
 
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="canvas-close">
 			<i class="fa fa-close"></i>
 		</div>
-		<div class="canvas-search search-switch">
-			<i class="fa fa-search"></i>
-		</div>
+
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/usergymlist">시설찾기</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
 				<sec:authorize access="hasRole('USER')">
 					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				</sec:authorize>
 				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				<sec:authorize access="hasRole('ADMIN')">
@@ -77,17 +55,26 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<ul class="navbar-nav">
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-					</ul>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 				</c:when>
 				<c:otherwise>
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-						<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-					</ul>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -100,7 +87,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -108,11 +95,11 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
@@ -122,24 +109,30 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-						<div class="to-search search-switch">
-							<i class="fa fa-search"></i>
-						</div>
+
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
-									<ul class="navbar-nav">
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-
-									</ul>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 								</c:when>
 								<c:otherwise>
-									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
-										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-									</ul>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -164,9 +157,9 @@
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
-						<li><a href="/user/memberInfo">내 정보</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
-						<li><a href="/user/note">쪽지</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/faqboard">FAQ</a></li>
 						<li><a href="#">1:1문의</a></li>
 						<li><a href="#">공지/이벤트</a></li>
@@ -372,27 +365,13 @@
 		<!-- Footer Section End -->
 	</div>
 
-	<!-- Search model Begin -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
+
+	<!-- Login model Begin -->
+	<%@ include file="../layout/login_model.jsp"%>
+	<!-- Login model end -->
 
 	<!-- Js Plugins -->
-	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
-	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<%@ include file="../layout/foot_tags.jsp"%>
 	
 
 

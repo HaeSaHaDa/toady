@@ -30,6 +30,11 @@ public class MainCotroller {
 		return "common/myPage";
 	}
 	
+	@GetMapping("/common/findMap")
+	public String findMap() {
+		System.out.println("findMap진입");
+		return "common/findMap";
+	}
 	
 	
 }

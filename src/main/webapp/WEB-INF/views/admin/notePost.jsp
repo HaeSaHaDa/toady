@@ -14,54 +14,32 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+<%@ include file="../layout/head_tags.jsp"%>
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="/css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="/css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="/css/style.css" type="text/css">
-<link rel="stylesheet" href="<c:url value ="css/main.css"/>">
-
-<!--Script -->
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <title>회원 목록 상세보기 페이지</title>
 
 </head>
 
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="canvas-close">
 			<i class="fa fa-close"></i>
 		</div>
-		<div class="canvas-search search-switch">
-			<i class="fa fa-search"></i>
-		</div>
+
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/usergymlist">시설찾기</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
 				<sec:authorize access="hasRole('USER')">
 					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				</sec:authorize>
 				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				<sec:authorize access="hasRole('ADMIN')">
@@ -72,17 +50,26 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<ul class="navbar-nav">
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-					</ul>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 				</c:when>
 				<c:otherwise>
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-						<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-					</ul>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -95,7 +82,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -103,11 +90,11 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
@@ -117,24 +104,30 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-						<div class="to-search search-switch">
-							<i class="fa fa-search"></i>
-						</div>
+
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
-									<ul class="navbar-nav">
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-
-									</ul>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 								</c:when>
 								<c:otherwise>
-									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
-										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-									</ul>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -154,23 +147,20 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container"
-			style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
-						<li><a
-							href="${pageContext.request.contextPath}/common/adminPage">MAIN</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/admin/manageMember">회원관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
 						<li><a href="#">헬스장 사장님 관리</a></li>
 						<li><a href="#">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">FAQ관리</a></li>
-						<li><a href="#">1:1답변,관리</a></li>
+						<li><a href="#">찜 결제 관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
+						<li><a href="#">1:1 답변 관리</a></li>
 						<li><a href="#">공지/이벤트 관리</a></li>
-
+						<li><a href="${pageContext.request.contextPath}/totalSales">매출 관리</a></li>
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
@@ -179,24 +169,24 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
-   							<c:url value="/admin/notePost" var="enrollUrl" />
-   							
-   							<form:form name="enrollForm" action="${enrollUrl}" method="POST">
-							<input type="hidden" id="mnum" name="mnum" value="${notePostList.mnum}">
-							
-							<thead class="thead-light">
-							<tr>
-								<th>받는 사람 ${notePostList.memail}</th>
-							</tr>
-							<thead>
-							
-							<tr class="table-light">
-								<td>내용 <textarea rows="10" cols="70" id="bcontent" name="bcontent"></textarea></td>
-							</tr>
-							
-							<tr class="table-light">
-								<td><input class="float-right" type="submit" value="쪽지 보내기"></td>
-							</tr>
+							<c:url value="/admin/notePost" var="enrollUrl" />
+
+							<form:form name="enrollForm" action="${enrollUrl}" method="POST">
+								<input type="hidden" id="mnum" name="mnum" value="${notePostList.mnum}">
+
+								<thead class="thead-light">
+									<tr>
+										<th>받는 사람 ${notePostList.memail}</th>
+									</tr>
+								<thead>
+
+									<tr class="table-light">
+										<td>내용 <textarea rows="10" cols="70" id="bcontent" name="bcontent"></textarea></td>
+									</tr>
+
+									<tr class="table-light">
+										<td><input class="float-right" type="submit" value="쪽지 보내기"></td>
+									</tr>
 							</form:form>
 						</table>
 					</div>
@@ -247,18 +237,12 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="${pageContext.request.contextPath}/today"><img
-									src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
+								<a href="${pageContext.request.contextPath}/today"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
-								endisse ultrices gravida lorem.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-youtube-play"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
-									class="fa  fa-envelope-o"></i></a>
+								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+								<a href="#"><i class="fa  fa-envelope-o"></i></a>
 							</div>
 						</div>
 					</div>
@@ -289,8 +273,7 @@
 							<h4>Tips & Guides</h4>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Physical fitness may help prevent depression,
-										anxiety</a>
+									<a href="#">Physical fitness may help prevent depression, anxiety</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -299,8 +282,7 @@
 							</div>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Fitness: The best exercise to lose belly fat
-										and tone up...</a>
+									<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -319,9 +301,7 @@
 								<script>
 									document.write(new Date().getFullYear());
 								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
+								All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</p>
 						</div>
@@ -332,27 +312,28 @@
 		<!-- Footer Section End -->
 	</div>
 
-	<!-- Search model Begin -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">+</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Login model Begin -->
+	<%@ include file="../layout/login_model.jsp"%>
+	<!-- Login model end -->
 	<!-- Js Plugins -->
-	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
-	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<%@ include file="../layout/foot_tags.jsp"%>
 
 
 

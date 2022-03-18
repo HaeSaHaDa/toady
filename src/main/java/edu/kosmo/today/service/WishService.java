@@ -25,10 +25,10 @@ public class WishService {
 	@Autowired
 	private WishMapper mapper; // 찜기능을 위한 mapper
 
-	public int getMemberNum(String memail) {
-		log.info("getMemberNum" + memail + "의 회원번호 가져오는 중");
+	public int getMemberNum(String mid) {
+		log.info("getMemberNum" + mid + "의 회원번호 가져오는 중");
 
-		return mapper.getMemberNum(memail);
+		return mapper.getMemberNum(mid);
 	}
 	
 	//찜 목록을 가져오는 서비스

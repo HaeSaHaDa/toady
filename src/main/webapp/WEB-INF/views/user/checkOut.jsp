@@ -14,26 +14,12 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+<%@ include file="../layout/head_tags.jsp"%>
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="/css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="/css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="/css/style.css" type="text/css">
-<link rel="stylesheet" href="<c:url value ="css/main.css"/>">
 
-<!--Script -->
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <title>오늘의 짐</title>
 <style>
@@ -128,28 +114,21 @@
 
 
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="canvas-close">
 			<i class="fa fa-close"></i>
 		</div>
-		<div class="canvas-search search-switch">
-			<i class="fa fa-search"></i>
-		</div>
+
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/usergymlist">시설찾기</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
 				<sec:authorize access="hasRole('USER')">
 					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				</sec:authorize>
 				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				<sec:authorize access="hasRole('ADMIN')">
@@ -160,17 +139,26 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<ul class="navbar-nav">
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-					</ul>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 				</c:when>
 				<c:otherwise>
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-						<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-					</ul>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -183,7 +171,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -191,11 +179,11 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
@@ -205,24 +193,30 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-						<div class="to-search search-switch">
-							<i class="fa fa-search"></i>
-						</div>
+
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
-									<ul class="navbar-nav">
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-
-									</ul>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 								</c:when>
 								<c:otherwise>
-									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/memberInfo">회원정보</a></li>
-										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-									</ul>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -247,27 +241,20 @@
 							<h4 class="checkout-title">주문정보입력</h4>
 							<div class="row">
 								<div class="col-md-8 mb-2">
-									<input type="text" placeholder="이름을 입력해주세요">
-									 <input	type="text" placeholder="핸드폰번호"> 
-									 <input type="email"  placeholder="이메일주소">
-									 <input type="date" id="startDate" >
+									<input type="text" placeholder="이름을 입력해주세요"> <input type="text" placeholder="핸드폰번호"> <input type="email" placeholder="이메일주소"> <input type="date" id="startDate">
 								</div>
 								<div class="col-md-8">
 									<div class="form-group">
-										<input class="form-control"
-											style="width: 40%; display: inline;" placeholder="우편번호"
-											name="addr1" id="addr1" type="text" readonly="readonly">
+										<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly="readonly">
 										<button type="button" class="btn btn-default" onclick="execPostCode();">
-											<i class="fa fa-search"></i> 우편번호 찾기	</button>
+											<i class="fa fa-search"></i> 우편번호 찾기
+										</button>
 									</div>
 									<div class="form-group">
-										<input class="form-control" style="top: 5px;"
-											placeholder="도로명 주소" name="addr2" id="addr2" type="text"
-											readonly="readonly" />
+										<input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly="readonly" />
 									</div>
 									<div class="form-group">
-										<input class="form-control" placeholder="상세주소" name="addr3"
-											id="addr3" type="text" />
+										<input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text" />
 									</div>
 
 
@@ -360,15 +347,10 @@
 						<div class="fa-logo">
 							<a href="${pageContext.request.contextPath}/today"><img src="img/logo.png" alt=""></a>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua
-							endisse ultrices gravida lorem.</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 						<div class="fa-social">
-							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-								class="fa fa-twitter"></i></a> <a href="#"><i
-								class="fa fa-youtube-play"></i></a> <a href="#"><i
-								class="fa fa-instagram"></i></a> <a href="#"><i
-								class="fa  fa-envelope-o"></i></a>
+							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> <a
+								href="#"><i class="fa  fa-envelope-o"></i></a>
 						</div>
 					</div>
 				</div>
@@ -399,8 +381,7 @@
 						<h4>Tips & Guides</h4>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Physical fitness may help prevent depression,
-									anxiety</a>
+								<a href="#">Physical fitness may help prevent depression, anxiety</a>
 							</h6>
 							<ul>
 								<li>3 min read</li>
@@ -409,8 +390,7 @@
 						</div>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Fitness: The best exercise to lose belly fat and
-									tone up...</a>
+								<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
 							</h6>
 							<ul>
 								<li>3 min read</li>
@@ -429,9 +409,7 @@
 							<script>
 								document.write(new Date().getFullYear());
 							</script>
-							All rights reserved | This template is made with <i
-								class="fa fa-heart" aria-hidden="true"></i> by <a
-								href="https://colorlib.com" target="_blank">Colorlib</a>
+							All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
 					</div>
@@ -452,102 +430,92 @@
 	</div>
 	<!-- Search model end -->
 
-	<!-- Js Plugins -->
-	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
-	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-
+		<!-- Js Plugins -->
+	<%@ include file="../layout/foot_tags.jsp"%>
 
 
 	<script>
-		$(document).ready(	function() {
-							let arr = $(".price").length;
+		$(document).ready(
+				function() {
+					let arr = $(".price").length;
 
-							console.log(arr);
+					console.log(arr);
 
-							let arr2 = new Array(arr);
+					let arr2 = new Array(arr);
 
-							let sum = 0;
+					let sum = 0;
 
-							for (let i = 0; i < arr; i++) {
-								arr2[i] = Number($(".price").eq(i).text());								
-								console.log(i + "번째 텍스트" + arr2[i]);
-								sum += arr2[i]*Number($(".wdate").eq(i).text());
-								$(".price").eq(i).text(arr2[i]* Number($(".wdate").eq(i).text()));								
-							}
-							console.log(sum);
+					for (let i = 0; i < arr; i++) {
+						arr2[i] = Number($(".price").eq(i).text());
+						console.log(i + "번째 텍스트" + arr2[i]);
+						sum += arr2[i] * Number($(".wdate").eq(i).text());
+						$(".price").eq(i).text(
+								arr2[i] * Number($(".wdate").eq(i).text()));
+					}
+					console.log(sum);
 
-							$(".totalprice").text(sum);
-							
+					$(".totalprice").text(sum);
 
-						});//ready끝
-						
-						 $('#startDate').change(function (){
-					            var date = $('#startDate').val();
-					            console.log(date);
-					        });
+				});//ready끝
 
+		$('#startDate').change(function() {
+			var date = $('#startDate').val();
+			console.log(date);
+		});
 
-					출처: https://minaminaworld.tistory.com/13 [미나미 블로그]
-		
+		출처: https:
+		//minaminaworld.tistory.com/13 [미나미 블로그]
+
 		function execPostCode() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			new daum.Postcode({
+				oncomplete : function(data) {
+					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-							// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-							var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-							var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+					// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 도로명 조합형 주소 변수
 
-							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-							if (data.bname !== ''
-									&& /[동|로|가]$/g
-											.test(data.bname)) {
-								extraRoadAddr += data.bname;
-							}
-							// 건물명이 있고, 공동주택일 경우 추가한다.
-							if (data.buildingName !== ''
-									&& data.apartment === 'Y') {
-								extraRoadAddr += (extraRoadAddr !== '' ? ', '
-										+ data.buildingName
-										: data.buildingName);
-							}
-							// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-							if (extraRoadAddr !== '') {
-								extraRoadAddr = ' ('
-										+ extraRoadAddr
-										+ ')';
-							}
-							// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-							if (fullRoadAddr !== '') {
-								fullRoadAddr += extraRoadAddr;
-							}
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+					// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+					if (fullRoadAddr !== '') {
+						fullRoadAddr += extraRoadAddr;
+					}
 
-							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							console.log(data.zonecode);
-							console.log(fullRoadAddr);
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					console.log(data.zonecode);
+					console.log(fullRoadAddr);
 
-							$("[name=addr1]").val(data.zonecode);
-							$("[name=addr2]").val(fullRoadAddr);
+					$("[name=addr1]").val(data.zonecode);
+					$("[name=addr2]").val(fullRoadAddr);
 
-							/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
-							document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
-							document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
-						}
-					}).open();
+					/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
+					document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
+					document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
+				}
+			}).open();
 		}
 	</script>
 
+	<!-- Login model Begin -->
+	<%@ include file="../layout/login_model.jsp"%>
+	<!-- Login model end -->
 
+	<!-- Js Plugins -->
+	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
 
 </html>
