@@ -19,10 +19,10 @@ public class MainCotroller {
 		return "common/home"; 
 	}
 	
-	@GetMapping("/common/adminPage")
+	@GetMapping("/admin/adminPage")
 	public String adminPage() {
 		System.out.println("adminPage진입");
-		return "common/adminPage";
+		return "admin/adminPage";
 	}
 	@GetMapping("/common/myPage")
 	public String myPage() {
