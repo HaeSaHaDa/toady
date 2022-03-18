@@ -53,14 +53,16 @@
 		    	  
 		    	  $.ajax({
 			           type : "POST",
-			           url : "/admin/deleteReview/"+bid,         
+			           url : "/owner/deleteReview/"+bid,         
 			           cache : false,
 			          	contentType:'application/json; charset=utf-8',
 			           success: function (result) { 
 			        	   
 			        	   if(result=="ok"){                     
-			        		   alert("리뷰가 삭제되었습니다.");
-			        	   }             
+			        		   alert("리뷰삭제요청이 완료되었습니다.");
+			        	   }else{
+			        		   alert("이미 요청했습니다.");
+			        	   }               
 			                                   
 			           },
 			           error: function (e) {
@@ -187,17 +189,17 @@
 				<!-- 사이드바 -->
 				<div class="col-4">
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
-						<li><a href="#">헬스장 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/manageReivew">리뷰관리</a></li>
-						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
-						<li><a href="#">1:1 답변 관리</a></li>
-						<li><a href="#">공지/이벤트 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/requestpr">환불요청/리뷰삭제요청</a></li>
-						<li><a href="#">매출 관리</a></li>
+					<li><a href="/user/memberInfo">내 정보</a></li>
+					<li><a href="#">내 이용권</a></li>
+					<li><a href="/user/note">쪽지</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">1:1문의</a></li>
+					<li><a href="#">공지/이벤트</a></li>
+					<li><a href="#">시설 등록 내역</a></li>
+					<li><a href="#">트레이너 관리</a></li>
+					<li><a href="/owner/gymreviewlist">리뷰목록보기</a></li>
+					<li><a href="/owner/gymMemberList">회원 목록 보기</a></li>
+					<li><a href="#">매출 관리</a></li>
 					
 				</ul>
 			</div>
@@ -211,7 +213,7 @@
 								<td>글번호</td>
 								<td>리뷰</td>
 								<td>별점</td>
-								<td>삭제</td>								
+								<td>삭제요청</td>								
 							</tr>
 							<c:forEach items="${reviewList}" var="reviewList">					
 							<tr>
@@ -226,16 +228,16 @@
 							
 						
 						<c:if test="${pageMaker.pre}">
-							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+							<a href="/gymreviewlist${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
 						<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage }">
-							<a href="/manageReivew${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="/gymreviewlist${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+							<a href="/gymreviewlist${pageMaker.makeQuery(pageMaker.endPage + 1) }">
 								» </a>
 						</c:if>					
 						<br>

@@ -16,7 +16,7 @@
 </style>
 
 
-<title>FAQ관리</title>
+<title>환불요청 및 리뷰삭제 요청관리</title>
 
 <!-- Google Font -->
 <link	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"rel="stylesheet">
@@ -32,46 +32,13 @@
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/css/slicknav.min.css"	type="text/css">
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 
-<!-- 별점라이브러리 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 		$(document).ready(function () {
 			
-			//<td class="delete_review">X</td>
-			
-			$(".delete_review").on("click",function(){
-				console.log("리뷰삭제요청하기");
-				
-				let bid = $(this).parent("tr").find("input").val();
-		    	   
-		    	  console.log(bid);
-		    	  
-		    	  $.ajax({
-			           type : "POST",
-			           url : "/admin/deleteReview/"+bid,         
-			           cache : false,
-			          	contentType:'application/json; charset=utf-8',
-			           success: function (result) { 
-			        	   
-			        	   if(result=="ok"){                     
-			        		   alert("리뷰가 삭제되었습니다.");
-			        	   }             
-			                                   
-			           },
-			           error: function (e) {
-			               console.log(e);
-			               console.log("실패");
-			           }
-			       })
-				
-				
+		    
 			});
-		   
 			
 		
 		})
@@ -101,8 +68,8 @@
 			<ul>
 
 				<li class="active"><a href="/">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/owner/mypage">mypage</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+				<li><a href="${pageContext.request.contextPath}/services.html">mypage</a></li>
+				<li><a href="${pageContext.request.contextPath}/team.html">찜</a></li>
 				<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 
@@ -149,20 +116,7 @@
 							<i class="fa fa-search"></i>
 						</div>
 						<div class="to-social">
-							<c:choose>
-								<c:when test="${empty principal}">
-									<ul class="navbar-nav">
-										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
-										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
-									</ul>
-								</c:when>
-								<c:otherwise>
-									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-									</ul>
-								</c:otherwise>
-							</c:choose>
+							<a href="#">로그인</a> <a href="#">회원가입</a>
 
 						</div>
 					</div>
@@ -186,11 +140,10 @@
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
 						<li><a href="#">헬스장 사장님 관리</a></li>
 						<li><a href="#">헬스장 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/manageReivew">리뷰관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
 						<li><a href="#">찜 결제 관리</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
@@ -198,44 +151,43 @@
 						<li><a href="#">공지/이벤트 관리</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/requestpr">환불요청/리뷰삭제요청</a></li>
 						<li><a href="#">매출 관리</a></li>
-					
-				</ul>
-			</div>
+					</ul>
+				</div>
 				<!-- 사이드바 끝 -->
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
-						<h4 class="text-white">review보기</h4>
+						<h4 class="text-white">환불요청/리뷰삭제요청</h4>
 						<table class="text-white" style="text-align: center;" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
 							<tr>
-								<td>글번호</td>
-								<td>리뷰</td>
-								<td>별점</td>
-								<td>삭제</td>								
+								<td>요청종류</td>
+								<td>내용</td>
+								<td>작성회원</td>
+								<td>날짜</td>								
 							</tr>
-							<c:forEach items="${reviewList}" var="reviewList">					
+							<c:forEach items="${requsetList}" var="requsetList">					
 							<tr>
-							<input type="hidden" value="${reviewList.bid}">
-								<td>${reviewList.bid}</td>
-								<td>${reviewList.bcontent}</td>
-								<td>${reviewList.grstar}</td>
-								<td class="delete_review">X</td>															
+							<input type="hidden" value="${requsetList.bid}">
+								<td>${requsetList.tname}</td>
+								<td>${requsetList.bcontent}</td>
+								<td >${requsetList.mnum}</td>
+								<td >${requsetList.bdate}</td>															
 							</tr>
 							</c:forEach>
 						</table>
 							
 						
 						<c:if test="${pageMaker.pre}">
-							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+							<a href="/admin/requstpr${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
 						<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage }">
-							<a href="/manageReivew${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="/admin/requstpr${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+							<a href="/admin/requstpr${pageMaker.makeQuery(pageMaker.endPage + 1) }">
 								» </a>
 						</c:if>					
 						<br>

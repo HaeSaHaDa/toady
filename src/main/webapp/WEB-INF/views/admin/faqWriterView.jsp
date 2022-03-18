@@ -235,6 +235,7 @@
 						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
 						<li><a href="#">1:1 답변 관리</a></li>
 						<li><a href="#">공지/이벤트 관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/requestpr">환불요청/리뷰삭제요청</a></li>
 						<li><a href="#">매출 관리</a></li>
 					</ul>
 				</div>

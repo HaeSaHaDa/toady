@@ -37,7 +37,7 @@ public interface OrderMapper {
 	//페이징
 	//갯수(페이징)
 	public int getTotal(int mnum);
-	//faq글 목록
+	//이용권 목록
 	public List<OrderVO> getTicketList(@Param("criteria")Criteria2 criteria,@Param("mnum")int mnum);
 	
 	
@@ -47,6 +47,8 @@ public interface OrderMapper {
 	//환불요청체크
 	public int checkRequest(int mnum,String ment1,String ment2);
 	
-	
-	
+	//환불요청 보기
+	public List<FaqVO> requetList(Criteria cri);
+	//환불요청갯수
+	public int totalRequet();
 }

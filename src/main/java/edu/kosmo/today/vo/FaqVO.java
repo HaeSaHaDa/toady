@@ -33,4 +33,6 @@ public class FaqVO {
 	private int mnum; //작성회원
 	private int tnum; //글 타입 예> 공지,이벤트,1:1문의	
 	
+	private String tname; //요청종류
+	
 }

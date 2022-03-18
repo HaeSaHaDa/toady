@@ -103,4 +103,16 @@ public class OrderService {
 		return mapper.checkRequest(mnum,ment1,ment2);
 	}
 
+	
+	//요청 리스트 보기
+	public List<FaqVO> requestList(Criteria cri){
+		System.out.println("요청리스트보는 곳");
+		
+		return mapper.requetList(cri);
+	}
+	//요청리스트 갯수
+	public int totalRequest() {
+		
+		return mapper.totalRequet();
+	}
 }
