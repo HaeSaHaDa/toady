@@ -67,4 +67,18 @@
 		and gymreview.ordernum = #{ordernum} and orderdetail.tknum = #{tknum}
 	</select>
 
+	<insert id="requestPayback">
+	<![CDATA[
+		insert into boardlist (bid,bcontent,mnum,tnum) values
+		(BOARD_SEQ.nextval,#{ment},#{mnum},5)
+	]]>	
+	</insert>
+	
+	<select id="checkRequest" resultType="_int">
+	<![CDATA[
+		SELECT  count(*)  FROM boardlist WHERE 
+		mnum = #{mnum} and bcontent like #{ment1} and bcontent LIKE #{ment2}
+	]]>	
+	</select>
+	
 </mapper>

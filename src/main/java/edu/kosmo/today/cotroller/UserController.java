@@ -3,6 +3,7 @@ package edu.kosmo.today.cotroller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
@@ -153,6 +155,45 @@ public class UserController {
 		return entity;
 	}
 	
+	//환불신청하기
+	@RequestMapping(value ="/insertBack", method = RequestMethod.POST)
+	public ResponseEntity<String> insertRequestPaybak(@RequestBody Map<String, Object> data){
+		System.out.println("환불입력중..."+data);
+		ResponseEntity<String> entity = null;
+		
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		
+		int mnum = faqService.getMemberNum(member.getUsername());
+		
+		log.info("insert review.."+data);
+	
+		System.out.println("--"+data.get("payid")+"--주문번호 타입은.."+data.get("ordernum").getClass().getName());
+		
+		
+		try {
+			
+			int check = orderService.checkRequst(mnum, (String)data.get("ordernum"), (String)data.get("tknum"));
+			
+			if(check != 0) {
+				entity = new ResponseEntity<String>("already", HttpStatus.OK);
+				
+			}else {
+				orderService.insertrequest((String)data.get("payid"),(String)data.get("ordernum"),(String)data.get("tknum"), mnum);
+				entity = new ResponseEntity<String>("ok", HttpStatus.OK);	
+			}
+			
+					
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			entity = new ResponseEntity<String>("notok", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		return entity;
+	}
 	
 	
 }

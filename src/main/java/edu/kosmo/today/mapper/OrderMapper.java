@@ -40,4 +40,13 @@ public interface OrderMapper {
 	//faq글 목록
 	public List<OrderVO> getTicketList(@Param("criteria")Criteria2 criteria,@Param("mnum")int mnum);
 	
+	
+	//환불요청하기
+	public void requestPayback(String ment,int mnum);
+	
+	//환불요청체크
+	public int checkRequest(int mnum,String ment1,String ment2);
+	
+	
+	
 }

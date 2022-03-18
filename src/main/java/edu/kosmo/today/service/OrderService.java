@@ -80,5 +80,27 @@ public class OrderService {
 		}
 
 	}
+	
+	//환불신청하기
+	public void insertrequest(String payid,String ordernum,String tknum,int mnum) {
+		log.info("환불신청중----"+ordernum+"0000"+mnum);
+		
+		String ment = "환불신청 회원번호 : "+mnum+" 주문번호 : "+ordernum+" 결제번호 : "+payid
+				+" 이용권번호 : "+tknum;
+		
+		System.out.println(ment);
+		
+		mapper.requestPayback(ment, mnum);
+	}
+	
+	//환불요청확인하기
+	public int checkRequst(int mnum,String ordernum,String tknum) {
+		System.out.println("환불요청체크중");
+		
+		String ment1 = "%주문번호 : "+ordernum+"%";
+		String ment2 = "%이용권번호 : "+tknum+"%";
+		
+		return mapper.checkRequest(mnum,ment1,ment2);
+	}
 
 }

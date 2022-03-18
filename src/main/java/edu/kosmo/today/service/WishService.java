@@ -73,15 +73,15 @@ public class WishService {
 	}
 	
 	//찜에 이용권 담기
-	public void insertWish(int mnum,int tnum) {
-		log.info("이용권 담는 중..."+mnum,tnum);
+	public void insertWish(int mnum,int tknum) {
+		log.info("이용권 담는 중..."+mnum,tknum);
 		
-		int check = mapper.checkWish(mnum, tnum);
+		int check = mapper.checkWish(mnum, tknum);
 		
 		if(check == 0) {
-			mapper.insertWish(mnum, tnum);
+			mapper.insertWish(mnum, tknum);
 		}else {
-			mapper.updateWish(mnum, tnum);
+			mapper.updateWish(mnum, tknum);
 		}
 		
 		

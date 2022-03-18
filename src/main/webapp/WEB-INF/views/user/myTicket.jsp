@@ -82,8 +82,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img
-							src="${pageContext.request.contextPath}/img/logo.png" alt=""
+						<a href="/today"> <img	src="${pageContext.request.contextPath}/img/logo.png" alt=""
 							width="500">
 						</a>
 					</div>
@@ -448,34 +447,36 @@
        $(".goback").on("click",function(){
     	  console.log("환불신청버튼누름");
     	  
-    	  let payid = $(this).parent("div").find('input:[name=payid]').val();
-    	  let ordernum = $(this).parent("div").find('input:[name=ordernum]').val();
-    	  let tknum = $(this).parent("div").find('input:[name=tknum]').val();
+    	  let payid = $(this).parent("div").find('input[name=payid]').val();
+    	  let ordernum = $(this).parent("div").find('input[name=ordernum]').val();
+    	  let tknum = $(this).parent("div").find('input[name=tknum]').val();
     	  
-    	  let form = {
+    	  let data = {
     			  payid : payid,
     			  ordernum : ordernum,
-				  gnum : gnum,
-				  tknum : tknum,
+				  tknum : tknum
 		  }
     	   
     	  console.log(payid+"..."+ordernum);
     	  
     	  $.ajax({
 	           type : "POST",
-	           url : "/insertBack",	         
+	           url : "/insertBack",         
 	           cache : false,
-	           contentType:'application/json; charset=utf-8',
-	            data: JSON.stringify(form), 
+	          	contentType:'application/json; charset=utf-8',
+	           data: JSON.stringify(data), 
 	           success: function (result) { 
 	        	   
-	        	   if(result=="SUCCESS"){                     
+	        	   if(result=="ok"){                     
 	        		   alert("환불신청완료");
+	        	   }else{
+	        		   alert("이미 신청하셨습니다.");
 	        	   }               
 	                                   
 	           },
 	           error: function (e) {
 	               console.log(e);
+	               console.log("실패");
 	           }
 	       })    	  
     	   

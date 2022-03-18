@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 
 import edu.kosmo.today.vo.UserVO;
 import edu.kosmo.today.vo.WishVO;
@@ -33,12 +35,12 @@ public interface WishMapper {
 	public void updateWishList(WishVO wish);
 	
 	//찜에 이용권 담기
-	public void insertWish(int mnum,int tnum);
+	public void insertWish(@Param("mnum")int mnum,@Param("tknum")int tknum);
 	
 	//찜에 이용권이 담겼는지 확인하기
-	public int checkWish(int mnum,int tnum);
+	public int checkWish(@Param("mnum")int mnum,@Param("tknum")int tknum);
 	
 	//찜 수량
-	public void updateWish(int mnum,int tnum);
+	public void updateWish(@Param("mnum")int mnum,@Param("tknum")int tknum);
 
 }

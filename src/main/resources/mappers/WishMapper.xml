@@ -24,7 +24,7 @@
 	
 	<select id="getMemberNum" resultType="_int">
 		
-		select * from member where mnum = #{mnum} 
+		select * from member where mid = #{mid} 
 		
 	</select>
 	
