@@ -2,6 +2,8 @@ package edu.kosmo.today.cotroller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +12,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
+import edu.kosmo.today.service.CompleteService;
 import edu.kosmo.today.service.WishService;
+import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.WishVO;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
 
 /*
  * 찜 기능을 위한 controller 0302 작성(김보람)
@@ -30,6 +36,8 @@ public class WishController {
 
 	@Autowired
 	private WishService wishServise; // 찜 기능을 수행할 서비스
+	@Autowired
+	private CompleteService cservice;
 
 	// 찜 목록을 불러오기
 	@GetMapping("/user/wishlist")
@@ -134,5 +142,35 @@ public class WishController {
 
 		return mav;
 	}
-
+	@RequestMapping("/completePay")
+	@ResponseBody
+	public String success(HttpServletRequest request ) {
+		log.info("controller - success");
+		
+		String payid = request.getParameter("merchantid");
+		String impid = request.getParameter("impid");
+		String mnum1 = request.getParameter("mnum");
+		int mnum = Integer.valueOf(mnum1);
+		
+		CompleteVO comVO = new CompleteVO();
+		comVO.setOscpayid(payid);
+		comVO.setOscimpid(impid);
+		comVO.setMnum(mnum);
+		
+		cservice.successpay(comVO);
+		
+		JSONObject result = new JSONObject();		
+		result.put("successPayment", true);
+				
+		log.info("*********************controller - success22");
+		return result.toString(); 
+	}
+	@RequestMapping("/user/complete")
+	public ModelAndView complete(ModelAndView mav) {
+		log.info("controller - complete");
+		
+		mav.setViewName("/user/complete");
+		
+		return mav;
+	}
 }
