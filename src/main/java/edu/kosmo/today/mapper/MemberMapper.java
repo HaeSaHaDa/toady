@@ -5,10 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kosmo.today.page.Criteria;
-<<<<<<< HEAD
 import edu.kosmo.today.vo.MemberVO;
-=======
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+
 import edu.kosmo.today.vo.NoteVO;
 import edu.kosmo.today.vo.UserVO;
 
