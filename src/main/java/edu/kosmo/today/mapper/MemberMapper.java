@@ -1,10 +1,11 @@
 package edu.kosmo.today.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.MemberVO;
-
 import edu.kosmo.today.vo.NoteVO;
 
 @Mapper

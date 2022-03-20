@@ -1,8 +1,10 @@
 package edu.kosmo.today.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import edu.kosmo.today.mapper.MemberMapper;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.MemberVO;

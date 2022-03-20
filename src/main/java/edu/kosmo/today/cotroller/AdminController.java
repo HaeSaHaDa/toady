@@ -37,6 +37,7 @@ import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.NoteVO;
+import edu.kosmo.today.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

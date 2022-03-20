@@ -14,8 +14,8 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <%@ include file="../layout/head_tags.jsp"%>
 
@@ -188,26 +188,20 @@ option {
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
+					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+					</span>
+					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					</a>
+					</span>
 				</c:when>
 				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					</a>
+					</span>
+					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+					</a>
+					</span>
+					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -242,30 +236,24 @@ option {
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
+									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+									</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									</a>
 									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+									</a>
+									</span>
+									<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -659,7 +647,7 @@ option {
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
 
-		<!-- Js Plugins -->
+	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
 <script>

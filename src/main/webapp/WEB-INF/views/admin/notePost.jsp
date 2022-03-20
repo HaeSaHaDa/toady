@@ -82,7 +82,9 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+						<a href="${pageContext.request.contextPath}/today"> 
+						<img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+
 						</a>
 					</div>
 				</div>
@@ -238,6 +240,7 @@
 						<div class="fs-about">
 							<div class="fa-logo">
 								<a href="${pageContext.request.contextPath}/today"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
+
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
