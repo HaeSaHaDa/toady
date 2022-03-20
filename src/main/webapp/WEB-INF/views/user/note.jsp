@@ -32,6 +32,7 @@
 			<i class="fa fa-close"></i>
 		</div>
 
+<<<<<<< HEAD
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
@@ -75,6 +76,57 @@
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
+=======
+   <!-- Offcanvas Menu Section Begin -->
+   <div class="offcanvas-menu-overlay"></div>
+   <div class="offcanvas-menu-wrapper">
+      <div class="canvas-close">
+         <i class="fa fa-close"></i>
+      </div>
+      <div class="canvas-search search-switch">
+         <i class="fa fa-search"></i>
+      </div>
+      <nav class="canvas-menu mobile-menu">
+         <ul>
+            
+                     <li class="active"><a href="/today">Home</a></li>
+                     <li><a href="/mypage">mypage</a></li>
+                     <li><a href="./team.html">찜</a></li>
+                     <li><a href="./services.html">지도</a></li>
+                     <li><a href="gymlist">시설찾기</a></li>
+
+                  
+         </ul>
+      </nav>
+      <div id="mobile-menu-wrap"></div>
+      <div class="canvas-social">
+         <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+            class="fa fa-twitter"></i></a> <a href="#"><i
+            class="fa fa-youtube-play"></i></a> <a href="#"><i
+            class="fa fa-instagram"></i></a>
+      </div>
+   </div>
+   <!-- Offcanvas Menu Section End -->
+
+   <!-- Header Section Begin -->
+   <header class="header-section">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-lg-3">
+               <div class="logo">
+                  <a href="${pageContext.request.contextPath}/today"> <img src="/img/logo.png" alt="" width="500">
+                  </a>
+               </div>
+            </div>
+            <div class="col-lg-6">
+               <nav class="nav-menu">
+                  <ul>
+                     <li class="active"><a href="/today">Home</a></li>
+                     <li><a href="/common/myPage">mypage</a></li>
+                     <li><a href="/user/wishlist">찜</a></li>
+                     <li><a href="./services.html">지도</a></li>
+                     <li><a href="gymlist">시설찾기</a></li>
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 
 	<!-- Header Section Begin -->
 	<header class="header-section">

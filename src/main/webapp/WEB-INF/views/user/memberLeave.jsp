@@ -116,7 +116,12 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
+<<<<<<< HEAD
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+=======
+						<a href="${pageContext.request.contextPath}/today"> 
+							<img src="/img/logo.png" alt="" width="500">
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 						</a>
 					</div>
 				</div>

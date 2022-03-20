@@ -14,14 +14,41 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
 <meta name="_csrf" content="${_csrf.token}"/>
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <%@ include file="../layout/head_tags.jsp"%>
+=======
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<style type="text/css">
+</style>
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 
 
 <title>시설목록</title>
 
+<<<<<<< HEAD
+=======
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/barfiller.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 </head>
 
 <body>
@@ -34,6 +61,7 @@
 
 		<nav class="canvas-menu mobile-menu">
 			<ul>
+<<<<<<< HEAD
 				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
@@ -73,6 +101,34 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+=======
+
+				<li class="active"><a href="./index.html">Home</a></li>
+				<li><a href="./services.html">mypage</a></li>
+				<li><a href="/user/wish">찜</a></li>
+				<li><a href="./services.html">지도</a></li>
+				<li><a href="/common/gymlist">시설찾기</a></li>
+
+
+			</ul>
+		</nav>
+		<div id="mobile-menu-wrap"></div>
+						<c:choose>
+							<c:when test="${empty principal}">
+								<ul class="navbar-nav">
+									<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+									<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+
+								</ul>
+							</c:when>
+							<c:otherwise>
+								<ul class="navbar-nav">
+									<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+									<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+								</ul>
+							</c:otherwise>
+						</c:choose>		
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 	</div>
 	<!-- Offcanvas Menu Section End -->
 
@@ -82,13 +138,18 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
+<<<<<<< HEAD
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+=======
+						<a href="/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
+<<<<<<< HEAD
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
@@ -99,11 +160,20 @@
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
+=======
+							<li class="active"><a href="/today">Home</a></li>
+							<li><a href="./services.html">mypage</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
+							<li><a href="./services.html">지도</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
+
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
+<<<<<<< HEAD
 
 						<div class="to-social">
 							<c:choose>
@@ -128,6 +198,25 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
+=======
+						<div class="to-search search-switch">
+							<i class="fa fa-search"></i>
+						</div>
+						<div class="to-social">
+							<c:choose>
+								<c:when test="${empty principal}">
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 								</c:otherwise>
 							</c:choose>
 						</div>

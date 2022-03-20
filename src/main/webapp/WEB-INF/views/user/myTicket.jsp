@@ -157,9 +157,15 @@
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
+<<<<<<< HEAD
 						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
+=======
+						<li><a href="/user/memberInfo">내 정보</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
+						<li><a href="/user/note">쪽지</a></li>
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 						<li><a href="${pageContext.request.contextPath}/user/faqboard">FAQ</a></li>
 						<li><a href="#">1:1문의</a></li>
 						<li><a href="#">공지/이벤트</a></li>

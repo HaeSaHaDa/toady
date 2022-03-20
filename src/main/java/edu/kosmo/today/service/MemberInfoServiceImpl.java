@@ -1,14 +1,10 @@
 package edu.kosmo.today.service;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import edu.kosmo.today.mapper.MemberInfoMapper;
-import edu.kosmo.today.mapper.MemberMapper;
-import edu.kosmo.today.page.Criteria;
-import edu.kosmo.today.vo.AuthVO;
-import edu.kosmo.today.vo.MemberVO;
 
+import edu.kosmo.today.mapper.MemberInfoMapper;
+import edu.kosmo.today.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전
@@ -26,13 +22,13 @@ public class MemberInfoServiceImpl implements MemberInfoService{
 	}
 
 	@Override
-	public MemberVO getInfoList(int mnum) {
+	public UserVO getInfoList(int mnum) {
 		
 		return memberInfoMapper.getMemberInfoList(mnum);
 	}
 
 	@Override
-	public void memberInfoModify(MemberVO memberVO) {
+	public void memberInfoModify(UserVO memberVO) {
 		memberInfoMapper.memberInfoUpdate(memberVO);		
 	}
 

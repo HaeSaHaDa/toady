@@ -117,6 +117,7 @@
 									</span>
 								</c:when>
 								<c:otherwise>
+<<<<<<< HEAD
 									<span class="userinfo" style="color:white">
 											<a href="${pageContext.request.contextPath}/user/memberInfo">
 												<i class="fa fa-user-secret">UserInfo</i>
@@ -128,6 +129,12 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
+=======
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+>>>>>>> b155730d4dfbed9e35a9f223def105e7685e646c
 								</c:otherwise>
 							</c:choose>
 						</div>
