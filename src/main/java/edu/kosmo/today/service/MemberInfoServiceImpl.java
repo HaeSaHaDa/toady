@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.kosmo.today.mapper.MemberInfoMapper;
-<<<<<<< HEAD
 import edu.kosmo.today.vo.MemberVO;
-=======
-import edu.kosmo.today.vo.UserVO;
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+
 import lombok.extern.slf4j.Slf4j;
 
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전
