@@ -23,6 +23,24 @@
 
 <title>회원 관리페이지</title>
 
+<<<<<<< HEAD
+=======
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/barfiller.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -85,6 +103,7 @@
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
+<<<<<<< HEAD
 			<c:choose>
 				<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
@@ -110,6 +129,9 @@
 				</c:otherwise>
 			</c:choose>
 
+=======
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -146,6 +168,7 @@
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
+<<<<<<< HEAD
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
 									<span class="signUp" style="color: white; margin-right:20px"> 
@@ -167,6 +190,18 @@
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
 
+=======
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -185,9 +220,14 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
+<<<<<<< HEAD
 		<div class="container" style="padding-bottom: 300px; margin-top: 150px;">
 			<div class="row" style="margin-top: 100px; margin-left:-100px">
 
+=======
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 				<!-- 사이드바 -->
 				<div class="col-3">
 					<ul>
@@ -206,12 +246,20 @@
 				<div class="col-9">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
+<<<<<<< HEAD
 						<table class="table table table-bordered" width="500px" border="1" cellpadding="0" cellspacing="0" border="1">
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">회원번호</th>
 									<th scope="col">회원 아이디</th>
 
+=======
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">회원번호</th>
+									<th scope="col">이메일</th>
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 									<th scope="col">회원구분</th>
 									<th scope="col">삭제</th>
 								</tr>
@@ -368,12 +416,35 @@
 		<!-- Footer Section End -->
 	</div>
 
+<<<<<<< HEAD
 
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
 		<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+=======
+	<!-- Search model Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form">
+				<input type="text" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
+
+	<!-- Js Plugins -->
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 
 
 

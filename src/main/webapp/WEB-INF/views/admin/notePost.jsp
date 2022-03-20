@@ -82,9 +82,15 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
+<<<<<<< HEAD
 						<a href="${pageContext.request.contextPath}/today"> 
 						<img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 
+=======
+						<a href="${pageContext.request.contextPath}/today"> <img
+							src="${pageContext.request.contextPath}/img/logo.png" alt=""
+							width="500">
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 						</a>
 					</div>
 				</div>
@@ -239,8 +245,13 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
+<<<<<<< HEAD
 								<a href="${pageContext.request.contextPath}/today"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
 
+=======
+								<a href="${pageContext.request.contextPath}/today"><img
+									src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
