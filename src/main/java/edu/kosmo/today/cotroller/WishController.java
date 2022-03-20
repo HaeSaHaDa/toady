@@ -146,12 +146,16 @@ public class WishController {
 	@ResponseBody
 	public String success(HttpServletRequest request ) {
 		log.info("controller - success");
-		
-		String payid = request.getParameter("merchantid");
+		JSONObject result = new JSONObject();
+				
+		String  payid = request.getParameter("merchantid");
 		String impid = request.getParameter("impid");
 		String mnum1 = request.getParameter("mnum");
+		String tamount1 = request.getParameter("tamount");
 		int mnum = Integer.valueOf(mnum1);
-		
+		int tamount = Integer.valueOf(tamount1);
+				
+				
 		CompleteVO comVO = new CompleteVO();
 		comVO.setOscpayid(payid);
 		comVO.setOscimpid(impid);
@@ -159,7 +163,7 @@ public class WishController {
 		
 		cservice.successpay(comVO);
 		
-		JSONObject result = new JSONObject();		
+		
 		result.put("successPayment", true);
 				
 		log.info("*********************controller - success22");

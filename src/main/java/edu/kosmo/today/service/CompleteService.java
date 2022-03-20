@@ -27,7 +27,9 @@ public class CompleteService {
    @Autowired
    private CompleteMapper mapper; // 찜기능을 위한 mapper
 
-   public void successpay(CompleteVO complete) {
+   public void successpay(CompleteVO complete) {   
+	   
+	   
 	   mapper.insertcomplete(complete);
    }
 

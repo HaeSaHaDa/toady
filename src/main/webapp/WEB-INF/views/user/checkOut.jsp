@@ -24,6 +24,10 @@
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js" type="text/javascript"></script>
+<!-- axios -->
+<!-- <script src="./node_modules/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 
 
 
@@ -555,6 +559,7 @@
             	var adr = $('#addr2').val()+$('#addr3').val();
             	var post = $('#addr1').val(); 
             	var mnum = ${principal.user.mnum};
+            	var totalamount = parseInt($(".totalprice").text(), 10);
             	
             	var IMP = window.IMP; // 생략가능
             	IMP.init('imp01979841');// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용 i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -565,7 +570,7 @@
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 				    name : '인규테스트',
-				    amount : 100,
+				    amount : 100/* totalamount */,
 				    buyer_email : bEmail,//'test@test',
 				    buyer_name : bName,//'송인규',
 				    buyer_tel : bTel,//'010-1234-3124',
@@ -585,16 +590,18 @@
 			        	$.ajax({
 				        	url:"/completePay",
 				        	type:'POST',
-				        	/* contentType:"application/json; charset=utf-8", */
+				        	/* /* ContentType:"application/json; charset=utf-8", */ */
 				        	dataType: 'json',
 				        	data:{
 				        		merchantid: rsp.merchant_uid,
-	                             impid : rsp.imp_uid,
-	                             mnum: mnum,
-	                            				 
+	                            impid : rsp.imp_uid,
+	                            mnum: mnum,
+	                          /*   tamount : amount */		 
 				        	} /* JSON.stringify(data) */
+				        	
 				        }).done(function(result){
 				        	console.log("페이지이동함?-1")
+				        			        	
 				        	if(result.successPayment){
 				        		console.log("페이지이동함?-2")
 				        		location.href = "/user/complete"
@@ -612,7 +619,71 @@
 
 				});
         </script>
+<script>
+console.log("실행중이세요 ? - 1 ")
+app.use(bodyParser.json());
+// "/payments/complete"에 대한 POST 요청을 처리
+console.log("실행중이세요 ? - 2 ")
+app.post("/payments/complete", async (req, res) => {
+	console.log("실행중이세요 ? - 3 ")
+	try {
+		const { imp_uid, merchant_uid } = req.body; // req의 body에서 imp_uid, merchant_uid 추출
+		
+        const getToken = await axios({
+            url: "https://api.iamport.kr/users/getToken",
+            method: "post", // POST method
+            headers: { "Content-Type": "application/json" }, // "Content-Type": "application/json"
+            data: {
+              imp_key: "0400212575548874", // REST API 키
+              imp_secret: "62cf0dd0734e7759837b91ed027a7313fc16e6aa3307685cfa56016e37dc105750cd64618cc2b22b" // REST API Secret
+            }
+          });
+		
+        const { access_token } = getToken.data.response; // 인증토큰
+		
+        const getPaymentData = await axios({
+            url: "https://api.iamport.kr/payments/\${imp_uid}", // imp_uid 전달
+            method: "get", // GET method
+            headers: { "Authorization": access_token } // 인증 토큰 Authorization header에 추가
+          });
+		const paymentData = getPaymentData.data.response;
+		
+		// DB에서 결제되어야 하는 금액 조회
+		const order = await Orders.findById(paymentData.merchant_uid);
+		const amountToBePaid = order.amount; // 결제 되어야 하는 금액
+          
+	    const { amount, status } = paymentData;
+				      
+			if (amount === amountToBePaid) { // 결제금액 일치. 결제 된 금액 === 결제 되어야 하는 금액
 
+	        switch (status) {
+	          case "ready": // 가상계좌 발급
+	            // DB에 가상계좌 발급 정보 저장
+	            const { vbank_num, vbank_date, vbank_name } = paymentData;
+	            await Users.findByIdAndUpdate("/* 고객 id */", { $set: { vbank_num, vbank_date, vbank_name }});
+	            // 가상계좌 발급 안내 문자메시지 발송
+	            SMS.send({ text: \`가상계좌 발급이 성공되었습니다. 계좌 정보 \${vbank_num} \${vbank_date} \${vbank_name}\`});
+	            res.send({ status: "vbankIssued", message: "가상계좌 발급 성공" });
+	            break;
+	          case "paid": // 결제 완료
+	            res.send({ status: "success", message: "일반 결제 성공" });
+	            break;
+	        }
+	      } else { // 결제금액 불일치. 위/변조 된 결제
+	        throw { status: "forgery", message: "위조된 결제시도" };
+	      }
+	    } catch (e) {
+	      res.status(400).send(e);
+	    }
+	  });  
+          
+          
+	} catch (e) {
+		res.status(400).send(e);
+    }
+}); 
+
+</script>
 </body>
 
 </html>
