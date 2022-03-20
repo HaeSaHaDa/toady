@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.service.OwnerService;
-import edu.kosmo.today.vo.UserVO;
+import edu.kosmo.today.vo.MemberVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,7 +41,7 @@ public class OwnerController {
 	
 	
 		@GetMapping("/gymMemberList/{mnum}")  //회원 상세보기
-		public ModelAndView ownerMemberDetail(UserVO memberVO,ModelAndView mav) {
+		public ModelAndView ownerMemberDetail(MemberVO memberVO,ModelAndView mav) {
 			
 			log.info("gymMemberListDetail()..");
 			UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
