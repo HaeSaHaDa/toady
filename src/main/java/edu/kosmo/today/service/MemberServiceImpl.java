@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import edu.kosmo.today.mapper.MemberMapper;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.NoteVO;
-import edu.kosmo.today.vo.UserVO;
+import edu.kosmo.today.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전
@@ -20,13 +20,13 @@ public class MemberServiceImpl implements MemberService{
 	private MemberMapper memberMapper ;
 	
 	@Override
-	public List<UserVO> getList() {
+	public List<MemberVO> getList() {
 		log.info("getList()..");
 		return memberMapper.getList();
 	}
 
 	@Override
-	public UserVO get(int mnum) {
+	public MemberVO get(int mnum) {
 		log.info("get()..");
 		return memberMapper.read(mnum);
 	}
@@ -46,14 +46,14 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
-	public List<UserVO> getListPage(Criteria criteria) {
+	public List<MemberVO> getListPage(Criteria criteria) {
 		log.info("getListPage() ..");
 		return memberMapper.getListPage(criteria);
 	}
 
 
 	@Override
-	public void modify(UserVO memberVO) {
+	public void modify(MemberVO memberVO) {
 		memberMapper.update(memberVO);
 	}
 
