@@ -1,23 +1,27 @@
 package edu.kosmo.today.cotroller;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.kosmo.today.cotroller.security.principal.UserCustomDetailService;
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
@@ -26,7 +30,6 @@ import edu.kosmo.today.page.PageVO2;
 import edu.kosmo.today.service.FaqService;
 import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.userservice.UserService;
-import edu.kosmo.today.vo.OrderVO;
 import edu.kosmo.today.vo.ReviewVO;
 import edu.kosmo.today.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
@@ -37,23 +40,13 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-
+	
 	@Autowired
 	FaqService faqService;
 		
-	@GetMapping("/logout")
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-        return "redirect:/today";
-    }
-	
-	
 	@Autowired
 	OrderService orderService;
-
-	@Autowired
-	private AuthenticationManager authenticationManager;
-
+	
 	@GetMapping("/common/signup")
 	public String joinForm() {
 		return "common/signUp";
@@ -153,5 +146,33 @@ public class UserController {
 		return entity;
 	}
 	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {		
+		return "idcheck";
+	}
 	
+	@RequestMapping(value="/common/idcheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> idCheck(UserVO user) throws Exception {
+		log.info("idCheck: " + user.getMid());
+		Map<String, Object> map = new HashMap<String, Object>();
+        
+		/* 테스트를 위해 임의로 false를 대입했습니다. */        
+        boolean flag ;
+		UserVO user2s = userService.findUser(user.getMid());
+		if(user2s != null) {
+			flag = true;
+		}
+		else {
+			flag = false;
+		}
+		
+        /* 중복인지 아닌지 검사해 반환하는 함수를 만들어주세요.
+		 * 중복확인 로직은 DAO에서 selectOne()으로 구현합니다.
+		 * 이 함수는 하나라도 있으면 1, 없으면 0을 반환합니다 */
+		
+		map.put("flag", flag);
+	
+		return map;
+	}
 }

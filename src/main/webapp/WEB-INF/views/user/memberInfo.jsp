@@ -14,8 +14,8 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <%@ include file="../layout/head_tags.jsp"%>
 
@@ -105,26 +105,20 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
+					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+					</span>
+					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					</a>
+					</span>
 				</c:when>
 				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					</a>
+					</span>
+					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+					</a>
+					</span>
+					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -165,24 +159,18 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
+									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+									</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									</a>
 									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+									</a>
+									</span>
+									<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -228,13 +216,7 @@
 							<p>
 								<label for="memail">Emial:</label> <input type="text" value="${memberInfoList.memail}" disabled />
 							</p>
-							<c:choose>
-								<c:when test="${principal.user.social!=1}">
-								</c:when>
-								<c:otherwise>
-									<a href="/user/updatePassword" class="btn btn-primary">비밀번호 변경</a>
-								</c:otherwise>
-							</c:choose>
+
 							<p>
 								닉네임 <input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" />
 							</p>
@@ -246,7 +228,13 @@
 								<label for="mbirth">생년월일:</label> <input type="text" value="${principal.user.mbirth}" class="form-control" placeholder="Enter birthday" id="mbirth">
 							</div>
 							<input class="btn btn-primary m-2" type="submit" value="수정하기"> <a class="btn btn-primary " href="/user/memberLeave">회원 탈퇴하기</a>
-
+							<c:choose>
+								<c:when test="${principal.user.social==0}">
+									<a href="/user/updatePassword" class="btn btn-primary">비밀번호 변경</a>
+								</c:when>
+								<c:otherwise>
+								</c:otherwise>
+							</c:choose>
 
 						</form>
 

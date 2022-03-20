@@ -16,7 +16,7 @@ public interface UserMapper {
 	@Select("select * from authority where mid = #{mid}")
 	public AuthVO findAuth(String mid);
 
-	@Insert("insert into member(mnum,mid,memail,mpassword,mnickname, mphone, mbirth) values(member_seq.nextval,#{mid},#{memail},#{mpassword},#{mnickname},#{mphone},#{mbirth})")
+	@Insert("insert into member(mnum,mid,memail,mpassword,mnickname, mphone, mbirth, social) values(member_seq.nextval,#{mid},#{memail},#{mpassword},#{mnickname},#{mphone},#{mbirth},0)")
 	public void save(UserVO userVO);
 
 	@Insert("insert into member(mnum,mid,memail, social) values(member_seq.nextval,#{mid},#{memail},1)")

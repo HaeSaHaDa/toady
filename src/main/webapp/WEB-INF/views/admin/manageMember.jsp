@@ -182,10 +182,10 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-			<div class="row" style="margin-top: 100px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 150px;">
+			<div class="row" style="margin-top: 100px; margin-left:-100px">
 				<!-- 사이드바 -->
-				<div class="col-4">
+				<div class="col-3">
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
 						<li><a href="#">헬스장 사장님 관리</a></li>
@@ -199,14 +199,14 @@
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
-				<div class="col-8">
+				<div class="col-9">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
-						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="table table table-bordered" width="500px" border="1" cellpadding="0" cellspacing="0" border="1">
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">회원번호</th>
-									<th scope="col">이메일</th>
+									<th scope="col">회원 아이디</th>
 									<th scope="col">회원구분</th>
 									<th scope="col">삭제</th>
 								</tr>
@@ -214,7 +214,7 @@
 							<c:forEach var="member" items="${memberList}">
 								<tr class="table-light">
 									<td>${member.mnum}</td>
-									<td><a href="./manageMember/${member.mnum}">${member.memail}</a></td>
+									<td><a href="./manageMember/${member.mnum}">${member.mid}</a></td>
 									<td>${member.auth}</td>
 
 									<td><a class="m-delete" data-bid='${member.mnum}' href="./manageMember/${member.mnum}">삭제</a></td>
