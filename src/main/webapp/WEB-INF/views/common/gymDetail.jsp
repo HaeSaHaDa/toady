@@ -214,7 +214,12 @@ option {
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
+<<<<<<< HEAD
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+=======
+						<a href="${pageContext.request.contextPath}/today"> 
+							<img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 						</a>
 					</div>
 				</div>
@@ -239,6 +244,7 @@ option {
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
+<<<<<<< HEAD
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
 									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
@@ -254,6 +260,19 @@ option {
 									</span>
 									<a class="nav-link">${principal.user.memail}</a>
 
+=======
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+>>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 								</c:otherwise>
 							</c:choose>
 						</div>
