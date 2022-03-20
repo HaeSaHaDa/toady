@@ -35,7 +35,6 @@
 
 		<nav class="canvas-menu mobile-menu">
 			<ul>
-<<<<<<< HEAD
 				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
@@ -46,14 +45,7 @@
 				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				<sec:authorize access="hasRole('ADMIN')">
 
-=======
-				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="/user/wishlist">찜</a></li>
-				<li><a href="./services.html">지도</a></li>
-				<li><a href="gymlist">시설찾기</a></li>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="./user/myTicket">mypage</a></li>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+
 				</sec:authorize>
 			</ul>
 		</nav>
@@ -61,7 +53,6 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-<<<<<<< HEAD
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
 									<span class="signUp" style="color: white; margin-right:20px"> 
@@ -70,12 +61,7 @@
 										</a>
 									</span>
 
-=======
-					<ul class="navbar-nav">
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-						<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-					</ul>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+
 				</c:when>
 				<c:otherwise>
 									<span class="userinfo" style="color:white">
@@ -109,7 +95,6 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-<<<<<<< HEAD
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<sec:authorize access="hasRole('USER')">
@@ -118,15 +103,7 @@
 							</sec:authorize>
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 
-=======
-							<li><a href="/user/wishlist">찜</a></li>
-							<li><a href="./services.html">지도</a></li>
-							<li><a href="/common/gymlist">시설찾기</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="./user/myTicket">mypage</a></li>
-							</sec:authorize>
-							<li><a href="./common/adminPage">AdminPage</a></li>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+
 							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
 						</ul>
@@ -138,7 +115,6 @@
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
-<<<<<<< HEAD
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
 									<span class="signUp" style="color: white; margin-right:20px"> 
@@ -159,19 +135,7 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
-=======
-									<ul class="navbar-nav">
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
 
-									</ul>
-								</c:when>
-								<c:otherwise>
-									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-									</ul>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 								</c:otherwise>
 							</c:choose>
 						</div>
