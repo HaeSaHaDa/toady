@@ -132,7 +132,7 @@
 												<i class="fa fa-sign-out">Log Out</i>
 											</a>
 									</span>																			
-										<a class="nav-link" style="color:white">${principal.user.memail}</a>
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>

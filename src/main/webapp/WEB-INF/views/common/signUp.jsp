@@ -70,7 +70,6 @@
 	</nav>
 	<br />
 
-
 <div class="container">
 	<form name="form">
 		<div class="form-group">
@@ -96,7 +95,6 @@
 		</div>
 		<div class="form-group">
 			<label for="mbirth">생년월일:</label> <input type="text" class="form-control" placeholder="Enter birthday" id="mbirth" name="birth">
-
 		</div>
 	</form>
 	<button id="btn-save" class="btn btn-primary">회원가입하기</button>

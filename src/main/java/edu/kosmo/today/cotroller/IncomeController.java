@@ -66,42 +66,8 @@ public class IncomeController {
 
 	}
 	 
-	@RequestMapping(value = "member", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public @ResponseBody String accountMember(Locale locale, Model model) {
 
-		Gson gson = new Gson();
 
-		List<OrderVO> list2 = service.getMonthIncome();
-
-		System.out.println("회원 수 데이터");
-
-		return gson.toJson(list2);
-
-	}
-
-	@RequestMapping(value = "gymWeekend", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public @ResponseBody String gymWeekend(Locale locale, Model model) {
-
-		Gson gson = new Gson();
-
-		List<OrderVO> list2 = service.getMonthIncome();
-
-		System.out.println("헬스장 주간 매출 데이터");
-
-		return gson.toJson(list2);
-
-	}
 	
-	@RequestMapping(value = "gymMonth", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public @ResponseBody String gymMonth(Locale locale, Model model) {
 
-		Gson gson = new Gson();
-
-		List<OrderVO> list2 = service.getMonthIncome();
-
-		System.out.println("헬스장 한 달 매출 데이터");
-
-		return gson.toJson(list2);
-
-	}
 }

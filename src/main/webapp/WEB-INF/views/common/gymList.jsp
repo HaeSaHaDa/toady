@@ -22,7 +22,6 @@
 
 <title>시설목록</title>
 
-
 </head>
 
 <body>
@@ -74,7 +73,6 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-
 	</div>
 	<!-- Offcanvas Menu Section End -->
 
@@ -85,7 +83,6 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
 						</a>
 					</div>
 				</div>
@@ -102,7 +99,6 @@
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
-
 						</ul>
 					</nav>
 				</div>

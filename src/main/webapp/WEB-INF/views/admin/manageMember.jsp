@@ -23,7 +23,6 @@
 
 <title>회원 관리페이지</title>
 
-
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -109,7 +108,6 @@
 										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
-
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -166,7 +164,6 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
-
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -187,7 +184,6 @@
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 150px;">
 			<div class="row" style="margin-top: 100px; margin-left:-100px">
-
 				<!-- 사이드바 -->
 				<div class="col-3">
 					<ul>
@@ -211,7 +207,6 @@
 								<tr>
 									<th scope="col">회원번호</th>
 									<th scope="col">회원 아이디</th>
-
 									<th scope="col">회원구분</th>
 									<th scope="col">삭제</th>
 								</tr>
@@ -367,6 +362,22 @@
 		</section>
 		<!-- Footer Section End -->
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	<!-- Login model Begin -->
