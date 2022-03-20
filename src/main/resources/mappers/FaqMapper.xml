@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.kosmo.today.mapper.FaqMapper">
+
+
+
+	<select id="faqList" resultType="edu.kosmo.today.vo.FaqVO">
+	<![CDATA[
+ 		          SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (
+                 SELECT bid,btitle,bcontent,bdate,mnum,tnum  FROM boardlist WHERE tnum = 3
+             ) A WHERE ROWNUM <= #{pageNum} * #{amount}
+         ) WHERE RNUM > (#{pageNum}-1) * #{amount}
+			
+	]]>
+	</select>
+
+	<select id="getTotal" resultType="_int">
+	<![CDATA[
+		select count(*) from boardlist where tnum = 3
+	]]>
+	</select>
+
+	<insert id="insertFaqBoard">
+		insert into boardlist (bid,btitle,bcontent,mnum,tnum)
+		values (BOARD_SEQ.nextval,#{btitle},#{bcontent},#{mnum},3)
+
+	</insert>
+
+	<select id="getMemberNum" resultType="_int">
+
+		select * from member where mid = #{mid}
+
+	</select>
+
+	<select id="getContent" resultType="edu.kosmo.today.vo.FaqVO">
+		select * from boardlist where
+		bid = #{bid}
+	</select>
+
+</mapper>
