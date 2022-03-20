@@ -1,6 +1,10 @@
+<!-- spring web form 사용 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
+<!doctype html>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -12,7 +16,7 @@
 </style>
 
 
-<title>헬스장 목록</title>
+<title>Admin-시설추가Page</title>
 
 <!-- Google Font -->
 <link
@@ -23,53 +27,44 @@
 	rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
-<!--  <c:url value="/css/style.css"/>"  -->
+<link
+	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
+	rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/flaticon.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/barfiller.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/magnific-popup.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/slicknav.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
-	<!-- Offcanvas Menu Section Begin -->
-	<div class="offcanvas-menu-overlay"></div>
-	<div class="offcanvas-menu-wrapper">
-		<div class="canvas-close">
-			<i class="fa fa-close"></i>
-		</div>
-		<div class="canvas-search search-switch">
-			<i class="fa fa-search"></i>
-		</div>
-		<nav class="canvas-menu mobile-menu">
-			<ul>
-
-				<li class="active"><a href="./index.html">Home</a></li>
-				<li><a href="./services.html">mypage</a></li>
-				<li><a href="./team.html">찜</a></li>
-				<li><a href="./services.html">지도</a></li>
-				<li><a href="./team.html">시설찾기</a></li>
-
-
-			</ul>
-		</nav>
-		<div id="mobile-menu-wrap"></div>
-		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i
-				class="fa fa-youtube-play"></i></a> <a href="#"><i
-				class="fa fa-instagram"></i></a>
-		</div>
-	</div>
-	<!-- Offcanvas Menu Section End -->
 
 	<!-- Header Section Begin -->
 	<header class="header-section">
@@ -77,7 +72,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="index"> <img src="img/logo.png" alt="" width="500">
+						<a href="/today"> <img src="img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -111,50 +106,97 @@
 		</div>
 	</header>
 	<!-- Header End -->
-
-	
-
-
-
-	<!-- ChoseUs Section End -->
-
-	<!-- 시설목록-->
-	<section class="classes-section spad">
-		<div class="container text-center"
-			style="margin-top: 100px; margin-bottom: 80px;">
-			<h1 style="color: white;">관리자가 보는 헬스장 리스트</h1>
-		</div>
+	<section class="classes-section spad"></section>
+	<div class="container-wrapper">
 		<div class="container">
-			<div class="row"></div>
-		</div>
-	</section>
-	<!-- 시설목록끝 -->
+			<h2>Add Gym</h2>
+			<p class="lead">시설을 추가해주세요.</p>
+
+			<sf:form
+				action="${pageContext.request.contextPath}/admin/gymListInventory/updateGymList"
+				method="post" modelAttribute="gymListVO" enctype="multipart/form-data">
+				<!-- post method 처리하는 것 controller만들어줘야함. -->
 
 
-<div class="container-wrapper">
-		<div class="container">
-			<h2><a href="<c:url value="/admin/gymListInventory"/>">헬스장 리스트</a></h2>
-			<p>헬스장을 추가하거나 관리해보세요.</p>
+
+				<sf:hidden path="gnum" />
+				
+				<div class="form group">
+					<label for="gname">회원번호</label>
+					<sf:input path="mnum" id="mnum" class="form-control" />
+					<sf:errors path="mnum" cssStyle="color:#ff0000" />
+				</div>
+				
+				
+				<div class="form group">
+					<label for="gname">이름</label>
+					<sf:input path="gname" id="gname" class="form-control" />
+					<sf:errors path="gname" cssStyle="color:#ff0000" />
+				</div>
+
+				<div class="form group">
+					<label for="gcategory">분류:</label><br />
+					<sf:radiobutton path="gcategory" id="gcategory" value="헬스장" />
+					헬스장 <br />
+					<sf:radiobutton path="gcategory" id="gcategory" value="요가" />
+					요가 <br />
+					<sf:radiobutton path="gcategory" id="gcategory" value="필라테스" />
+					필라테스 <br />
+				</div>
+
+				<div class="form group">
+					<label for="gadress">주소</label>
+					<sf:input path="gadress" id="gadress" class="form-control" />
+					<sf:errors path="gadress" cssStyle="color:#ff0000" />
+				</div>
+
+				<div class="form group">
+					<label for="gphone">전화번호</label>
+					<sf:input path="gphone" id="gphone" class="form-control" />
+					<sf:errors path="gphone" cssStyle="color:#ff0000" />
+				</div>
+
+				<div class="form group">
+					<label for="ginform">정보</label>
+					<sf:input path="ginform" id="ginform" class="form-control" />
+					<sf:errors path="ginform" cssStyle="color:#ff0000" />
+				</div>
+
+				<div class="form group">
+					<label for="gtime">운영시간</label>
+					<sf:input path="gtime" id="gtime" class="form-control" />
+					<sf:errors path="gtime" cssStyle="color:#ff0000" />
+				</div>
+
+				<div class="form group">
+					<label for="gfacility">편의시설</label>
+					<sf:input path="gfacility" id="gfacility" class="form-control" />
+					<sf:errors path="gfacility" cssStyle="color:#ff0000" />
+				</div>
+
+
+
+				<div class="form group">
+					<label for="gsns">SNS</label>
+					<sf:input path="gsns" id="gsns" class="form-control" />
+					<sf:errors path="gsns" cssStyle="color:#ff0000" />
+				</div>
+
+				<div class="form group">
+					<label for="gymimage">Upload Picture</label>
+					<sf:input path="gymimage" id="gymimage" name="gymimage" type="file" class="form-control" />
+				</div>
+
+
+				<br />
+				<button type="submit" class="btn btn-primary">submit</button>
+				<a href="<c:url value="/admin/gymListInventory"/>"
+					class="btn btn-dark">Cancle</a>
+			</sf:form>
+			<br />
 		</div>
-		
-	<div class="container">
-			<h2><a href="<c:url value="/admin/memberList"/>">회원 리스트</a></h2>
-			<p>회원의 정보를 수정하거나 관리해보세요.</p>
-		</div>
-		
 	</div>
-	
-
-
-
-
-
-
-
-
-
-
-
+	<br />
 
 	<!-- Get In Touch Section Begin -->
 	<div class="gettouch-section">
@@ -289,15 +331,16 @@
 	</div>
 	<!-- Search model end -->
 
-	<!-- Js Plugins -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/masonry.pkgd.min.js"></script>
-	<script src="js/jquery.barfiller.js"></script>
-	<script src="js/jquery.slicknav.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+
 
 
 

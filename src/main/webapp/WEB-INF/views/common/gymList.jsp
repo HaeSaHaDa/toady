@@ -138,7 +138,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="class-item">
 						<div class="ci-pic">
-							<img src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="">
+							<img src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="">
+					
 						</div>
 						<div class="ci-text">
 							<span>${gym.gcategory}</span>

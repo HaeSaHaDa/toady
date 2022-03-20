@@ -1,5 +1,10 @@
+<!-- spring web form 사용 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
+<!doctype html>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -11,7 +16,7 @@
 </style>
 
 
-<title>Map</title>
+<title>Admin-시설추가Page</title>
 
 <!-- Google Font -->
 <link
@@ -53,9 +58,12 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/main.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 
 <body>
 	<!-- Page Preloder -->
@@ -101,9 +109,9 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt=""
-							width="500">
-						</a>
+						<a href="index"> <img
+							src="${pageContext.request.contextPath}/img/logo.png" alt=""
+							width="500"></a>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -111,11 +119,11 @@
 						<ul>
 							<li class="active"><a
 								href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
-							<li><a href="fi">지도</a></li>
-							<li><a href="gymlist">시설찾기</a></li>
-
+							<li><a
+								href="${pageContext.request.contextPath}/services.html">mypage</a></li>
+							<li><a href="${pageContext.request.contextPath}/team.html">찜</a></li>
+							<li><a href="${pageContext.request.contextPath}/findMap">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/gymlist">시설찾기</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -138,123 +146,91 @@
 	</header>
 	<!-- Header End -->
 
-
-	<!-- find map-->
 	<section class="classes-section spad">
-		<div class="container"
-			style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
-				<div class="col-4">
-					<ul>
-						<li><a
-							href="${pageContext.request.contextPath}/admin/manageMember">회원
-								관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
-						<li><a href="#">헬스장 관리</a></li>
-						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="#">FAQ 관리</a></li>
-						<li><a href="#">1:1 답변 관리</a></li>
-						<li><a href="#">공지/이벤트 관리</a></li>
-						<li><a href="#">매출 관리</a></li>
-					</ul>
-				</div>
-
-				<div class="col-8">
-					<div>
-						<h4 style="color: white;">지도에서 찾기</h4>
+				<p class="lead">시설을 추가해주세요.</p>
+				<sf:form
+					action="${pageContext.request.contextPath}/admin/gymListInventory/addGymList"
+					method="post" modelAttribute="gymListVO" enctype="multipart/form-data">
+					<!-- post method 처리하는 것 controller만들어줘야함. -->
+					<!-- modelAttribute="gymListVO"의 input path ="여러가지들 이름 맞춰줘야함" -->
+					<div class="form group">
+						<label for="mnum">회원 번호 </label>
+						<sf:input path="mnum" id="mnum" class="form-control" />
+						<sf:errors path="mnum" cssStyle="color:#ff0000" />
 					</div>
-					<div class="container">
-						<div class="row">
-							<!-- 실제 지도맵 들어가는 자리입니다. -->
-							<div id="map" style="width: 100%; height: 350px;"></div>
-							<script type="text/javascript"
-								src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe8a7303194945138622f04ab6f2e5b3"></script>
-							<script>
-								var mapContainer = document
-										.getElementById('map'), // 지도를 표시할 div 
-								mapOption = {
-									center : new kakao.maps.LatLng(37.478864,
-											126.8787819), // 위도 경도 순으로 입력하세요.
-									level : 3
-								// 지도의 확대 레벨
-								};
 
-								var map = new kakao.maps.Map(mapContainer,
-										mapOption); // 지도를 생성합니다
-
-								var positions = [
-										{
-											content : '<div>kosmo Gym</div>',
-											latlng : new kakao.maps.LatLng(
-													37.478864, 126.8787819)
-										},
-										{
-											content : '<div>미애옹 Gym</div>',
-											latlng : new kakao.maps.LatLng(
-													37.479614, 126.878672)
-										},
-										{
-											content : '<div>쿵스GYM</div>',
-											latlng : new kakao.maps.LatLng(
-													37.479163, 126.877690)
-										},
-										{
-											content : '<div>괴도필라테스</div>',
-											latlng : new kakao.maps.LatLng(
-													37.478554, 126.877840)
-										} ];
-								var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-								for (var i = 0; i < positions.length; i++) {
-									// 마커를 생성합니다
-									var marker = new kakao.maps.Marker({
-										map : map, // 마커를 표시할 지도
-										position : positions[i].latlng
-									// 마커의 위치
-									});
-
-									// 마커에 표시할 인포윈도우를 생성합니다 
-									var infowindow = new kakao.maps.InfoWindow(
-											{
-												content : positions[i].content
-											// 인포윈도우에 표시할 내용
-											});
-
-									kakao.maps.event.addListener(marker,
-											'mouseover', makeOverListener(map,
-													marker, infowindow));
-									kakao.maps.event.addListener(marker,
-											'mouseout',
-											makeOutListener(infowindow));
-
-								}
-
-								function makeOverListener(map, marker,
-										infowindow) {
-									return function() {
-										infowindow.open(map, marker);
-									};
-								}
-
-								function makeOutListener(infowindow) {
-									return function() {
-										infowindow.close();
-									};
-								}
-							</script>
-						</div>
+					<div class="form group">
+						<label for="gname">이름</label>
+						<sf:input path="gname" id="gname" class="form-control" />
+						<sf:errors path="gname" cssStyle="color:#ff0000" />
 					</div>
-				</div>
 
+					<div class="form group">
+						<label for="gcategory">분류:</label><br />
+						<sf:radiobutton path="gcategory" id="gcategory" value="헬스장" />
+						헬스장 <br />
+						<sf:radiobutton path="gcategory" id="gcategory" value="요가" />
+						요가 <br />
+						<sf:radiobutton path="gcategory" id="gcategory" value="필라테스" />
+						필라테스 <br />
+					</div>
+
+					<div class="form group">
+						<label for="gadress">주소</label>
+						<sf:input path="gadress" id="gadress" class="form-control" />
+						<sf:errors path="gadress" cssStyle="color:#ff0000" />
+					</div>
+
+					<div class="form group">
+						<label for="gphone">전화번호</label>
+						<sf:input path="gphone" id="gphone" class="form-control" />
+						<sf:errors path="gphone" cssStyle="color:#ff0000" />
+					</div>
+
+					<div class="form group">
+						<label for="ginform">정보</label>
+						<sf:input path="ginform" id="ginform" class="form-control" />
+						<sf:errors path="ginform" cssStyle="color:#ff0000" />
+					</div>
+
+					<div class="form group">
+						<label for="gtime">운영시간</label>
+						<sf:input path="gtime" id="gtime" class="form-control" />
+						<sf:errors path="gtime" cssStyle="color:#ff0000" />
+					</div>
+
+					<div class="form group">
+						<label for="gfacility">편의시설</label>
+						<sf:input path="gfacility" id="gfacility" class="form-control" />
+						<sf:errors path="gfacility" cssStyle="color:#ff0000" />
+					</div>
+
+
+
+					<div class="form group">
+						<label for="gsns">SNS</label>
+						<sf:input path="gsns" id="gsns" class="form-control" />
+						<sf:errors path="gsns" cssStyle="color:#ff0000" />
+					</div>
+
+					<div class="form group">
+						<label for="gymimage">Upload Picture</label>
+						<sf:input path="gymimage" id="gymimage" name="gymimage"
+							type="file" class="form-control" />
+					</div>
+
+					<br />
+					<button type="submit" class="btn btn-primary">submit</button>
+					<a href="<c:url value="/admin/gymListInventory"/> "
+						class="btn btn-dark">Cancle</a>
+				</sf:form>
+				<br />
 			</div>
 		</div>
+		<br />
 	</section>
-	<!-- find map end -->
-
-
-
-
-
 
 	<!-- Get In Touch Section Begin -->
 	<div class="gettouch-section">
@@ -389,10 +365,7 @@
 	</div>
 	<!-- Search model end -->
 
-	<!-- Js Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/static/js/jquery-3.3.1.min.js"></script>
-
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
@@ -401,6 +374,7 @@
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
 	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+
 
 
 

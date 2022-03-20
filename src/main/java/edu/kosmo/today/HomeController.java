@@ -18,11 +18,7 @@ public class HomeController {
 		
 		return "index";
 	}
-	@GetMapping("/findMap")
-	public String findMap() {
-		
-		return "findMap";
-	}
+	
 	@RequestMapping("/gymList") 
 	public String gymList() {
 		

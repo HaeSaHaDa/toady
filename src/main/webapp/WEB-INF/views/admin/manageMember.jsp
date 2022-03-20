@@ -134,8 +134,7 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="index"> <img
-							src="${pageContext.request.contextPath}/img/logo.png" alt=""
-							width="500">
+							src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -388,7 +387,8 @@
 	<!-- Search model end -->
 
 	<!-- Js Plugins -->
-	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/static/js/jquery-3.3.1.min.js"></script>
+
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>

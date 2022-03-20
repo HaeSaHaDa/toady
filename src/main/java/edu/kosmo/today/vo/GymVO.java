@@ -2,6 +2,8 @@ package edu.kosmo.today.vo;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,7 +42,7 @@ public class GymVO {
 	private String gtime; //시설 운영시간
 	private String gfacility;  //편의시설
 	private String gsns;  //sns주소
-	private String filename; //시설사진
+	private String imagename; //시설사진
 
 	
 	
