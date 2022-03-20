@@ -44,6 +44,7 @@
 				</sec:authorize>
 				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				<sec:authorize access="hasRole('ADMIN')">
+
 				</sec:authorize>
 			</ul>
 		</nav>
@@ -58,6 +59,7 @@
 											<i class="fa fa-user-plus">Sign Up</i>
 										</a>
 									</span>
+
 				</c:when>
 				<c:otherwise>
 									<span class="userinfo" style="color:white">
@@ -98,6 +100,7 @@
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+
 							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
 						</ul>

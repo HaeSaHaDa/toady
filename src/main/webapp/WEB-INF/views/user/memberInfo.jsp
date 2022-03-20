@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -99,6 +100,7 @@
 				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				<sec:authorize access="hasRole('ADMIN')">
 				</sec:authorize>
+
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
@@ -121,6 +123,7 @@
 					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
+
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -132,6 +135,7 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+
 						</a>
 					</div>
 				</div>
@@ -153,7 +157,6 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
@@ -164,13 +167,14 @@
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									<span class="userinfo" style="color: white"> 
+									<a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
 									</a>
 									</span>
 									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
 									</a>
 									</span>
-									<a class="nav-link">${principal.user.memail}</a>
+									<a class="nav-link" style="color:white">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -236,9 +240,8 @@
 								</c:otherwise>
 							</c:choose>
 
-						</form>
 
-						<form class="needs-validation" novalidate>
+						</form>
 					</div>
 				</div>
 			</div>

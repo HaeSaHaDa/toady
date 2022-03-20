@@ -41,5 +41,26 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 
+	@Override
+	public List<OrderVO> getMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<OrderVO> getGymWeekend() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<OrderVO> getGymMonth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
 

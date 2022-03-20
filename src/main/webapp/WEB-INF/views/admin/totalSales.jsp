@@ -210,6 +210,7 @@ function month(){
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+
 						</a>
 					</div>
 				</div>
