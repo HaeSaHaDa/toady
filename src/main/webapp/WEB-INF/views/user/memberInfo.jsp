@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<<<<<<< HEAD
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-=======
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -28,8 +24,6 @@
 
 <title>마이페이지</title>
 
-<<<<<<< HEAD
-=======
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
@@ -112,7 +106,6 @@
 
 		<nav class="canvas-menu mobile-menu">
 			<ul>
-<<<<<<< HEAD
 				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
@@ -123,21 +116,11 @@
 				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				<sec:authorize access="hasRole('ADMIN')">
 				</sec:authorize>
-=======
-
-				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="/mypage">mypage</a></li>
-				<li><a href="/user/wishlist">찜</a></li>
-				<li><a href="./services.html">지도</a></li>
-				<li><a href="/common/gymlist">시설찾기</a></li>
-
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-<<<<<<< HEAD
 			<c:choose>
 				<c:when test="${empty principal}">
 					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
@@ -157,9 +140,6 @@
 				</c:otherwise>
 			</c:choose>
 
-=======
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -170,19 +150,15 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-<<<<<<< HEAD
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 
-=======
-						<a href="/today"> <img src="/img/logo.png" alt="" width="300">
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-<<<<<<< HEAD
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
@@ -193,20 +169,11 @@
 							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
-=======
-							<li class="active"><a href="/today">Home</a></li>
-							<li><a href="/mypage">mypage</a></li>
-							<li><a href="/user/wishlist">찜</a></li>
-							<li><a href="./services.html">지도</a></li>
-							<li><a href="/common/gymlist">시설찾기</a></li>
-
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-<<<<<<< HEAD
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
@@ -228,25 +195,6 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-=======
-						<div class="to-search search-switch">
-							<i class="fa fa-search"></i>
-						</div>
-							<c:choose>
-								<c:when test="${empty principal}">
-									<ul class="navbar-nav">
-										<li><a href="/common/login">로그인</a></li>
-										<li><a href="/common/signup">회원가입</a></li>
-									</ul>
-								</c:when>
-								<c:otherwise>
-									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-									</ul>
-								</c:otherwise>
-							</c:choose>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 					</div>
 				</div>
 			</div>
@@ -289,18 +237,7 @@
 							<p>
 								<label for="memail">Emial:</label> <input type="text" value="${memberInfoList.memail}" disabled />
 							</p>
-<<<<<<< HEAD
 
-=======
-							<c:choose>
-								<c:when test="${principal.user.social!=1}">
-									<br />
-								</c:when>
-								<c:otherwise>
-									<a href="/user/updatePassword" class="btn btn-primary">비밀번호 변경</a>
-								</c:otherwise>
-							</c:choose>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 							<p>
 								닉네임 <input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" />
 							</p>
@@ -312,7 +249,6 @@
 								<label for="mbirth">생년월일:</label> <input type="text" value="${principal.user.mbirth}" class="form-control" placeholder="Enter birthday" id="mbirth">
 							</div>
 							<input class="btn btn-primary m-2" type="submit" value="수정하기"> <a class="btn btn-primary " href="/user/memberLeave">회원 탈퇴하기</a>
-<<<<<<< HEAD
 							<c:choose>
 								<c:when test="${principal.user.social==0}">
 									<a href="/user/updatePassword" class="btn btn-primary">비밀번호 변경</a>
@@ -323,13 +259,6 @@
 
 
 						</form>
-=======
-
-
-						</form>
-
-						<form class="needs-validation" novalidate>
->>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
 					</div>
 				</div>
 			</div>
