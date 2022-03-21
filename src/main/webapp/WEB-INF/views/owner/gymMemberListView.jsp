@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -8,12 +12,9 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <style type="text/css">
-	
-	
 </style>
 
-
-<title>어드민 페이지</title>
+<title>마이페이지</title>
 
 <!-- Google Font -->
 <link
@@ -32,6 +33,47 @@
 <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+		$(document).ready(function () {
+			
+			$(".member-delete").click(function(event) {
+				 
+				if(confirm("정말 삭제하시겠습니까 ?") == true){
+				        
+				    }
+				    else{
+				    	return false;
+				    }
+								
+				event.preventDefault();
+				console.log("ajax 호출전");
+					
+				var trObj = $(this).parent().parent();
+				console.log($(this).attr("href"));
+				
+				$.ajax({
+					 type : "DELETE",  
+					 url : $(this).attr("href"),
+					 success: function (result) {       
+					 console.log(result); 
+						if(result == "SUCCESS"){
+						      $(trObj).remove();  		      	       
+							}					        
+					    },
+					    error: function (e) {
+					        console.log(e);
+					    }			
+				});	
+			
+			});	
+		
+		});
+	
+	</script>
 </head>
 
 <body>
@@ -52,8 +94,8 @@
 		<nav class="canvas-menu mobile-menu">
 			<ul>
 				
-							<li class="active"><a href="./index.html">Home</a></li>
-							<li><a href="./services.html">mypage</a></li>
+							<li class="active"><a href="/today">Home</a></li>
+							<li><a href="/mypage">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>
@@ -84,16 +126,41 @@
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="./index.html">Home</a></li>
-							<li><a href="./services.html">mypage</a></li>
-							<li><a href="./team.html">찜</a></li>
+							<li class="active"><a href="/today">Home</a></li>
+							<li><a href="/common/myPage">mypage</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>
 
 						</ul>
 					</nav>
 				</div>
-				
+				<div class="col-lg-3">
+					<div class="top-option">
+						<div class="to-search search-switch">
+							<i class="fa fa-search"></i>
+						</div>
+						<div class="to-social">
+							<c:choose>
+								<c:when test="${empty principal}">
+									<ul class="navbar-nav">
+										<a href="${pageContext.request.contextPath}/common/login">로그인</a>
+										<a href="${pageContext.request.contextPath}/common/signup">회원가입</a>
+									</ul>
+								</c:when>
+								<c:otherwise>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="#">글쓰기</a></li>
+										<li class="nav-item"><a class="nav-link" href="#">회원정보</a></li>
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+								</c:otherwise>
+							</c:choose>
+
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="canvas-open">
 				<i class="fa fa-bars"></i>
@@ -113,14 +180,15 @@
 		<!-- 사이드바 -->
 			<div class="col-4">
 				<ul>
-					<li><a href="/admin/manageMember">회원 관리</a></li>
-					<li><a href="#">헬스장 사장님 관리</a></li>
-					<li><a href="#">헬스장 관리</a></li>
-					<li><a href="#">헬스장 신청서 목록</a></li>
-					<li><a href="#">찜 결제 관리</a></li>
-					<li><a href="#">FAQ 관리</a></li>
-					<li><a href="#">1:1 답변 관리</a></li>
-					<li><a href="#">공지/이벤트 관리</a></li>
+					<li><a href="/user/memberInfo">내 정보</a></li>
+					<li><a href="#">내 이용권</a></li>
+					<li><a href="/user/note">쪽지</a></li>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">1:1문의</a></li>
+					<li><a href="#">공지/이벤트</a></li>
+					<li><a href="#">시설 등록 내역</a></li>
+					<li><a href="#">트레이너 관리</a></li>
+					<li><a href="/owner/gymMemberList">회원 목록 보기</a></li>
 					<li><a href="#">매출 관리</a></li>
 					
 				</ul>
@@ -130,7 +198,33 @@
 			<div class="col-8">
 			<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 				<div>
-				<h2 style="color: white;">(admin page 메인)</h2>
+				<h2 style="color: white;">회원 목록</h2>
+				<table class="table table table-bordered" width="600" border="1" cellpadding="0">
+							<thead class="thead-light">
+							<tr>
+								<th scope="col">회원번호</th>
+								<th scope="col">이메일</th>
+								<th scope="col">이용권</th>
+								<th scope="col">가격</th>
+								<th scope="col">구매날짜</th>
+								<th scope="col">삭제</th>
+								
+							</tr>
+							</thead>
+							
+							<c:forEach var="member" items="${gymMemberListView}">
+								<tr class="table-light">
+									<td>${member.mnum}</td>
+									<td>${member.memail}</td>
+									<td>${member.tname}</td>
+									<td>${member.tcost}</td>
+									<td>${member.orderdate}</td>
+									<td><a class="member-delete" data-bid='${member.mnum}' href="/owner/gymMemberList/${member.mnum}">삭제</a></td>
+								</tr>
+							</c:forEach>
+							
+						</table>
+				
 				</div>
 			
 			</div>
@@ -286,9 +380,6 @@
 	<script src="/js/jquery.slicknav.js"></script>
 	<script src="/js/owl.carousel.min.js"></script>
 	<script src="/js/main.js"></script>
-
-
-
 </body>
 
 </html>

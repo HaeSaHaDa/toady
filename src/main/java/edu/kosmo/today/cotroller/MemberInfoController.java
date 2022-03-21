@@ -33,10 +33,11 @@ public class MemberInfoController {
 
 	@Autowired
 	MemberInfoService memberInfoService;
-
-	@GetMapping("/memberInfo")
+	
+	//마이페이지 내정보 페이지 진입
+	@GetMapping("/memberInfo") 
 	public ModelAndView memberInfo(ModelAndView mav) {
-
+		
 		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int mnum = memberInfoService.getInfoNum(member.getUsername()); // 회원 번호 가져오기
 
@@ -48,8 +49,8 @@ public class MemberInfoController {
 		return mav;
 	}
 
-	// 회원정보 수정
-	@PutMapping("/memberInfo") // @RequestBody를 사용하면 json으로 온 데이터를 객체로 자동변환해줌
+	//마이페이지 회원정보 수정하기
+	@PutMapping("/memberInfo")
 	public ResponseEntity<String> memberInfoUpdate(@RequestBody MemberVO memberVO, Model model) {
 
 		ResponseEntity<String> entity = null;
@@ -67,7 +68,7 @@ public class MemberInfoController {
 		return entity;
 
 	}
-	
+	//마이페이지 회원탈퇴 페이지 진입
 	@GetMapping("/memberLeave")
 	public ModelAndView memberLeave(ModelAndView mav) {
 
@@ -82,8 +83,7 @@ public class MemberInfoController {
 		return mav;
 	}
 
-	
-	
+	//마이페이지 회원탈퇴 
 	@DeleteMapping("/memberLeave/{memail}")
 	public ResponseEntity<String> member_delete(MemberVO memberVO,Model model) {
 		ResponseEntity<String> entity = null;

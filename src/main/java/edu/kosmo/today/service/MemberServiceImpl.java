@@ -7,6 +7,7 @@ import edu.kosmo.today.mapper.MemberMapper;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.NoteVO;
+import edu.kosmo.today.vo.OrderVO;
 import lombok.extern.slf4j.Slf4j;
 
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전
@@ -36,10 +37,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int getTotal() {
+	public int getUserTotalCount() {
 		
-		log.info("getTotal()..");	
-		return memberMapper.getTotalCount();
+		log.info("getUserTotalCount()..");	
+		return memberMapper.getUserTotalCount();
 	}
 
 
@@ -59,5 +60,21 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void nboardRegister(NoteVO noteVO) {
 		memberMapper.nboardinsert(noteVO);
+	}
+
+	@Override
+	public List<MemberVO> getOwnerList(Criteria criteria) {
+		return memberMapper.getOwnerListPage(criteria);
+	}
+
+	@Override
+	public int getOwnerTotalCount() {
+		return memberMapper.getOwnerTotalCount();
+	}
+
+	@Override
+	public MemberVO ownerGet(int mnum) {
+		
+		return memberMapper.ownerRead(mnum);
 	}	
 }

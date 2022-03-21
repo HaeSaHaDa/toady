@@ -22,6 +22,7 @@ public class NoteController {
 	
 	@Autowired NoteService noteService;
 	
+	//쪽지 확인페이지 진입
 	@GetMapping("/user/note")
 	public ModelAndView noteList(ModelAndView mav) {
 		log.info("noteList..");

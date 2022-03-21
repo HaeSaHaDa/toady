@@ -176,11 +176,13 @@
                            <td>${helpBoard.bcontent}</td>
                            <td>${helpBoard.bdate}</td>
                         </tr>
+                        
+                         <tr class="table-light">
+							<td><a href="/user/notePost/${helpBoard.mnum}">1:1문의하기</a></td>
+					 	</tr>
                      </c:forEach>
                      
-                     <tr class="table-light">
-						<td><a href="/user/helpBoardPost/${helpBoard.mnum}">1:1문의하기</a></td>
-					 </tr>
+                    
 
                      </form>
                   </table>

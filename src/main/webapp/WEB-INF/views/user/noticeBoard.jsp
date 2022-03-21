@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	1:1문의 페이지 입니다
 </body>
 </html>

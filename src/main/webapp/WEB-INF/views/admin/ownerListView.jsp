@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
 <sec:authorize access="isAuthenticated()">
-   <sec:authentication property="principal" var="principal" />
+	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
 <head>
 <meta charset="UTF-8">
@@ -15,7 +15,7 @@
 </style>
 
 
-<title>회원 관리페이지</title>
+<title>회원 목록 상세보기 페이지</title>
 
 <!-- Google Font -->
 <link
@@ -50,46 +50,51 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-		$(document).ready(function () {
+	$(document).ready(function(){
+	    
+		$("#updateAuth").submit(function(event){
 			
-			$(".m-delete").click(function(event) {
-				 
-				if(confirm("정말 삭제하시겠습니까 ?") == true){
-				        
-				    }
-				    else{
-				    	return false;
-				    }
-								
-				event.preventDefault();
-				console.log("ajax 호출전");
-					
-				var trObj = $(this).parent().parent();
-				console.log($(this).attr("href"));
-				
-				$.ajax({
-					 type : "DELETE",  
-					 url : $(this).attr("href"),
-					 success: function (result) {       
-					 console.log(result); 
-						if(result == "SUCCESS"){
-						      $(trObj).remove();  		      	       
-							}					        
-					    },
-					    error: function (e) {
-					        console.log(e);
-					    }			
-				});	
+			event.preventDefault();
 			
-			});	
-		
-		});
+	        var mid = $("#mid").val(); 
+	        var auth = $("#auth").val();
+	        	        
+	        console.log($(this).attr("action"));
+	        
+	        var form = {
+	        		mid: mid,
+	        		auth: auth
+	                
+	        };       
+			
+			
+	        console.log(JSON.stringify(form));
+
+	        $.ajax({
+			    type : "PUT",
+			    url : $(this).attr("action"),
+			    cache : false,
+			    contentType:'application/json; charset=utf-8',
+ 			    data: JSON.stringify(form), 
+			    success: function (result) {       
+					if(result == "SUCCESS"){
+						//list로					
+						$(location).attr('href', '${pageContext.request.contextPath}/admin/manageMember');				      	       
+					}					        
+			    },
+			    error: function (e) {
+			        console.log(e);
+			    }
+			})	       
 	
-	</script>
+	    }); // end submit()
+	    
+	}); // end ready()
+</script>
+
+
 </head>
 
 <body>
@@ -111,10 +116,10 @@
 			<ul>
 
 				<li class="active"><a href="/today">Home</a></li>
-				<li><a href="/common/myPage">mypage</a></li>
-				<li><a href="${pageContext.request.contextPath}/team.html">찜</a></li>
-				<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/gymlist">시설찾기</a></li>
+				<li><a href="./services.html">mypage</a></li>
+				<li><a href="./team.html">찜</a></li>
+				<li><a href="./services.html">지도</a></li>
+				<li><a href="gymlist">시설찾기</a></li>
 
 
 			</ul>
@@ -145,7 +150,7 @@
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="/today">Home</a></li>
-							<li><a href="/common/myPage">mypage</a></li>
+							<li><a href="./services.html">mypage</a></li>
 							<li><a href="./team.html">찜</a></li>
 							<li><a href="./services.html">지도</a></li>
 							<li><a href="gymlist">시설찾기</a></li>
@@ -198,69 +203,66 @@
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
-						<li><a href="/admin/manageMember">회원 관리</a></li>
+						<li><a
+							href="/admin/manageMember">회원관리</a></li>
 						<li><a href="/admin/ownerList">헬스장 사장님 관리</a></li>
 						<li><a href="#">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="#">FAQ 관리</a></li>
-						<li><a href="#">1:1 답변 관리</a></li>
+						<li><a href="#">FAQ관리</a></li>
+						<li><a href="#">1:1답변,관리</a></li>
 						<li><a href="#">공지/이벤트 관리</a></li>
 						<li><a href="#">매출 관리</a></li>
+
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
-						<table class="table table table-bordered" width="600" border="1" cellpadding="0"
-							cellspacing="0" border="1">
-							<thead class="thead-light">
-							<tr>
-								<th scope="col">회원번호</th>
-								<th scope="col">이메일</th>
-								<th scope="col">회원구분</th>
-								<th scope="col">삭제</th>
-							</tr>
-							</thead>
-							<c:forEach var="member" items="${memberList}">
-								<tr class="table-light">
-									<td>${member.mnum}</td>
-									<td><a href="./manageMember/${member.mnum}">${member.memail}</a></td>
-									<td>${member.auth}</td>
-									
-									<td><a class="m-delete" data-bid='${member.mnum}'
-										href="./manageMember/${member.mnum}">삭제</a></td>
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
+							<form id="updateAuth" action="${pageContext.request.contextPath}/admin/ownerList/${ownerMemberDetail.mid}" >
+								<input type="hidden" id="mid" name="mid" value="${ownerMemberDetail.mid}">
+				
+								<thead class="thead-light">
+								<tr>
+									<th>회원번호</td>
+									<th>${ownerMemberDetail.mnum}</th>
+									<th>닉네임</th>
+                           			<th>${ownerMemberDetail.mnickname}</th>
 								</tr>
-							</c:forEach>
+								<thead>
+
+								<tr class="table-light">
+									<td>이메일</td>
+									<td colspan="3">${ownerMemberDetail.memail}</td>
+								</tr>
+
+								<tr class="table-light">
+									<td>연락처</td>
+									<td colspan="3">${ownerMemberDetail.mphone}</td>
+								</tr>
+
+								<tr class="table-light">
+									<td>생년월일</td>
+									<td colspan="3">${ownerMemberDetail.mbirth}</td>
+								</tr>
+
+								<tr class="table-light">
+									<td>회원구분</td>
+									<td colspan="3"><input type="text" id="auth" name="auth" value="${ownerMemberDetail.auth}"></td>
+								</tr>
+
+								<tr class="table-light">
+									<td colspan="4"><input type="submit" value="수정하기"> &nbsp;&nbsp; 
+								</tr>
+							</form>
 						</table>
-
-						<c:if test="${pageMaker.pre}">
-							<a href="list2${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
-						</c:if>
-
-						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-						<c:forEach var="idx" begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage }">
-							<a href="manageMember${pageMaker.makeQuery(idx)}">${idx}</a>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a
-								href="manageMember${pageMaker.makeQuery(pageMaker.endPage + 1) }">
-								» </a>
-						</c:if>
-						<br>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
-
-
-
 	<!-- 내용물 끝 -->
 
 
@@ -304,7 +306,8 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="#"><img src="img/logo.png" alt=""></a>
+								<a href="#"><img
+									src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
