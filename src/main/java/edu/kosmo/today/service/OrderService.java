@@ -2,24 +2,16 @@ package edu.kosmo.today.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import edu.kosmo.today.mapper.OrderMapper;
-import edu.kosmo.today.mapper.UserMapper;
-import edu.kosmo.today.mapper.WishMapper;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
+import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.OrderVO;
 import edu.kosmo.today.vo.ReviewVO;
-import edu.kosmo.today.vo.TicketVO;
-import edu.kosmo.today.vo.UserVO;
-import edu.kosmo.today.vo.WishVO;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -114,5 +106,11 @@ public class OrderService {
 
 		return mapper.totalRequet();
 	}
-
+	
+	//결제정보 디비저장
+	public void successpay(CompleteVO complete) {   
+		   
+		   
+		mapper.insertcomplete(complete);
+	}
 }
