@@ -52,7 +52,7 @@ public class OwnerController {
 		return mav;
 	}
 
-	@GetMapping("/gymMemberList/{mnum}") // 회원 상세보기
+/*	@GetMapping("/gymMemberList/{mnum}") // 회원 상세보기
 	public ModelAndView ownerMemberDetail(MemberVO memberVO, ModelAndView mav) {
 
 		log.info("gymMemberListDetail()..");
@@ -64,7 +64,7 @@ public class OwnerController {
 		mav.setViewName("/owner/gymMemberListDetail");
 
 		return mav;
-	}
+	}*/
 
 	@Autowired
 	private GymServicce gymService;
