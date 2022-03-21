@@ -83,7 +83,11 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
+<<<<<<< HEAD
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+=======
+						<a href="${pageContext.request.contextPath}/today"> <img src="img/logo.png" alt="" width="500">
+>>>>>>> refs/remotes/origin/master
 						</a>
 					</div>
 				</div>

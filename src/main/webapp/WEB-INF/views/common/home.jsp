@@ -59,6 +59,7 @@
 											<i class="fa fa-user-plus">Sign Up</i>
 										</a>
 									</span>
+
 				</c:when>
 				<c:otherwise>
 									<span class="userinfo" style="color:white">
@@ -118,6 +119,7 @@
 											<i class="fa fa-user-plus">Sign Up</i>
 										</a>
 									</span>
+
 								</c:when>
 								<c:otherwise>
 									<span class="userinfo" style="color:white">
@@ -131,6 +133,7 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
 						</div>

@@ -1,205 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%><head>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
-
-<!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
-<%@ include file="../layout/head_tags.jsp"%>
-
-
-<title>매출 페이지</title>
-<script>
-function weekend(){
-
-	var chartLabels = [];
-	var chartData = [];
-
-	$.getJSON("http://localhost:8282/weekendList", function(data) {
-		//chartData ="";
-
-		$.each(data, function(inx, obj) {
-
-			chartLabels.push(obj.day);
-			chartData.push(obj.income);
-
-		});
-
-		createChart();
-		chartData="";
-		chartLabels="";
-		console.log("create Chart")
-
-	});
-
-	var lineChartData = {
-
-		labels : chartLabels,
-
-		datasets : [
-
-		{
-
-			label : "주간 매출 현황",
-			borderWidth : 2,
-			borderColor : "white",
-			data : chartData
-		} ],
-
-	}
-
-	 function createChart() {
-
-		var ctx = document.getElementById("canvas").getContext("2d");
-
-		var LineChart = new Chart(ctx, {
-			type : 'line',
-
-			data : lineChartData,
-
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : true
-						}
-					} ]
-				}
-
-			}
-
-		})
-
-	}
-}
-//==================================================
-
-function month(){
-	var chartLabels = [];
-	var chartData = [];
-	$.getJSON("http://localhost:8282/MonthList", function(data) {
-
-		$.each(data, function(inx, obj) {
-
-			chartLabels.push(obj.day);
-
-			chartData.push(obj.income);
-
-		});
-
-		createChart();
-		chartData="";
-		chartLabels="";
-		console.log("create Chart2")
-
-	});
-
-	var lineChartData = {
-
-		labels : chartLabels,
-
-		datasets : [
-
-		{
-
-			label : "월간 매출 현황",
-			borderWidth : 2,
-			borderColor : "white",
-			data : chartData
-		} ],
-
-	}
-
-	function createChart() {
-
-		var ctx = document.getElementById("canvas").getContext("2d");
-
-		var LineChart = new Chart(ctx, {
-			type : 'line',
-
-			data : lineChartData,
-
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : true
-						}
-					} ]
-				}
-
-			}
-
-		})
-
-	}
-}
-</script>
+<style type="text/css">
+</style>
 
 
+<title>어드민 페이지</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/css/barfiller.css" type="text/css">
+<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
 <body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="canvas-close">
 			<i class="fa fa-close"></i>
 		</div>
-
+		<div class="canvas-search search-switch">
+			<i class="fa fa-search"></i>
+		</div>
 		<nav class="canvas-menu mobile-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
+							<li><a href="./services.html">지도</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+								<li><a href="./user/myTicket">mypage</a></li>
 							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							<li><a href="./common/adminPage">AdminPage</a></li>
+							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
 						</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<c:choose>
-				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
-				</c:when>
-				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
-				</c:otherwise>
-			</c:choose>
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -210,8 +74,7 @@ function month(){
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
+						<a href="${pageContext.request.contextPath}/today"> <img src="/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -219,45 +82,36 @@ function month(){
 					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<li><a href="/user/wishlist">찜</a></li>
+							<li><a href="./services.html">지도</a></li>
+							<li><a href="/common/gymlist">시설찾기</a></li>
 							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+								<li><a href="./user/myTicket">mypage</a></li>
 							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							<li><a href="./common/adminPage">AdminPage</a></li>
+							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-
+						<div class="to-search search-switch">
+							<i class="fa fa-search"></i>
+						</div>
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+									</ul>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -267,6 +121,7 @@ function month(){
 			<div class="canvas-open">
 				<i class="fa fa-bars"></i>
 			</div>
+
 		</div>
 	</header>
 	<!-- Header End -->
@@ -280,33 +135,31 @@ function month(){
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-2">
+				<div class="col-4">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
+						<li><a href="/admin/manageMember">회원 관리</a></li>
 						<li><a href="#">헬스장 사장님 관리</a></li>
 						<li><a href="#">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
 						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
+						<li><a href="#">FAQ 관리</a></li>
 						<li><a href="#">1:1 답변 관리</a></li>
 						<li><a href="#">공지/이벤트 관리</a></li>
 						<li><a href="${pageContext.request.contextPath}/totalSales">매출 관리</a></li>
+
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="chart-container col-8">
-					<input id="weekbutton" type="button" value="주간매출" onclick="weekend()"> 				
-					<input id="monthbutton" type="button" value="월간매출" onclick="month()">
-					<div>
-						<canvas id="canvas"></canvas>
-					</div>
+				<div class="col-8">
+					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+					<div></div>
+
 				</div>
+
+
 			</div>
 		</div>
-
-
-
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
 
@@ -426,13 +279,26 @@ function month(){
 		<!-- Footer Section End -->
 	</div>
 
+	<!-- Search model Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form class="search-model-form">
+				<input type="text" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
 
-
-	<!-- Login model Begin -->
-	<%@ include file="../layout/login_model.jsp"%>
-	<!-- Login model end -->
-		<!-- Js Plugins -->
-	<%@ include file="../layout/foot_tags.jsp"%>
+	<!-- Js Plugins -->
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/masonry.pkgd.min.js"></script>
+	<script src="/js/jquery.barfiller.js"></script>
+	<script src="/js/jquery.slicknav.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/main.js"></script>
 
 
 

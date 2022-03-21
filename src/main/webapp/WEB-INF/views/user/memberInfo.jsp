@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -22,6 +23,7 @@
 
 
 <title>마이페이지</title>
+
 
 <script type="text/javascript">
 	$(document)
@@ -101,6 +103,7 @@
 								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
+
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -122,6 +125,7 @@
 					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
+
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -133,12 +137,14 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+r
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
+<<<<<<< HEAD
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
@@ -150,6 +156,7 @@
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
+
 						</ul>
 					</nav>
 				</div>
@@ -157,6 +164,7 @@
 					<div class="top-option">
 
 						<div class="to-social">
+
 							<c:choose>
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
@@ -164,6 +172,7 @@
 									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
 									</a>
 									</span>
+
 								</c:when>
 								<c:otherwise>
 									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
@@ -173,9 +182,11 @@
 									</a>
 									</span>
 									<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -242,6 +253,7 @@
 								<c:otherwise>
 								</c:otherwise>
 							</c:choose>
+
 
 						</form>
 

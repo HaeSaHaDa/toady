@@ -106,7 +106,6 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
@@ -142,6 +141,7 @@
 		</div>
 	</header>
 	<!-- Header End -->
+
 
    
 

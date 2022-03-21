@@ -118,6 +118,7 @@
 									</a>
 									</span>
 									<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
 						</div>

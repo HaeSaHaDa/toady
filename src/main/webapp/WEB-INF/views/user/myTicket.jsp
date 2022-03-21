@@ -160,6 +160,7 @@
 				<div class="col-4">
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
+
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
 						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
@@ -172,6 +173,7 @@
 							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
 							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
 						</sec:authorize>
+
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->

@@ -35,8 +35,8 @@ import edu.kosmo.today.service.GymListService;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.GymListVO;
-import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.NoteVO;
+import edu.kosmo.today.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -208,7 +208,7 @@ public class AdminController {
 	
 	//회원 삭제
 	@DeleteMapping("/manageMember/{mnum}")
-	public ResponseEntity<String> delete(MemberVO memberVO, Model model) {
+	public ResponseEntity<String> delete(UserVO memberVO, Model model) {
 		ResponseEntity<String> entity = null;
 		log.info("delete()..");
 
@@ -228,7 +228,7 @@ public class AdminController {
 
 	//회원 상세보기
 	@GetMapping("/manageMember/{mnum}")
-	public ModelAndView memberDetail(MemberVO memberVO, ModelAndView mav) {
+	public ModelAndView memberDetail(UserVO memberVO, ModelAndView mav) {
 
 		log.info("memberDetail()..");
 
@@ -242,7 +242,7 @@ public class AdminController {
 
 	//회원구분 수정
 	@PutMapping("/manageMember/{memail}")  //@RequestBody를 사용하면 json으로 온 데이터를 객체로 자동변환해줌
-	public ResponseEntity<String> authUpdate(@RequestBody MemberVO memberVO, Model model) {
+	public ResponseEntity<String> authUpdate(@RequestBody UserVO memberVO, Model model) {
 		
 		ResponseEntity<String> entity = null;
 		log.info("authUpdate.. memberVO" + memberVO);
@@ -262,7 +262,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/notePost/{mnum}") //쪽지 작성 페이지 진입
-	public ModelAndView notePostList(MemberVO memberVO,ModelAndView mav) {
+	public ModelAndView notePostList(UserVO memberVO,ModelAndView mav) {
 		log.info("notePostList..()");
 			
 		mav.setViewName("/admin/notePost");
