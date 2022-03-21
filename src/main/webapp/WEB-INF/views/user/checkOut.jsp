@@ -559,7 +559,7 @@
             	var adr = $('#addr2').val()+$('#addr3').val();
             	var post = $('#addr1').val(); 
             	var mnum = ${principal.user.mnum};
-            	var totalamount = parseInt($(".totalprice").text(), 10);
+            	var totalamount =100;/*  parseInt($(".totalprice").text(), 10); */
             	
             	var IMP = window.IMP; // 생략가능
             	IMP.init('imp01979841');// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용 i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -570,7 +570,7 @@
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 				    name : '인규테스트',
-				    amount :  100/*totalamount */,
+				    amount :  totalamount,
 				    buyer_email : bEmail,//'test@test',
 				    buyer_name : bName,//'송인규',
 				    buyer_tel : bTel,//'010-1234-3124',
@@ -596,7 +596,7 @@
 				        		merchantid: rsp.merchant_uid,
 	                            impid : rsp.imp_uid,
 	                            mnum: mnum,
-	                         	tamount : amount		 
+	                         	paidamount : rsp.paid_amount		 
 				        	} /* JSON.stringify(data) */
 				        	
 				        }).done(function(result){

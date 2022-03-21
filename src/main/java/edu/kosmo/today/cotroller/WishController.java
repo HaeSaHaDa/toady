@@ -151,7 +151,7 @@ public class WishController {
 		String  payid = request.getParameter("merchantid");
 		String impid = request.getParameter("impid");
 		String mnum1 = request.getParameter("mnum");
-		String tamount1 = request.getParameter("tamount");
+		String tamount1 = request.getParameter("paidamount");
 		int mnum = Integer.valueOf(mnum1);
 		int tamount = Integer.valueOf(tamount1);
 		
