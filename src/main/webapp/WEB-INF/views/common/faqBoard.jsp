@@ -99,7 +99,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -116,12 +116,14 @@
 				<c:when test="${empty principal}">
 					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 					</span>
-					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					<span class="signUp" style="color: white; margin-right: 20px"> 
+					<a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
 					</a>
 					</span>
 				</c:when>
 				<c:otherwise>
-					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					<span class="userinfo" style="color: white"> 
+					<a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
 					</a>
 					</span>
 					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
@@ -149,7 +151,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
