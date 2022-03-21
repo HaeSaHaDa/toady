@@ -50,10 +50,6 @@
  		          SELECT * FROM (
               SELECT ROWNUM AS RNUM, A.* FROM (
                   select mnum , memail, mnickname, member.mid, auth  from member,authority where member.mid = authority.mid
-<<<<<<< HEAD
-=======
-
->>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
              ) A WHERE ROWNUM <= #{pageNum} * #{amount}
          ) WHERE RNUM > (#{pageNum}-1) * #{amount}
 			

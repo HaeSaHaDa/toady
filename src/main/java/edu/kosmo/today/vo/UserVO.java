@@ -34,7 +34,7 @@ public class UserVO {
 
 	@Builder
 	public UserVO(Integer mnum, String mid, String memail, String mpassword, String mnickname, String mphone,
-			String mbirth, List<AuthVO> authList) {
+			String mbirth, int social,List<AuthVO> authList) {
 		super();
 		this.mnum = mnum;
 		this.mid = mid;
@@ -43,6 +43,7 @@ public class UserVO {
 		this.mnickname = mnickname;
 		this.mphone = mphone;
 		this.mbirth = mbirth;
+		this.social = social;
 		this.authList = authList;
 	}
 	

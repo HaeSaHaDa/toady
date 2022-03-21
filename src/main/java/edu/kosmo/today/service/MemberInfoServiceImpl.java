@@ -5,10 +5,6 @@ import org.springframework.stereotype.Service;
 
 import edu.kosmo.today.mapper.MemberInfoMapper;
 import edu.kosmo.today.vo.MemberVO;
-<<<<<<< HEAD
-
-=======
->>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 import lombok.extern.slf4j.Slf4j;
 
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전

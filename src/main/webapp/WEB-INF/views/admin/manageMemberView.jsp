@@ -127,13 +127,8 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-<<<<<<< HEAD
-						<a href="${pageContext.request.contextPath}/today"> 
-						<img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-=======
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
->>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>

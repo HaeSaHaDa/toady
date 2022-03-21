@@ -6,12 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.MemberVO;
-<<<<<<< HEAD
-
-=======
->>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 import edu.kosmo.today.vo.NoteVO;
-import edu.kosmo.today.vo.UserVO;
+
 
 @Mapper
 public interface MemberMapper {

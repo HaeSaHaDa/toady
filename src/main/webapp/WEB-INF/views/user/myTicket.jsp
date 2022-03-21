@@ -163,17 +163,6 @@
 
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-						<li><a href="${pageContext.request.contextPath}/user/faqboard">FAQ</a></li>
-						<li><a href="#">1:1문의</a></li>
-						<li><a href="#">공지/이벤트</a></li>
-						<li><a href="#">시설등록하기</a></li>
-						<li><a href="#">시설등록내역</a></li>
-=======
-=======
->>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
@@ -184,11 +173,6 @@
 							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
 							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
 						</sec:authorize>
-<<<<<<< HEAD
->>>>>>> dev_okh_jsp
-=======
-
->>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
