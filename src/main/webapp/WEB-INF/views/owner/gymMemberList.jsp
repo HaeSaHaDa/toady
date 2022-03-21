@@ -166,20 +166,18 @@
 						<h2 style="color: white;">회원 목록</h2>
 						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
 							<thead class="thead-light">
-								<tr>
-									<th scope="col">회원번호</th>
-									<th scope="col">이메일</th>
-									<th scope="col">이용권</th>
-									<th scope="col">삭제</th>
-								</tr>
+							<tr>
+								<th scope="col">회원번호</th>
+								<th scope="col">이메일</th>
+								<th scope="col">이용권</th>				
+							</tr>
 							</thead>
 
 							<c:forEach var="member" items="${gymMemberList}">
 								<tr class="table-light">
 									<td>${member.mnum}</td>
 									<td>${member.memail}</td>
-									<td><a href="/owner/gymMemberList/${member.mnum}">${member.tname}</a></td>
-									<td>삭제추가</td>
+									<td><a href="/owner/gymMemberList/${member.mnum}">${member.tname}</a></td>				
 								</tr>
 							</c:forEach>
 

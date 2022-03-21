@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +35,9 @@ public class OwnerController {
 	NoteService noteService;
 	OwnerService ownerService;
 
-	@GetMapping("/gymMemberList") // 회원 조회
+
+	// 헬스장 오너페이지 회원목록
+	@GetMapping("/gymMemberList")
 	public ModelAndView gymMemberList(ModelAndView mav) {
 
 		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
@@ -112,7 +118,45 @@ public class OwnerController {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 		}
-
+		
 		return entity;
 	}
+	// 헬스장 오너페이지 회원목록 상세보기
+	@GetMapping("/gymMemberList/{mnum}")
+	public ModelAndView gymMemberListView(MemberVO memberVO, ModelAndView mav) {
+
+		log.info("gymMemberListView()..");
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
+
+		mav.addObject("gymMemberListView", ownerService.getOrderList(mnum));
+		mav.setViewName("/owner/gymMemberListView");
+
+		return mav;
+	}
+
+	
+	// 헬스장 오너페이지 회원목록 삭제
+	@DeleteMapping("/gymMemberList/{mnum}")
+	public ResponseEntity<String> delete(MemberVO memberVO, Model model) {
+		ResponseEntity<String> entity = null;
+		log.info("memberdelete()..");
+
+		try {
+			
+			ownerService.memberRemove(memberVO.getMnum());
+			
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+
+	}
+
 }

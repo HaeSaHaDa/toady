@@ -192,8 +192,8 @@
 				<!-- 사이드바 -->
 				<div class="col-3">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
+						<li><a href="/admin/manageMember">회원 관리</a></li>
+						<li><a href="/admin/ownerList">헬스장 사장님 관리</a></li>
 						<li><a href="#">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
 						<li><a href="#">찜 결제 관리</a></li>

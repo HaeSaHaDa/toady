@@ -38,10 +38,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int getTotal() {
+	public int getUserTotalCount() {
 		
-		log.info("getTotal()..");	
-		return memberMapper.getTotalCount();
+		log.info("getUserTotalCount()..");	
+		return memberMapper.getUserTotalCount();
 	}
 
 
@@ -61,5 +61,29 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void nboardRegister(NoteVO noteVO) {
 		memberMapper.nboardinsert(noteVO);
-	}	
+	}
+
+	@Override
+	public List<MemberVO> getOwnerList(Criteria criteria) {
+		return memberMapper.getOwnerListPage(criteria);
+	}
+
+	@Override
+	public int getOwnerTotalCount() {
+		return memberMapper.getOwnerTotalCount();
+	}
+
+	@Override
+	public MemberVO ownerGet(int mnum) {
+		
+		return memberMapper.ownerRead(mnum);
+	}
+
+	@Override
+	public int getTotal() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 }
