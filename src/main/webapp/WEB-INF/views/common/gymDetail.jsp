@@ -593,6 +593,8 @@ option {
 	
 	
 	$(".review-list").append(htmls);
+	$(".product-rating").text("0");
+	$(".rating-text span").text("0 reviews");
 }
 function check(){
 	let checkNum = $(".review-description p").text();
