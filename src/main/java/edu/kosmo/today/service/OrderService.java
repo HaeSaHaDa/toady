@@ -14,6 +14,7 @@ import edu.kosmo.today.mapper.UserMapper;
 import edu.kosmo.today.mapper.WishMapper;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
+import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.OrderVO;
 import edu.kosmo.today.vo.ReviewVO;
@@ -80,5 +81,13 @@ public class OrderService {
 		}
 
 	}
+
+	//결제정보 디비저장
+	public void successpay(CompleteVO complete) {   
+		   
+		   
+		mapper.insertcomplete(complete);
+	}
+
 
 }

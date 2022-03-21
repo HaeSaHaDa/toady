@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
-import edu.kosmo.today.service.CompleteService;
+import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.service.WishService;
 import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.WishVO;
@@ -37,7 +37,7 @@ public class WishController {
 	@Autowired
 	private WishService wishServise; // 찜 기능을 수행할 서비스
 	@Autowired
-	private CompleteService cservice;
+	private OrderService oService;
 
 	// 찜 목록을 불러오기
 	@GetMapping("/user/wishlist")
@@ -168,7 +168,7 @@ public class WishController {
 			comVO.setOscimpid(impid);
 			comVO.setMnum(mnum);
 			
-			cservice.successpay(comVO);
+			oService.successpay(comVO);
 			result.put("successPayment", true);
 		}
 						

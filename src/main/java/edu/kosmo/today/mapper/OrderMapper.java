@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
+import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.OrderVO;
 import edu.kosmo.today.vo.ReviewVO;
@@ -39,5 +40,7 @@ public interface OrderMapper {
 	public int getTotal(int mnum);
 	//faq글 목록
 	public List<OrderVO> getTicketList(@Param("criteria")Criteria2 criteria,@Param("mnum")int mnum);
+	//결제완료 주문저장
+	public void insertcomplete(CompleteVO completevo);
 	
 }

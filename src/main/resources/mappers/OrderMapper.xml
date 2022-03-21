@@ -66,5 +66,20 @@
 		ticket.tknum and ticket.gnum=gymreview.gnum
 		and gymreview.ordernum = #{ordernum} and orderdetail.tknum = #{tknum}
 	</select>
+	
+	<resultMap id="Complete" type="edu.kosmo.today.vo.CompleteVO">
+		<result property="oscnum" column="oscnum" />
+		<result property="oscpayid" column="oscpayid" />
+		<result property="oscimpid" column="oscimpid" />
+		<result property="mnum" column="mnum" />
 
+	</resultMap>
+
+
+	<insert id="insertcomplete">
+		
+		insert into orderlist (ordernum,mnum,payid) values (9154,#{mnum},#{oscpayid})
+		
+	</insert>
+	
 </mapper>
