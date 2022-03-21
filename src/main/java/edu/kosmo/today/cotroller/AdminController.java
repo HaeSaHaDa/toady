@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,7 +33,9 @@ import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
 import edu.kosmo.today.service.GymListService;
+import edu.kosmo.today.service.GymServicce;
 import edu.kosmo.today.service.MemberService;
+import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.MemberVO;
@@ -341,5 +344,65 @@ public class AdminController {
 		
 		return vo;
 	}
+	
+	@Autowired
+	private OrderService orderService;
+	
+	//환불요청 및 리뷰삭제 요청보기
+	@GetMapping("/requstpr")
+	public ModelAndView getRequetList(Criteria cri,ModelAndView mav) {
+		log.info("환불/리뷰삭제요청 목록뽑아내는중");
+		
+		mav.setViewName("/admin/requsetPR");
+		mav.addObject("requsetList",orderService.requestList(cri) );
 
+		log.info("requsetList(cri)" + orderService.requestList(cri));
+
+		int total = orderService.totalRequest();
+		log.info("total" + total);
+		mav.addObject("pageMaker", new PageVO(cri, total));
+		
+		return mav;
+	}
+	
+	@Autowired
+	private GymServicce gymService;
+	
+	//리뷰목록보기
+	@GetMapping("/manageReivew")
+	public ModelAndView manageReview(ModelAndView mav,Criteria cri) {
+		System.out.println("관리자 리뷰목록");		
+		
+		
+		mav.setViewName("/admin/helpReview");
+		mav.addObject("reviewList",gymService.reviewList(cri));
+		
+		int total = gymService.getTotal2();
+		log.info("리뷰갯수는.."+total);
+		
+		mav.addObject("pageMaker", new PageVO(cri, total));
+		mav.addObject("totalReiew",total);
+		
+		return mav;
+
+	}
+	
+	//리뷰삭제하기
+	@RequestMapping("/deleteReview/{bid}")
+	@ResponseBody
+	public ResponseEntity<String> deleteWish(@PathVariable("bid") String bid) {
+		ResponseEntity<String> entity = null;
+		System.out.println("리뷰삭제중..." + bid + ">>리뷰번호");
+		int bnum = Integer.parseInt(bid);
+
+		try {
+			gymService.deleteReview(bnum);
+			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+
+		return entity;
+	}
 }
