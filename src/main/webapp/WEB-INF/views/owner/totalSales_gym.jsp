@@ -20,62 +20,134 @@
 <%@ include file="../layout/head_tags.jsp"%>
 
 
+<title>매출 페이지</title>
+<script>
+function weekend(){
 
-<script type="text/javascript">
-$(document).ready(function () {
-	
-	$(".view-content").on("click",function(){	
-		
-	    
-		console.log("FAQ글보기");
-		
-		let bid = $(this).parents("tr").find("input").val();
-		console.log("faq글번호"+bid);
-		let divcontent = $(this).parents("tr");
-		console.log(divcontent+".....");
-		
-		let url = "${pageContext.request.contextPath}/admin/faqpage/"+bid;
-		
-		let faqContent = divcontent.next("tr").find("input").val();
-		console.log(faqContent);
-		
-		if(faqContent == bid){
-			divcontent.next("tr").remove();
-		}else{
-			 $.ajax({
-	               type: 'POST',
-	               url: url,
-	               dataType: 'JSON',	               
-	               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
-	               success: function(result) {
-						
-	            	console.log(result);
-	            	   
-	               var htmls="";
-	               
+	var chartLabels = [];
+	var chartData = [];
 
-	           		htmls += '<tr>';
-	           		htmls += '<input type="hidden" value='+result.bid+'>';
-	          		htmls += '<td colspan="3">'+result.bcontent+'</td>';
-	           		htmls += '</tr>';	           		
+	$.getJSON("http://localhost:8282/weekendList", function(data) {
+		//chartData ="";
 
-	           		divcontent.after(htmls);		           		
-	               
-	              }
+		$.each(data, function(inx, obj) {
 
-	         });
-		}
+			chartLabels.push(obj.day);
+			chartData.push(obj.income);
 
-		
+		});
+
+		createChart();
+		chartData="";
+		chartLabels="";
+		console.log("create Chart")
+
 	});
-	
-})
-	
-	
 
+	var lineChartData = {
 
+		labels : chartLabels,
+
+		datasets : [
+
+		{
+
+			label : "주간 매출 현황",
+			borderWidth : 2,
+			borderColor : "white",
+			data : chartData
+		} ],
+
+	}
+
+	 function createChart() {
+
+		var ctx = document.getElementById("canvas").getContext("2d");
+
+		var LineChart = new Chart(ctx, {
+			type : 'line',
+
+			data : lineChartData,
+
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+
+			}
+
+		})
+
+	}
+}
+//==================================================
+
+function month(){
+	var chartLabels = [];
+	var chartData = [];
+	$.getJSON("http://localhost:8282/MonthList", function(data) {
+
+		$.each(data, function(inx, obj) {
+
+			chartLabels.push(obj.day);
+
+			chartData.push(obj.income);
+
+		});
+
+		createChart();
+		chartData="";
+		chartLabels="";
+		console.log("create Chart2")
+
+	});
+
+	var lineChartData = {
+
+		labels : chartLabels,
+
+		datasets : [
+
+		{
+
+			label : "월간 매출 현황",
+			borderWidth : 2,
+			borderColor : "white",
+			data : chartData
+		} ],
+
+	}
+
+	function createChart() {
+
+		var ctx = document.getElementById("canvas").getContext("2d");
+
+		var LineChart = new Chart(ctx, {
+			type : 'line',
+
+			data : lineChartData,
+
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+
+			}
+
+		})
+
+	}
+}
 </script>
-<title>마이페이지</title>
+
 
 </head>
 
@@ -138,7 +210,6 @@ $(document).ready(function () {
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
 						</a>
 					</div>
 				</div>
@@ -203,8 +274,7 @@ $(document).ready(function () {
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container"
-			style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
@@ -212,51 +282,28 @@ $(document).ready(function () {
 						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/faqboard">FAQ</a></li>
-						<li><a href="#">1:1문의</a></li>
-						<li><a href="#">공지/이벤트</a></li>
-						<li><a href="#">시설등록하기</a></li>
-						<li><a href="#">시설등록내역</a></li>
+						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/registerGym">시설 등록 신청</a></li>
+						<sec:authorize access="hasRole('USER')">
+							<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
+						</sec:authorize>
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
 				<div class="col-8">
-					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
-					<div>
-						<h4 class="text-white">FAQ</h4>
-						<table class="text-white" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
-							<tr>
-								<td>제목</td>
-								<td>+</td>								
-							</tr>
-							<c:forEach items="${faqList}" var="faq">
-							<tr>
-							<input type="hidden" value="${faq.bid}">
-								<td>${faq.btitle}</td>
-								<td class="view-content">+</td>				
-							</tr>
-							</c:forEach>
-						</table>
-							
-						
-						<c:if test="${pageMaker.pre}">
-							<a href="/user/faqboard${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
-						</c:if>
-
-						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-						<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage }">
-							<a href="/user/faqboard${pageMaker.makeQuery(idx)}">${idx}</a>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="/user/faqboard${pageMaker.makeQuery(pageMaker.endPage + 1) }">
-								» </a>
-						</c:if>					
-						<br>
+				
+				
+				</div>
 			</div>
 		</div>
 	</section>
-	<!-- 내용물 끝 -->
+	<!-- 마이페이지 내용물 끝 -->
 
 
 	<!-- Get In Touch Section Begin -->
@@ -299,17 +346,12 @@ $(document).ready(function () {
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="#"><img src="img/logo.png" alt=""></a>
+								<a href="${pageContext.request.contextPath}/today"><img src="/img/logo.png" alt=""></a>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
-								endisse ultrices gravida lorem.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-youtube-play"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
-									class="fa  fa-envelope-o"></i></a>
+								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+								<a href="#"><i class="fa  fa-envelope-o"></i></a>
 							</div>
 						</div>
 					</div>
@@ -340,8 +382,7 @@ $(document).ready(function () {
 							<h4>Tips & Guides</h4>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Physical fitness may help prevent depression,
-										anxiety</a>
+									<a href="#">Physical fitness may help prevent depression, anxiety</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -350,8 +391,7 @@ $(document).ready(function () {
 							</div>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Fitness: The best exercise to lose belly fat
-										and tone up...</a>
+									<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -370,9 +410,7 @@ $(document).ready(function () {
 								<script>
 									document.write(new Date().getFullYear());
 								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
+								All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</p>
 						</div>
@@ -384,12 +422,13 @@ $(document).ready(function () {
 	</div>
 
 
-<!-- Login model Begin -->
+
+	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
-
-	<!-- Js Plugins -->
+		<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+
 
 
 </body>

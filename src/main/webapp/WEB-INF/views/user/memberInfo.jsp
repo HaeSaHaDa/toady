@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -89,19 +88,19 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<ul>
-				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-				</sec:authorize>
-				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-				<sec:authorize access="hasRole('ADMIN')">
-				</sec:authorize>
-
-			</ul>
+						<ul>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							</sec:authorize>
+						</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -123,7 +122,6 @@
 					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
-
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -135,7 +133,6 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
 						</a>
 					</div>
 				</div>
@@ -144,19 +141,21 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
-							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
+
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
@@ -167,14 +166,13 @@
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> 
-									<a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
 									</a>
 									</span>
 									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
 									</a>
 									</span>
-									<a class="nav-link" style="color:white">${principal.user.memail}</a>
+									<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -202,11 +200,16 @@
 						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/faqboard">FAQ</a></li>
-						<li><a href="#">1:1문의</a></li>
-						<li><a href="#">공지/이벤트</a></li>
-						<li><a href="#">시설등록하기</a></li>
-						<li><a href="#">시설등록내역</a></li>
+						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/registerGym">시설 등록 신청</a></li>
+						<sec:authorize access="hasRole('USER')">
+							<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
+						</sec:authorize>
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
@@ -240,8 +243,9 @@
 								</c:otherwise>
 							</c:choose>
 
-
 						</form>
+
+						<form class="needs-validation" novalidate>
 					</div>
 				</div>
 			</div>
