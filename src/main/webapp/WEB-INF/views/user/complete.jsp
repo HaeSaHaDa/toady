@@ -176,9 +176,11 @@
 				<!-- 내용물 -->
 				<div class="col-8">
 				
-				<h1 style="color:white ">결제 완료</h1>
-				<button><a href="/today">홈으로</button>
+				<h1 class="text-center" style="color:white" >결제 완료</h1>
+				<h3 class="text-center" style="color:white" >이용해주셔서 감사합니다!</h3>
+				<div class="text-center" style="margin-top:70px"><button type="button" class="btn btn-warning"><a href="/today" style="text-decoration:none; color:black">HOME</a></button></div>
 				</div>
+				
 			</div>
 		</div>
 	</section>

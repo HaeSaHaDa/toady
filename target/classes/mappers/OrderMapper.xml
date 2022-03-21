@@ -115,7 +115,7 @@
 	<insert id="insertcomplete">
 		<![CDATA[
 		insert into orderlist (ordernum,mnum,payid) values
-		(order_seq.nextval,#{mnum},#{oscpayid})
+		(9848,#{mnum},#{oscpayid})
 		]]>
 	</insert>
 

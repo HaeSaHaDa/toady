@@ -58,7 +58,6 @@
 	type="text/css">
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 </head>
->>>>>>> branch 'dev_IG_test' of https://github.com/HaeSaHaDa/toady.git
 <style>
 .checkout-form .checkout-title {
 	font-weight: 400;
