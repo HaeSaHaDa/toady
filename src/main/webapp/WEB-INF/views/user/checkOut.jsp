@@ -570,7 +570,7 @@
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 				    name : '인규테스트',
-				    amount : 100/* totalamount */,
+				    amount :  100/*totalamount */,
 				    buyer_email : bEmail,//'test@test',
 				    buyer_name : bName,//'송인규',
 				    buyer_tel : bTel,//'010-1234-3124',
@@ -590,13 +590,13 @@
 			        	$.ajax({
 				        	url:"/completePay",
 				        	type:'POST',
-				        	/* /* ContentType:"application/json; charset=utf-8", */ */
+				        	/* ContentType:"application/json; charset=utf-8", */
 				        	dataType: 'json',
 				        	data:{
 				        		merchantid: rsp.merchant_uid,
 	                            impid : rsp.imp_uid,
 	                            mnum: mnum,
-	                          /*   tamount : amount */		 
+	                         	tamount : amount		 
 				        	} /* JSON.stringify(data) */
 				        	
 				        }).done(function(result){
@@ -619,7 +619,7 @@
 
 				});
         </script>
-<script>
+<!-- <script>
 console.log("실행중이세요 ? - 1 ")
 app.use(bodyParser.json());
 // "/payments/complete"에 대한 POST 요청을 처리
@@ -672,18 +672,15 @@ app.post("/payments/complete", async (req, res) => {
 	      } else { // 결제금액 불일치. 위/변조 된 결제
 	        throw { status: "forgery", message: "위조된 결제시도" };
 	      }
-	    } catch (e) {
+		}catch (e) {
 	      res.status(400).send(e);
 	    }
-	  });  
+ 	 });
           
           
-	} catch (e) {
-		res.status(400).send(e);
-    }
-}); 
+	
 
-</script>
+</script> -->
 </body>
 
 </html>

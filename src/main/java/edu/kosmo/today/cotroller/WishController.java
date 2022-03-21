@@ -154,18 +154,24 @@ public class WishController {
 		String tamount1 = request.getParameter("tamount");
 		int mnum = Integer.valueOf(mnum1);
 		int tamount = Integer.valueOf(tamount1);
-				
-				
-		CompleteVO comVO = new CompleteVO();
-		comVO.setOscpayid(payid);
-		comVO.setOscimpid(impid);
-		comVO.setMnum(mnum);
 		
-		cservice.successpay(comVO);
-		
-		
-		result.put("successPayment", true);
-				
+		if(tamount1 == null) {
+			//결제 금액 파라미터 값이 null 일시 결제실패
+			result.put("successPayment", false);
+		}else if(tamount == 0){
+			//결제 금액 파라미터 값이 0 일시 결제실패
+			result.put("successPayment", false);
+		}else {
+			//그 외 결제 성공
+			CompleteVO comVO = new CompleteVO();
+			comVO.setOscpayid(payid);
+			comVO.setOscimpid(impid);
+			comVO.setMnum(mnum);
+			
+			cservice.successpay(comVO);
+			result.put("successPayment", true);
+		}
+						
 		log.info("*********************controller - success22");
 		return result.toString(); 
 	}
