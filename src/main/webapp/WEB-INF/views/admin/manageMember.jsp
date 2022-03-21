@@ -69,21 +69,23 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<ul>
-				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-				</sec:authorize>
-				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-				<sec:authorize access="hasRole('ADMIN')">
-				</sec:authorize>
-			</ul>
+						<ul>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							</sec:authorize>
+						</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
+<<<<<<< HEAD
 			<c:choose>
 				<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
@@ -108,6 +110,9 @@
 										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
+=======
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+>>>>>>> refs/remotes/origin/master
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -127,13 +132,14 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
-							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
@@ -144,6 +150,7 @@
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
+<<<<<<< HEAD
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
 									<span class="signUp" style="color: white; margin-right:20px"> 
@@ -151,8 +158,15 @@
 											<i class="fa fa-user-plus">Sign Up</i>
 										</a>
 									</span>
+=======
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+									</ul>
+>>>>>>> refs/remotes/origin/master
 								</c:when>
 								<c:otherwise>
+<<<<<<< HEAD
 									<span class="userinfo" style="color:white">
 											<a href="${pageContext.request.contextPath}/user/memberInfo">
 												<i class="fa fa-user-secret">UserInfo</i>
@@ -164,6 +178,12 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
+=======
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+>>>>>>> refs/remotes/origin/master
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -182,8 +202,13 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
+<<<<<<< HEAD
 		<div class="container" style="padding-bottom: 300px; margin-top: 150px;">
 			<div class="row" style="margin-top: 100px; margin-left:-100px">
+=======
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+>>>>>>> refs/remotes/origin/master
 				<!-- 사이드바 -->
 				<div class="col-3">
 					<ul>
@@ -202,11 +227,19 @@
 				<div class="col-9">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
+<<<<<<< HEAD
 						<table class="table table table-bordered" width="500px" border="1" cellpadding="0" cellspacing="0" border="1">
+=======
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+>>>>>>> refs/remotes/origin/master
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">회원번호</th>
+<<<<<<< HEAD
 									<th scope="col">회원 아이디</th>
+=======
+									<th scope="col">이메일</th>
+>>>>>>> refs/remotes/origin/master
 									<th scope="col">회원구분</th>
 									<th scope="col">삭제</th>
 								</tr>
@@ -364,6 +397,7 @@
 	</div>
 
 
+<<<<<<< HEAD
 
 
 
@@ -385,6 +419,17 @@
 	<!-- Login model end -->
 		<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+=======
+	<!-- Js Plugins -->
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+>>>>>>> refs/remotes/origin/master
 
 
 

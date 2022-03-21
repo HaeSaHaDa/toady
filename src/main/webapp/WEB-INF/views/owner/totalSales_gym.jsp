@@ -14,14 +14,141 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}" />
-<meta name="_csrf_header" content="${_csrf.headerName}" />
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <%@ include file="../layout/head_tags.jsp"%>
 
 
+<title>매출 페이지</title>
+<script>
+function weekend(){
 
-<title>어드민 페이지</title>
+	var chartLabels = [];
+	var chartData = [];
+
+	$.getJSON("http://localhost:8282/weekendList", function(data) {
+		//chartData ="";
+
+		$.each(data, function(inx, obj) {
+
+			chartLabels.push(obj.day);
+			chartData.push(obj.income);
+
+		});
+
+		createChart();
+		chartData="";
+		chartLabels="";
+		console.log("create Chart")
+
+	});
+
+	var lineChartData = {
+
+		labels : chartLabels,
+
+		datasets : [
+
+		{
+
+			label : "주간 매출 현황",
+			borderWidth : 2,
+			borderColor : "white",
+			data : chartData
+		} ],
+
+	}
+
+	 function createChart() {
+
+		var ctx = document.getElementById("canvas").getContext("2d");
+
+		var LineChart = new Chart(ctx, {
+			type : 'line',
+
+			data : lineChartData,
+
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+
+			}
+
+		})
+
+	}
+}
+//==================================================
+
+function month(){
+	var chartLabels = [];
+	var chartData = [];
+	$.getJSON("http://localhost:8282/MonthList", function(data) {
+
+		$.each(data, function(inx, obj) {
+
+			chartLabels.push(obj.day);
+
+			chartData.push(obj.income);
+
+		});
+
+		createChart();
+		chartData="";
+		chartLabels="";
+		console.log("create Chart2")
+
+	});
+
+	var lineChartData = {
+
+		labels : chartLabels,
+
+		datasets : [
+
+		{
+
+			label : "월간 매출 현황",
+			borderWidth : 2,
+			borderColor : "white",
+			data : chartData
+		} ],
+
+	}
+
+	function createChart() {
+
+		var ctx = document.getElementById("canvas").getContext("2d");
+
+		var LineChart = new Chart(ctx, {
+			type : 'line',
+
+			data : lineChartData,
+
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+
+			}
+
+		})
+
+	}
+}
+</script>
+
+
 </head>
 
 <body>
@@ -33,19 +160,18 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+			<ul>
+				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+				<sec:authorize access="hasRole('USER')">
+					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+				</sec:authorize>
+				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+				<sec:authorize access="hasRole('ADMIN')">
+				</sec:authorize>
+			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -92,14 +218,13 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							<sec:authorize access="hasRole('ADMIN')">
 							</sec:authorize>
 						</ul>
 					</nav>
@@ -154,26 +279,27 @@
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
-						<li><a href="#">헬스장 관리</a></li>
-						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
-						<li><a href="#">1:1 답변 관리</a></li>
-						<li><a href="#">공지/이벤트 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/totalSales">매출 관리</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
+						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/registerGym">시설 등록 신청</a></li>
+						<sec:authorize access="hasRole('USER')">
+							<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
+						</sec:authorize>
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-8">
-					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
-					<div></div>
-
+				
+				
 				</div>
-
-
 			</div>
 		</div>
 	</section>
@@ -295,13 +421,13 @@
 		<!-- Footer Section End -->
 	</div>
 
+
+
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
-
-	<!-- Js Plugins -->
+		<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
-
 
 
 

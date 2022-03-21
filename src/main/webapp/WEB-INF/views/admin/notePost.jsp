@@ -33,18 +33,19 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<ul>
-				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-				</sec:authorize>
-				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-				<sec:authorize access="hasRole('ADMIN')">
-				</sec:authorize>
-			</ul>
+						<ul>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							</sec:authorize>
+						</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -83,21 +84,22 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<nav class="nav-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
-							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
@@ -238,6 +240,7 @@
 						<div class="fs-about">
 							<div class="fa-logo">
 								<a href="${pageContext.request.contextPath}/today"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
+
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">

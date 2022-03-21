@@ -1,13 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal" />
-</sec:authorize>
-
-<!DOCTYPE html>
-<html>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -16,10 +11,21 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="_csrf" content="${_csrf.token}"/>
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
+<!-- Google Font -->
+<link	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
-<%@ include file="../layout/head_tags.jsp"%>
+<!-- Css Styles -->
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/bootstrap.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/font-awesome.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/flaticon.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/barfiller.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/magnific-popup.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/slicknav.min.css"	type="text/css">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 
-
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function () {
@@ -77,56 +83,80 @@ $(document).ready(function () {
 </script>
 <title>마이페이지</title>
 
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
+	rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/flaticon.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/barfiller.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/magnific-popup.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/slicknav.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
+
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+	
+</script>
 </head>
 
 <body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="canvas-close">
 			<i class="fa fa-close"></i>
 		</div>
-
+		<div class="canvas-search search-switch">
+			<i class="fa fa-search"></i>
+		</div>
 		<nav class="canvas-menu mobile-menu">
 			<ul>
-				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-				</sec:authorize>
-				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-				<sec:authorize access="hasRole('ADMIN')">
-				</sec:authorize>
+
+				<li class="active"><a href="./index.html">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/services.html">mypage</a></li>
+				<li><a href="${pageContext.request.contextPath}/team.html">찜</a></li>
+				<li><a href="${pageContext.request.contextPath}/services.html">지도</a></li>
+				<li><a href="${pageContext.request.contextPath}/gymlist">시설찾기</a></li>
+
+
 			</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<c:choose>
-				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
-				</c:when>
-				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
-				</c:otherwise>
-			</c:choose>
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+				class="fa fa-twitter"></i></a> <a href="#"><i
+				class="fa fa-youtube-play"></i></a> <a href="#"><i
+				class="fa fa-instagram"></i></a>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -137,55 +167,32 @@ $(document).ready(function () {
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 
+						<a href="${pageContext.request.contextPath}/today"> 
+							<img src="${pageContext.request.contextPath}/img/logo.png" alt=""	width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
-							</sec:authorize>
+							<li class="active"><a href="$./index.html">Home</a></li>
+							<li><a href="./services.html">mypage</a></li>
+							<li><a href="./team.html">찜</a></li>
+							<li><a href="./services.html">지도</a></li>
+							<li><a href="gymlist">시설찾기</a></li>
+
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-
+						<div class="to-search search-switch">
+							<i class="fa fa-search"></i>
+						</div>
 						<div class="to-social">
-							<c:choose>
-								<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
-								</c:when>
-								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
-								</c:otherwise>
-							</c:choose>
+							<a href="#">로그인</a> <a href="#">회원가입</a>
+
 						</div>
 					</div>
 				</div>
@@ -209,9 +216,9 @@ $(document).ready(function () {
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
+						<li><a href="#">내 정보</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
+						<li><a href="#">쪽지</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/faqboard">FAQ</a></li>
 						<li><a href="#">1:1문의</a></li>
 						<li><a href="#">공지/이벤트</a></li>
@@ -383,8 +390,7 @@ $(document).ready(function () {
 		<!-- Footer Section End -->
 	</div>
 
-
-<!-- Login model Begin -->
+	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
 
@@ -393,5 +399,6 @@ $(document).ready(function () {
 
 
 </body>
+
 
 </html>

@@ -14,47 +14,57 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <%@ include file="../layout/head_tags.jsp"%>
 
-	
-	
+
+
 <script type="text/javascript">
-	
-	$(document).ready(function () {
-		
-		$("#member-delete").click(function(event) {
-									
-			event.preventDefault();
-			console.log("ajax 호출전");
-				
-			var trObj = $(this).parent().parent();
-			console.log($(this).attr("href"));
-			
-			$.ajax({
-				 type : "DELETE",  
-				 url : $(this).attr("href"),
-				 success: function (result) {       
-				 console.log(result); 
-					if(result == "SUCCESS"){
-					      $(trObj).remove();
-					      $(location).attr('href', '${pageContext.request.contextPath}/today');
-						}					        
-				    },
-				    error: function (e) {
-				        console.log(e);
-				    }			
-			});	
-		
-		});	
-	
-	});
-	
+	$(document)
+			.ready(
+					function() {
+
+						$("#member-delete")
+								.click(
+										function(event) {
+
+											event.preventDefault();
+											console.log("ajax 호출전");
+
+											var trObj = $(this).parent()
+													.parent();
+											console.log($(this).attr("href"));
+
+											$
+													.ajax({
+														type : "DELETE",
+														url : $(this).attr(
+																"href"),
+														success : function(
+																result) {
+															console.log(result);
+															if (result == "SUCCESS") {
+																$(trObj)
+																		.remove();
+																$(location)
+																		.attr(
+																				'href',
+																				'${pageContext.request.contextPath}/today');
+															}
+														},
+														error : function(e) {
+															console.log(e);
+														}
+													});
+
+										});
+
+					});
 </script>
 
-	<title>마이페이지</title>
+<title>마이페이지</title>
 
 </head>
 
@@ -67,43 +77,38 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<ul>
-				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-				</sec:authorize>
-				<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-				<sec:authorize access="hasRole('ADMIN')">
-				</sec:authorize>
-			</ul>
+						<ul>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							</sec:authorize>
+						</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
+					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+					</span>
+					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					</a>
+					</span>
 				</c:when>
 				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					</a>
+					</span>
+					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+					</a>
+					</span>
+					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -126,13 +131,14 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
-							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
@@ -145,24 +151,18 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
+									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+									</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									</a>
 									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+									</a>
+									</span>
+									<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -182,20 +182,25 @@
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container"
-			style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
 				<!-- 사이드바 -->
 				<div class="col-4">
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/faqboard">FAQ</a></li>
-						<li><a href="#">1:1문의</a></li>
-						<li><a href="#">공지/이벤트</a></li>
-						<li><a href="#">시설등록하기</a></li>
-						<li><a href="#">시설등록내역</a></li>
+						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/registerGym">시설 등록 신청</a></li>
+						<sec:authorize access="hasRole('USER')">
+							<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
+							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
+						</sec:authorize>
 					</ul>
 				</div>
 				<!-- 사이드바 끝 -->
@@ -203,18 +208,22 @@
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div class="text-white">
-						<h2 style="color: white;">오늘의 짐 회원탈퇴</h2><br>
-						<h4>탈퇴 계정</h4> <br>
+						<h2 style="color: white;">오늘의 짐 회원탈퇴</h2>
+						<br>
+						<h4>탈퇴 계정</h4>
+						<br>
 						<h6>아래 계정을 탈퇴 처리합니다.</h6>
-						<h6>${memberInfoList.mid}</h6><br>
-						
-						<h4>탈퇴 시 유의사항</h4> <br>
+						<h6>${memberInfoList.mid}</h6>
+						<br>
+
+						<h4>탈퇴 시 유의사항</h4>
+						<br>
 						<h6>-탈퇴 후에는 위의 계정으로 로그인하실 수 없습니다.</h6>
 						<h6>-작성하신 이용 후기는 탈퇴 후에도 삭제되지 않습니다.</h6>
-						
-						<br>
-						 <a class="btn btn-primary" id="member-delete" data-bid='${memberInfoList.mid}' href="./memberLeave/${memberInfoList.mid}" role="button">회원탈퇴</a></td>
-						
+
+						<br> <a class="btn btn-primary" id="member-delete" data-bid='${memberInfoList.mid}' href="./memberLeave/${memberInfoList.mid}" role="button">회원탈퇴</a>
+						</td>
+
 					</div>
 				</div>
 			</div>
@@ -265,15 +274,10 @@
 							<div class="fa-logo">
 								<a href="#"><img src="/img/logo.png" alt=""></a>
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore dolore magna aliqua
-								endisse ultrices gravida lorem.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-youtube-play"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
-									class="fa  fa-envelope-o"></i></a>
+								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+								<a href="#"><i class="fa  fa-envelope-o"></i></a>
 							</div>
 						</div>
 					</div>
@@ -304,8 +308,7 @@
 							<h4>Tips & Guides</h4>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Physical fitness may help prevent depression,
-										anxiety</a>
+									<a href="#">Physical fitness may help prevent depression, anxiety</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -314,8 +317,7 @@
 							</div>
 							<div class="fw-recent">
 								<h6>
-									<a href="#">Fitness: The best exercise to lose belly fat
-										and tone up...</a>
+									<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
 								</h6>
 								<ul>
 									<li>3 min read</li>
@@ -334,9 +336,7 @@
 								<script>
 									document.write(new Date().getFullYear());
 								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
+								All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							</p>
 						</div>
