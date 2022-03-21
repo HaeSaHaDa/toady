@@ -34,5 +34,5 @@ public class ReviewVO {
 	private int ordernum; //주문번호
 	
 	private int tknum; //티켓번호
-	
+	private String mnickname;
 }

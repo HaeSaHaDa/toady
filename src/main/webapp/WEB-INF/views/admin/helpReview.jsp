@@ -20,42 +20,47 @@
 <%@ include file="../layout/head_tags.jsp"%>
 
 <script type="text/javascript">
-$(document).ready(function () {
-	
-	//<td class="delete_review">X</td>
-	
-	$(".delete_review").on("click",function(){
-		console.log("리뷰삭제요청하기");
+		$(document).ready(function () {
+			
+			//<td class="delete_review">X</td>
+			
+			$(".delete_review").on("click",function(){
+				console.log("리뷰삭제요청하기");
+				
+				let bid = $(this).parent("tr").find("input").val();
+		    	   
+		    	  console.log(bid);
+		    	  
+		    	  $.ajax({
+			           type : "POST",
+			           url : "/admin/deleteReview/"+bid,         
+			           cache : false,
+			          	contentType:'application/json; charset=utf-8',
+			           success: function (result) { 
+			        	   
+			        	   if(result=="ok"){                     
+			        		   alert("리뷰가 삭제되었습니다.");
+			        		   $(location).attr('href', '${pageContext.request.contextPath}/admin/manageReivew');  
+			        	   }             
+			                                   
+			           },
+			           error: function (e) {
+			               console.log(e);
+			               console.log("실패");
+			           }
+			       })
+				
+				
+			});
+		   
+			
 		
-		let bid = $(this).parent("tr").find("input").val();
-    	   
-    	  console.log(bid);
-    	  
-    	  $.ajax({
-	           type : "POST",
-	           url : "/admin/deleteReview/"+bid,         
-	           cache : false,
-	          	contentType:'application/json; charset=utf-8',
-	           success: function (result) { 
-	        	   
-	        	   if(result=="ok"){                     
-	        		   alert("리뷰가 삭제되었습니다.");
-	        	   }             
-	                                   
-	           },
-	           error: function (e) {
-	               console.log(e);
-	               console.log("실패");
-	           }
-	       })
+		})
 		
-		
-	});
-   
 	
-
-})
-</script>
+		
+	
+	</script>
 
 <title>Insert title here</title>
 </head>
@@ -201,51 +206,41 @@ $(document).ready(function () {
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
-						<h4 class="text-white">FAQ 관리</h4>
+						<h4 class="text-white">review보기</h4>
 						<table class="text-white" style="text-align: center;" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
 							<tr>
-								<td>FAQ번호</td>
-								<td>제목</td>
-								<td>+</td>								
+								<td>글번호</td>
+								<td>리뷰</td>
+								<td>별점</td>
+								<td>삭제</td>								
 							</tr>
-							<c:forEach items="${faqList}" var="faq">					
+							<c:forEach items="${reviewList}" var="reviewList">					
 							<tr>
-							<input type="hidden" value="${faq.bid}">
-								<td>${faq.bid}</td>
-								<td>${faq.btitle}</td>
-								<td class="view-content">+</td>															
+							<input type="hidden" value="${reviewList.bid}">
+								<td>${reviewList.bid}</td>
+								<td>${reviewList.bcontent}</td>
+								<td>${reviewList.grstar}</td>
+								<td class="delete_review">X</td>															
 							</tr>
 							</c:forEach>
 						</table>
 							
 						
 						<c:if test="${pageMaker.pre}">
-							<a href="faqpage${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
 						<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage }">
-							<a href="faqpage${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="/manageReivew${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="faqpage${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.endPage + 1) }">
 								» </a>
 						</c:if>					
 						<br>
-						<table class="text-white" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
-							<form:form id="insertfaq" action="${pageContext.request.contextPath}/insertfaq" method="post">
-								<tr>
-									<td>제목</td>
-									<td><input width="200" type="text" id="btitle" name="btitle"></td>
-								</tr>
-								 <tr>
-            						<td> 내용 </td>
-           							 <td><textarea rows="10" cols="60" id="bcontent" name="bcontent" ></textarea></td>
-         						</tr>
-							</form:form>							
-						</table>
-						<button id="submitfaq" class="btn btn-light">FAQ작성</button>
+						
 
 					</div>
 				</div>

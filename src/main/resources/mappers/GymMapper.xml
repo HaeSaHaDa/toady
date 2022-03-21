@@ -101,11 +101,11 @@
 	
 	<insert id="deleteRequest">
 		insert into boardlist (bid,bcontent,mnum,tnum) values
-		(BOARD_SEQ.nextval,#{ment},#{mnum},6) 
+		(BOARD_SEQ.nextval,#{ment},#{mnum},7) 
 	</insert>
 
 	<select id="checkRequest" resultType="_int">
-		select count(*) from boardlist where bcontent like #{ment} and mnum = #{mnum}
+		select count(*) from boardlist where bcontent like #{ment} and mnum = #{mnum} and tnum = 7
 	</select>
 	
 	<select id="getLeviewList" resultMap="reviewList" >
