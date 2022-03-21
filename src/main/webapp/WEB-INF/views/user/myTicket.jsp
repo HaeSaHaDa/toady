@@ -41,7 +41,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -97,7 +97,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -178,7 +178,8 @@
 				<!-- 사이드바 끝 -->
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->					
-					<div class="container">
+					<div class="container ticket-area">
+					<h3 style="color: white;" class="mb-3">구매한 이용권</h3>
 					<c:forEach items="${myTicket}" var="myticket">
      					 <div class="ticket">
        						 <div class="first">
@@ -386,7 +387,10 @@
 </body>
 
 <script>
+
       $(document).ready(function () {
+    	  
+    	  checkList();
     	  
         $("goRivew").mouseleave(function () {
           $(this).removeClass("hover");
@@ -459,6 +463,23 @@
     	  $('.modal').modal('hide');
       }
       
+      function checkList(){
+    	  let checkText=$(".ticket p").text();
+    	  
+    	  if(checkText == ""){
+    		  noTicket();
+    	  }
+    	  
+      }
+      
+      function noTicket(){
+    		
+    		let htmls ="";
+    		htmls += '<h5 class = "mt-5" style="color: white;">구매한 이용권이 없습니다.</h5>';
+
+    		
+    		$(".ticket-area").append(htmls);
+    	}
       
     </script>
 

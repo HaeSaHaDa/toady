@@ -92,7 +92,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -102,7 +102,6 @@
 								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
-
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -136,7 +135,6 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-						
 						</a>
 					</div>
 				</div>
@@ -145,7 +143,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>

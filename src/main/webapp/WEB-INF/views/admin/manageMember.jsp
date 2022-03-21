@@ -72,7 +72,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -109,7 +109,6 @@
 										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
-
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -157,7 +156,6 @@
 
 								</c:when>
 								<c:otherwise>
-
 									<span class="userinfo" style="color:white">
 											<a href="${pageContext.request.contextPath}/user/memberInfo">
 												<i class="fa fa-user-secret">UserInfo</i>
@@ -194,8 +192,8 @@
 				<!-- 사이드바 -->
 				<div class="col-3">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
+						<li><a href="/admin/manageMember">회원 관리</a></li>
+						<li><a href="/admin/ownerList">헬스장 사장님 관리</a></li>
 						<li><a href="#">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
 						<li><a href="#">찜 결제 관리</a></li>
@@ -209,14 +207,13 @@
 				<div class="col-9">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
+
 						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">회원번호</th>
-									<th scope="col">이메일</th>
-
-									<th scope="col">이메일</th>
-
+									<th scope="col">회원 아이디</th>
 									<th scope="col">회원구분</th>
 									<th scope="col">삭제</th>
 								</tr>
@@ -224,7 +221,7 @@
 							<c:forEach var="member" items="${memberList}">
 								<tr class="table-light">
 									<td>${member.mnum}</td>
-									<td><a href="./manageMember/${member.mnum}">${member.mid}</a></td>
+									<td><a href="./manageMember/${member.mnum}">${member.memail}</a></td>
 									<td>${member.auth}</td>
 
 									<td><a class="m-delete" data-bid='${member.mnum}' href="./manageMember/${member.mnum}">삭제</a></td>
@@ -379,6 +376,7 @@
 	<!-- Login model end -->
 		<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+
 
 
 

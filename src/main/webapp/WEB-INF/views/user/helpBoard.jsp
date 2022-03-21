@@ -8,6 +8,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -23,19 +24,22 @@
 
 <title>Insert title here</title>
 </head>
+
 <body>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
 		<div class="canvas-close">
 			<i class="fa fa-close"></i>
-		</div>
+		</div>   
+
+   <!-- ChoseUs Section End -->
 
 		<nav class="canvas-menu mobile-menu">
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -85,7 +89,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -156,7 +160,37 @@
 				<!-- 사이드바 끝 -->
 				<div class="col-8">
 					<!-- 내용물 -->
+            <div> 
+            <table class="table table-striped table-light" width="600" border="1" cellpadding="0">
+                     <form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}" >
+                        <input type="hidden" id="mid" name="mid" value="${memberDetail.mid}">
+                         
+                        <thead class="thead-light">                       
+                        <tr>
+                           <th>작성자</th>
+                           <th>제목</th>
+                           <th>내용</th>
+                           <th>작성시간</th>
+                        </tr>
+                        <thead>
 
+                        <c:forEach var="helpBoard" items="${helpBoardList}">
+                        <tr>
+                           <td>${helpBoard.mnum}</td>
+                           <td>${helpBoard.btitle}</td>
+                           <td>${helpBoard.bcontent}</td>
+                           <td>${helpBoard.bdate}</td>
+                        </tr>
+                     </c:forEach>
+                     
+                     <tr class="table-light">
+						<td><a href="/user/helpBoardPost/${helpBoard.mnum}">1:1문의하기</a></td>
+					 </tr>
+
+                     </form>
+                  </table>
+            
+            </div>
 					<!-- 내용물 끝 -->
 				</div>
 			</div>
@@ -191,4 +225,5 @@
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
+
 </html>

@@ -25,7 +25,6 @@ ORDERDATE          DATE
 @ToString
 public class OrderListVO {
 	
-	//orderlist, member, orderdetail, ticket, gympage
 	private int mnum; //회원 번호
 	private String memail; //회원 이메일
 	private String mnickname; //회원 닉네임
@@ -33,8 +32,9 @@ public class OrderListVO {
 	private String mbirth; //회원 생일
 	
 	private Date orderdate; //구매 날짜
+	private int cost; //가격
 	
-	private int tcost; //가격
 	private String tname; //이용권 이름
+	private int tcost; //가격
 
 }

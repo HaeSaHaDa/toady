@@ -64,7 +64,59 @@
 		gymreview ,orderdetail , ticket WHERE
 		gymreview.ordernum=orderdetail.ordernum and orderdetail.tknum =
 		ticket.tknum and ticket.gnum=gymreview.gnum
-		and gymreview.ordernum = #{ordernum} and orderdetail.tknum = #{tknum}
+		and gymreview.ordernum =
+		#{ordernum} and orderdetail.tknum = #{tknum}
 	</select>
+
+	<insert id="requestPayback">
+	<![CDATA[
+		insert into boardlist (bid,bcontent,mnum,tnum) values
+		(BOARD_SEQ.nextval,#{ment},#{mnum},5)
+	]]>
+	</insert>
+
+	<select id="checkRequest" resultType="_int">
+	<![CDATA[
+		SELECT  count(*)  FROM boardlist WHERE 
+		mnum = #{mnum} and bcontent like #{ment1} and bcontent LIKE #{ment2}
+	]]>
+	</select>
+
+	<select id="requetList" resultType="edu.kosmo.today.vo.FaqVO">
+	<![CDATA[
+		SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (
+                 select b.bid,b.bcontent,b.bdate,b.mnum,b.tnum,t.tname
+                 
+                 from boardlist b, boardtype t where b.tnum = t.tnum and b.tnum = 5 or b.tnum = 6
+             ) A WHERE ROWNUM <= #{pageNum} * #{amount}
+         ) WHERE RNUM > (#{pageNum}-1) * #{amount}
+	]]>
+	</select>
+
+	<select id="totalRequet" resultType="_int">
+		<![CDATA[
+	
+		select count(*) from
+		boardlist where tnum = 5 or tnum = 6
+		]]>
+	</select>
+
+
+	<resultMap id="Complete" type="edu.kosmo.today.vo.CompleteVO">
+		<result property="oscnum" column="oscnum" />
+		<result property="oscpayid" column="oscpayid" />
+		<result property="oscimpid" column="oscimpid" />
+		<result property="mnum" column="mnum" />
+
+	</resultMap>
+
+
+	<insert id="insertcomplete">
+		<![CDATA[
+		insert into orderlist (ordernum,mnum,payid) values
+		(9848,#{mnum},#{oscpayid})
+		]]>
+	</insert>
 
 </mapper>
