@@ -110,10 +110,16 @@
 										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
+<<<<<<< HEAD
 
 =======
 			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
 >>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+=======
+=======
+			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+>>>>>>> refs/remotes/origin/master
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -159,8 +165,15 @@
 											<i class="fa fa-user-plus">Sign Up</i>
 										</a>
 									</span>
+=======
+									<ul class="navbar-nav">
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
+										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
+									</ul>
+>>>>>>> refs/remotes/origin/master
 								</c:when>
 								<c:otherwise>
+<<<<<<< HEAD
 									<span class="userinfo" style="color:white">
 											<a href="${pageContext.request.contextPath}/user/memberInfo">
 												<i class="fa fa-user-secret">UserInfo</i>
@@ -172,6 +185,7 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
+<<<<<<< HEAD
 
 =======
 									<ul class="navbar-nav">
@@ -185,6 +199,14 @@
 										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
 									</ul>
 >>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+=======
+=======
+									<ul class="navbar-nav">
+										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
+									</ul>
+>>>>>>> refs/remotes/origin/master
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -206,11 +228,18 @@
 <<<<<<< HEAD
 		<div class="container" style="padding-bottom: 300px; margin-top: 150px;">
 			<div class="row" style="margin-top: 100px; margin-left:-100px">
+<<<<<<< HEAD
 
 =======
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 >>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+=======
+=======
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+>>>>>>> refs/remotes/origin/master
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 				<!-- 사이드바 -->
 				<div class="col-3">
 					<ul>
@@ -231,10 +260,15 @@
 					<div>
 <<<<<<< HEAD
 						<table class="table table table-bordered" width="500px" border="1" cellpadding="0" cellspacing="0" border="1">
+=======
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+>>>>>>> refs/remotes/origin/master
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">회원번호</th>
+<<<<<<< HEAD
 									<th scope="col">회원 아이디</th>
+<<<<<<< HEAD
 
 =======
 						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
@@ -243,6 +277,11 @@
 									<th scope="col">회원번호</th>
 									<th scope="col">이메일</th>
 >>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+=======
+=======
+									<th scope="col">이메일</th>
+>>>>>>> refs/remotes/origin/master
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 									<th scope="col">회원구분</th>
 									<th scope="col">삭제</th>
 								</tr>
@@ -400,6 +439,7 @@
 	</div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
@@ -417,7 +457,32 @@
 		</div>
 	</div>
 	<!-- Search model end -->
+=======
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Login model Begin -->
+	<%@ include file="../layout/login_model.jsp"%>
+	<!-- Login model end -->
+		<!-- Js Plugins -->
+	<%@ include file="../layout/foot_tags.jsp"%>
+=======
 	<!-- Js Plugins -->
 	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
@@ -427,7 +492,11 @@
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
 	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+<<<<<<< HEAD
 >>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+=======
+>>>>>>> refs/remotes/origin/master
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 
 
 

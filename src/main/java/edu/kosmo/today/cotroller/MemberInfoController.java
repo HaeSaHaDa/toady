@@ -16,7 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.service.MemberInfoService;
 import edu.kosmo.today.vo.MemberVO;
+<<<<<<< HEAD
 
+=======
+import edu.kosmo.today.vo.UserVO;
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,7 +49,7 @@ public class MemberInfoController {
 
 	// 회원정보 수정
 	@PutMapping("/memberInfo") // @RequestBody를 사용하면 json으로 온 데이터를 객체로 자동변환해줌
-	public ResponseEntity<String> memberInfoUpdate(@RequestBody UserVO memberVO, Model model) {
+	public ResponseEntity<String> memberInfoUpdate(@RequestBody MemberVO	 memberVO, Model model) {
 
 		ResponseEntity<String> entity = null;
 		log.info("memberInfoUpdate().. memberVO" + memberVO);
@@ -80,7 +84,7 @@ public class MemberInfoController {
 	
 	
 	@DeleteMapping("/memberLeave/{memail}")
-	public ResponseEntity<String> member_delete(UserVO memberVO,Model model) {
+	public ResponseEntity<String> member_delete(MemberVO memberVO,Model model) {
 		ResponseEntity<String> entity = null;
 		log.info("member_delete()..");
 

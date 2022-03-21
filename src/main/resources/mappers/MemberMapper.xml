@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace는 패키지 명 + 인터페이스명과 맞춰줘야한다. -->
 <mapper namespace="edu.kosmo.today.mapper.MemberMapper">
-	<resultMap id="userMap" type="edu.kosmo.today.vo.MemberAuthVO">
+	<resultMap id="userMap" type="edu.kosmo.today.vo.MemberVO">
 		<result property="mnum" column="mnum" />
 		<result property="mid" column="mid" />
 		<result property="mpassword" column="mpassword" />
@@ -18,7 +18,7 @@
 	</resultMap>
 
 
-	<select id="getList" resultType="edu.kosmo.today.vo.UserVO">
+	<select id="getList" resultType="edu.kosmo.today.vo.MemberVO">
    <![CDATA[
       select * from member,authority where member.mid = authority.mid
    ]]>
@@ -26,9 +26,9 @@
 
 
 	<!--회원 목록 상세보기 -->
-	<select id="read" resultType="edu.kosmo.today.vo.UserVO">
+	<select id="read" resultType="edu.kosmo.today.vo.MemberVO">
 	<![CDATA[
-		select * from member,authority where member.mid = authority.mid and member.mnum = #{mnum}
+		select * from member,authority where member.mid = authority.mid and mnum = #{mnum}
 	]]>
 	</select>
 
@@ -50,6 +50,10 @@
  		          SELECT * FROM (
               SELECT ROWNUM AS RNUM, A.* FROM (
                   select mnum , memail, mnickname, member.mid, auth  from member,authority where member.mid = authority.mid
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
              ) A WHERE ROWNUM <= #{pageNum} * #{amount}
          ) WHERE RNUM > (#{pageNum}-1) * #{amount}
 			

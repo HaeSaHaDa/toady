@@ -83,13 +83,15 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+<<<<<<< HEAD
 						<a href="${pageContext.request.contextPath}/todays"> <img src="img/logo.png" alt="" width="500">
+=======
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>

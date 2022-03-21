@@ -12,7 +12,10 @@ public class MemberVO {
 	private String mphone;
 	private String mbirth;
 	private int social;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 	private String auth;	
 
 }

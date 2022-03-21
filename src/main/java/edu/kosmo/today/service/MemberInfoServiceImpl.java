@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 
 import edu.kosmo.today.mapper.MemberInfoMapper;
 import edu.kosmo.today.vo.MemberVO;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 import lombok.extern.slf4j.Slf4j;
 
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전
@@ -23,26 +26,26 @@ public class MemberInfoServiceImpl implements MemberInfoService{
 	}
 
 	@Override
-	public UserVO getInfoList(int mnum) {
+	public MemberVO getInfoList(int mnum) {
 		
 		return memberInfoMapper.getMemberInfoList(mnum);
 	}
 
 	@Override
-	public void memberInfoModify(UserVO memberVO) {
+	public void memberInfoModify(MemberVO memberVO) {
 		memberInfoMapper.memberInfoUpdate(memberVO);		
 	}
 
 
 	@Override
-	public void remove(String mid) {
-		memberInfoMapper.delete(mid);
+	public void remove(String memail) {
+		memberInfoMapper.delete(memail);
 		
 	}
 
 	@Override
-	public void authDelete(String mid) {
-		memberInfoMapper.authDelete(mid);
+	public void authDelete(String memail) {
+		memberInfoMapper.authDelete(memail);
 	}
 
 }

@@ -24,6 +24,7 @@
 
 <title>마이페이지</title>
 
+<<<<<<< HEAD
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
@@ -40,6 +41,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 >>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+=======
+
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -133,7 +137,12 @@
 								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
+<<<<<<< HEAD
 >>>>>>> dev_okh_jsp
+=======
+
+>>>>>>> refs/remotes/origin/dev_okh_jsp
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -167,14 +176,25 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+<<<<<<< HEAD
 
+<<<<<<< HEAD
 
+=======
+=======
+r
+>>>>>>> refs/remotes/origin/dev_okh_jsp
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 						<ul>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
@@ -186,12 +206,17 @@
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
 						<div class="to-social">
+
 							<c:choose>
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
@@ -199,6 +224,7 @@
 									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
 									</a>
 									</span>
+
 								</c:when>
 								<c:otherwise>
 									<span class="userinfo" style="color: white"> 
@@ -208,10 +234,19 @@
 									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
 									</a>
 									</span>
+<<<<<<< HEAD
 									<a class="nav-link" style="color:white">${principal.user.memail}</a>
+=======
+									<a class="nav-link">${principal.user.memail}</a>
+
+>>>>>>> refs/remotes/origin/dev_okh_jsp
 								</c:otherwise>
 							</c:choose>
 						</div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 					</div>
 				</div>
 			</div>
@@ -279,6 +314,11 @@
 								</c:otherwise>
 							</c:choose>
 
+<<<<<<< HEAD
+=======
+
+						</form>
+>>>>>>> refs/remotes/origin/dev_okh_jsp
 
 						</form>
 					</div>

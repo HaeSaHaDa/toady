@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
@@ -177,6 +178,10 @@
                 
         </script>
 >>>>>>> 44c3f050df83ab8f9b078ff5e96e8d90ea7b9370
+=======
+<!-- 헤더 불러오는 부분 -->
+<%@ include file="../layout/header.jsp"%>
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 <div class="container">
 	<form name="form">
 		<div class="form-group">
@@ -193,17 +198,23 @@
 		</div>
 		<div class="form-group">
 			<label for="memail">Emial:</label> <input type="email" class="form-control" placeholder="Enter Email" id="memail" name="mail">
+
 		</div>
 		<div class="form-group">
 			<label for="mnickname">닉네임:</label> <input type="text" class="form-control" placeholder="Enter nickname" id="mnickname" name="nickname">
+
 		</div>
 		<div class="form-group">
 			<label for="mphone">전화번호:</label> <input type="text" class="form-control" placeholder="Enter phoneNumber" id="mphone" name="phone">
+
 		</div>
 		<div class="form-group">
 			<label for="mbirth">생년월일:</label> <input type="text" class="form-control" placeholder="Enter birthday" id="mbirth" name="birth">
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 		</div>
 	</form>
 	<button id="btn-save" class="btn btn-primary">회원가입하기</button>

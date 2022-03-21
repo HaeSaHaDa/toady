@@ -6,25 +6,28 @@ import org.apache.ibatis.annotations.Mapper;
 
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.MemberVO;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3d965d4262a93c1b95d2c88ebcd70fde3e844579
 import edu.kosmo.today.vo.NoteVO;
 import edu.kosmo.today.vo.UserVO;
 
 @Mapper
 public interface MemberMapper {
 
-	public List<UserVO> getList(); // 회원 목록 전체조회
+	public List<MemberVO> getList(); // 회원 목록 전체조회
 
-	public UserVO read(int mnum); // 회원 목록 상세보기
+	public MemberVO read(int mnum); // 회원 목록 상세보기
 
 	public void delete(int mnum); // 회원 삭제
 
 	public int getTotalCount(); // 페이징 처리 관련
 
-	public List<UserVO> getListPage(Criteria criteria);
+	public List<MemberVO> getListPage(Criteria criteria);
 
 
-	void update(UserVO memberVO); // 권한 수정
+	void update(MemberVO memberVO); // 권한 수정
 
 	public void nboardinsert(NoteVO noteVO);//// 쪽지 작성
 
