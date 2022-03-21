@@ -22,6 +22,7 @@
 
 
 
+
 <title>시설목록</title>
 
 </head>
@@ -135,6 +136,7 @@
 											</a>
 									</span>																			
 										<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
 						</div>

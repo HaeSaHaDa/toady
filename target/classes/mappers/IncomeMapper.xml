@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="edu.kosmo.today.mapper.IncomeMapper">
+
+	<select id="getWeekendIncome" resultType="edu.kosmo.today.vo.OrderVO">
+
+		select to_char(orderdate,'yy.mm.dd') as day, sum(cost) as income from
+		orderlist, orderdetail WHERE orderlist.orderdate BETWEEN
+		trunc(sysdate) - 7 and trunc(sysdate) group by orderdate order by orderdate asc
+
+	</select>
+
+	<select id="getMonthIncome" resultType="edu.kosmo.today.vo.OrderVO">
+
+		select to_char(orderdate,'yy.mm.dd') as day, sum(cost) as income from
+		orderlist, orderdetail WHERE orderlist.orderdate BETWEEN
+		trunc(sysdate) - 30 and trunc(sysdate) group by orderdate order by orderdate asc
+
+	</select>
+
+
+
+</mapper> 

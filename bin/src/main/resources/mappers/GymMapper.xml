@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.kosmo.today.mapper.GymMapper">
+
+	<resultMap id="gymList" type="edu.kosmo.today.vo.GymVO">
+		<result property="gnum" column="gnum" />		
+		<result property="gname" column="gname" />
+		<result property="gcategory" column="gcategory" />
+		<result property="gadress" column="gadress" />
+		<result property="gphone" column="gphone" />
+		<result property="ginform" column="ginform" />
+		<result property="gtime" column="gtime" />
+		<result property="gfacility" column="gfacility" />
+		<result property="gsns" column="gsns" />
+		<result property="filename" column="filename" />
+	</resultMap>
+	
+	<resultMap id="ticket" type="edu.kosmo.today.vo.TicketVO">
+		<result property="tknum" column="tknum" />		
+		<result property="gnum" column="gnum" />
+		<result property="tcost" column="tcost" />
+		<!-- <result property="tdate" column="tdate" /> -->
+		<result property="tname" column="tname" />
+
+	</resultMap>
+	
+	<resultMap id="reviewList" type="edu.kosmo.today.vo.ReviewVO">
+		<result property="bid" column="bid" />		
+		<result property="bcontent" column="bcontent" />
+		<result property="bdate" column="bdate" />
+		<result property="mnum" column="mnum" />
+		<result property="tnum" column="tnum" />
+		<result property="grstar" column="grstar" />
+		<result property="gnum" column="gnum" />
+		<result property="ordernum" column="ordernum" />
+		<result property="tknum" column="tknum" />
+		<result property="mnickname" column="mnickname" />
+	</resultMap>
+
+
+	<select id="gymList" resultMap="gymList">
+		
+		select * from gympage
+		
+	</select>
+	
+	<select id="gymdetail" resultMap="gymList">
+		
+		select * from gympage where gnum = #{gnum}
+		
+	</select>
+	
+	<select id="getticket" resultMap="ticket">
+		
+		select * from ticket where gnum = #{gnum}
+		
+	</select>
+	
+	<select id="getReivew" resultMap="reviewList" >
+	<![CDATA[
+		      SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (                	
+		select boardlist.bid,boardlist.bcontent,boardlist.bdate,boardlist.mnum,
+		gymreview.grstar,gymreview.gnum,gymreview.ordernum,member.mnickname		 
+		from boardlist,gymreview,member where
+		 boardlist.bid = gymreview.bid and boardlist.mnum = member.mnum  and gymreview.gnum = #{gnum}
+             ) A WHERE ROWNUM <= #{criteria.pagenum} * #{criteria.amount}
+         ) WHERE RNUM > (#{criteria.pagenum}-1) * #{criteria.amount}
+        	]]> 
+	</select>
+	
+	<select id="getReviewTotal" resultType="_int">
+		select count(*) from gymreview where gnum = #{gnum}
+	</select>
+	
+	<select id="getstarAvg" resultType="_int">
+		select grstar from gymreview where gnum = #{gnum}
+	</select>
+	
+	<select id="getGnum" resultType="_int">
+		select gnum from gympage where mnum = #{mnum}
+	</select>
+
+	
+	<select id="getReivewlist" resultMap="reviewList" >
+	<![CDATA[
+		      SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (                	
+		select boardlist.bid,boardlist.bcontent,boardlist.bdate,boardlist.mnum,
+		gymreview.grstar,gymreview.gnum,gymreview.ordernum,member.mnickname		 
+		from boardlist,gymreview,member where
+		 boardlist.bid = gymreview.bid and boardlist.mnum = member.mnum  and gymreview.gnum = #{gnum}
+             ) A WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+         ) WHERE RNUM > (#{criteria.pageNum}-1) * #{criteria.amount}
+        	]]> 
+	</select>
+	
+	<insert id="deleteRequest">
+		insert into boardlist (bid,bcontent,mnum,tnum) values
+		(BOARD_SEQ.nextval,#{ment},#{mnum},6) 
+	</insert>
+
+	<select id="checkRequest" resultType="_int">
+		select count(*) from boardlist where bcontent like #{ment} and mnum = #{mnum}
+	</select>
+	
+	<select id="getLeviewList" resultMap="reviewList" >
+	<![CDATA[
+		      SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (                	
+		select boardlist.bid,boardlist.bcontent,boardlist.bdate,boardlist.mnum,
+		gymreview.grstar,gymreview.gnum,gymreview.ordernum,member.mnickname		 
+		from boardlist,gymreview,member where
+		 boardlist.bid = gymreview.bid and boardlist.mnum = member.mnum order by boardlist.bdate
+             ) A WHERE ROWNUM <= #{pageNum} * #{amount}
+         ) WHERE RNUM > (#{pageNum}-1) * #{amount}
+        	]]> 
+	</select>
+	
+	<select id="getTotal2" resultType="_int">
+		select count(*) from boardlist where tnum = 7
+	</select>
+	
+	<delete id="deleteReview1">
+	<![CDATA[
+
+		delete from boardlist where bid = #{bid}		
+		
+		]]> 
+	</delete>
+	<delete id="deleteReview2">
+	<![CDATA[
+
+		delete from gymreview where bid = #{bid}		
+		
+		]]> 
+	</delete>
+	
+</mapper>

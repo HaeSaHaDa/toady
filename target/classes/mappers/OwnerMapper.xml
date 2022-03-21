@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 패키지 명 + 인터페이스명과 맞춰줘야한다. -->
+<mapper namespace="edu.kosmo.today.mapper.OwnerMapper">
+
+	<select id="getOrderList"
+		resultType="edu.kosmo.today.vo.OrderListVO">
+		SELECT m.mnum, m.memail,m.mnickname, m.mphone,
+		m.mbirth,ol.orderdate, od.cost, t.tname, t.tcost
+		FROM member m, orderlist ol, orderdetail od, ticket t
+		WHERE m.mnum = ol.mnum AND ol.ordernum = od.ordernum AND od.tknum = t.tknum
+		and ol.mnum = #{mnum}
+	</select>
+
+	<!-- 회원 번호 가져오기 -->
+	<select id="getMemberNum" resultType="int">
+		select * from member where
+		mid = #{mid}
+	</select>
+
+</mapper>

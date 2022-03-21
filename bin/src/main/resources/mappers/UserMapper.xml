@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.kosmo.today.mapper.UserMapper">
+
+	<resultMap id="userMap" type="edu.kosmo.today.vo.UserVO">
+		<result property="mnum" column="mnum" />
+		<result property="mid" column="mid" />		
+		<result property="mpassword" column="mpassword" />
+		<result property="memail" column="memail" />
+		<result property="mnickname" column="mnickname" />
+		<result property="mphone" column="mphone" />
+		<result property="mbirth" column="mbirth" />
+		<result property="social" column="social" />
+		
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+
+	<resultMap id="authMap" type="edu.kosmo.today.vo.AuthVO">
+		<result property="mid" column="mid" />
+		<result property="auth" column="auth" />
+	</resultMap>
+
+	<select id="getUser" resultMap="userMap">
+		select * from member , authority
+		where member.mid = authority.mid and member.mid = #{mid}
+	</select>
+
+	
+</mapper>

@@ -24,7 +24,6 @@
 
 <title>마이페이지</title>
 
-
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -182,7 +181,6 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -250,11 +248,7 @@
 								</c:otherwise>
 							</c:choose>
 
-<<<<<<< HEAD
-=======
 
-						</form>
->>>>>>> refs/remotes/origin/dev_okh_jsp
 
 						</form>
 					</div>

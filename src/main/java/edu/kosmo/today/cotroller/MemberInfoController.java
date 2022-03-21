@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.service.MemberInfoService;
 import edu.kosmo.today.vo.MemberVO;
-import edu.kosmo.today.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

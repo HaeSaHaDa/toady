@@ -23,102 +23,95 @@
 <title>FAQ관리</title>
 
 <script type="text/javascript">
-		$(document).ready(function () {
-			
-		    
-			$("#submitfaq").on("click",function(e){
-				var token = $("meta[name='_csrf']").attr("content");
-			    var header = $("meta[name='_csrf_header']").attr("content");
-				
-				 var btitle = $("#btitle").val();
-		         var bcontent = $("#bcontent").val();
-				
-		         console.log(bcontent);
-		         
-		         
-		         var form = {
-		        		 btitle : btitle,
-		        		 bcontent : bcontent
-		         }
-		         
-		         console.log(JSON.stringify(form));
-		         
-		         $.ajax({
-		             type : "POST",
-		             url : "/admin/insertfaq",
-		             beforeSend : function(xhr){
-		    			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
-		    		},
-		             cache : false,
-		             contentType:'application/json; charset=utf-8',
-		             data: JSON.stringify(form), 
-		             success: function (result) {       
-		               if(result == "SUCCESS"){
-		                  //list로               
-		                  $(location).attr('href', '${pageContext.request.contextPath}/admin/faqpage');                            
-		               }                       
-		             },
-		             error: function (e) {
-		                 console.log(e);
-		             }
-		         })		         
-			});
-			
-			
-			$(".view-content").on("click",function(){	
-				var token = $("meta[name='_csrf']").attr("content");
-			    var header = $("meta[name='_csrf_header']").attr("content");
-			    
-				console.log("FAQ글보기");
-				
-				let bid = $(this).parents("tr").find("input").val();
-				console.log("faq글번호"+bid);
-				let divcontent = $(this).parents("tr");
-				console.log(divcontent+".....");
-				
-				let url = "${pageContext.request.contextPath}/admin/faqpage/"+bid;
-				
-				let faqContent = divcontent.next("tr").find("input").val();
-				console.log(faqContent);
-				
-				if(faqContent == bid){
-					divcontent.next("tr").remove();
-				}else{
-					 $.ajax({
-			               type: 'POST',
-			               url: url,
-			               dataType: 'JSON',
-			               beforeSend : function(xhr){
-				    		 xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
-				    		},
-			               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
-			               success: function(result) {
-								
-			            	console.log(result);
-			            	   
-			               var htmls="";
-			               
-
-			           		htmls += '<tr>';
-			           		htmls += '<input type="hidden" value='+result.bid+'>';
-			          		htmls += '<td colspan="3">'+result.bcontent+'</td>';
-			           		htmls += '</tr>';	           		
-
-			           		divcontent.after(htmls);		           		
-			               
-			              }
-
-			         });
-				}
-
-				
-			});
-			
-		
-		})
-		
+$(document).ready(function () {
 	
+    
+	$("#submitfaq").on("click",function(e){
+		var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
 		
+		 var btitle = $("#btitle").val();
+         var bcontent = $("#bcontent").val();
+		
+         console.log(bcontent);
+         
+         
+         var form = {
+        		 btitle : btitle,
+        		 bcontent : bcontent
+         }
+         
+         console.log(JSON.stringify(form));
+         
+         $.ajax({
+             type : "POST",
+             url : "/admin/insertfaq",
+             beforeSend : function(xhr){
+    			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+    		},
+             cache : false,
+             contentType:'application/json; charset=utf-8',
+             data: JSON.stringify(form), 
+             success: function (result) {       
+               if(result == "SUCCESS"){
+                  //list로               
+                  $(location).attr('href', '${pageContext.request.contextPath}/admin/faqpage');                            
+               }                       
+             },
+             error: function (e) {
+                 console.log(e);
+             }
+         })		         
+	});
+	
+	
+	$(".view-content").on("click",function(){	
+		var token = $("meta[name='_csrf']").attr("content");
+	    var header = $("meta[name='_csrf_header']").attr("content");
+	    
+		console.log("FAQ글보기");
+		
+		let bid = $(this).parents("tr").find("input").val();
+		console.log("faq글번호"+bid);
+		let divcontent = $(this).parents("tr");
+		console.log(divcontent+".....");
+		
+		let url = "${pageContext.request.contextPath}/admin/faqpage/"+bid;
+		
+		let faqContent = divcontent.next("tr").find("input").val();
+		console.log(faqContent);
+		
+		if(faqContent == bid){
+			divcontent.next("tr").remove();
+		}else{
+			 $.ajax({
+	               type: 'POST',
+	               url: url,
+	               dataType: 'JSON',
+	               beforeSend : function(xhr){
+		    		 xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+		    		},
+	               cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
+	               success: function(result) {
+						
+	            	console.log(result);
+	            	   
+	               var htmls="";
+	               
+	           		htmls += '<tr>';
+	           		htmls += '<input type="hidden" value='+result.bid+'>';
+	          		htmls += '<td colspan="3">'+result.bcontent+'</td>';
+	           		htmls += '</tr>';	           		
+	           		divcontent.after(htmls);		           		
+	               
+	              }
+	         });
+		}
+		
+	});
+	
+
+})	
 	
 	</script>
 </head>
@@ -183,6 +176,7 @@
 				<div class="col-lg-3">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+
 						</a>
 					</div>
 				</div>

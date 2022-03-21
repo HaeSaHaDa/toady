@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace는 패키지 명 + 인터페이스명과 맞춰줘야한다. -->
+<mapper namespace="edu.kosmo.today.mapper.MemberInfoMapper">
+
+
+	<!-- 회원 번호 가져오기 -->
+	<select id="getMemberInfoNum" resultType="_int">
+		select * from member where mid = #{mid}
+	</select>
+
+	<!-- 회원 정보 목록 가져오기 -->
+	<select id="getMemberInfoList" resultType="edu.kosmo.today.vo.MemberVO">
+		select * from member where member.mnum = #{mnum}
+	</select>
+
+
+	<!--회원 정보 수정하기 -->
+	<update id="memberInfoUpdate">
+	<![CDATA[
+		update member set mnickname = #{mnickname}, mphone = #{mphone} where mid = #{mid}
+	]]>
+	</update>
+
+
+	<!-- 권한 삭제(탈퇴) -->
+	<delete id="authDelete">
+	<![CDATA[
+		delete from authority where mid = #{mid}
+	]]>
+	</delete>
+
+	<!-- 회원 정보 삭제(탈퇴) -->
+	<delete id="delete">
+	<![CDATA[
+		delete from member where mid = #{mid}
+	]]>
+	</delete>
+
+
+</mapper>

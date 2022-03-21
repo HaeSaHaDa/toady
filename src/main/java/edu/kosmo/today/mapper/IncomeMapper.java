@@ -10,6 +10,7 @@ public interface IncomeMapper {
 	public List<OrderVO> getWeekendIncome();
 	public List<OrderVO> getMonthIncome();
 
+
 	public List<OrderVO> gymWeekend();
 	public List<OrderVO> gymMonth();
 

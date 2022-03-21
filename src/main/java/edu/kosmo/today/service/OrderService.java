@@ -35,22 +35,22 @@ public class OrderService {
 
 	// 이용권갯수 구하기
 	public int getTotal(String mid) {
-		
+
 		int mnum = mapper.getMemberNum(mid);
-		
-		log.info("이용권 총 갯수구하는 중"+mapper.getTotal(mnum));
+
+		log.info("이용권 총 갯수구하는 중" + mapper.getTotal(mnum));
 
 		return mapper.getTotal(mnum);
 
 	}
 
 	// 리스트 가져오기
-	public List<OrderVO> getTicketList(Criteria2 criteria,String mid) {
-		log.info("이용권목록 뽑는중.."+criteria,mid);
+	public List<OrderVO> getTicketList(Criteria2 criteria, String mid) {
+		log.info("이용권목록 뽑는중.." + criteria, mid);
 		int mnum = mapper.getMemberNum(mid);
-		System.out.println("....회원번호찾음"+mid);
-		
-		log.info(".."+mapper.getTicketList(criteria, mnum));
+		System.out.println("....회원번호찾음" + mid);
+
+		log.info(".." + mapper.getTicketList(criteria, mnum));
 
 		return mapper.getTicketList(criteria, mnum);
 	}
@@ -79,6 +79,40 @@ public class OrderService {
 			return 0;
 		}
 
+	}
+
+	// 환불신청하기
+	public void insertrequest(String payid, String ordernum, String tknum, int mnum) {
+		log.info("환불신청중----" + ordernum + "0000" + mnum);
+
+		String ment = "환불신청 회원번호 : " + mnum + " 주문번호 : " + ordernum + " 결제번호 : " + payid + " 이용권번호 : " + tknum;
+
+		System.out.println(ment);
+
+		mapper.requestPayback(ment, mnum);
+	}
+
+	// 환불요청확인하기
+	public int checkRequst(int mnum, String ordernum, String tknum) {
+		System.out.println("환불요청체크중");
+
+		String ment1 = "%주문번호 : " + ordernum + "%";
+		String ment2 = "%이용권번호 : " + tknum + "%";
+
+		return mapper.checkRequest(mnum, ment1, ment2);
+	}
+
+	// 요청 리스트 보기
+	public List<FaqVO> requestList(Criteria cri) {
+		System.out.println("요청리스트보는 곳");
+
+		return mapper.requetList(cri);
+	}
+
+	// 요청리스트 갯수
+	public int totalRequest() {
+
+		return mapper.totalRequet();
 	}
 
 }

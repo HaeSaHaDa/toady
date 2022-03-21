@@ -214,6 +214,16 @@
 								<tr>
 									<th scope="col">회원번호</th>
 									<th scope="col">회원 아이디</th>
+=======
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">회원번호</th>
+									<th scope="col">이메일</th>
+
+									<th scope="col">이메일</th>
+
+>>>>>>> 9c44a8e3cb6955f6a1ac46a3335e44d6a218cb25
 									<th scope="col">회원구분</th>
 									<th scope="col">삭제</th>
 								</tr>
