@@ -17,25 +17,8 @@
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+<%@ include file="../layout/head_tags.jsp"%>
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css">
-<link rel="stylesheet" href="<c:url value ="css/main.css"/>" type="text/css">
-
-<!--Script ajax,icon -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://use.fontawesome.com/3f2fcd4ff5.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
 
 <title>마이페이지</title>
 
@@ -50,18 +33,8 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<ul>
-				<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-				</sec:authorize>
-				<sec:authorize access="hasRole('USER')">
-					<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-				</sec:authorize>
-			</ul>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -99,18 +72,8 @@
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
-							</sec:authorize>
-						</ul>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -156,31 +119,21 @@
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
-					<ul>
-						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/faqBoard">FAQ</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/registerGym">시설 등록 신청</a></li>
-						<sec:authorize access="hasRole('USER')">
-							<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
-						</sec:authorize>
-					</ul>
+					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-8">
-				
-				<h1 class="text-center" style="color:white" >결제 완료</h1>
-				<h3 class="text-center" style="color:white" >이용해주셔서 감사합니다!</h3>
-				<div class="text-center" style="margin-top:70px"><button type="button" class="btn btn-warning"><a href="/today" style="text-decoration:none; color:black">HOME</a></button></div>
+
+					<h1 class="text-center" style="color: white">결제 완료</h1>
+					<h3 class="text-center" style="color: white">이용해주셔서 감사합니다!</h3>
+					<div class="text-center" style="margin-top: 70px">
+						<button type="button" class="btn btn-warning">
+							<a href="/today" style="text-decoration: none; color: black">HOME</a>
+						</button>
+					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</section>
@@ -307,38 +260,38 @@
 
 
 	<!-- Login model Begin -->
-	   <!-- Login model Begin -->
-   <div class="search-model">
-      <div class="h-100 d-flex align-items-center justify-content-center">
-         <div class="search-close-switch">+</div>
-         <div class="container" style="width: 50%">
-            <form action="/common/loginProc" method="post">
-               <div class="form-group">
-                  <label for="mid" style="color: white">Username:</label> <input type="text" name="mid" class="form-control" placeholder="Enter Username" id="mid">
-               </div>
-               <div class="form-group">
-                  <label for="mpassword" style="color: white">Password:</label> <input type="password" name="mpassword" class="form-control" placeholder="Enter password" id="mpassword">
-               </div>
+	<!-- Login model Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<div class="container" style="width: 50%">
+				<form action="/common/loginProc" method="post">
+					<div class="form-group">
+						<label for="mid" style="color: white">Username:</label> <input type="text" name="mid" class="form-control" placeholder="Enter Username" id="mid">
+					</div>
+					<div class="form-group">
+						<label for="mpassword" style="color: white">Password:</label> <input type="password" name="mpassword" class="form-control" placeholder="Enter password" id="mpassword">
+					</div>
 
-               <button id="btn-login" class="btn btn-dark" style="color: white">Log-In</button>
-               <a href="/oauth2/authorization/kakao"> <img height="38px" src="/img/kakao_login_button3.png" /></a> <a href="/oauth2/authorization/google"><img height="38px"
-                  src="/img/google_login_button2.png"></a> <a href="/oauth2/authorization/naver"><img height="38px" src="/img/naver_login_button.png"></a>
-            </form>
+					<button id="btn-login" class="btn btn-dark" style="color: white">Log-In</button>
+					<a href="/oauth2/authorization/kakao"> <img height="38px" src="/img/kakao_login_button3.png" /></a> <a href="/oauth2/authorization/google"><img height="38px"
+						src="/img/google_login_button2.png"></a> <a href="/oauth2/authorization/naver"><img height="38px" src="/img/naver_login_button.png"></a>
+				</form>
 
-         </div>
-      </div>
-   </div>
-   <!-- Login model end -->
+			</div>
+		</div>
+	</div>
+	<!-- Login model end -->
 	<!-- Login model end -->
 	<!-- Js Plugins -->
 	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
-   <script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
-   <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 
 </body>
