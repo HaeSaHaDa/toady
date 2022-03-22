@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -40,11 +41,11 @@
 				<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 				<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-				<sec:authorize access="hasRole('USER')">
+				<sec:authorize access="hasAnyRole('USER','BUSINESS')">
 					<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 					<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 				</sec:authorize>
-				<sec:authorize access="hasRole('USER')">
+				<sec:authorize access="hasAnyRole('USER','BUSINESS')">
 					<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 				</sec:authorize>
 			</ul>
@@ -66,10 +67,11 @@
 					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
 					</a>
 					</span>
-					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-					</a>
-					</span>
-					<a class="nav-link">${principal.user.memail}</a>
+					<body ng-controller="moniteringCtrl" class="pad">
+						<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+						</a>
+						</span>
+						<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -93,11 +95,11 @@
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
+							<sec:authorize access="hasAnyRole('USER','BUSINESS')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
+							<sec:authorize access="hasAnyRole('USER','BUSINESS')">
 								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
@@ -120,7 +122,7 @@
 									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
 									</a>
 									</span>
-									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/logout"> <i class="fa fa-sign-out">Log Out</i>
 									</a>
 									</span>
 									<a class="nav-link">${principal.user.memail}</a>

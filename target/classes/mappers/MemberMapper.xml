@@ -67,7 +67,7 @@
 	<![CDATA[
  		          SELECT * FROM (
               SELECT ROWNUM AS RNUM, A.* FROM (
-                  select mnum , memail, mnickname, auth from member,authority where member.mid = authority.mid and auth = 'ROLE_USER'
+                  select mnum, member.mid , memail, mnickname, auth from member,authority where member.mid = authority.mid and auth = 'ROLE_USER'
              ) A WHERE ROWNUM <= #{pageNum} * #{amount}
          ) WHERE RNUM > (#{pageNum}-1) * #{amount}
 			

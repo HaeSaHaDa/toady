@@ -57,11 +57,12 @@ public class AdminController {
 		return "admin";
 	}
 	
-	@RequestMapping("/gymListInventory")
-	public String getGymLists(Model model) {
+	@RequestMapping(value="/gymListInventory", method=RequestMethod.GET)
+	public ModelAndView getGymLists(Model model, ModelAndView mav) {
 		List<GymListVO> gymLists = gymListService.getGymLists();//getGymLists에서 직접가져와서
-		model.addAttribute("gymLists", gymLists);// 추가후에 그 값을 모델에 저장함
-		return "gymListInventory"; // view의 jsp name
+		mav.addObject("gymLists", gymLists);// 추가후에 그 값을 모델에 저장함
+		mav.setViewName("/admin/gymListInventory");
+		return mav; // view의 jsp name
 	}
 	
 	@RequestMapping(value="/gymListInventory/addGymList", method=RequestMethod.GET) //getmethod

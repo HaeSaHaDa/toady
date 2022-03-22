@@ -194,7 +194,7 @@
 					<ul>
 						<li><a href="/admin/manageMember">회원 관리</a></li>
 						<li><a href="/admin/ownerList">헬스장 사장님 관리</a></li>
-						<li><a href="#">헬스장 관리</a></li>
+						<li><a href="/admin/gymListInventory">헬스장 관리</a></li>
 						<li><a href="#">헬스장 신청서 목록</a></li>
 						<li><a href="#">찜 결제 관리</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
@@ -221,7 +221,7 @@
 							<c:forEach var="member" items="${memberList}">
 								<tr class="table-light">
 									<td>${member.mnum}</td>
-									<td><a href="./manageMember/${member.mnum}">${member.memail}</a></td>
+									<td><a href="./manageMember/${member.mnum}">${member.mid}</a></td>
 									<td>${member.auth}</td>
 
 									<td><a class="m-delete" data-bid='${member.mnum}' href="./manageMember/${member.mnum}">삭제</a></td>
