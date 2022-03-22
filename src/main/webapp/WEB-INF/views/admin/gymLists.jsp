@@ -144,7 +144,15 @@
 		</div>
 	</header>
 	<!-- Header End -->
-
+	<!--마이페이지 내용물 시작-->
+	<section class="classes-section spad">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+				<div class="col-4">
+					<%@ include file="../layout/adminmenu.jsp"%>
+				</div>
+				<!-- 사이드바 끝 -->
 	<div class="container-wrapper">
 		<div class="container">
 			<h2>헬스장 리스트</h2>

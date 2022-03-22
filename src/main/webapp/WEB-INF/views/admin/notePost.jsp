@@ -149,28 +149,18 @@
 
 	<!-- ChoseUs Section End -->
 
-	<!--마이페이지 내용물 시작-->
-	<section class="classes-section spad">
-		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-			<div class="row" style="margin-top: 100px;">
-				<!-- 사이드바 -->
-				<div class="col-4">
-					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
-						<li><a href="#">헬스장 관리</a></li>
-						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
-						<li><a href="#">1:1 답변 관리</a></li>
-						<li><a href="#">공지/이벤트 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/totalSales">매출 관리</a></li>
-					</ul>
-				</div>
-				<!-- 사이드바 끝 -->
-				<!-- 내용물 -->
-				<div class="col-8 text-white">
-					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+<!--마이페이지 내용물 시작-->
+<section class="classes-section spad">
+	<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="row" style="margin-top: 100px;">
+			<!-- 사이드바 -->
+			<div class="col-4">
+					<%@ include file="../layout/adminmenu.jsp"%>
+			</div>
+			<!-- 사이드바 끝 -->
+			<!-- 내용물 -->
+			<div class="col-8">
+				<!-- 내용물 시작 -->
 					<div>
 						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
 							<c:url value="/admin/notePost" var="enrollUrl" />
@@ -194,11 +184,14 @@
 							</form:form>
 						</table>
 					</div>
-				</div>
+
+				
+				<!-- 내용물 끝 -->
 			</div>
 		</div>
-	</section>
-	<!-- 내용물 끝 -->
+	</div>
+</section>
+<!-- 마이페이지 내용물 끝 -->
 
 
 	<!-- Get In Touch Section Begin -->
