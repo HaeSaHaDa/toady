@@ -19,7 +19,7 @@ public class GymListVO {
 	private int mnum;
 	private String gname;
 	private String gcategory;
-	private String gadress;
+	private String gaddress;
 	private String gphone;
 	private String ginform;
 	private String gtime;
