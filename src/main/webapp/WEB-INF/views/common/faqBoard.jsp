@@ -203,16 +203,16 @@
 
 
 						<c:if test="${pageMaker.pre}">
-							<a href="/user/faqboard${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+							<a href="/common/faqboard${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
 						<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
-							<a href="/user/faqboard${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="/common/faqboard${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="/user/faqboard${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
+							<a href="/common/faqboard${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
 						</c:if>
 						<br>
 				</div>
