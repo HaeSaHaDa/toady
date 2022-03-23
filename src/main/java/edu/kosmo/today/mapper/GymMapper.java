@@ -19,7 +19,9 @@ import edu.kosmo.today.vo.TicketVO;
 public interface GymMapper {
 
 	// 시설 목록 뽑기
-	public List<GymVO> gymList();
+	public List<GymVO> gymList(Criteria cri);
+	//시설갯수
+	public int getGymTotal();
 
 	// 시설상세화면
 	public GymVO gymdetail(int gnum);

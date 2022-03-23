@@ -15,7 +15,7 @@
 		<result property="gtime" column="gtime" />
 		<result property="gfacility" column="gfacility" />
 		<result property="gsns" column="gsns" />
-		<result property="filename" column="filename" />
+		<result property="imagename" column="imagename" />
 	</resultMap>
 	
 	<resultMap id="ticket" type="edu.kosmo.today.vo.TicketVO">
@@ -43,9 +43,14 @@
 
 
 	<select id="gymList" resultMap="gymList">
-		
-		select * from gympage
-		
+		<![CDATA[
+ 		          SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (
+                 SELECT * FROM gympage 
+             ) A WHERE ROWNUM <= #{pageNum} * #{amount}
+         ) WHERE RNUM > (#{pageNum}-1) * #{amount}
+			
+	]]>
 	</select>
 	
 	<select id="gymdetail" resultMap="gymList">
@@ -137,5 +142,9 @@
 		
 		]]> 
 	</delete>
+	
+	<select id="getGymTotal" resultType="_int">
+		select count(*) from gympage
+	</select>
 
 </mapper>

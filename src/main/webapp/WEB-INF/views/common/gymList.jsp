@@ -16,10 +16,15 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" type="text/css">
 
 <%@ include file="../layout/head_tags.jsp"%>
-
+<style type="text/css">
+	.ci-pic img {
+		width: 150px;
+		height: 200px;
+	}
+</style>
 
 
 
@@ -131,7 +136,7 @@
 					<div class="col-lg-4 col-md-6">
 						<div class="class-item">
 							<div class="ci-pic">
-								<img src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="">
+								<img src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="">
 							</div>
 							<div class="ci-text">
 								<span>${gym.gcategory}</span>
@@ -142,6 +147,23 @@
 					</div>
 				</c:forEach>
 			</div>
+			<nav class="pagination-outer mb-2" aria-label="Page navigation">
+     <ul class="pagination justify-content-center text-center">
+      <c:if test="${pageMaker.pre}">
+		<li class="page-item"><a aria-label="Previous" class="page-link" href="${pageContext.request.contextPath}/common/gymlist/${gym.gnum}${pageMaker.makeQuery(pageMaker.startPage - 1) }">
+		<span aria-hidden="true">«</a></span></li>
+		</c:if>
+
+		<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+		<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage}">
+			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/common/gymlist/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
+			</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/common/gymlist/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}">
+							<span aria-hidden="true">»</span> </a></li>
+				</c:if>					
+		</ul>
+  		</nav>
 		</div>
 	</section>
 	<!-- 시설목록끝 -->
