@@ -25,7 +25,7 @@
 			//<td class="delete_review">X</td>
 			
 			$(".delete_review").on("click",function(){
-				console.log("리뷰삭제요청하기");
+				console.log("리뷰삭제하기");
 				
 				let bid = $(this).parent("tr").find("input").val();
 		    	   
