@@ -2,18 +2,15 @@ package edu.kosmo.today.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
+import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.OrderVO;
 import edu.kosmo.today.vo.ReviewVO;
-import edu.kosmo.today.vo.TicketVO;
-import edu.kosmo.today.vo.UserVO;
-import edu.kosmo.today.vo.WishVO;
 
 /*
  * 0314 이용권
@@ -52,5 +49,9 @@ public interface OrderMapper {
 
 	// 환불요청갯수
 	public int totalRequet();
+	
+	//결제완료 주문저장
+	   public void insertcomplete(CompleteVO completevo);
+	
 
 }

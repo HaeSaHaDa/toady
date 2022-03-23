@@ -22,6 +22,23 @@
 
 
 <title>오늘의 짐</title>
+
+<!-- ajax -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet"	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+<script	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js" type="text/javascript"></script>
+<!-- axios -->
+<!-- <script src="./node_modules/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<!-- 다음 주소 -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+</head>
 <style>
 .checkout-form .checkout-title {
 	font-weight: 400;
@@ -122,19 +139,8 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -178,19 +184,8 @@
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -243,7 +238,12 @@
 							<h4 class="checkout-title">주문정보입력</h4>
 							<div class="row">
 								<div class="col-md-8 mb-2">
-									<input type="text" placeholder="이름을 입력해주세요"> <input type="text" placeholder="핸드폰번호"> <input type="email" placeholder="이메일주소"> <input type="date" id="startDate">
+
+								
+									<input type="text" placeholder="이름을 입력해주세요" id="buyer_name">
+									 <input	type="text" placeholder="핸드폰번호" id="buyer_tel"> 
+									 <input type="email"  placeholder="이메일주소" id="buyer_email">
+									 <input type="date" id="startDate" >
 								</div>
 								<div class="col-md-8">
 									<div class="form-group">
@@ -258,7 +258,7 @@
 									<div class="form-group">
 										<input class="form-control" placeholder="상세주소" name="addr3" id="addr3" type="text" />
 									</div>
-
+								
 
 
 
@@ -296,7 +296,8 @@
 										</table>
 									</div>
 								</div>
-								<button class="site-btn btn-full">결제하기</button>
+								<button id="payment_mudule" class="site-btn btn-full" type="button">결제하기</button>
+								
 							</div>
 						</div>
 					</div>
@@ -511,11 +512,80 @@
 			}).open();
 		}
 	</script>
-
+	
+	<script>
+	
+	
+            $("#payment_mudule").click(function () {
+                
+            	var bName = $('#buyer_name').val();
+            	var bTel = $('#buyer_tel').val();
+            	var bEmail =$('#buyer_email').val(); 
+            	var adr = $('#addr2').val()+$('#addr3').val();
+            	var post = $('#addr1').val(); 
+            	var mnum = ${principal.user.mnum};
+            	var totalamount =100;/*  parseInt($(".totalprice").text(), 10); */
+            	
+            	var IMP = window.IMP; // 생략가능
+            	IMP.init('imp01979841');// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용 i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+            	
+                IMP.request_pay({
+                    //pg: 'inicis', // version 1.1.0부터 지원.                 
+				    pg : 'html5_inicis',
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : '인규테스트',
+				    amount :  totalamount,
+				    buyer_email : bEmail,//'test@test',
+				    buyer_name : bName,//'송인규',
+				    buyer_tel : bTel,//'010-1234-3124',
+				    buyer_addr : adr,
+				    buyer_postcode : post
+				}, function(rsp) {
+				    if ( rsp.success ) {
+				        var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        console.log(msg);
+				        alert(rsp.paid_amount + "원 결제 완료");
+				     
+				        
+			        	$.ajax({
+				        	url:"/completePay",
+				        	type:'POST',
+				        	/* ContentType:"application/json; charset=utf-8", */
+				        	dataType: 'json',
+				        	data:{
+				        		merchantid: rsp.merchant_uid,
+	                            impid : rsp.imp_uid,
+	                            mnum: mnum,
+	                         	paidamount : rsp.paid_amount		 
+				        	} /* JSON.stringify(data) */
+				        	
+				        }).done(function(result){
+				        	console.log("페이지이동함?-1")
+				        			        	
+				        	if(result.successPayment){
+				        		console.log("페이지이동함?-2")
+				        		location.href = "/user/complete"
+				        	}else{
+				        		 var msg = '결제에 실패하였습니다.';
+							        msg += '에러내용 : ' + rsp.error_msg;
+							        alert(msg);
+				        	}
+				        })
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				        alert(msg);
+				    }})
+				});
+        </script>
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
-
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>

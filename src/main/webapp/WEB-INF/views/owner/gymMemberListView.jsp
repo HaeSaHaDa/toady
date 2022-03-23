@@ -11,25 +11,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<style type="text/css">
-</style>
+<%@ include file="../layout/head_tags.jsp"%>
 
 
-<title>어드민 페이지</title>
+<title>마이페이지</title>
+<script type="text/javascript">
+	$(document).ready(function() {
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+		$(".member-delete").click(function(event) {
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="/css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="/css/barfiller.css" type="text/css">
-<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="/css/style.css" type="text/css">
+			if (confirm("정말 삭제하시겠습니까 ?") == true) {
+
+			} else {
+				return false;
+			}
+
+			event.preventDefault();
+			console.log("ajax 호출전");
+
+			var trObj = $(this).parent().parent();
+			console.log($(this).attr("href"));
+
+			$.ajax({
+				type : "DELETE",
+				url : $(this).attr("href"),
+				success : function(result) {
+					console.log(result);
+					if (result == "SUCCESS") {
+						$(trObj).remove();
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+
+		});
+
+	});
+</script>
 </head>
 
 <body>
@@ -48,22 +68,29 @@
 			<i class="fa fa-search"></i>
 		</div>
 		<nav class="canvas-menu mobile-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="/user/wishlist">찜</a></li>
-							<li><a href="./services.html">지도</a></li>
-							<li><a href="/common/gymlist">시설찾기</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="./user/myTicket">mypage</a></li>
-							</sec:authorize>
-							<li><a href="./common/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
-							</sec:authorize>
-						</ul>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a>
+			<c:choose>
+				<c:when test="${empty principal}">
+					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+					</span>
+					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					</a>
+					</span>
+				</c:when>
+				<c:otherwise>
+					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					</a>
+					</span>
+					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+					</a>
+					</span>
+					<a class="nav-link">${principal.user.memail}</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
@@ -74,24 +101,14 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="/img/logo.png" alt="" width="500">
+						<a href="index"> <img src="/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="/user/wishlist">찜</a></li>
-							<li><a href="./services.html">지도</a></li>
-							<li><a href="/common/gymlist">시설찾기</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="./user/myTicket">mypage</a></li>
-							</sec:authorize>
-							<li><a href="./common/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
-							</sec:authorize>
-						</ul>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -102,18 +119,24 @@
 						<div class="to-social">
 							<c:choose>
 								<c:when test="${empty principal}">
-									<ul class="navbar-nav">
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/login">로그인</a></li>
-										<li class="nav-item"><a href="${pageContext.request.contextPath}/common/signup">회원가입</a></li>
-									</ul>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+									</a>
+									</span>
 								</c:when>
 								<c:otherwise>
-									<ul class="navbar-nav">
-										<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
-										<li class="nav-item"><a class="nav-link">${principal.user.memail}님 환영합니다.</a></li>
-									</ul>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									</a>
+									</span>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+									</a>
+									</span>
+									<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
+
 						</div>
 					</div>
 				</div>
@@ -121,7 +144,6 @@
 			<div class="canvas-open">
 				<i class="fa fa-bars"></i>
 			</div>
-
 		</div>
 	</header>
 	<!-- Header End -->
@@ -136,24 +158,41 @@
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
-					<ul>
-						<li><a href="/admin/manageMember">회원 관리</a></li>
-						<li><a href="#">헬스장 사장님 관리</a></li>
-						<li><a href="#">헬스장 관리</a></li>
-						<li><a href="#">헬스장 신청서 목록</a></li>
-						<li><a href="#">찜 결제 관리</a></li>
-						<li><a href="#">FAQ 관리</a></li>
-						<li><a href="#">1:1 답변 관리</a></li>
-						<li><a href="#">공지/이벤트 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/totalSales">매출 관리</a></li>
-
-					</ul>
+					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-8">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
-					<div></div>
+					<div>
+						<h2 style="color: white;">회원 목록</h2>
+						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">회원번호</th>
+									<th scope="col">이메일</th>
+									<th scope="col">이용권</th>
+									<th scope="col">가격</th>
+									<th scope="col">구매날짜</th>
+									<th scope="col">삭제</th>
+
+								</tr>
+							</thead>
+
+							<c:forEach var="member" items="${gymMemberListView}">
+								<tr class="table-light">
+									<td>${member.mnum}</td>
+									<td>${member.memail}</td>
+									<td>${member.tname}</td>
+									<td>${member.tcost}</td>
+									<td>${member.orderdate}</td>
+									<td><a class="member-delete" data-bid='${member.mnum}' href="/owner/gymMemberList/${member.mnum}">삭제</a></td>
+								</tr>
+							</c:forEach>
+
+						</table>
+
+					</div>
 
 				</div>
 
@@ -204,7 +243,7 @@
 					<div class="col-lg-4">
 						<div class="fs-about">
 							<div class="fa-logo">
-								<a href="${pageContext.request.contextPath}/today"><img src="/img/logo.png" alt=""></a>
+								<a href="#"><img src="/img/logo.png" alt=""></a>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 							<div class="fa-social">
@@ -299,9 +338,6 @@
 	<script src="/js/jquery.slicknav.js"></script>
 	<script src="/js/owl.carousel.min.js"></script>
 	<script src="/js/main.js"></script>
-
-
-
 </body>
 
 </html>

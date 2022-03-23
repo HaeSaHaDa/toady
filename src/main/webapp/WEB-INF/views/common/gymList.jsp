@@ -14,8 +14,8 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
 
 <%@ include file="../layout/head_tags.jsp"%>
@@ -36,44 +36,27 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
+					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+					</span>
+					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					</a>
+					</span>
 				</c:when>
 				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					</a>
+					</span>
+					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+					</a>
+					</span>
+					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -94,20 +77,8 @@
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-
-						</ul>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -119,24 +90,18 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
+									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+									</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									</a>
 									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+									</a>
+									</span>
+									<a class="nav-link">${principal.user.memail}</a>
 
 								</c:otherwise>
 							</c:choose>
@@ -303,7 +268,7 @@
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
 
-		<!-- Js Plugins -->
+	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 
 

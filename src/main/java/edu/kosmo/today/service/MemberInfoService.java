@@ -8,7 +8,8 @@ public interface MemberInfoService {
 	public MemberVO getInfoList(int mnum);	
 	void memberInfoModify(MemberVO memberVO); // 회원정보 수정
 
+
 	
-	public void authDelete(String memail);//권한 삭제
-	public void remove(String memail); // 회원정보 탈퇴	
+	public void authDelete(String memail);
+	public void remove(String memail); 
 }

@@ -20,7 +20,7 @@
 	<!--회원 정보 수정하기 -->
 	<update id="memberInfoUpdate">
 	<![CDATA[
-		update member set mnickname = #{mnickname}, mphone = #{mphone} where mid = #{mid}
+		update member set mnickname = #{mnickname}, mphone = #{mphone}, mbirth = #{mbirth} where mid = #{mid}
 	]]>
 	</update>
 

@@ -20,5 +20,11 @@ public class OwnerServiceImpl implements OwnerService{
 	@Override
 	public List<OrderListVO> getOrderList(int mnum) {
 		return ownerMapper.getOrderList(mnum);
+	}
+
+	@Override
+	public void memberRemove(int mnum) {
+		ownerMapper.memberDelete(mnum);
+		
 	}			
 }
