@@ -25,7 +25,7 @@ public class TrainerVO {
 	private int gnum; //시설번호
 	private String gtname; //트레이너 이름
 	private String gtimage; //트레이너이미지
-
+	private String gtcareer; //트레이너 경력
 
 	
 	

@@ -3,6 +3,7 @@ package edu.kosmo.today.service;
 import java.util.List;
 
 import edu.kosmo.today.vo.OrderListVO;
+import edu.kosmo.today.vo.TrainerVO;
 
 
 public interface OwnerService {
@@ -10,4 +11,6 @@ public interface OwnerService {
 	public List<OrderListVO> getOrderList(int mnum);
 	public void memberRemove(int mnum); //회원 목록삭제
 	
+	public List<TrainerVO> getTrainer(int gnum);//트레이너 목록보기
+	public void registerTrainer(TrainerVO vo);
 }

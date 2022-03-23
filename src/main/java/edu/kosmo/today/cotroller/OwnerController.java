@@ -1,5 +1,7 @@
 package edu.kosmo.today.cotroller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +25,9 @@ import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.GymServicce;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.service.OwnerService;
+import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.MemberVO;
+import edu.kosmo.today.vo.TrainerVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -159,4 +165,47 @@ public class OwnerController {
 
 	}
 
+	//트레이너 목록보기
+	@GetMapping("/manageTrainer")
+	public ModelAndView getTrainer(ModelAndView mav) {
+		System.out.println("오너-트레이너 관리목록보기");
+		
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
+		System.out.println(mnum+"의 시설번호 구하는중");
+		int gnum = gymService.getGnum(mnum);
+		System.out.println("......."+gnum);
+		
+		List<TrainerVO> list = ownerService.getTrainer(gnum);
+		
+		mav.setViewName("/owner/manageTrainer");
+		mav.addObject("trainer", list);
+		
+		return mav;
+	}
+	
+	//트레이너 등록
+	@RequestMapping(value = "/insertTrainer", method = RequestMethod.POST)
+	public ResponseEntity<String> insertTrainer(@RequestBody TrainerVO vo) {
+		ResponseEntity<String> entity = null;
+		System.out.println("트레이너 등록중..."+vo);
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
+		System.out.println(mnum+"의 시설번호 구하는중");
+		int gnum = gymService.getGnum(mnum);
+		System.out.println("......."+gnum);
+
+		try {
+			vo.setGnum(gnum);
+			ownerService.registerTrainer(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

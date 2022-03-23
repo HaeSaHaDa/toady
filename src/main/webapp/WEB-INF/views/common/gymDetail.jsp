@@ -310,7 +310,7 @@ option {
 												<img class="card-img-top" src="${pageContext.request.contextPath}/img/${list.gtimage}"  alt="Card image" style="width: 100%">
 												<div class="card-body text-center">
 													<h4 class="card-title">${list.gtname}</h4>													
-
+													<h3 class="card-body">${list.gtcareer}</h3>
 												</div>
 											</div>
 										</c:forEach>
