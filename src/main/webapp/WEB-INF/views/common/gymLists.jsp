@@ -16,13 +16,27 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" type="text/css">
 
 <%@ include file="../layout/head_tags.jsp"%>
+<style type="text/css">
+	.ci-pic img {
+		width: 150px;
+		height: 200px;
+	}
+</style>
 
 
-<title>Insert title here</title>
+
+<title>시설목록</title>
+
 </head>
+
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -55,6 +69,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+
 	</div>
 	<!-- Offcanvas Menu Section End -->
 
@@ -68,15 +83,15 @@
 						</a>
 					</div>
 				</div>
-				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
+
 
 						<div class="to-social">
 							<c:choose>
@@ -95,6 +110,7 @@
 									</a>
 									</span>
 									<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -107,37 +123,90 @@
 		</div>
 	</header>
 	<!-- Header End -->
-	<!--마이페이지 내용물 시작-->
+
+
+
+	<!-- ChoseUs Section End -->
+
+	<!-- 시설목록-->
 	<section class="classes-section spad">
-		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-			<div class="row" style="margin-top: 100px;">
-				<!-- 사이드바 -->
-				<div class="col-4">
-					<%@ include file="../layout/adminmenu.jsp"%>
-				</div>
-				<!-- 사이드바 끝 -->	<!--  Section Begin -->
-			<!--마이페이지 내용물 시작-->
+		<div class="container text-center" style="margin-top: 100px; margin-bottom: 80px;">
+			<h1 style="color: white;">헬스장 리스트</h1>
+		</div>
+		<div class="container">
+			<div class="row">
+				<c:forEach items="${gymLists}" var="gym">
+					<div class="col-lg-4 col-md-6">
+						<div class="class-item">
+							<div class="ci-pic">
+								<img src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="">
+							</div>
+							<div class="ci-text">
+								<span>${gym.gcategory}</span>
+								<h5>${gym.gname}</h5>
+								<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<nav class="pagination-outer mb-2" aria-label="Page navigation">
+     <ul class="pagination justify-content-center text-center">
+      <c:if test="${pageMaker.pre}">
+		<li class="page-item"><a aria-label="Previous" class="page-link" href="${pageContext.request.contextPath}/common/gymlist/${gym.gnum}${pageMaker.makeQuery(pageMaker.startPage - 1) }">
+		<span aria-hidden="true">«</a></span></li>
+		</c:if>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			<!-- 마이페이지 내용물 끝 -->
-
+		<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+		<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage}">
+			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/common/gymlist/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
+			</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/common/gymlist/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}">
+							<span aria-hidden="true">»</span> </a></li>
+				</c:if>					
+		</ul>
+  		</nav>
 		</div>
 	</section>
+	<!-- 시설목록끝 -->
+
+
+
+
+
+
 	<!-- Get In Touch Section Begin -->
+	<div class="gettouch-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="gt-text">
+						<i class="fa fa-map-marker"></i>
+						<p>
+							333 Middle Winchendon Rd, Rindge,<br /> NH 03461
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="gt-text">
+						<i class="fa fa-mobile"></i>
+						<ul>
+							<li>125-711-811</li>
+							<li>125-668-886</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="gt-text email">
+						<i class="fa fa-envelope"></i>
+						<p>Support.gymcenter@gmail.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Get In Touch Section End -->
 
 	<!-- Footer Section Begin -->
 	<section class="footer-section">
@@ -146,7 +215,7 @@
 				<div class="col-lg-4">
 					<div class="fs-about">
 						<div class="fa-logo">
-							<a href="#"><img src="/img/logo.png" alt=""></a>
+							<a href="#"><img src="img/logo.png" alt=""></a>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 						<div class="fa-social">
@@ -219,8 +288,6 @@
 		</div>
 	</section>
 	<!-- Footer Section End -->
-	</div>
-
 
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
@@ -230,9 +297,7 @@
 	<%@ include file="../layout/foot_tags.jsp"%>
 
 
+
 </body>
 
 </html>
-
-
-

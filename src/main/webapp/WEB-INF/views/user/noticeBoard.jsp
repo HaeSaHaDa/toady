@@ -70,8 +70,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -126,7 +126,7 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
+					<div class="col-4" style="margin-left: -100px">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->

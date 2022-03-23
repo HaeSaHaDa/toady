@@ -88,6 +88,10 @@
 </head>
 
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -128,8 +132,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -175,15 +179,16 @@
 
 
 	<!-- ChoseUs Section End -->
-
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-			<div class="row">
+			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-			<%@ include file="../layout/user_owner_menu.jsp"%>
-
+					<div class="col-4" style="margin-left: -100px">
+					<%@ include file="../layout/user_owner_menu.jsp"%>
+				</div>
 				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div  style="margin:0 auto;">
 						<h4 class="text-white">FAQ</h4>

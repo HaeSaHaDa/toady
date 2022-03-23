@@ -56,7 +56,7 @@ public class AdminController {
 	public String adminPage() {
 		return "admin";
 	}
-	
+//=========================경로설정 해 주세요. start==============================	
 	@RequestMapping(value="/gymListInventory", method=RequestMethod.GET)
 	public ModelAndView getGymLists(Model model, ModelAndView mav) {
 		List<GymListVO> gymLists = gymListService.getGymLists();//getGymLists에서 직접가져와서
@@ -66,16 +66,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/gymListInventory/addGymList", method=RequestMethod.GET) //getmethod
-	public String addGymList(Model model) {
+	public ModelAndView addGymList(Model model, ModelAndView mav) {
 		
 		GymListVO gymListVO =new GymListVO();
-		model.addAttribute("gymListVO", gymListVO);
-		return "addGymList"; //gym의 내용을 새로 입력 하는 addGymList.jsp
+		mav.addObject("gymListVO", gymListVO);
+		mav.setViewName("/admin/addGymList");
+		return mav;//"addGymList"; //gym의 내용을 새로 입력 하는 addGymList.jsp
 		
 	}
 	
 	@RequestMapping(value="/gymListInventory/addGymList", method=RequestMethod.POST) //postmethod
-	public String addGymListPost(GymListVO gymListVO, HttpServletRequest request) {
+	public ModelAndView addGymListPost(GymListVO gymListVO, HttpServletRequest request, ModelAndView mav) {
 		///today_gym/src/main/resources/img
 				MultipartFile gymimage = gymListVO.getGymimage();
 				String rootDirectory = request.getSession().getServletContext().getRealPath("/");
@@ -104,10 +105,11 @@ public class AdminController {
 				}//디렉토리에 저장후 
 				gymListVO.setImagename(gymimage.getOriginalFilename());//DB에 파일네임 
 				gymListService.addGymList(gymListVO);
-				//model.addAttribute("gymListVO", gymListVO); //모델에 넣어주는 작업까지이
-		return "redirect:/admin/gymListInventory";
+				mav.addObject("gymListVO", gymListVO); //모델에 넣어주는 작업까지이
+				mav.setViewName("/admin/gymListInventory");
+		return mav;
 	}
-	
+
 	
 	
 	@RequestMapping(value="/gymListInventory/deleteGymList/{gnum}", method=RequestMethod.GET)
@@ -138,9 +140,10 @@ public class AdminController {
 		
 		GymListVO gymListVO =gymListService.getGymListByGnum(gnum);
 		model.addAttribute("gymListVO", gymListVO);
+		
 		return "updateGymList";
 	}
-	
+	//======================경로 설정...... 해주세요....======================	
 	
 	@RequestMapping(value="/gymListInventory/updateGymList", method=RequestMethod.POST) //postmethod
 	public String updateGymListPost(GymListVO gymListVO, HttpServletRequest request) {
@@ -276,7 +279,8 @@ public class AdminController {
 		return entity;
 
 	}
-
+	
+	
 	// 관리자페이지 쪽지 작성 페이지 진입
 	@GetMapping("/notePost/{mnum}")
 	public ModelAndView notePostList(MemberVO memberVO, ModelAndView mav) {
