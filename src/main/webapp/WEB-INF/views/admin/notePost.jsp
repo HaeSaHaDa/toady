@@ -76,9 +76,8 @@
 						</a>
 					</div>
 				</div>
-				</div>
 				<div class="col-lg-6">
-				<nav>
+					<nav class="nav-menu">
 			<!-- 메뉴 바  -->
 			<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
@@ -126,15 +125,16 @@
 
 	<!-- ChoseUs Section End -->
 
-<!--마이페이지 내용물 시작-->
-<section class="classes-section spad">
-	<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-		<div class="row" style="margin-top: 100px;">
-			<!-- 사이드바 -->
-			<div class="col-4">
+	<!--마이페이지 내용물 시작-->
+	<section class="classes-section spad">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+				<div class="col-4" style="margin-left: -100px">
+					<!-- 메뉴 바  -->
 					<%@ include file="../layout/adminmenu.jsp"%>
-			</div>
-			<!-- 사이드바 끝 -->
+				</div>
+				<!-- 사이드바 끝 -->
 			<!-- 내용물 -->
 			<div class="col-8">
 				<!-- 내용물 시작 -->
