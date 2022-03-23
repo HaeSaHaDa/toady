@@ -123,7 +123,45 @@
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="col-8"></div>
+				<div class="col-8">
+					<table class="table">
+						 <thead class="thead-light">
+						 <tr>
+						 <th style="width: 150px;">트레이너 이름</th>
+						 <th>트레이너 소개 및 경력</th>
+						 <th>수정</th>
+						 <th>삭제</th>						 
+						 </tr>
+						 </thead>
+						 <tbody>
+						 <c:forEach items="${trainer}" var="trainer">
+						 	<tr style="color: white;">
+						 		<td class="trainer-name">${trainer.gtname}</td>
+						 		<td class="trainer-career">${trainer.gtcareer}</td>
+						 		<td class="updateTrainer">수정</td>
+						 		<td>X</td>
+						 	</tr>
+						 </c:forEach>
+						 </tbody>
+					</table>
+					<br>
+					
+					<table class="text-white" width="690" border="1" cellpadding="0" cellspacing="0" border="1">
+							<form id="insertTrainer" action="${pageContext.request.contextPath}/insertTrainer" method="post">
+								<tr>
+									<td style="width: 140px;">트레이너 이름</td>
+									<td><input width="200" type="text" id="gtname" name="gtname"></td>
+								</tr>
+								<tr>
+									<td style="width: 140px;">소개 및 경력</td>
+									<td><textarea rows="10" cols="60" id="gtcareer" name="gtcareer"></textarea></td>
+								</tr>
+							</form>
+						</table>
+						<button id="submit-trainer" class="btn btn-light">트레이너 등록</button>
+					
+					
+				</div>
 			</div>
 		</div>
 	</section>
@@ -136,4 +174,74 @@
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#submit-trainer").on("click",function(){
+		console.log("트레이너등록버튼");
+		
+		var gtname = $("#gtname").val();
+		var gtcareer = $("#gtcareer").val();
+
+		console.log(gtcareer);
+
+		var form = {
+				gtname : gtname,
+				gtcareer : gtcareer
+		}
+
+		console.log(JSON.stringify(form));
+		
+		$.ajax({
+			type : "POST",
+			url : "/owner/insertTrainer",
+			cache : false,
+			contentType : 'application/json; charset=utf-8',
+			data : JSON	.stringify(form),
+			success : function(	result) {
+				if (result == "SUCCESS") {
+					//list로               
+					$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		})
+		
+	});
+	/*
+	$(".updateTrainer").on("click",function(){
+		console.log("수정누름");
+	
+		
+		let name = $(this).parent("tr").find(".trainer-name").text();
+		console.log(name);
+		let check = $(this).parent("tr").next("tr").find("input").val();
+		console.log(check);
+		if(name != check){
+			htmls ='';
+			
+			htmls +='<tr class = "update-tr">';
+			htmls +='<form id="update-tr">';
+			htmls +='<input type="hidden" value = "'+name+'">';
+			htmls += '<td colspan="3"><textarea class="career" cols="80" ></textarea></td>';
+			htmls +='</form>';
+			htmls += '<td><button  class="btn btn-light">수정</button></td>';
+			htmls += '</tr>';
+			$(this).parent("tr").after(htmls);
+		}else{
+			$(".update-tr").remove();
+		}
+		
+		
+		
+	});	
+	
+	*/
+	
+})
+
+
+
+</script>
 </html>

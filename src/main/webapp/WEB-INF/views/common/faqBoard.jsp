@@ -183,16 +183,11 @@
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
-				<!-- 사이드바 -->
-					<div class="col-4" style="margin-left: -100px">
-					<%@ include file="../layout/user_owner_menu.jsp"%>
-				</div>
-				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div  style="margin:0 auto;">
 						<h4 class="text-white">FAQ</h4>
-						<table class="text-white" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="text-white" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
 							<tr>
 								<td>제목</td>
 								<td>+</td>
@@ -208,16 +203,16 @@
 
 
 						<c:if test="${pageMaker.pre}">
-							<a href="/user/faqboard${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+							<a href="/common/faqboard${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
 						<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
-							<a href="/user/faqboard${pageMaker.makeQuery(idx)}">${idx}</a>
+							<a href="/common/faqboard${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="/user/faqboard${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
+							<a href="/common/faqboard${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
 						</c:if>
 						<br>
 				</div>

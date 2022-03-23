@@ -171,8 +171,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<span>Our Classes</span>
-						<h2>WHAT WE CAN OFFER</h2>
+						<span>오늘의 짐</span>
+						<h2>인기 헬스장</h2>
 					</div>
 				</div>
 			</div>
