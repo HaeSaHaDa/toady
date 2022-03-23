@@ -259,12 +259,11 @@ option {
 		<div class="container" id="gympage1">
 			<div class="row">
 				<div class="col-md-5">
-					<img class="gym-img" src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="" />
+					<img class="gym-img" src="${pageContext.request.contextPath}/img/${gym.imagename}"  alt="" />
 				</div>
 				<div class="col-md-7">
 					<h1>${gym.gname}</h1>
 					<br />
-					<h2>평점</h2>
 					<br />
 					<h3>${gym.gadress}</h3>
 					<br />
@@ -305,23 +304,16 @@ option {
 
 
 									<div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-										<div class="container row">
-											<div class="card" style="width: 400px">
-												<img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width: 100%">
-												<div class="card-body">
-													<h4 class="card-title">Jane Doe</h4>
-													<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+										<div class="container row justify-content-center">
+										<c:forEach items="${trainer}" var="list">
+											<div class="card" style="width: 300px;">
+												<img class="card-img-top" src="${pageContext.request.contextPath}/img/${list.gtimage}"  alt="Card image" style="width: 100%">
+												<div class="card-body text-center">
+													<h4 class="card-title">${list.gtname}</h4>													
 
 												</div>
 											</div>
-											<div class="card" style="width: 400px">
-												<img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width: 100%">
-												<div class="card-body">
-													<h4 class="card-title">Jane Doe</h4>
-													<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-
-												</div>
-											</div>
+										</c:forEach>
 
 										</div>
 									</div>

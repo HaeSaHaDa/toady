@@ -146,5 +146,9 @@
 	<select id="getGymTotal" resultType="_int">
 		select count(*) from gympage
 	</select>
+	
+	<select id="getTrainer" resultType="edu.kosmo.today.vo.TrainerVO">
+		select * from trainer where gnum = #{gnum}
+	</select>
 
 </mapper>

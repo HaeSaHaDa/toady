@@ -99,6 +99,9 @@ public class GymPageController {
 
 		mav.addObject("gymstar", Math.round(starAvg));
 		mav.addObject("gymstar2", (int) starAvg);
+		
+		//시설 트레이너 리스트
+		mav.addObject("trainer",service.getTrainerList(vo.getGnum()));
 
 		return mav;
 	}
