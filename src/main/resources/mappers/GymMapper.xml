@@ -9,7 +9,7 @@
 		<result property="gnum" column="gnum" />		
 		<result property="gname" column="gname" />
 		<result property="gcategory" column="gcategory" />
-		<result property="gadress" column="gadress" />
+		<result property="gaddress" column="gaddress" />
 		<result property="gphone" column="gphone" />
 		<result property="ginform" column="ginform" />
 		<result property="gtime" column="gtime" />

@@ -208,4 +208,26 @@ public class OwnerController {
 		}
 		return entity;
 	}
+	@RequestMapping(value = "/updateCareer", method = RequestMethod.POST)
+	public ResponseEntity<String> updateCareer(@RequestBody TrainerVO vo) {
+		ResponseEntity<String> entity = null;
+		System.out.println("트레이너 등록중..."+vo);
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
+		System.out.println(mnum+"의 시설번호 구하는중");
+		int gnum = gymService.getGnum(mnum);
+		System.out.println("......."+gnum);
+
+		try {
+			vo.setGnum(gnum);
+			ownerService.updateTrainer(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 }

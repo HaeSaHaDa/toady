@@ -209,38 +209,73 @@ $(document).ready(function(){
 		})
 		
 	});
-	/*
+
 	$(".updateTrainer").on("click",function(){
 		console.log("수정누름");
-	
 		
-		let name = $(this).parent("tr").find(".trainer-name").text();
-		console.log(name);
-		let check = $(this).parent("tr").next("tr").find("input").val();
-		console.log(check);
-		if(name != check){
-			htmls ='';
-			
-			htmls +='<tr class = "update-tr">';
-			htmls +='<form id="update-tr">';
-			htmls +='<input type="hidden" value = "'+name+'">';
-			htmls += '<td colspan="3"><textarea class="career" cols="80" ></textarea></td>';
-			htmls +='</form>';
-			htmls += '<td><button  class="btn btn-light">수정</button></td>';
-			htmls += '</tr>';
-			$(this).parent("tr").after(htmls);
-		}else{
-			$(".update-tr").remove();
-		}
-		
-		
-		
+			let name = $(this).parent("tr").find(".trainer-name").text();
+			console.log(name);
+			let check = $(this).parent("tr").next("tr").find("input").val();
+			console.log(check);
+			if(name != check){
+				let num = $("tbody .update-tr").length;
+				
+				console.log(num+"..........");
+				if(num==0){
+					htmls ='';
+					
+					htmls +='<tr class = "update-tr">';
+					htmls +='<form id="update-tr">';
+					htmls +='<input type="hidden" id="name" value = "'+name+'">';
+					htmls += '<td colspan="3"><textarea id="career" class="career" cols="80" ></textarea></td>';
+					htmls +='</form>';
+					htmls += '<td><button id="go" onclick= "goUpdate()" class="btn btn-light">수정</button></td>';
+					htmls += '</tr>';
+					$(this).parent("tr").after(htmls);
+				}else{
+					alert("한개만 수정해주세요!");
+				}				
+			}else{
+				$(this).parent("tr").next(".update-tr").remove();
+			}		
 	});	
-	
-	*/
-	
+
 })
 
+function goUpdate(){
+	console.log("수정버튼 누르고 함수실행됨!");
+	
+	var gtname = $("#name").val();
+	var gtcareer = $("#career").val();
+
+	console.log(gtname,gtcareer);
+
+	var form = {
+			gtname : gtname,
+			gtcareer : gtcareer
+	}
+
+	console.log(JSON.stringify(form));
+	
+	$.ajax({
+		type : "POST",
+		url : "/owner/updateCareer",
+		cache : false,
+		contentType : 'application/json; charset=utf-8',
+		data : JSON	.stringify(form),
+		success : function(	result) {
+			if (result == "SUCCESS") {
+				alert("수정완료!");             
+				$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+			}
+		},
+		error : function(e) {
+			console.log(e);
+		}
+	})
+	
+	
+}
 
 
 </script>

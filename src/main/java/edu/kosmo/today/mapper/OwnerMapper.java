@@ -21,4 +21,6 @@ public interface OwnerMapper {
 	
 	public void insertTrainer(TrainerVO vo);//트레이너 등록
 	
+	public void updateTrainer(TrainerVO vo);
+	
 }

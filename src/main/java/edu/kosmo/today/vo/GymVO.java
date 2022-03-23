@@ -34,7 +34,7 @@ public class GymVO {
 	//private int mnum; //회원번호
 	private String gname; //시설이름
 	private String gcategory;  //시설분류(예> 요가,헬스,p.t전문점)
-	private String gadress; //주소
+	private String gaddress; //주소
 	private String gphone; //시설연락처
 	private String ginform; //시설 설명
 	private String gtime; //시설 운영시간
