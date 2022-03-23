@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+
+.container-wrapper{
+	margin-top :200px;
+	color:white;
+}
+
+.table {
+	table-layout:fixed;
+	overflow:auto;
+	color:white;
+}
+
+.table th{
+	text-align :center;
+	overflow:hidden;
+	color:white;
+}
+
+.table td{
+	text-align:center;
+	overflow:hidden;
+	color:white;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+.label{
+	color:white;
+}

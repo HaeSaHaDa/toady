@@ -163,6 +163,10 @@ option {
 </head>
 
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -203,9 +207,8 @@ option {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -266,7 +269,7 @@ option {
 					<br />
 					<h2>평점</h2>
 					<br />
-					<h3>${gym.gadress}</h3>
+					<h3>${gym.gaddress}</h3>
 					<br />
 					<h3>${gym.gphone}</h3>
 					<br /> <select name="order" id="order">

@@ -23,6 +23,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -64,8 +68,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -94,7 +98,7 @@
 									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
 									</a>
 									</span>
-									<a class="nav-link">${principal.user.memail}</a>
+									<a class="nav-link" style="color: white" >${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -111,7 +115,100 @@
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<!--마이페이지 내용물 시작-->
+	<!-- find map-->
+	<section class="classes-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div>
+						<h4 style="color: white;">지도에서 찾기</h4>
+					</div>
+					<div class="container">
+						<div class="row">
+							<!-- 실제 지도맵 들어가는 자리입니다. -->
+							<div id="map" style="width: 100%; height: 350px;"></div>
+							<script type="text/javascript"
+								src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe8a7303194945138622f04ab6f2e5b3"></script>
+							<script>
+								var mapContainer = document
+										.getElementById('map'), // 지도를 표시할 div 
+								mapOption = {
+									center : new kakao.maps.LatLng(37.478864,
+											126.8787819), // 위도 경도 순으로 입력하세요.
+									level : 3
+								// 지도의 확대 레벨
+								};
 
+								var map = new kakao.maps.Map(mapContainer,
+										mapOption); // 지도를 생성합니다
+
+								var positions = [
+										{
+											content : '<div>kosmo Gym</div>',
+											latlng : new kakao.maps.LatLng(
+													37.478864, 126.8787819)
+										},
+										{
+											content : '<div>미애옹 Gym</div>',
+											latlng : new kakao.maps.LatLng(
+													37.479614, 126.878672)
+										},
+										{
+											content : '<div>쿵스GYM</div>',
+											latlng : new kakao.maps.LatLng(
+													37.479163, 126.877690)
+										},
+										{
+											content : '<div>괴도필라테스</div>',
+											latlng : new kakao.maps.LatLng(
+													37.478554, 126.877840)
+										} ];
+								var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+								for (var i = 0; i < positions.length; i++) {
+									// 마커를 생성합니다
+									var marker = new kakao.maps.Marker({
+										map : map, // 마커를 표시할 지도
+										position : positions[i].latlng
+									// 마커의 위치
+									});
+
+									// 마커에 표시할 인포윈도우를 생성합니다 
+									var infowindow = new kakao.maps.InfoWindow(
+											{
+												content : positions[i].content
+											// 인포윈도우에 표시할 내용
+											});
+
+									kakao.maps.event.addListener(marker,
+											'mouseover', makeOverListener(map,
+													marker, infowindow));
+									kakao.maps.event.addListener(marker,
+											'mouseout',
+											makeOutListener(infowindow));
+
+								}
+
+								function makeOverListener(map, marker,
+										infowindow) {
+									return function() {
+										infowindow.open(map, marker);
+									};
+								}
+
+								function makeOutListener(infowindow) {
+									return function() {
+										infowindow.close();
+									};
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- find map end -->
 
 
 

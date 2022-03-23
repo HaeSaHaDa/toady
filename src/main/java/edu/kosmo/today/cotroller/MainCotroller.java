@@ -29,12 +29,9 @@ public class MainCotroller {
 		System.out.println("myPage진입");
 		return "common/myPage";
 	}
-	
-	@GetMapping("/common/findMap")
-	public String findMap() {
-		System.out.println("findMap진입");
-		return "common/findMap";
+	@GetMapping("/admin/notePost")
+	public String notePostPage() {
+		System.out.println("admin notePost진입");
+		return "admin/notePost";
 	}
-	
-	
 }

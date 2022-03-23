@@ -80,8 +80,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -141,22 +141,13 @@
 	</header>
 	<!-- Header End -->
 	<!--마이페이지 내용물 시작-->
+	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
-					<ul>
-						<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/ownerList">헬스장 사장님 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/gymListInventory">헬스장 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/registerGym">헬스장 신청서 목록</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/gymOrderList">찜 결제 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/helpList">1:1 답변 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/notePost">공지/이벤트 관리</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/totalSales">매출 관리</a></li>
-					</ul>
+					<div class="col-4" style="margin-left: -100px">
+					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->

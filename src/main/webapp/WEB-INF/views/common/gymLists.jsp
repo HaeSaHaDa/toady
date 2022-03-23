@@ -17,12 +17,21 @@
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 
+
 <%@ include file="../layout/head_tags.jsp"%>
 
 
-<title>Insert title here</title>
+
+
+<title>시설목록</title>
+
 </head>
+
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -55,6 +64,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+
 	</div>
 	<!-- Offcanvas Menu Section End -->
 
@@ -68,15 +78,15 @@
 						</a>
 					</div>
 				</div>
-				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
+
 
 						<div class="to-social">
 							<c:choose>
@@ -95,6 +105,7 @@
 									</a>
 									</span>
 									<a class="nav-link">${principal.user.memail}</a>
+
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -107,37 +118,73 @@
 		</div>
 	</header>
 	<!-- Header End -->
-	<!--마이페이지 내용물 시작-->
+
+
+
+	<!-- ChoseUs Section End -->
+
+	<!-- 시설목록-->
 	<section class="classes-section spad">
-		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-			<div class="row" style="margin-top: 100px;">
-				<!-- 사이드바 -->
-				<div class="col-4">
-					<%@ include file="../layout/adminmenu.jsp"%>
-				</div>
-				<!-- 사이드바 끝 -->	<!--  Section Begin -->
-			<!--마이페이지 내용물 시작-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			<!-- 마이페이지 내용물 끝 -->
-
+		<div class="container text-center" style="margin-top: 100px; margin-bottom: 80px;">
+			<h1 style="color: white;">헬스장 리스트</h1>
+		</div>
+		<div class="container">
+			<div class="row">
+				<c:forEach items="${gymLists}" var="gym">
+					<div class="col-lg-4 col-md-6">
+						<div class="class-item">
+							<div class="ci-pic">
+								<img src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="">
+							</div>
+							<div class="ci-text">
+								<span>${gym.gcategory}</span>
+								<h5>${gym.gname}</h5>
+								<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</section>
+	<!-- 시설목록끝 -->
+
+
+
+
+
+
 	<!-- Get In Touch Section Begin -->
+	<div class="gettouch-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="gt-text">
+						<i class="fa fa-map-marker"></i>
+						<p>
+							333 Middle Winchendon Rd, Rindge,<br /> NH 03461
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="gt-text">
+						<i class="fa fa-mobile"></i>
+						<ul>
+							<li>125-711-811</li>
+							<li>125-668-886</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="gt-text email">
+						<i class="fa fa-envelope"></i>
+						<p>Support.gymcenter@gmail.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Get In Touch Section End -->
 
 	<!-- Footer Section Begin -->
 	<section class="footer-section">
@@ -146,7 +193,7 @@
 				<div class="col-lg-4">
 					<div class="fs-about">
 						<div class="fa-logo">
-							<a href="#"><img src="/img/logo.png" alt=""></a>
+							<a href="#"><img src="img/logo.png" alt=""></a>
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 						<div class="fa-social">
@@ -219,8 +266,6 @@
 		</div>
 	</section>
 	<!-- Footer Section End -->
-	</div>
-
 
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
@@ -230,9 +275,7 @@
 	<%@ include file="../layout/foot_tags.jsp"%>
 
 
+
 </body>
 
 </html>
-
-
-
