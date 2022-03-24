@@ -19,8 +19,6 @@
 
 <%@ include file="../layout/head_tags.jsp"%>
 
-
-
 <title>Insert title here</title>
 </head>
 <body>
@@ -70,8 +68,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo"  style="margin-top:-60px">
-						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
+					<div class="logo">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -124,32 +122,33 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-3">
+				<div class="col-4">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
+
 				</div>
 				<!-- 사이드바 끝 -->
-				<!-- 내용물 -->
-				<div class="col-9">
+				<div class="col-8">
 				<!-- 내용물 -->
 				
-					<table width="500" cellpadding="0" cellspacing="0" border="1">
-				      <tr>
-				         <td>요청 번호</td>
-				         <td>요청 이름</td>
-				         <td>요청 주소</td>
-				         <td>연락처</td>
-				      </tr>
-				      <c:forEach items="${registList}" var="regist">
-				      <tr>
-				         <td>${regist.storenum}</td>
-				         <td>${regist.storename}</td>
-				         <td>${regist.storeadr}</td>
-				         <td>${regist.storetel}</td>
-				      </tr>
-				      </c:forEach>
-				      <tr>
-				         <td colspan="5"> <a href="/today">홈</a> </td>
-				      </tr>
+				
+				<table class="text-center"  width="600" cellpadding="0" cellspacing="0" border="1">
+				      <form action="registration" method="post">
+				         <tr>
+				            <td style="color:white"> 헬스장 명</td>
+				            <td> <input type="text" name="storename" size = "50"> </td>
+				         </tr>
+				         <tr>
+				            <td style="color:white"> 헬스장 주소 </td>
+				            <td> <input type="text" name="storeadr" size = "50"> </td>
+				         </tr>
+				         <tr>
+				            <td style="color:white"> 헬스장 전화번호 </td>
+				            <td> <input type="text" name="storetel"  size = "50"></input> </td>
+				         </tr>
+						 <tr >
+				            <td colspan="2"> <button type="submit">등록 신청</button> &nbsp;&nbsp; <button type="button"><a href="/owner/registListView" style="color: black;">목록 보기</a></button></td>
+				         </tr>
+				      </form>
 				   </table>
 					
 				<!-- 내용물 끝 -->				

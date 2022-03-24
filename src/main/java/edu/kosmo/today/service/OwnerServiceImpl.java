@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import edu.kosmo.today.mapper.OwnerMapper;
 import edu.kosmo.today.vo.OrderListVO;
+import edu.kosmo.today.vo.RegiGymListVO;
+import edu.kosmo.today.vo.RegiGymVO;
 import edu.kosmo.today.vo.TrainerVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,4 +53,25 @@ public class OwnerServiceImpl implements OwnerService{
 		
 		ownerMapper.updateTrainer(vo);
 	}			
+
+	@Override
+	public void insertStore(RegiGymVO regiGymVO) {
+		ownerMapper.registration(regiGymVO);
+		log.info("OwnerServcie");
+		
+	}
+
+	@Override
+	public List<RegiGymListVO> getregistList() {
+		
+		return ownerMapper.getRegistList();
+	}
+
+	@Override
+	public void remove(int storenum) {
+		log.info("OwnerServcie-remove");
+		
+		ownerMapper.deleteRegist(storenum);
+	}
+	
 }

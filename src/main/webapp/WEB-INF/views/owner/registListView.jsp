@@ -70,8 +70,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo"  style="margin-top:-60px">
-						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
+					<div class="logo">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
 						</a>
 					</div>
 				</div>
@@ -124,31 +124,39 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-3">
+				<div class="col-4">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
+
 				</div>
 				<!-- 사이드바 끝 -->
-				<!-- 내용물 -->
-				<div class="col-9">
+				<div class="col-8">
 				<!-- 내용물 -->
 				
-					<table width="500" cellpadding="0" cellspacing="0" border="1">
-				      <tr>
-				         <td>요청 번호</td>
-				         <td>요청 이름</td>
-				         <td>요청 주소</td>
-				         <td>연락처</td>
-				      </tr>
+					<table class="table table-striped table-light text-center" style="width:800px" border="1" cellpadding="0">
+				      <thead class="thead-light">   
+					      <tr>   
+					         <th width="70">번호</th>
+					         <th>헬스장 이름</th>
+					         <th>헬스장 주소</th>
+					         <th>연락처</th>
+					         <th width="100">신청일</th>
+					         <th>취소</th>
+					      </tr>
+				      </thead>
 				      <c:forEach items="${registList}" var="regist">
 				      <tr>
 				         <td>${regist.storenum}</td>
 				         <td>${regist.storename}</td>
 				         <td>${regist.storeadr}</td>
 				         <td>${regist.storetel}</td>
+				         <td>${regist.storedate}</td>
+				         <td>					         
+					         	<a class="deleteRegist" href="/owner/deleteRegister/${regist.storenum}">삭제</a>
+					      </td>
 				      </tr>
 				      </c:forEach>
 				      <tr>
-				         <td colspan="5"> <a href="/today">홈</a> </td>
+				         <td colspan="6"> <a href="/today">홈</a> </td>
 				      </tr>
 				   </table>
 					
@@ -164,5 +172,32 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+	<!-- 신청 목록 삭제 -->
+	<script>
+	$(document).ready(function() {
+		$(".deleteRegist").click(function(event){
+			
+			event.preventDefault();
+			console.log("ajax 호출전");
+			alert("");
+			var trObj = $(this).parent().parent();
+			
+			$.ajax({
+				dataType : "DELETE",
+				url : $(this).attr("href"),						
+				success : function(result){
+					console.log("ajax 호출-2");
+					console.log(result);
+					if(result == "SUCCESS"){
+						$(trObj).remove();
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			
+		});
+	});
+	</script>
 </body>
 </html>

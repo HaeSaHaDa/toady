@@ -39,4 +39,25 @@
 		UPDATE trainer SET gtcareer = #{gtcareer} WHERE gnum = #{gnum} and gtname = #{gtname}
 
 	</update>
+	<!-- 헬스장 신청 목록 -->
+	<select id="getRegistList" resultType="edu.kosmo.today.vo.RegiGymListVO">
+		<![CDATA[
+		select * from Store order by storenum
+	]]>
+	</select>
+	
+	<!-- 헬스장 등록 신청 -->
+	<insert id="registration">
+	<![CDATA[
+		insert into store (storenum,storename,storeadr,storetel,storedate)
+		values (store_seq.nextval, #{storename}, #{storeadr}, #{storetel},sysdate)
+      ]]>
+	</insert>
+	
+	<delete id="deleteRegist" >
+		<![CDATA[
+			delete from store where storenum = #{storenum}
+		]]>
+	</delete>
+	
 </mapper>
