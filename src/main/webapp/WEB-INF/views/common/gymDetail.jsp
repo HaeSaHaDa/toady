@@ -326,8 +326,7 @@ option {
 										<p>${gym.gsns}</p>
 										<h2>시설 위치</h2>
 										<div id="map" style="width: 80%; height: 350px;"></div>
-							<script type="text/javascript"
-								src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe8a7303194945138622f04ab6f2e5b3&libraries=services"></script>
+			<script type="text/javascript"	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe8a7303194945138622f04ab6f2e5b3&libraries=services"></script>
 							<script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -353,6 +352,7 @@ geocoder.addressSearch(addres, function(result, status) {
     	 console.log("되따!!");
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
+        console.log(coords+".........")
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new kakao.maps.Marker({
             map: map,

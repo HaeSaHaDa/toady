@@ -63,5 +63,8 @@ public interface GymMapper {
 	
 	//트레이너
 	public List<TrainerVO> getTrainer(int gnum);
+	
+	//시설위치구하기
+	public List<GymVO> gymAdress();
 
 }

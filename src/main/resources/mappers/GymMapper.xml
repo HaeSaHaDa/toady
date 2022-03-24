@@ -150,5 +150,9 @@
 	<select id="getTrainer" resultType="edu.kosmo.today.vo.TrainerVO">
 		select * from trainer where gnum = #{gnum}
 	</select>
+	
+	<select id="gymAdress" resultMap="gymList">
+		select * from gympage
+	</select>
 
 </mapper>
