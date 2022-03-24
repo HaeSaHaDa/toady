@@ -16,132 +16,92 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" type="text/css">
 <%@ include file="../layout/head_tags.jsp"%>
 
 
 <title>FAQ관리</title>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document)	.ready(	function() {
 
-						$("#submitfaq")
-								.on(
-										"click",
-										function(e) {
-											var token = $("meta[name='_csrf']")
-													.attr("content");
-											var header = $(
-													"meta[name='_csrf_header']")
-													.attr("content");
+		$("#submitfaq").on("click",function(e) {
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
 
-											var btitle = $("#btitle").val();
-											var bcontent = $("#bcontent").val();
+				var btitle = $("#btitle").val();
+				var bcontent = $("#bcontent").val();
 
-											console.log(bcontent);
+				console.log(bcontent);
 
-											var form = {
-												btitle : btitle,
-												bcontent : bcontent
-											}
+				var form = {
+					btitle : btitle,
+					bcontent : bcontent
+					}
 
-											console.log(JSON.stringify(form));
+					console.log(JSON.stringify(form));
 
-											$
-													.ajax({
-														type : "POST",
-														url : "/admin/insertfaq",
-														beforeSend : function(
-																xhr) {
-															xhr
-																	.setRequestHeader(
-																			"X-CSRF-Token",
-																			"${_csrf.token}");
-														},
-														cache : false,
-														contentType : 'application/json; charset=utf-8',
-														data : JSON
-																.stringify(form),
-														success : function(
-																result) {
-															if (result == "SUCCESS") {
-																//list로               
-																$(location)
-																		.attr(
-																				'href',
-																				'${pageContext.request.contextPath}/admin/faqpage');
-															}
-														},
-														error : function(e) {
-															console.log(e);
-														}
-													})
-										});
+					$.ajax({
+						type : "POST",
+						url : "/admin/insertfaq",
+						beforeSend : function(hr) {	
+							xhr.setRequestHeader("X-CSRF-Token","${_csrf.token}");},
+							cache : false,
+							contentType : 'application/json; charset=utf-8',
+							data : JSON.stringify(form),
+							success : function(result) {
+								if (result == "SUCCESS") {
+									//list로               
+									$(location).attr('href','${pageContext.request.contextPath}/admin/faqpage');
+									}
+							},error : function(e) {
+								console.log(e);
+								}
+						})
+			});
 
-						$(".view-content")
-								.on(
-										"click",
-										function() {
-											var token = $("meta[name='_csrf']")
-													.attr("content");
-											var header = $(
-													"meta[name='_csrf_header']")
-													.attr("content");
+			$(".view-content").on("click",function() {
+					var token = $("meta[name='_csrf']").attr("content");
+					var header = $("meta[name='_csrf_header']").attr("content");
 
-											console.log("FAQ글보기");
+					console.log("FAQ글보기");
 
-											let bid = $(this).parents("tr")
-													.find("input").val();
-											console.log("faq글번호" + bid);
-											let divcontent = $(this).parents(
-													"tr");
-											console.log(divcontent + ".....");
+					let bid = $(this).parents("tr").find("input").val();
+					console.log("faq글번호" + bid);
+					let divcontent = $(this).parents("tr");
+					console.log(divcontent + ".....");
 
-											let url = "${pageContext.request.contextPath}/admin/faqpage/"
-													+ bid;
+					let url = "${pageContext.request.contextPath}/admin/faqpage/"+ bid;
 
-											let faqContent = divcontent.next(
-													"tr").find("input").val();
-											console.log(faqContent);
+					let faqContent = divcontent.next("tr").find("input").val();
+					console.log(faqContent);
 
-											if (faqContent == bid) {
-												divcontent.next("tr").remove();
-											} else {
-												$
-														.ajax({
-															type : 'POST',
-															url : url,
-															dataType : 'JSON',
-															beforeSend : function(xhr) {
-																xhr.setRequestHeader(
-																				"X-CSRF-Token",
-																				"${_csrf.token}");
-															},
-															cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
-															success : function(
-																	result) {
+					if (faqContent == bid) {
+							divcontent.next("tr").remove();
+					} else {
+						$.ajax({
+							type : 'POST',
+							url : url,
+							dataType : 'JSON',
+							beforeSend : function(xhr) {
+							xhr.setRequestHeader("X-CSRF-Token","${_csrf.token}");
+							},cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
+							success : function(result) {
 
-																console
-																		.log(result);
+							console	.log(result);
 
-																var htmls = "";
+								var htmls = "";
 
-																htmls += '<tr>';
-																htmls += '<input type="hidden" value='+result.bid+'>';
-																htmls += '<td colspan="3">'
-																		+ result.bcontent
-																		+ '</td>';
-																htmls += '</tr>';
-																divcontent
-																		.after(htmls);
+								htmls += '<tr>';
+								htmls += '<input type="hidden" value='+result.bid+'>';
+								htmls += '<td colspan="3">'+ result.bcontent+ '</td>';
+								htmls += '</tr>';
+								divcontent.after(htmls);
+							}
+				});
+				}
 
-															}
-														});
-											}
-
-										});
+			});
 
 					})
 </script>
@@ -262,7 +222,7 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h4 class="text-white">FAQ 관리</h4>
-						<table class="text-white" style="text-align: center;" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table  class="table">
 							<tr>
 								<td>FAQ번호</td>
 								<td>제목</td>
@@ -279,20 +239,27 @@
 						</table>
 
 
-						<c:if test="${pageMaker.pre}">
-							<a href="faqpage${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
-						</c:if>
+						<nav class="pagination-outer mb-2" aria-label="Page navigation">
+								<ul class="pagination justify-content-center text-center">
+									<c:if test="${pageMaker.pre}">
+									<li class="page-item"><a aria-label="Previous" class="page-link"
+										href="${pageContext.request.contextPath}/admin/faqpage/${gym.gnum}${pageMaker.makeQuery(pageMaker.startPage - 1) }"> <span aria-hidden="true">«</a></span></li>
+									</c:if>
 
-						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-						<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
-							<a href="faqpage${pageMaker.makeQuery(idx)}">${idx}</a>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="faqpage${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
-						</c:if>
+								<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+								<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/admin/faqpage/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
+								</c:forEach>
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/admin/faqpage/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}">
+									<span aria-hidden="true">»</span>
+								</a></li>
+								</c:if>
+							</ul>
+						</nav>
 						<br>
 						<table class="text-white" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
+
 							<form:form id="insertfaq" action="${pageContext.request.contextPath}/insertfaq" method="post">
 								<tr>
 									<td>제목</td>

@@ -149,4 +149,14 @@ public class GymServicce {
 		
 		return mapper.getTrainer(gnum);
 	}
+	
+	//시설위치받기
+	public List<GymVO> getAdress(){
+		System.out.println("시설위치받기..");
+		
+		List<GymVO> list = mapper.gymAdress();
+		
+		return list;
+		
+	}
 }

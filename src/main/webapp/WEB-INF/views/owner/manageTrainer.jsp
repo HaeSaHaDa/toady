@@ -127,26 +127,28 @@
 					<table class="table">
 						 <thead class="thead-light">
 						 <tr>
-						 <th style="width: 150px;">트레이너 이름</th>
-						 <th>트레이너 소개 및 경력</th>
-						 <th>수정</th>
-						 <th>삭제</th>						 
+						 <th style="width: 80px;">트레이너 이름</th>
+						 <th style="width: 250px;">트레이너 소개 및 경력</th>
+						 <th style="width: 40px;">수정</th>
+						 <th style="width: 40px;">삭제</th>						 
 						 </tr>
 						 </thead>
-						 <tbody>
+						 <tbody>					 
+						
 						 <c:forEach items="${trainer}" var="trainer">
 						 	<tr style="color: white;">
 						 		<td class="trainer-name">${trainer.gtname}</td>
-						 		<td class="trainer-career">${trainer.gtcareer}</td>
+						 		<td style="word-break:break-all;" class="trainer-career">${trainer.gtcareer}</td>
 						 		<td class="updateTrainer">수정</td>
-						 		<td>X</td>
+						 		<td class="delete-trainer">X</td>
 						 	</tr>
 						 </c:forEach>
+						
 						 </tbody>
 					</table>
 					<br>
 					
-					<table class="text-white" width="690" border="1" cellpadding="0" cellspacing="0" border="1">
+					<table class="text-white" width="700" border="1" cellpadding="0" cellspacing="0" border="1">
 							<form id="insertTrainer" action="${pageContext.request.contextPath}/insertTrainer" method="post">
 								<tr>
 									<td style="width: 140px;">트레이너 이름</td>
@@ -158,6 +160,7 @@
 								</tr>
 							</form>
 						</table>
+						<br>
 						<button id="submit-trainer" class="btn btn-light">트레이너 등록</button>
 					
 					
@@ -176,6 +179,8 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
+	checkList();
+	
 	$("#submit-trainer").on("click",function(){
 		console.log("트레이너등록버튼");
 		
@@ -184,29 +189,38 @@ $(document).ready(function(){
 
 		console.log(gtcareer);
 
-		var form = {
-				gtname : gtname,
-				gtcareer : gtcareer
-		}
-
-		console.log(JSON.stringify(form));
-		
-		$.ajax({
-			type : "POST",
-			url : "/owner/insertTrainer",
-			cache : false,
-			contentType : 'application/json; charset=utf-8',
-			data : JSON	.stringify(form),
-			success : function(	result) {
-				if (result == "SUCCESS") {
-					//list로               
-					$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
-				}
-			},
-			error : function(e) {
-				console.log(e);
+		if(gtname ==""){
+			alert("이름을 입력해주세요!");
+		}else if(gtcareer==""){
+			alert("내용을 입력해주세요!");
+		}else{
+			var form = {
+					gtname : gtname,
+					gtcareer : gtcareer
 			}
-		})
+			console.log(JSON.stringify(form));
+			
+			$.ajax({
+				type : "POST",
+				url : "/owner/insertTrainer",
+				cache : false,
+				contentType : 'application/json; charset=utf-8',
+				data : JSON	.stringify(form),
+				success : function(	result) {
+					if (result == "SUCCESS") {
+						//list로               
+						$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
+		}
+		
+		
+
+		
 		
 	});
 
@@ -239,9 +253,33 @@ $(document).ready(function(){
 				$(this).parent("tr").next(".update-tr").remove();
 			}		
 	});	
+	
+	$(".delete-trainer").on("click",function(){
+		console.log("트레이너 삭제버튼 누르는중");		
+		
+		let name=$(this).parent("tr").find(".trainer-name").text();
+		
+		
+		console.log("트레이너이름..."+name);
+		
+		$.ajax({
+			type : "POST",
+			url : "/owner/deleteTrainer/"+name,
+			cache : false,
+			success : function(	result) {
+				if (result == "ok") {
+					alert("삭제완료!");             
+					$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		})
 
 })
 
+});
 function goUpdate(){
 	console.log("수정버튼 누르고 함수실행됨!");
 	
@@ -272,8 +310,22 @@ function goUpdate(){
 		error : function(e) {
 			console.log(e);
 		}
-	})
+	})	
 	
+}
+
+function checkList(){
+	let check = $(".trainer-name").text();
+	
+	if(check == ""){
+		htmls = "";
+		
+		htmls += '<tr>';
+		htmls += '<td colspan="4"><h2>등록된 트레이너가 없습니다.</h2></td>';
+		htmls += '<td>';
+		
+		$("tbody").append(htmls);
+	}
 	
 }
 

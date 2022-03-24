@@ -31,4 +31,5 @@ public interface OwnerMapper {
 
 	public void deleteRegist(int storenum);
 
+	public void deleteTrainer(TrainerVO vo);
 }

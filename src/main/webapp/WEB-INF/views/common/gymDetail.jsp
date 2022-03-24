@@ -158,6 +158,25 @@ option {
 .card {
 	margin: 10px;
 }
+@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.tab-content p{
+	font-family: 'IM_Hyemin-Bold';
+	font-size: 20px;
+}
+@font-face {
+    font-family: 'ONE-Mobile-POP';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.tab-content h2,h3,h4{
+	font-family: 'ONE-Mobile-POP';
+}
 </style>
 <title>시설상세</title>
 </head>
@@ -270,7 +289,8 @@ option {
 					<h3>${gym.gaddress}</h3>
 					<br />
 					<h3>${gym.gphone}</h3>
-					<br /> <select name="order" id="order">
+					<br /> 
+					<select name="order" id="order">
 						<c:forEach items="${ticketList}" var="ticket">
 							<option value="${ticket.tknum}">${ticket.tname}</option>
 						</c:forEach>
@@ -295,27 +315,89 @@ option {
 								</ul>
 
 								<div class="tab-content" id="pills-tabContent">
-									<div class="tab-pane border fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+									<div style="line-height: 20px; padding: 15px;" class="tab-pane border fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
 										<h2>소개</h2>
+										<input type="hidden" class="gaddress" value="${gym.gaddress}">
+										<input type="hidden" class="gname" value="${gym.gname}">
 										<p>${gym.ginform}</p>
 										<h2>편의시설</h2>
 										<p>${gym.gfacility}</p>
 										<p>${gym.gtime}</p>
 										<p>${gym.gsns}</p>
+										<h2>시설 위치</h2>
+										<div id="map" style="width: 80%; height: 350px;"></div>
+			<script type="text/javascript"	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe8a7303194945138622f04ab6f2e5b3&libraries=services"></script>
+							<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+let addres = $(".gaddress").val();
+let gname = $(".gname").val();
+console.log(addres);
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(addres, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+    	 console.log("되따!!");
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        console.log(coords+".........")
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+gname+'</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>
 									</div>
 
 
 									<div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
 										<div class="container row justify-content-center">
-											<c:forEach items="${trainer}" var="list">
-												<div class="card" style="width: 300px;">
-													<img class="card-img-top" src="${pageContext.request.contextPath}/img/${list.gtimage}" alt="Card image" style="width: 100%">
-													<div class="card-body text-center">
-														<h4 class="card-title">${list.gtname}</h4>
-														<h3 class="card-body">${list.gtcareer}</h3>
-													</div>
-												</div>
-											</c:forEach>
+											<c:forEach items="${trainer}" var="trainer">
+           						 <div class="card mt-3 " style="background-color: black; width: 300px;">
+                				<div class="layer"></div>
+               						<div class="content">                    
+                    			<div class="card-body text-center pb-3 " style="height: 200px;">
+                       			 <div class="row justify-content-center">
+                            		<div class="col text-center justify-content-center ">
+                               	 <p class="bold text-center px-md-3">
+                               	  ${trainer.gtcareer}</p>
+                            		</div>
+                        		</div>
+                    			</div>
+                   				 <hr class="mt-auto mb-4">
+                   				 <div class="card-footer text-center border-0 mt-0 pt-0 mb-3">
+                       			 <div class="row text-center name mt-auto ">
+                           		 <div class="col">
+                               	 <h4 class="mb-0 Elizabeth">${trainer.gtname}</h4> <small class="mt-0 text-white"></small>                             
+                           	 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </c:forEach>
 
 										</div>
 									</div>
@@ -531,9 +613,7 @@ option {
 			let login = "${principal.username}";
 
 			if (login == "") {
-				if (confirm("로그인이 필요합니다.")) {
-					location.href = "/common/login";
-				}
+				confirm("로그인이 필요합니다.");
 			} else {
 
 				let ticketNumber = $("#order option:selected").val();
@@ -577,7 +657,7 @@ option {
 		$(".rating-text span").text("0 reviews");
 	}
 	function check() {
-		let checkNum = $(".review-description p").text();
+		let checkNum = $(".r-content h4").text();
 
 		console.log(checkNum);
 

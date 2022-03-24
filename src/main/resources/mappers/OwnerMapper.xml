@@ -60,4 +60,8 @@
 		]]>
 	</delete>
 	
+	<!-- 트레이너 삭제 -->
+	<delete id="deleteTrainer">
+	delete from trainer where gnum = #{gnum} and gtname = #{gtname}
+	</delete>
 </mapper>
