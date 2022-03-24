@@ -64,6 +64,7 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 			.and() 
 				.logout()
 				.logoutSuccessUrl("/today")
+				//.logoutUrl("/logoutsuccess")
 				.and()
 				.formLogin()
 				.loginPage("/common/login") //인증이 필요한 곳으로 접근하면 이동할 페이지

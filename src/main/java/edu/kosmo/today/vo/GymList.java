@@ -16,7 +16,7 @@ public class GymList { // 빈칸이나 Min Max 나중 구현 아직 안했음. �
 	private int mnum;
 	private String gname;
 	private String gcategory;
-	private String gadress;
+	private String gaddress;
 	private String gphone;
 	private String ginform;
 	private String gtime;

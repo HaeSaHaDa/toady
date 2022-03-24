@@ -31,7 +31,7 @@ public class IncomeController {
 	@Setter(onMethod_=@Autowired)
 	private IncomeService service;
 
-	@RequestMapping(value = "totalSales", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/totalSales", method = RequestMethod.GET)
 	public String dateIncome(Locale locale, Model model) {
 		System.out.println("데이트 인컴");
 		return "admin/totalSales";

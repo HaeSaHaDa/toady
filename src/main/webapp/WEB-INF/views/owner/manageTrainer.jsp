@@ -33,19 +33,8 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -76,26 +65,15 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -140,28 +118,49 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
-					<ul>
-						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
-						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/registerGym">시설 등록 신청</a></li>
-						<sec:authorize access="hasRole('USER')">
-							<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
-						</sec:authorize>
-					</ul>
+					<div class="col-4" style="margin-left: -100px">
+					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-8">
-				
-				
+					<table class="table">
+						 <thead class="thead-light">
+						 <tr>
+						 <th style="width: 150px;">트레이너 이름</th>
+						 <th>트레이너 소개 및 경력</th>
+						 <th>수정</th>
+						 <th>삭제</th>						 
+						 </tr>
+						 </thead>
+						 <tbody>
+						 <c:forEach items="${trainer}" var="trainer">
+						 	<tr style="color: white;">
+						 		<td class="trainer-name">${trainer.gtname}</td>
+						 		<td class="trainer-career">${trainer.gtcareer}</td>
+						 		<td class="updateTrainer">수정</td>
+						 		<td>X</td>
+						 	</tr>
+						 </c:forEach>
+						 </tbody>
+					</table>
+					<br>
+					
+					<table class="text-white" width="690" border="1" cellpadding="0" cellspacing="0" border="1">
+							<form id="insertTrainer" action="${pageContext.request.contextPath}/insertTrainer" method="post">
+								<tr>
+									<td style="width: 140px;">트레이너 이름</td>
+									<td><input width="200" type="text" id="gtname" name="gtname"></td>
+								</tr>
+								<tr>
+									<td style="width: 140px;">소개 및 경력</td>
+									<td><textarea rows="10" cols="60" id="gtcareer" name="gtcareer"></textarea></td>
+								</tr>
+							</form>
+						</table>
+						<button id="submit-trainer" class="btn btn-light">트레이너 등록</button>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -175,4 +174,109 @@
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#submit-trainer").on("click",function(){
+		console.log("트레이너등록버튼");
+		
+		var gtname = $("#gtname").val();
+		var gtcareer = $("#gtcareer").val();
+
+		console.log(gtcareer);
+
+		var form = {
+				gtname : gtname,
+				gtcareer : gtcareer
+		}
+
+		console.log(JSON.stringify(form));
+		
+		$.ajax({
+			type : "POST",
+			url : "/owner/insertTrainer",
+			cache : false,
+			contentType : 'application/json; charset=utf-8',
+			data : JSON	.stringify(form),
+			success : function(	result) {
+				if (result == "SUCCESS") {
+					//list로               
+					$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		})
+		
+	});
+
+	$(".updateTrainer").on("click",function(){
+		console.log("수정누름");
+		
+			let name = $(this).parent("tr").find(".trainer-name").text();
+			console.log(name);
+			let check = $(this).parent("tr").next("tr").find("input").val();
+			console.log(check);
+			if(name != check){
+				let num = $("tbody .update-tr").length;
+				
+				console.log(num+"..........");
+				if(num==0){
+					htmls ='';
+					
+					htmls +='<tr class = "update-tr">';
+					htmls +='<form id="update-tr">';
+					htmls +='<input type="hidden" id="name" value = "'+name+'">';
+					htmls += '<td colspan="3"><textarea id="career" class="career" cols="80" ></textarea></td>';
+					htmls +='</form>';
+					htmls += '<td><button id="go" onclick= "goUpdate()" class="btn btn-light">수정</button></td>';
+					htmls += '</tr>';
+					$(this).parent("tr").after(htmls);
+				}else{
+					alert("한개만 수정해주세요!");
+				}				
+			}else{
+				$(this).parent("tr").next(".update-tr").remove();
+			}		
+	});	
+
+})
+
+function goUpdate(){
+	console.log("수정버튼 누르고 함수실행됨!");
+	
+	var gtname = $("#name").val();
+	var gtcareer = $("#career").val();
+
+	console.log(gtname,gtcareer);
+
+	var form = {
+			gtname : gtname,
+			gtcareer : gtcareer
+	}
+
+	console.log(JSON.stringify(form));
+	
+	$.ajax({
+		type : "POST",
+		url : "/owner/updateCareer",
+		cache : false,
+		contentType : 'application/json; charset=utf-8',
+		data : JSON	.stringify(form),
+		success : function(	result) {
+			if (result == "SUCCESS") {
+				alert("수정완료!");             
+				$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+			}
+		},
+		error : function(e) {
+			console.log(e);
+		}
+	})
+	
+	
+}
+
+
+</script>
 </html>

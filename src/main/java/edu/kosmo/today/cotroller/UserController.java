@@ -72,14 +72,14 @@ public class UserController {
 	}
 
 	// FAQ목록
-	@GetMapping("/user/faqboard")
+	@GetMapping("/common/faqboard")
 	public ModelAndView getFaqList(Criteria cri, ModelAndView mav) {
 
 		System.out.println("faqList");
 		log.info("faqList() ..");
 		log.info("Criteria" + cri);
 
-		mav.setViewName("/user/faqBoard");
+		mav.setViewName("/common/faqBoard");
 		mav.addObject("faqList", faqService.getFaqList(cri));
 
 		log.info("faqList(cri)" + faqService.getFaqList(cri));

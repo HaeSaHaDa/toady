@@ -25,6 +25,7 @@
 <title>마이페이지</title>
 
 <script type="text/javascript">
+
 	$(document)
 			.ready(
 					function() {
@@ -34,18 +35,21 @@
 										function(event) {
 
 											event.preventDefault();
-
+											var token = $("meta[name='_csrf']").attr("content");
+											var header = $("meta[name='_csrf_header']").attr("content");
 											var mid = $("#mid").val();
 											var mnickname = $("#mnickname")
 													.val();
 											var mphone = $("#mphone").val();
+											var mbirth = $("#mbirth").val();
 
 											console.log($(this).attr("action"));
 
 											var form = {
 												mid : mid,
 												mnickname : mnickname,
-												mphone : mphone
+												mphone : mphone,
+												mbirth: mbirth
 											};
 
 											console.log(JSON.stringify(form));
@@ -59,6 +63,7 @@
 														contentType : 'application/json; charset=utf-8',
 														data : JSON
 																.stringify(form),
+														beforeSend: function(xhr) {  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");},
 														success : function(
 																result) {
 															if (result == "SUCCESS") {
@@ -89,20 +94,8 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
-
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -134,27 +127,15 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-						
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -171,14 +152,13 @@
 
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> 
-									<a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
 									</a>
 									</span>
 									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
 									</a>
 									</span>
-									<a class="nav-link" style="color:white">${principal.user.memail}</a>
+									<a class="nav-link" style="color: white">${principal.user.memail}</a>
 
 								</c:otherwise>
 							</c:choose>
@@ -202,22 +182,8 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
-					<ul>
-						<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
-						<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/registerGym">시설 등록 신청</a></li>
-						<sec:authorize access="hasRole('USER')">
-							<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
-							<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
-						</sec:authorize>
-					</ul>
+					<div class="col-4" style="margin-left: -100px">
+					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
@@ -232,15 +198,15 @@
 							</p>
 
 							<p>
-								닉네임 <input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" />
+								닉네임 <input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" placeholder="Enter nickname" />
 							</p>
 
 							<p>
-								연락처 <input type="text" id="mphone" name="mphone" value="${memberInfoList.mphone}" />
+								연락처 <input type="text" id="mphone" name="mphone" value="${memberInfoList.mphone}"placeholder="Enter phonenumber"  />
 							</p>
-							<div class="form-group">
-								<label for="mbirth">생년월일:</label> <input type="text" value="${principal.user.mbirth}" class="form-control" placeholder="Enter birthday" id="mbirth">
-							</div>
+							<p>
+								생년월일<input type="text" id="mbirth" name="mbirth" value="${memberInfoList.mbirth}"  placeholder="Enter birthday" >
+							</p>
 							<input class="btn btn-primary m-2" type="submit" value="수정하기"> <a class="btn btn-primary " href="/user/memberLeave">회원 탈퇴하기</a>
 							<c:choose>
 								<c:when test="${principal.user.social==0}">

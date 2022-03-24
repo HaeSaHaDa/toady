@@ -25,7 +25,7 @@
 			//<td class="delete_review">X</td>
 			
 			$(".delete_review").on("click",function(){
-				console.log("리뷰삭제요청하기");
+				console.log("리뷰삭제하기");
 				
 				let bid = $(this).parent("tr").find("input").val();
 		    	   
@@ -122,10 +122,11 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
+				</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">

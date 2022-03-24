@@ -10,6 +10,7 @@ import edu.kosmo.today.page.Criteria2;
 import edu.kosmo.today.vo.GymVO;
 import edu.kosmo.today.vo.ReviewVO;
 import edu.kosmo.today.vo.TicketVO;
+import edu.kosmo.today.vo.TrainerVO;
 
 /*
  *0310 시설페이지 (김보람)
@@ -19,7 +20,9 @@ import edu.kosmo.today.vo.TicketVO;
 public interface GymMapper {
 
 	// 시설 목록 뽑기
-	public List<GymVO> gymList();
+	public List<GymVO> gymList(Criteria cri);
+	//시설갯수
+	public int getGymTotal();
 
 	// 시설상세화면
 	public GymVO gymdetail(int gnum);
@@ -57,5 +60,8 @@ public interface GymMapper {
 	public void deleteReview1(int bid);
 
 	public void deleteReview2(int bid);
+	
+	//트레이너
+	public List<TrainerVO> getTrainer(int gnum);
 
 }

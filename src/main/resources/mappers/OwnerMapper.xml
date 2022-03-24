@@ -19,5 +19,24 @@
 		select * from member where
 		mid = #{mid}
 	</select>
+	
+	<delete id="memberDelete" >
+	<![CDATA[
+		delete from member where mnum = #{mnum}
+	]]>
+	</delete>
+	
+	<!-- 트레이너 목록가져오기 -->
+	<select id="getTrainer" resultType="edu.kosmo.today.vo.TrainerVO">
+		select * from trainer where gnum = #{gnum}
+	</select>
+	<!-- 트레이너 등록 -->
+	<insert id="insertTrainer">
+		insert into trainer (gnum,gtname,gtcareer) values (#{gnum},#{gtname},#{gtcareer})
+	</insert>
+	<!-- 트레이너 정보 수정하기 -->
+	<update id="updateTrainer">
+		UPDATE trainer SET gtcareer = #{gtcareer} WHERE gnum = #{gnum} and gtname = #{gtname}
 
+	</update>
 </mapper>

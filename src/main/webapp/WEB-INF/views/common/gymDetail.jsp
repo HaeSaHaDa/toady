@@ -163,6 +163,10 @@ option {
 </head>
 
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -171,19 +175,8 @@ option {
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -214,27 +207,15 @@ option {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -281,14 +262,13 @@ option {
 		<div class="container" id="gympage1">
 			<div class="row">
 				<div class="col-md-5">
-					<img class="gym-img" src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="" />
+					<img class="gym-img" src="${pageContext.request.contextPath}/img/${gym.imagename}"  alt="" />
 				</div>
 				<div class="col-md-7">
 					<h1>${gym.gname}</h1>
 					<br />
-					<h2>평점</h2>
 					<br />
-					<h3>${gym.gadress}</h3>
+					<h3>${gym.gaddress}</h3>
 					<br />
 					<h3>${gym.gphone}</h3>
 					<br /> <select name="order" id="order">
@@ -327,23 +307,16 @@ option {
 
 
 									<div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-										<div class="container row">
-											<div class="card" style="width: 400px">
-												<img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width: 100%">
-												<div class="card-body">
-													<h4 class="card-title">Jane Doe</h4>
-													<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-
+										<div class="container row justify-content-center">
+										<c:forEach items="${trainer}" var="list">
+											<div class="card" style="width: 300px;">
+												<img class="card-img-top" src="${pageContext.request.contextPath}/img/${list.gtimage}"  alt="Card image" style="width: 100%">
+												<div class="card-body text-center">
+													<h4 class="card-title">${list.gtname}</h4>													
+													<h3 class="card-body">${list.gtcareer}</h3>
 												</div>
 											</div>
-											<div class="card" style="width: 400px">
-												<img class="card-img-top" src="${pageContext.request.contextPath}/img/classes/class-details/trainer-profile.jpg" alt="Card image" style="width: 100%">
-												<div class="card-body">
-													<h4 class="card-title">Jane Doe</h4>
-													<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-
-												</div>
-											</div>
+										</c:forEach>
 
 										</div>
 									</div>

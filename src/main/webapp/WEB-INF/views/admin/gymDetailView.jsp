@@ -34,7 +34,7 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
 							<sec:authorize access="hasRole('USER')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
@@ -80,8 +80,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -90,14 +90,14 @@
 						<ul>
 							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/gymlist">시설찾기</a></li>
 							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
+							<sec:authorize access="hasAnyRole('USER','BUSINESS','ADMIN')">
 								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
 								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 							</sec:authorize>
-							<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							<sec:authorize access="hasRole('ADMIN')">
+							<sec:authorize access="hasAnyRole('USER','BUSINESS','ADMIN')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
@@ -140,8 +140,38 @@
 		</div>
 	</header>
 	<!-- Header End -->
-	<!-- 내용 들어갈 자리 -->
-	
+	<!--마이페이지 내용물 시작-->
+	<!--마이페이지 내용물 시작-->
+	<section class="classes-section spad">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+					<div class="col-4" style="margin-left: -100px">
+					<%@ include file="../layout/adminmenu.jsp"%>
+				</div>
+				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
+				<div class="col-8">
+					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+					<div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</div>
+					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+	<!-- 마이페이지 내용물 끝 -->
 	
 	
 	

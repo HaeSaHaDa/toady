@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -26,6 +27,10 @@
 
 
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -35,47 +40,31 @@
 
 		<nav class="canvas-menu mobile-menu">
 
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
-							</sec:authorize>
-						</ul>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
+					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+					</span>
+					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					</a>
+					</span>
 
 
 				</c:when>
 				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					</a>
+					</span>
+					<body ng-controller="moniteringCtrl" class="pad">
+						<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+						</a>
+						</span>
+						<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -87,23 +76,16 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo" style="margin-top: -60px">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-						<ul>
-							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
-							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
-							<sec:authorize access="hasRole('USER')">
-								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
-								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
-							</sec:authorize>
-						</ul>
+
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -114,25 +96,19 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
+									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+									</a>
 									</span>
 
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									</a>
 									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/logout"> <i class="fa fa-sign-out">Log Out</i>
+									</a>
+									</span>
+									<a class="nav-link">${principal.user.memail}</a>
 
 								</c:otherwise>
 							</c:choose>
@@ -195,8 +171,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<span>Our Classes</span>
-						<h2>WHAT WE CAN OFFER</h2>
+						<span>오늘의 짐</span>
+						<h2>인기 헬스장</h2>
 					</div>
 				</div>
 			</div>
@@ -364,7 +340,7 @@
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
 
-		<!-- Js Plugins -->
+	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 
 
