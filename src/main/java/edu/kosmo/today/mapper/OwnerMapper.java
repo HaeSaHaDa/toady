@@ -23,4 +23,5 @@ public interface OwnerMapper {
 	
 	public void updateTrainer(TrainerVO vo);
 	
+	public void deleteTrainer(TrainerVO vo);
 }

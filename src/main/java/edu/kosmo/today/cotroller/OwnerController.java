@@ -231,4 +231,30 @@ public class OwnerController {
 		}
 		return entity;
 	}
+	
+	//트레이너 삭제
+	@RequestMapping(value="/deleteTrainer/{gtname}" , method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> deleteTrainer(@PathVariable("gtname") String gtname,TrainerVO vo) {
+		ResponseEntity<String> entity = null;
+		System.out.println("찜 하나 삭제중..." + gtname + ">>이용권번호");
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
+		System.out.println(mnum+"의 시설번호 구하는중");
+		int gnum = gymService.getGnum(mnum);
+		System.out.println("......."+gnum);
+
+		try {
+			vo.setGnum(gnum);
+			vo.setGtname(gtname);			
+			ownerService.deleteTrainer(vo);
+			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+		}
+
+		return entity;
+	}
 }

@@ -16,71 +16,40 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" type="text/css">
 <%@ include file="../layout/head_tags.jsp"%>
 
-
-
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-
-						$(".view-content")
-								.on(
-										"click",
-										function() {
-
-											console.log("FAQ글보기");
-
-											let bid = $(this).parents("tr")
-													.find("input").val();
-											console.log("faq글번호" + bid);
-											let divcontent = $(this).parents(
-													"tr");
-											console.log(divcontent + ".....");
-
-											let url = "${pageContext.request.contextPath}/admin/faqpage/"
-													+ bid;
-
-											let faqContent = divcontent.next(
-													"tr").find("input").val();
-											console.log(faqContent);
-
-											if (faqContent == bid) {
-												divcontent.next("tr").remove();
-											} else {
-												$
-														.ajax({
-															type : 'POST',
-															url : url,
-															dataType : 'JSON',
-															cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
-															success : function(
-																	result) {
-
-																console
-																		.log(result);
-
-																var htmls = "";
-
-																htmls += '<tr>';
-																htmls += '<input type="hidden" value='+result.bid+'>';
-																htmls += '<td colspan="3">'
-																		+ result.bcontent
-																		+ '</td>';
-																htmls += '</tr>';
-
-																divcontent
-																		.after(htmls);
-
-															}
-
-														});
-											}
-
-										});
-
+	$(document).ready(	function() {
+			$(".view-content").on("click",function() {
+					console.log("FAQ글보기");
+					let bid = $(this).parents("tr").find("input").val();
+					console.log("faq글번호" + bid);
+					let divcontent = $(this).parents("tr");
+					console.log(divcontent + ".....");
+					let url = "${pageContext.request.contextPath}/admin/faqpage/"+ bid;
+					let faqContent = divcontent.next("tr").find("input").val();
+					console.log(faqContent);
+					if (faqContent == bid) {
+						divcontent.next("tr").remove();
+					} else {
+						$.ajax({
+							type : 'POST',
+							url : url,
+							dataType : 'JSON',
+							cache : false, // 이걸 안쓰거나 true하면 수정해도 값반영이 잘안댐		            
+							success : function(result) {
+							console.log(result);
+							var htmls = "";
+							htmls += '<tr>';
+							htmls += '<input type="hidden" value='+result.bid+'>';
+							htmls += '<td style="word-wrap:break-all; white-space:pre-wrap;" colspan="2">'+ result.bcontent+ '</td>';
+							htmls += '</tr>';
+							divcontent.after(htmls);
+					}
+				});
+					}
+		});
 					})
 </script>
 <title>마이페이지</title>
@@ -181,16 +150,18 @@
 	<!-- ChoseUs Section End -->
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+		<div class="container">
+<<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 내용물 -->
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
-					<div  style="margin:0 auto;">
+					<div style="margin:0 auto;">
 						<h4 class="text-white">FAQ</h4>
-						<table class="text-white" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="table" style="width: 850px; table-layout:fixed;" border="1" cellpadding="1" cellspacing="10" border="1">
+							<thead class="thead-light">
 							<tr>
-								<td>제목</td>
-								<td>+</td>
+								<th style="width: 90%;">제목</th>
+								<th>+</th>
 							</tr>
 							<c:forEach items="${faqList}" var="faq">
 								<tr>
@@ -202,18 +173,24 @@
 						</table>
 
 
-						<c:if test="${pageMaker.pre}">
-							<a href="/common/faqboard${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
-						</c:if>
+						<nav class="pagination-outer mb-2 mt-2" aria-label="Page navigation">
+											<ul class="pagination justify-content-center text-center">
+												<c:if test="${pageMaker.pre}">
+													<li class="page-item"><a aria-label="Previous" class="page-link"
+														href="${pageContext.request.contextPath}/common/faqboard/${gym.gnum}${pageMaker.makeQuery(pageMaker.startPage - 1) }"> <span aria-hidden="true">«</a></span></li>
+												</c:if>
 
-						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-						<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
-							<a href="/common/faqboard${pageMaker.makeQuery(idx)}">${idx}</a>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="/common/faqboard${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
-						</c:if>
+												<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+												<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+													<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/common/faqboard/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
+												</c:forEach>
+												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+													<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/common/faqboard/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}">
+															<span aria-hidden="true">»</span>
+													</a></li>
+												</c:if>
+											</ul>
+										</nav>
 						<br>
 				</div>
 			</div>

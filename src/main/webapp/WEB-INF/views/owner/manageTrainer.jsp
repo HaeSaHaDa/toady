@@ -139,7 +139,7 @@
 						 		<td class="trainer-name">${trainer.gtname}</td>
 						 		<td style="word-break:break-all;" class="trainer-career">${trainer.gtcareer}</td>
 						 		<td class="updateTrainer">수정</td>
-						 		<td>X</td>
+						 		<td class="delete-trainer">X</td>
 						 	</tr>
 						 </c:forEach>
 						 </tbody>
@@ -249,9 +249,33 @@ $(document).ready(function(){
 				$(this).parent("tr").next(".update-tr").remove();
 			}		
 	});	
+	
+	$(".delete-trainer").on("click",function(){
+		console.log("트레이너 삭제버튼 누르는중");		
+		
+		let name=$(this).parent("tr").find(".trainer-name").text();
+		
+		
+		console.log("트레이너이름..."+name);
+		
+		$.ajax({
+			type : "POST",
+			url : "/owner/deleteTrainer/"+name,
+			cache : false,
+			success : function(	result) {
+				if (result == "ok") {
+					alert("삭제완료!");             
+					$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		})
 
 })
 
+});
 function goUpdate(){
 	console.log("수정버튼 누르고 함수실행됨!");
 	

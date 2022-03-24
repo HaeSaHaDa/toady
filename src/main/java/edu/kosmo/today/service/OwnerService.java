@@ -13,5 +13,6 @@ public interface OwnerService {
 	
 	public List<TrainerVO> getTrainer(int gnum);//트레이너 목록보기
 	public void registerTrainer(TrainerVO vo);//트레이너 등록하기
-	public void updateTrainer(TrainerVO vo);
+	public void updateTrainer(TrainerVO vo); //트레이너 정보수정
+	public void deleteTrainer(TrainerVO vo);
 }

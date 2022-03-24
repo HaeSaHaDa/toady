@@ -39,4 +39,8 @@
 		UPDATE trainer SET gtcareer = #{gtcareer} WHERE gnum = #{gnum} and gtname = #{gtname}
 
 	</update>
+	<!-- 트레이너 삭제 -->
+	<delete id="deleteTrainer">
+	delete from trainer where gnum = #{gnum} and gtname = #{gtname}
+	</delete>
 </mapper>
