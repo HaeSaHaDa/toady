@@ -317,11 +317,59 @@ option {
 								<div class="tab-content" id="pills-tabContent">
 									<div style="line-height: 20px; padding: 15px;" class="tab-pane border fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
 										<h2>소개</h2>
+										<input type="hidden" class="gaddress" value="${gym.gaddress}">
+										<input type="hidden" class="gname" value="${gym.gname}">
 										<p>${gym.ginform}</p>
 										<h2>편의시설</h2>
 										<p>${gym.gfacility}</p>
 										<p>${gym.gtime}</p>
 										<p>${gym.gsns}</p>
+										<h2>시설 위치</h2>
+										<div id="map" style="width: 80%; height: 350px;"></div>
+							<script type="text/javascript"
+								src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe8a7303194945138622f04ab6f2e5b3&libraries=services"></script>
+							<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+let addres = $(".gaddress").val();
+let gname = $(".gname").val();
+console.log(addres);
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(addres, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+    	 console.log("되따!!");
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+gname+'</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>
 									</div>
 
 

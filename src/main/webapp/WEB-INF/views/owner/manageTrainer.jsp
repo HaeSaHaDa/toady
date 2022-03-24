@@ -133,7 +133,8 @@
 						 <th style="width: 40px;">삭제</th>						 
 						 </tr>
 						 </thead>
-						 <tbody>
+						 <tbody>					 
+						
 						 <c:forEach items="${trainer}" var="trainer">
 						 	<tr style="color: white;">
 						 		<td class="trainer-name">${trainer.gtname}</td>
@@ -142,6 +143,7 @@
 						 		<td class="delete-trainer">X</td>
 						 	</tr>
 						 </c:forEach>
+						
 						 </tbody>
 					</table>
 					<br>
@@ -177,6 +179,8 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
+	checkList();
+	
 	$("#submit-trainer").on("click",function(){
 		console.log("트레이너등록버튼");
 		
@@ -306,8 +310,22 @@ function goUpdate(){
 		error : function(e) {
 			console.log(e);
 		}
-	})
+	})	
 	
+}
+
+function checkList(){
+	let check = $(".trainer-name").text();
+	
+	if(check == ""){
+		htmls = "";
+		
+		htmls += '<tr>';
+		htmls += '<td colspan="4"><h2>등록된 트레이너가 없습니다.</h2></td>';
+		htmls += '<td>';
+		
+		$("tbody").append(htmls);
+	}
 	
 }
 
