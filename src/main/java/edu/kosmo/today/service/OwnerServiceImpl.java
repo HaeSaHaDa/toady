@@ -43,5 +43,12 @@ public class OwnerServiceImpl implements OwnerService{
 		System.out.println("트레이너 등록중--"+vo);
 		
 		ownerMapper.insertTrainer(vo);		
+	}
+
+	@Override
+	public void updateTrainer(TrainerVO vo) {
+		System.out.println("트레이너 정보 수정중....");
+		
+		ownerMapper.updateTrainer(vo);
 	}			
 }

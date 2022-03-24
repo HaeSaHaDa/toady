@@ -124,42 +124,8 @@
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
-					<table class="table">
-						 <thead class="thead-light">
-						 <tr>
-						 <th style="width: 150px;">트레이너 이름</th>
-						 <th>트레이너 소개 및 경력</th>
-						 <th>수정</th>
-						 <th>삭제</th>						 
-						 </tr>
-						 </thead>
-						 <tbody>
-						 <c:forEach items="${trainer}" var="trainer">
-						 	<tr style="color: white;">
-						 		<td class="trainer-name">${trainer.gtname}</td>
-						 		<td class="trainer-career">${trainer.gtcareer}</td>
-						 		<td class="updateTrainer">수정</td>
-						 		<td>X</td>
-						 	</tr>
-						 </c:forEach>
-						 </tbody>
-					</table>
-					<br>
-					
-					<table class="text-white" width="690" border="1" cellpadding="0" cellspacing="0" border="1">
-							<form id="insertTrainer" action="${pageContext.request.contextPath}/insertTrainer" method="post">
-								<tr>
-									<td style="width: 140px;">트레이너 이름</td>
-									<td><input width="200" type="text" id="gtname" name="gtname"></td>
-								</tr>
-								<tr>
-									<td style="width: 140px;">소개 및 경력</td>
-									<td><textarea rows="10" cols="60" id="gtcareer" name="gtcareer"></textarea></td>
-								</tr>
-							</form>
-						</table>
-						<button id="submit-trainer" class="btn btn-light">트레이너 등록</button>
-					
+				<h1 class="text-light">관리 중인 트레이너가 없습니다.</h1>
+			
 					
 				</div>
 			</div>
