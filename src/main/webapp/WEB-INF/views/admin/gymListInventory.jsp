@@ -123,10 +123,15 @@
 	<!-- ChoseUs Section End -->
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container" style="padding-bottom: 100px; margin-top: 200px;">
-			<div class="row">
-
-				<!-- 내용물 시작 -->
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+					<div class="col-3">
+					<%@ include file="../layout/adminmenu.jsp"%>
+				</div>
+				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
+				<div class="col-9">
 				<h2 class="title" style="color:white">헬스장 관리 페이지입니다.</h2>
 				<table class="table table-hover" style="width: 100%;">
 					<thead>
@@ -137,10 +142,7 @@
 							<th>gcategory</th>
 							<th>gaddress</th>
 							<th>gphone</th>
-							<th>ginform</th>
-							<th>gtime</th>
-							<th>gfacility</th>
-							<th>gsns</th>
+	
 							<th></th>
 						</tr>
 					</thead>
@@ -153,12 +155,10 @@
 								<td>${gymList.gcategory}</td>
 								<td>${gymList.gaddress}</td>
 								<td>${gymList.gphone}</td>
-								<td>${gymList.ginform}</td>
-								<td>${gymList.gtime}</td>
-								<td>${gymList.gfacility}</td>
-								<td>${gymList.gsns}</td>
-								<td><a href="<c:url value ="/admin/gymListInventory/deleteGymList/${gymList.gnum}"/>"> <i class="fa-solid fa-trash"></i>
-								</a> <a href="<c:url value ="/admin/gymListInventory/updateGymList/${gymList.gnum}"/>"> <i class="fas fa-edit"></i>
+
+								<td>
+								<a href="<c:url value ="/admin/gymListInventory/deleteGymList/${gymList.gnum}"/>"> <i class="fa-solid fa-trash"></i></a>
+								<a href="<c:url value ="/admin/gymListInventory/updateGymList/${gymList.gnum}"/>"> <i class="fas fa-edit"></i>
 								</a></td>
 							</tr>
 						</c:forEach>

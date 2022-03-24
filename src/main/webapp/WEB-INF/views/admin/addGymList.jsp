@@ -126,10 +126,10 @@
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
-				<p class="lead">시설을 추가해주세요.</p>
+				<p class="lead">시설을 추가해주세요.</p><br/>
 				<sf:form
 					action="${pageContext.request.contextPath}/admin/gymListInventory/addGymList"
-					method="post" modelAttribute="gymListVO" enctype="multipart/form-data" style="width:80%;">
+					method="post" modelAttribute="gymListVO" enctype="multipart/form-data" style="width:80%; color:white">
 					<!-- post method 처리하는 것 controller만들어줘야함. -->
 					<!-- modelAttribute="gymListVO"의 input path ="여러가지들 이름 맞춰줘야함" -->
 					<div class="form group">
@@ -155,7 +155,7 @@
 					</div>
 
 					<div class="form group">
-						<label for="gadress">주소</label>
+						<label for="gaddress">주소</label>
 						<sf:input path="gaddress" id="gaddress" class="form-control" />
 						<sf:errors path="gaddress" cssStyle="color:#ff0000" />
 					</div>

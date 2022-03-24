@@ -25,7 +25,6 @@
 <title>마이페이지</title>
 
 <script type="text/javascript">
-
 	$(document)
 			.ready(
 					function() {
@@ -35,8 +34,11 @@
 										function(event) {
 
 											event.preventDefault();
-											var token = $("meta[name='_csrf']").attr("content");
-											var header = $("meta[name='_csrf_header']").attr("content");
+											var token = $("meta[name='_csrf']")
+													.attr("content");
+											var header = $(
+													"meta[name='_csrf_header']")
+													.attr("content");
 											var mid = $("#mid").val();
 											var mnickname = $("#mnickname")
 													.val();
@@ -49,7 +51,7 @@
 												mid : mid,
 												mnickname : mnickname,
 												mphone : mphone,
-												mbirth: mbirth
+												mbirth : mbirth
 											};
 
 											console.log(JSON.stringify(form));
@@ -63,7 +65,13 @@
 														contentType : 'application/json; charset=utf-8',
 														data : JSON
 																.stringify(form),
-														beforeSend: function(xhr) {  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");},
+														beforeSend : function(
+																xhr) {
+															xhr
+																	.setRequestHeader(
+																			"X-CSRF-Token",
+																			"${_csrf.token}");
+														},
 														success : function(
 																result) {
 															if (result == "SUCCESS") {
@@ -94,8 +102,8 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-						<!-- 메뉴 바  -->
-						<%@ include file="../layout/menu_bar.jsp"%>
+			<!-- 메뉴 바  -->
+			<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -127,8 +135,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo"  style="margin-top:-60px">
-						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
+					<div class="logo" style="margin-top: -60px">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -182,31 +190,38 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-4" style="margin-left: -100px">
+				<div class="col-3">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="col-8">
+				<div class="col-9">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h2 style="color: white;">회원 정보</h2>
-						<form class="text-white" id="updateMemberinfo" action="${pageContext.request.contextPath}/user/memberInfo">
-							<input type="hidden" id="mid" name="mid" value="${memberInfoList.mid}">
-							<p>
-								<label for="memail">Emial:</label> <input type="text" value="${memberInfoList.memail}" disabled />
-							</p>
+						<br/>
+						<form class="text-white" id="updateMemberinfo" action="${pageContext.request.contextPath}/user/memberInfo" >
+							<table>
+								<input type="hidden" id="mid" name="mid" value="${memberInfoList.mid}">
+								<tr>
+									<td><label for="memail">Emial:</label></td>
+									<td><input type="text" value="${memberInfoList.memail}" disabled /></td>
+								</tr>
 
-							<p>
-								닉네임 <input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" placeholder="Enter nickname" />
-							</p>
+								<tr>
+									<td><label for="nickname">닉네임</label></td>
+									<td><input type="text" id="mnickname" name="mnickname" value="${memberInfoList.mnickname}" placeholder="Enter nickname" /></td>
+								</tr>
 
-							<p>
-								연락처 <input type="text" id="mphone" name="mphone" value="${memberInfoList.mphone}"placeholder="Enter phonenumber"  />
-							</p>
-							<p>
-								생년월일<input type="text" id="mbirth" name="mbirth" value="${memberInfoList.mbirth}"  placeholder="Enter birthday" >
-							</p>
+								<tr>
+									<td><label for="phone-number">연락처</label></td>
+									<td><input type="text" id="mphone" name="mphone" value="${memberInfoList.mphone}" placeholder="Enter phonenumber" /></td>
+								</tr>
+								<tr>
+									<td><label for="birth">생년얼일</label></td>
+									<td><input type="text" id="mbirth" name="mbirth" value="${memberInfoList.mbirth}" placeholder="Enter birthday"></td>
+								</tr>
+							</table>
 							<input class="btn btn-primary m-2" type="submit" value="수정하기"> <a class="btn btn-primary " href="/user/memberLeave">회원 탈퇴하기</a>
 							<c:choose>
 								<c:when test="${principal.user.social==0}">

@@ -153,18 +153,17 @@
 	</header>
 	<!-- Header End -->
 
-	<!--마이페이지 내용물 시작-->
+		<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4" style="margin-left: -100px">
-					<!-- 메뉴 바  -->
+					<div class="col-3">
 					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="col-8">
+				<div class="col-9">
 					<!-- 내용물 시작 -->
 					<div>
 						<h4 class="text-white">환불요청/리뷰삭제요청</h4>
