@@ -9,10 +9,7 @@
 		<result property="gnum" column="gnum" />		
 		<result property="gname" column="gname" />
 		<result property="gcategory" column="gcategory" />
-<<<<<<< HEAD
 		<result property="gaddress" column="gaddress" />
-=======
->>>>>>> c00ac62b693306a79df91f6b7860758f85b6b582
 		<result property="gphone" column="gphone" />
 		<result property="ginform" column="ginform" />
 		<result property="gtime" column="gtime" />

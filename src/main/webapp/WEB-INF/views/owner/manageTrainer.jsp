@@ -127,17 +127,17 @@
 					<table class="table">
 						 <thead class="thead-light">
 						 <tr>
-						 <th style="width: 150px;">트레이너 이름</th>
-						 <th>트레이너 소개 및 경력</th>
-						 <th>수정</th>
-						 <th>삭제</th>						 
+						 <th style="width: 80px;">트레이너 이름</th>
+						 <th style="width: 250px;">트레이너 소개 및 경력</th>
+						 <th style="width: 40px;">수정</th>
+						 <th style="width: 40px;">삭제</th>						 
 						 </tr>
 						 </thead>
 						 <tbody>
 						 <c:forEach items="${trainer}" var="trainer">
 						 	<tr style="color: white;">
 						 		<td class="trainer-name">${trainer.gtname}</td>
-						 		<td class="trainer-career">${trainer.gtcareer}</td>
+						 		<td style="word-break:break-all;" class="trainer-career">${trainer.gtcareer}</td>
 						 		<td class="updateTrainer">수정</td>
 						 		<td>X</td>
 						 	</tr>
@@ -146,7 +146,7 @@
 					</table>
 					<br>
 					
-					<table class="text-white" width="690" border="1" cellpadding="0" cellspacing="0" border="1">
+					<table class="text-white" width="700" border="1" cellpadding="0" cellspacing="0" border="1">
 							<form id="insertTrainer" action="${pageContext.request.contextPath}/insertTrainer" method="post">
 								<tr>
 									<td style="width: 140px;">트레이너 이름</td>
@@ -158,6 +158,7 @@
 								</tr>
 							</form>
 						</table>
+						<br>
 						<button id="submit-trainer" class="btn btn-light">트레이너 등록</button>
 					
 					
@@ -184,29 +185,38 @@ $(document).ready(function(){
 
 		console.log(gtcareer);
 
-		var form = {
-				gtname : gtname,
-				gtcareer : gtcareer
-		}
-
-		console.log(JSON.stringify(form));
-		
-		$.ajax({
-			type : "POST",
-			url : "/owner/insertTrainer",
-			cache : false,
-			contentType : 'application/json; charset=utf-8',
-			data : JSON	.stringify(form),
-			success : function(	result) {
-				if (result == "SUCCESS") {
-					//list로               
-					$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
-				}
-			},
-			error : function(e) {
-				console.log(e);
+		if(gtname ==""){
+			alert("이름을 입력해주세요!");
+		}else if(gtcareer==""){
+			alert("내용을 입력해주세요!");
+		}else{
+			var form = {
+					gtname : gtname,
+					gtcareer : gtcareer
 			}
-		})
+			console.log(JSON.stringify(form));
+			
+			$.ajax({
+				type : "POST",
+				url : "/owner/insertTrainer",
+				cache : false,
+				contentType : 'application/json; charset=utf-8',
+				data : JSON	.stringify(form),
+				success : function(	result) {
+					if (result == "SUCCESS") {
+						//list로               
+						$(location).attr('href','${pageContext.request.contextPath}/owner/manageTrainer');
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
+		}
+		
+		
+
+		
 		
 	});
 
