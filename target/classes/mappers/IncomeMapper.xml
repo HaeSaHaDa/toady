@@ -8,6 +8,8 @@
 
 <mapper namespace="edu.kosmo.today.mapper.IncomeMapper">
 
+
+
 	<select id="getWeekendIncome" resultType="edu.kosmo.today.vo.OrderVO">
 
 		select to_char(orderdate,'yy.mm.dd') as day, sum(cost) as income from
@@ -24,6 +26,22 @@
 
 	</select>
 
+	<select id="getGnum" resultType="edu.kosmo.today.vo.GymListVO">
+		select * from gympage, member where member.mnum=gympage.mnum and member.mnum = #{mnum}
+	</select>
 
+	<select id="gymWeekend" resultType="edu.kosmo.today.vo.OrderVO">
 
+		select to_char(orderdate,'yy.mm.dd') as day, NVL(sum(cost), 0) as income from
+		orderlist, orderdetail, ticket WHERE orderlist.orderdate BETWEEN
+		trunc(sysdate) - 7 and trunc(sysdate) and orderlist.ordernum = orderdetail.ordernum and orderdetail.tknum=ticket.tknum and ticket.gnum = ${gnum} group by orderdate order by orderdate asc
+
+	</select>
+	<select id="gymMonth" resultType="edu.kosmo.today.vo.OrderVO">
+
+		select to_char(orderdate,'yy.mm.dd') as day, NVL(sum(cost), 0) as income from
+		orderlist, orderdetail, ticket WHERE orderlist.orderdate BETWEEN
+		trunc(sysdate) - 30 and trunc(sysdate) and orderlist.ordernum = orderdetail.ordernum and orderdetail.tknum=ticket.tknum and ticket.gnum = ${gnum} group by orderdate order by orderdate asc
+
+	</select>
 </mapper> 

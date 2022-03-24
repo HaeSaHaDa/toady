@@ -19,7 +19,7 @@
 					<li><a href="${pageContext.request.contextPath}/owner/manageGym">시설 등록 내역</a></li>
 					<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
 					<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
-					<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym">매출 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/owner/totalSales_gym/${principal.user.mnum}">매출 관리</a></li>
 				</sec:authorize>
 			</ul></li>
 		<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>

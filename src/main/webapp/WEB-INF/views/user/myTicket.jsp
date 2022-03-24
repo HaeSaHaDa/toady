@@ -166,7 +166,7 @@
 											<div class="card-body text-center">
 												<img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100">
 												<div class="comment-box text-center">
-													<h4>${myticket.gname}의리뷰를 남겨주세요!</h4>
+													<h4>${myticket.gname}의리뷰를남겨주세요!</h4>
 													<input type="hidden" id="tknum" value="${myticket.tknum}">
 													<div class="rating">
 														<input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.kosmo.today.mapper.IncomeMapper;
+import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.OrderVO;
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -41,24 +42,26 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 
+
+
 	@Override
-	public List<OrderVO> getMember() {
+	public List<OrderVO> getGymWeekend(int gnum) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.gymWeekend(gnum);
 	}
 
 
 	@Override
-	public List<OrderVO> getGymWeekend() {
+	public List<OrderVO> getGymMonth(int gnum) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.gymMonth(gnum);
 	}
 
 
 	@Override
-	public List<OrderVO> getGymMonth() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GymListVO> getGnum(int mnum) {
+		System.out.println("IncomMapper- Gnum 구하기");
+		return mapper.getGnum(mnum);
 	}
 
 

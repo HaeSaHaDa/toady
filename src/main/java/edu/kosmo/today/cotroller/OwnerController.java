@@ -174,22 +174,13 @@ public class OwnerController {
 				.getPrincipal();
 		Integer mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
 		
-		
 
-		
-		if(mnum == null) {
-			mav.setViewName("/owner/manageTrainer2");
-			System.out.println("......."+mnum);
-
-		}
-		else {
 			Integer gnum = gymService.getGnum(mnum);
 
 			List<TrainerVO> list = ownerService.getTrainer(gnum);
 			System.out.println(mnum+"의 시설번호 구하는중");
 			mav.setViewName("/owner/manageTrainer");
 			mav.addObject("trainer", list);
-		}
 
 		
 		return mav;

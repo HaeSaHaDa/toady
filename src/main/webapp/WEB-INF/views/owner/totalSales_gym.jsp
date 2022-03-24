@@ -22,12 +22,12 @@
 
 <title>매출 페이지</title>
 <script>
-	function weekend() {
-
+	function weekend(gnum) {
 		var chartLabels = [];
 		var chartData = [];
-
-		$.getJSON("http://localhost:8282/weekendList", function(data) {
+		var gnum = gnum
+		console.log(gnum)
+		$.getJSON("http://localhost:8282/gymweekend/" + gnum, function(data) {
 			//chartData ="";
 
 			$.each(data, function(inx, obj) {
@@ -51,7 +51,6 @@
 			datasets : [
 
 			{
-
 				label : "주간 매출 현황",
 				borderWidth : 2,
 				borderColor : "white",
@@ -86,15 +85,14 @@
 	}
 	//==================================================
 
-	function month() {
+	function month(gnum) {
 		var chartLabels = [];
 		var chartData = [];
-		$.getJSON("http://localhost:8282/MonthList", function(data) {
+		var gnum = gnum;
+		$.getJSON("http://localhost:8282/gymmonth/" + gnum , function(data) {
 
 			$.each(data, function(inx, obj) {
-
 				chartLabels.push(obj.day);
-
 				chartData.push(obj.income);
 
 			});
@@ -192,8 +190,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo"  style="margin-top:-60px">
-						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
+					<div class="logo" style="margin-top: -60px">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -245,12 +243,23 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-3">
+				<div class="col-3">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
+					<!-- 내용물 -->
+					<c:forEach items="${gym}" var="gym">
+
+						<input id="weekbutton" type="button" value="${gym.gname} 주간매출" onclick="weekend(${gym.gnum})">
+						<input id="monthbutton" type="button" value="${gym.gname} 월간매출" onclick="month(${gym.gnum})">
+					</c:forEach>
+					<div>
+						<canvas id="canvas"></canvas>
+					</div>
+					<!-- 내용물 끝 -->
+				</div>
 			</div>
 		</div>
 	</section>
