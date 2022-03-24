@@ -262,7 +262,7 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h4 class="text-white">FAQ 관리</h4>
-						<table class="text-white" style="text-align: center;" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="text-white" style="text-align: center;" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
 							<tr>
 								<td>FAQ번호</td>
 								<td>제목</td>
@@ -292,7 +292,7 @@
 							<a href="faqpage${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
 						</c:if>
 						<br>
-						<table class="text-white" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="text-white" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
 							<form:form id="insertfaq" action="${pageContext.request.contextPath}/insertfaq" method="post">
 								<tr>
 									<td>제목</td>

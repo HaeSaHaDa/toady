@@ -49,9 +49,15 @@ public interface OrderMapper {
 
 	// 환불요청갯수
 	public int totalRequet();
+
+	// 결제완료 주문저장
+	public void insertcomplete(CompleteVO completevo);
 	
-	//결제완료 주문저장
-	   public void insertcomplete(CompleteVO completevo);
-	
+	// 페이징
+	// 관리자 갯수(페이징)
+	public int adminGetTotal(int mnum);
+
+	// 이용권 목록======================================
+	public List<OrderVO> adminnGetTicketList(@Param("criteria") Criteria criteria, @Param("mnum") int mnum);
 
 }

@@ -1,15 +1,6 @@
 package edu.kosmo.today.cotroller;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,19 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
-import edu.kosmo.today.service.GymListService;
 import edu.kosmo.today.service.GymServicce;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.vo.FaqVO;
-import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.NoteVO;
 import lombok.AllArgsConstructor;
@@ -108,22 +96,33 @@ public class AdminController {
 
 	// 관리자페이지 회원 상세보기
 	@GetMapping("/manageMember/{mnum}")
-	public ModelAndView memberDetail(MemberVO memberVO, ModelAndView mav) {
+	public ModelAndView memberDetail(MemberVO memberVO,Criteria criteria ,ModelAndView mav) {
 
 		log.info("memberDetail()..");
-
-
-		// UserCustomDetails member = (UserCustomDetails)
+		System.out.println("mid는 무엇인가???" + memberVO.getMnum());
+		int mnum = Integer.valueOf(memberVO.getMnum());
+		// UserCustomDetails member = (UserCustomDetails).
 		// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		// int mnum = memberService.getMemberNum(member.getUsername());
 
 		// memberService.getTicketList();
 
+		System.out.println(memberVO.getMnum() + "의 이용권 가져오는 중");
+		int total = orderService.getTotal(mnum);
+		log.info("total:..." + total);
+	
+		mav.addObject("myTicket", orderService.getTicketList2(criteria, mnum));	
+		
+		mav.addObject("pageMaker", new PageVO(criteria, total));
+		
+		mav.addObject("memberDetail", memberService.get(mnum));
+		
+		
+		System.out.println("===================" + orderService.getTicketList2(criteria, mnum));
+		
 		mav.setViewName("/admin/manageMemberView");
-		mav.addObject("memberDetail", memberService.get(memberVO.getMnum()));
-
-
-		log.info("memberService :" + memberService.get(memberVO.getMnum()));
+		
+		log.info("memberService :=======================" + memberService.get(mnum));
 
 		return mav;
 	}
@@ -311,7 +310,6 @@ public class AdminController {
 		int total = memberService.getOwnerTotalCount();
 		log.info("total" + total);
 		mav.addObject("pageMaker", new PageVO(cri, total));
-
 		return mav;
 	}
 	

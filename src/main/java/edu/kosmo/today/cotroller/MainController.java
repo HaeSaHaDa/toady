@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import edu.kosmo.today.vo.UserVO;
 
 @Controller	
-public class MainCotroller {
+public class MainController {
 		
 	@GetMapping("/today")
 	public String index(Principal principal, UserVO user) {

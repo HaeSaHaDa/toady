@@ -57,6 +57,26 @@ public class OrderService {
 	 * 
 	 * return list; }
 	 */
+	//관리자용
+	public int getTotal(int mnum) {
+		System.out.println("...총갯수...."+mnum);
+		
+
+		return mapper.adminGetTotal(mnum);
+
+	}
+	
+	//관리자용
+	public List<OrderVO> getTicketList2(Criteria criteria, int mnum) {
+		log.info("이용권목록 뽑는중.." + criteria, mnum);
+	
+
+		log.info(".." + mapper.adminnGetTicketList(criteria, mnum));
+
+		return mapper.adminnGetTicketList(criteria, mnum);
+	}
+
+	
 	// 리뷰작성하기
 	public int insertReivew(ReviewVO vo) {
 		System.out.println("리뷰 작성중.." + vo);
