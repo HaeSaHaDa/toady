@@ -466,7 +466,7 @@
 			console.log(date);
 		});
 
-		출처: https:
+		//출처: https:
 		//minaminaworld.tistory.com/13 [미나미 블로그]
 
 		function execPostCode() {
