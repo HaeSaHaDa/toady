@@ -257,8 +257,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -334,7 +334,7 @@
                     <input type="hidden" id="wishnum" name="wishnum"  value="${wish.wishnum}">
                     <td class="cart-pic first-row">
                     <!-- 여기는 나중에 이미지이름넣기 -->
-                      <img class="cart-img" src="img/hero/hero-2.jpg" alt="" />
+                      <img class="cart-img" src="${pageContext.request.contextPath}/img/hero/hero-2.jpg" alt="" />
                     </td>
                     <td class="cart-title first-row">
                       <h5>${wish.gname}</h5>

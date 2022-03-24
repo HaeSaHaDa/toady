@@ -79,7 +79,6 @@ public class UserController {
 		log.info("faqList() ..");
 		log.info("Criteria" + cri);
 
-		mav.setViewName("/common/faqBoard");
 		mav.addObject("faqList", faqService.getFaqList(cri));
 
 		log.info("faqList(cri)" + faqService.getFaqList(cri));
@@ -87,6 +86,7 @@ public class UserController {
 		int total = faqService.getTotal();
 		log.info("total" + total);
 		mav.addObject("pageMaker", new PageVO(cri, total));
+		mav.setViewName("/common/faqBoard");
 
 		return mav;
 	}

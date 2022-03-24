@@ -70,8 +70,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -120,55 +120,55 @@
 	</header>
 	<!-- Header End -->
 	<!-- ChoseUs Section End -->
-<!--마이페이지 내용물 시작-->
-<section class="classes-section spad">
-	<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-		<div class="row" style="margin-top: 100px;">
-			<!-- 사이드바 -->
-			<div class="col-4">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/adminmenu.jsp"%>
-			</div>
-			<!-- 사이드바 끝 -->
-			<!-- 내용물 -->
-			<div class="col-8">
-				<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
-				<div>
-					<!-- 시설목록-->
-					<section class="classes-section spad">
-						<div class="container text-center" style="margin-top: 100px; margin-bottom: 80px;">
-							<h1 style="color: white;">관리자가 보는 헬스장 리스트</h1>
-						</div>
-						<div class="container">
-							<div class="row"></div>
-						</div>
-					</section>
-					<!-- 시설목록끝 -->
+	<!--마이페이지 내용물 시작-->
+	<section class="classes-section spad">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+					<div class="col-3">
+					<%@ include file="../layout/adminmenu.jsp"%>
+				</div>
+				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
+				<div class="col-9">
+				
+					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+					<div>
+						<!-- 시설목록-->
+						<section class="classes-section spad">
+							<div class="container text-center" style="margin-top: 100px; margin-bottom: 80px;">
+								<h1 style="color: white;">관리자가 보는 헬스장 리스트</h1>
+							</div>
+							<div class="container">
+								<div class="row"></div>
+							</div>
+						</section>
+						<!-- 시설목록끝 -->
 
 
-					<div class="container-wrapper">
-						<div class="container">
-							<h2>
-								<a href="<c:url value="/admin/gymListInventory"/>">헬스장 리스트</a>
-							</h2>
-							<p>헬스장을 추가하거나 관리해보세요.</p>
-						</div>
+						<div class="container-wrapper">
+							<div class="container">
+								<h2>
+									<a href="<c:url value="/admin/gymListInventory"/>">헬스장 리스트</a>
+								</h2>
+								<p>헬스장을 추가하거나 관리해보세요.</p>
+							</div>
 
-						<div class="container">
-							<h2>
-								<a href="<c:url value="/admin/memberList"/>">회원 리스트</a>
-							</h2>
-							<p>회원의 정보를 수정하거나 관리해보세요.</p>
+							<div class="container">
+								<h2>
+									<a href="<c:url value="/admin/memberList"/>">회원 리스트</a>
+								</h2>
+								<p>회원의 정보를 수정하거나 관리해보세요.</p>
+							</div>
+
 						</div>
 
 					</div>
-
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<!-- 마이페이지 내용물 끝 -->
+	</section>
+	<!-- 마이페이지 내용물 끝 -->
 
 
 

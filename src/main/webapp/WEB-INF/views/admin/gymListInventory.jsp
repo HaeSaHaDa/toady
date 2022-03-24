@@ -40,20 +40,26 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-					</span>
-					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-					</a>
-					</span>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 				</c:when>
 				<c:otherwise>
-					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-					</a>
-					</span>
-					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-					</a>
-					</span>
-					<a class="nav-link">${principal.user.memail}</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -65,9 +71,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -85,18 +90,24 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-									</a>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-									</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
 									</span>
-									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-									</a>
-									</span>
-									<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -115,54 +126,48 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
+					<div class="col-3">
 					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="col-8">
-					<!-- 내용물 시작 -->
-					<div class="container-wrapper">
-						<div class="container">
-							<h2>헬스장 리스트</h2>
-							<p>헬스장 리스트 입니다.</p>
-							<table class="table table-hover">
-								<thead>
-									<tr class="bg-warning">
-										<th>gnum</th>
-										<th>mnum</th>
-										<th>gname</th>
-										<th>gaddress</th>
-										<th>gphone</th>
-										<th>ginform</th>
-										<th>gtime</th>
-										<th>gfacility</th>
-										<th>gsns</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="gymList" items="${gymLists}">
-										<tr>
-											<td>${gymList.gnum}</td>
-											<td>${gymList.mnum}</td>
-											<td>${gymList.gname}</td>
-											<td>${gymList.gaddress}</td>
-											<td>${gymList.gphone}</td>
-											<td>${gymList.ginform}</td>
-											<td>${gymList.gtime}</td>
-											<td>${gymList.gfacility}</td>
-											<td>${gymList.gsns}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<!-- 내용물 끝 -->
-				</div>
+				<div class="col-9">
+				<h2 class="title" style="color:white">헬스장 관리 페이지입니다.</h2>
+				<table class="table table-hover" style="width: 100%;">
+					<thead>
+						<tr class="bg-warning">
+							<th>gym Photo</th>
+							<th>mnum</th>
+							<th>gname</th>
+							<th>gcategory</th>
+							<th>gaddress</th>
+							<th>gphone</th>
+	
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="gymList" items="${gymLists}">
+							<tr style="width: 80%; color: white; font-weight: 700;">
+								<td><img src="<c:url value="/img/${gymList.imagename}"/>" alt="image" /></td>
+								<td>${gymList.mnum}</td>
+								<td>${gymList.gname}</td>
+								<td>${gymList.gcategory}</td>
+								<td>${gymList.gaddress}</td>
+								<td>${gymList.gphone}</td>
+
+								<td>
+								<a href="<c:url value ="/admin/gymListInventory/deleteGymList/${gymList.gnum}"/>"> <i class="fa-solid fa-trash"></i></a>
+								<a href="<c:url value ="/admin/gymListInventory/updateGymList/${gymList.gnum}"/>"> <i class="fas fa-edit"></i>
+								</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				s<a href="<c:url value ="/admin/gymListInventory/addGymList"/>" class="btn btn-dark"> Add Gym</a>
 			</div>
 		</div>
+		<!-- 내용물 끝 -->
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
 

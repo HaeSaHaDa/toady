@@ -114,10 +114,8 @@
 															type : 'POST',
 															url : url,
 															dataType : 'JSON',
-															beforeSend : function(
-																	xhr) {
-																xhr
-																		.setRequestHeader(
+															beforeSend : function(xhr) {
+																xhr.setRequestHeader(
 																				"X-CSRF-Token",
 																				"${_csrf.token}");
 															},
@@ -165,20 +163,26 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-					</span>
-					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-					</a>
-					</span>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 				</c:when>
 				<c:otherwise>
-					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-					</a>
-					</span>
-					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-					</a>
-					</span>
-					<a class="nav-link">${principal.user.memail}</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -190,9 +194,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -210,18 +213,24 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-									</a>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-									</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
 									</span>
-									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-									</a>
-									</span>
-									<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -244,17 +253,16 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
+					<div class="col-3">
 					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-
-				<div class="col-8">
+				<div class="col-9">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h4 class="text-white">FAQ 관리</h4>
-						<table class="text-white" style="text-align: center;" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="text-white" style="text-align: center;" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
 							<tr>
 								<td>FAQ번호</td>
 								<td>제목</td>
@@ -284,7 +292,7 @@
 							<a href="faqpage${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
 						</c:if>
 						<br>
-						<table class="text-white" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<table class="text-white" width="800" border="1" cellpadding="0" cellspacing="0" border="1">
 							<form:form id="insertfaq" action="${pageContext.request.contextPath}/insertfaq" method="post">
 								<tr>
 									<td>제목</td>

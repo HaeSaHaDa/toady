@@ -11,6 +11,7 @@ import edu.kosmo.today.page.Criteria2;
 import edu.kosmo.today.vo.GymVO;
 import edu.kosmo.today.vo.ReviewVO;
 import edu.kosmo.today.vo.TicketVO;
+import edu.kosmo.today.vo.TrainerVO;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -24,12 +25,19 @@ public class GymServicce {
 	@Autowired
 	private GymMapper mapper;
 
-	public List<GymVO> gymList() {
+	public List<GymVO> gymList(Criteria cri) {
 		log.info("시설 목록 불러오는 중");
 
-		List<GymVO> gymList = mapper.gymList();
+		List<GymVO> gymList = mapper.gymList(cri);
 
 		return gymList;
+	}
+	
+	//이용권 토탈가져오는 중
+	public int getGymTotal() {
+		System.out.println("시설객수세는중");
+		
+		return mapper.getGymTotal();
 	}
 
 	public GymVO gympage(int gnum) {
@@ -133,5 +141,12 @@ public class GymServicce {
 		mapper.deleteReview2(bid);
 
 		System.out.println("gymreview테이블에서 삭제됨");
+	}
+	
+	//트레이너 목록구하기
+	public List<TrainerVO> getTrainerList(int gnum){
+		System.out.println("시설 트레이너 뽑는 중...");
+		
+		return mapper.getTrainer(gnum);
 	}
 }

@@ -9,6 +9,7 @@ import edu.kosmo.today.mapper.OwnerMapper;
 import edu.kosmo.today.vo.OrderListVO;
 import edu.kosmo.today.vo.RegiGymListVO;
 import edu.kosmo.today.vo.RegiGymVO;
+import edu.kosmo.today.vo.TrainerVO;
 import lombok.extern.slf4j.Slf4j;
 
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전
@@ -30,7 +31,6 @@ public class OwnerServiceImpl implements OwnerService{
 		
 	}
 
-
 	@Override
 	public void insertStore(RegiGymVO regiGymVO) {
 		ownerMapper.registration(regiGymVO);
@@ -51,4 +51,27 @@ public class OwnerServiceImpl implements OwnerService{
 		ownerMapper.deleteRegist(storenum);
 	}
 	
+	@Override
+	public List<TrainerVO> getTrainer(int gnum) {
+		System.out.println("트레이너 목록가져오는 중 - 오너");
+		
+		List<TrainerVO> list = ownerMapper.getTrainer(gnum);
+		
+		return list;
+	}
+
+	@Override
+	public void registerTrainer(TrainerVO vo) {
+		System.out.println("트레이너 등록중--"+vo);
+		
+		ownerMapper.insertTrainer(vo);		
+	}
+
+	@Override
+	public void updateTrainer(TrainerVO vo) {
+		System.out.println("트레이너 정보 수정중....");
+		
+		ownerMapper.updateTrainer(vo);
+	}			
+
 }

@@ -14,45 +14,53 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}" />
-<meta name="_csrf_header" content="${_csrf.headerName}" />
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <%@ include file="../layout/head_tags.jsp"%>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-
-		//<td class="delete_review">X</td>
-
-		$(".delete_review").on("click", function() {
-			console.log("리뷰삭제요청하기");
-
-			let bid = $(this).parent("tr").find("input").val();
-
-			console.log(bid);
-
-			$.ajax({
-				type : "POST",
-				url : "/admin/deleteReview/" + bid,
-				cache : false,
-				contentType : 'application/json; charset=utf-8',
-				success : function(result) {
-
-					if (result == "ok") {
-						alert("리뷰가 삭제되었습니다.");
-					}
-
-				},
-				error : function(e) {
-					console.log(e);
-					console.log("실패");
-				}
-			})
-
-		});
-
-	})
-</script>
+		$(document).ready(function () {
+			
+			//<td class="delete_review">X</td>
+			
+			$(".delete_review").on("click",function(){
+				console.log("리뷰삭제하기");
+				
+				let bid = $(this).parent("tr").find("input").val();
+		    	   
+		    	  console.log(bid);
+		    	  
+		    	  $.ajax({
+			           type : "POST",
+			           url : "/admin/deleteReview/"+bid,         
+			           cache : false,
+			          	contentType:'application/json; charset=utf-8',
+			           success: function (result) { 
+			        	   
+			        	   if(result=="ok"){                     
+			        		   alert("리뷰가 삭제되었습니다.");
+			        		   $(location).attr('href', '${pageContext.request.contextPath}/admin/manageReivew');  
+			        	   }             
+			                                   
+			           },
+			           error: function (e) {
+			               console.log(e);
+			               console.log("실패");
+			           }
+			       })
+				
+				
+			});
+		   
+			
+		
+		})
+		
+	
+		
+	
+	</script>
 
 <title>Insert title here</title>
 </head>
@@ -65,27 +73,44 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<ul>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							</sec:authorize>
+						</ul>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-					</span>
-					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-					</a>
-					</span>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 				</c:when>
 				<c:otherwise>
-					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-					</a>
-					</span>
-					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-					</a>
-					</span>
-					<a class="nav-link">${principal.user.memail}</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -97,15 +122,26 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<ul>
+							<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/gymlist">시설찾기</a></li>
+							<li><a href="${pageContext.request.contextPath}/common/faqBoard">FAQ</a></li>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/user/myTicket">mypage</a></li>
+								<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
+							</sec:authorize>
+							<sec:authorize access="hasRole('USER')">
+								<li><a href="${pageContext.request.contextPath}/admin/adminPage">AdminPage</a></li>
+							</sec:authorize>
+						</ul>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -116,18 +152,24 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-									</a>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-									</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
 									</span>
-									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-									</a>
-									</span>
-									<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -140,90 +182,79 @@
 		</div>
 	</header>
 	<!-- Header End -->
+	
+	
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
+					<div class="col-3">
 					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="col-8">
-					<!-- 내용물 시작 -->
+				<div class="col-9">
+					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
-						<h4 class="text-white">FAQ 관리</h4>
-						<table class="text-white" style="text-align: center;" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
+						<h4 class="text-white">review보기</h4>
+						<table class="text-white" style="text-align: center;" width="600" border="1" cellpadding="0"cellspacing="0" border="1">
 							<tr>
-								<td>FAQ번호</td>
-								<td>제목</td>
-								<td>+</td>
+								<td>글번호</td>
+								<td>리뷰</td>
+								<td>별점</td>
+								<td>삭제</td>								
 							</tr>
-							<c:forEach items="${faqList}" var="faq">
-								<tr>
-									<input type="hidden" value="${faq.bid}">
-									<td>${faq.bid}</td>
-									<td>${faq.btitle}</td>
-									<td class="view-content">+</td>
-								</tr>
+							<c:forEach items="${reviewList}" var="reviewList">					
+							<tr>
+							<input type="hidden" value="${reviewList.bid}">
+								<td>${reviewList.bid}</td>
+								<td>${reviewList.bcontent}</td>
+								<td>${reviewList.grstar}</td>
+								<td class="delete_review">X</td>															
+							</tr>
 							</c:forEach>
 						</table>
-
-
+							
+						
 						<c:if test="${pageMaker.pre}">
-							<a href="faqpage${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
 						</c:if>
 
 						<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-						<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
-							<a href="faqpage${pageMaker.makeQuery(idx)}">${idx}</a>
+						<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage }">
+							<a href="/manageReivew${pageMaker.makeQuery(idx)}">${idx}</a>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<a href="faqpage${pageMaker.makeQuery(pageMaker.endPage + 1) }"> » </a>
-						</c:if>
+							<a href="/manageReivew${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+								» </a>
+						</c:if>					
 						<br>
-						<table class="text-white" width="600" border="1" cellpadding="0" cellspacing="0" border="1">
-							<form:form id="insertfaq" action="${pageContext.request.contextPath}/insertfaq" method="post">
-								<tr>
-									<td>제목</td>
-									<td><input width="200" type="text" id="btitle" name="btitle"></td>
-								</tr>
-								<tr>
-									<td>내용</td>
-									<td><textarea rows="10" cols="60" id="bcontent" name="bcontent"></textarea></td>
-								</tr>
-							</form:form>
-						</table>
-						<button id="submitfaq" class="btn btn-light">FAQ작성</button>
+						
 
 					</div>
-
-
-					<!-- 내용물 끝 -->
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- 마이페이지 내용물 끝 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
-	<!-- Js Plugins -->
+		<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
 </html>

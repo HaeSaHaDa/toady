@@ -35,12 +35,36 @@
 	]]>
 	</select>
 
+	<select id="adminGetTotal" resultType="_int">
+	<![CDATA[
+		select count(*) from orderlist,orderdetail where orderlist.ordernum = orderdetail.ordernum 
+		and orderlist.mnum = #{mnum}
+	]]>
+	</select>
+	
+	<!-- Admin 티켓 -->
+		<select id="adminnGetTicketList" resultMap="OrderList">
+	<![CDATA[
+		SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (
+                 SELECT orderlist.ordernum, orderlist.mnum, orderlist.orderdate, orderlist.payid, 
+                 orderdetail.tknum, orderdetail.cost, orderdetail.startdate,
+                 orderdetail.tdate, ticket.tname, ticket.gnum, gympage.gname 
+                 FROM orderlist,orderdetail,ticket,gympage
+		WHERE orderlist.ordernum= orderdetail.ordernum and
+		orderdetail.tknum=ticket.tknum	and ticket.gnum=gympage.gnum and orderlist.mnum = #{mnum}
+             ) A WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+         ) WHERE RNUM > (#{criteria.pageNum}-1) * #{criteria.amount}
+	]]>
+	</select>
+
 	<select id="getTotal" resultType="_int">
 	<![CDATA[
 		select count(*) from orderlist,orderdetail where orderlist.ordernum = orderdetail.ordernum 
 		and orderlist.mnum = #{mnum}
 	]]>
 	</select>
+	<!-- ======== -->
 
 	<select id="getMemberNum" resultType="_int">
 

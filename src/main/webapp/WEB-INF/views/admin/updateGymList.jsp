@@ -1,7 +1,9 @@
+<!-- spring web form 사용 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -17,16 +19,13 @@
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 
-
 <%@ include file="../layout/head_tags.jsp"%>
 
 
 
+<title>Admin-시설추가Page</title>
 
-<title>시설목록</title>
-
-</head>
-
+<!-- Google Font -->
 <body>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
@@ -60,7 +59,6 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-
 	</div>
 	<!-- Offcanvas Menu Section End -->
 
@@ -69,9 +67,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
+					<div class="logo" style="margin-top: -60px">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -83,7 +80,6 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-
 
 						<div class="to-social">
 							<c:choose>
@@ -102,7 +98,6 @@
 									</a>
 									</span>
 									<a class="nav-link">${principal.user.memail}</a>
-
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -115,42 +110,105 @@
 		</div>
 	</header>
 	<!-- Header End -->
-
-
-
-	<!-- ChoseUs Section End -->
-
-	<!-- 시설목록-->
+	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
-		<div class="container text-center" style="margin-top: 100px; margin-bottom: 80px;">
-			<h1 style="color: white;">헬스장 리스트</h1>
-		</div>
-		<div class="container">
-			<div class="row">
-				<c:forEach items="${gymList}" var="gym">
-					<div class="col-lg-4 col-md-6">
-						<div class="class-item">
-							<div class="ci-pic">
-								<img src="${pageContext.request.contextPath}/img/classes/class-3.jpg" alt="">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+				<div class="col-3">
+					<%@ include file="../layout/adminmenu.jsp"%>
+				</div>
+				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
+				<div class="container-wrapper; col-9" style="margin-top: -20px; color:white">
+					<div class="container">
+						<h2 style="color: white">Update Gym</h2>
+						</br>
+						<p class="lead">시설정보를 수정합니다.</p>
+
+						<sf:form action="${pageContext.request.contextPath}/admin/gymListInventory/updateGymList" method="post" modelAttribute="gymListVO" enctype="multipart/form-data">
+							<!-- post method 처리하는 것 controller만들어줘야함. -->
+
+							<sf:hidden path="gnum" />
+
+							<div class="form group">
+								<label for="gname">회원번호</label>
+								<sf:input path="mnum" id="mnum" class="form-control" />
+								<sf:errors path="mnum" cssStyle="color:#ff0000" />
 							</div>
-							<div class="ci-text">
-								<span>${gym.gcategory}</span>
-								<h5>${gym.gname}</h5>
-								<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+
+
+							<div class="form group">
+								<label for="gname">이름</label>
+								<sf:input path="gname" id="gname" class="form-control" />
+								<sf:errors path="gname" cssStyle="color:#ff0000" />
 							</div>
-						</div>
+
+							<div class="form group">
+								<label for="gcategory">분류:</label><br />
+								<sf:radiobutton path="gcategory" id="gcategory" value="헬스장" />
+								헬스장 <br />
+								<sf:radiobutton path="gcategory" id="gcategory" value="요가" />
+								요가 <br />
+								<sf:radiobutton path="gcategory" id="gcategory" value="필라테스" />
+								필라테스 <br />
+							</div>
+
+							<div class="form group">
+								<label for="gaddress">주소</label>
+								<sf:input path="gaddress" id="gaddress" class="form-control" />
+								<sf:errors path="gaddress" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gphone">전화번호</label>
+								<sf:input path="gphone" id="gphone" class="form-control" />
+								<sf:errors path="gphone" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="ginform">정보</label>
+								<sf:input path="ginform" id="ginform" class="form-control" />
+								<sf:errors path="ginform" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gtime">운영시간</label>
+								<sf:input path="gtime" id="gtime" class="form-control" />
+								<sf:errors path="gtime" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gfacility">편의시설</label>
+								<sf:input path="gfacility" id="gfacility" class="form-control" />
+								<sf:errors path="gfacility" cssStyle="color:#ff0000" />
+							</div>
+
+
+
+							<div class="form group">
+								<label for="gsns">SNS</label>
+								<sf:input path="gsns" id="gsns" class="form-control" />
+								<sf:errors path="gsns" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gymimage">Upload Picture</label>
+								<sf:input path="gymimage" id="gymimage" name="gymimage" type="file" class="form-control" />
+							</div>
+
+
+							<br />
+							<button type="submit" class="btn btn-primary">submit</button>
+							<a href="<c:url value="/admin/gymListInventory"/>" class="btn btn-dark">Cancle</a>
+						</sf:form>
+						<br />
 					</div>
-				</c:forEach>
+				</div>
+				<br />
 			</div>
 		</div>
 	</section>
-	<!-- 시설목록끝 -->
-
-
-
-
-
-
 	<!-- Get In Touch Section Begin -->
 	<div class="gettouch-section">
 		<div class="container">
@@ -270,9 +328,6 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
-
-
-
 </body>
 
 </html>

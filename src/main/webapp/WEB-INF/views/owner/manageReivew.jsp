@@ -100,8 +100,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -153,13 +153,12 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-4">
+					<div class="col-3">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
-
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="col-8">
+				<div class="col-9">
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h4 class="text-white">review보기</h4>

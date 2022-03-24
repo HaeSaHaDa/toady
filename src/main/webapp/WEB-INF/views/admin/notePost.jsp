@@ -71,16 +71,13 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo">
-
-						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="" width="500">
-
-
+					<div class="logo"  style="margin-top:-60px">
+						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-6">
-				<nav>
+					<nav class="nav-menu">
 			<!-- 메뉴 바  -->
 			<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
@@ -128,17 +125,17 @@
 
 	<!-- ChoseUs Section End -->
 
-<!--마이페이지 내용물 시작-->
-<section class="classes-section spad">
-	<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
-		<div class="row" style="margin-top: 100px;">
-			<!-- 사이드바 -->
-			<div class="col-4">
+	<!--마이페이지 내용물 시작-->
+	<section class="classes-section spad">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+					<div class="col-3">
 					<%@ include file="../layout/adminmenu.jsp"%>
-			</div>
-			<!-- 사이드바 끝 -->
-			<!-- 내용물 -->
-			<div class="col-8">
+				</div>
+				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
+				<div class="col-9">
 				<!-- 내용물 시작 -->
 					<div>
 						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
@@ -149,7 +146,7 @@
 
 								<thead class="thead-light">
 									<tr>
-										<th>받는 사람 ${notePostList.memail}</th>
+										<th>받는 사람 ${notePostList.mid}</th>
 									</tr>
 								<thead>
 

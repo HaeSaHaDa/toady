@@ -19,6 +19,8 @@
 
 <%@ include file="../layout/head_tags.jsp"%>
 
+
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -130,25 +132,32 @@
 				<div class="col-8">
 				<!-- 내용물 -->
 				
-				
-				<table class="text-center"  width="600" cellpadding="0" cellspacing="0" border="1">
-				      <form action="registration" method="post">
-				         <tr>
-				            <td style="color:white"> 헬스장 명</td>
-				            <td> <input type="text" name="storename" size = "50"> </td>
-				         </tr>
-				         <tr>
-				            <td style="color:white"> 헬스장 주소 </td>
-				            <td> <input type="text" name="storeadr" size = "50"> </td>
-				         </tr>
-				         <tr>
-				            <td style="color:white"> 헬스장 전화번호 </td>
-				            <td> <input type="text" name="storetel"  size = "50"></input> </td>
-				         </tr>
-						 <tr >
-				            <td colspan="2"> <button type="submit">등록 신청</button> &nbsp;&nbsp; <button type="button"><a href="/owner/registListView" style="color: black;">목록 보기</a></button></td>
-				         </tr>
-				      </form>
+					<table class="table table-striped table-light text-center" style="width:800px" border="1" cellpadding="0">
+				      <thead class="thead-light">   
+					      <tr>   
+					         <th width="70">번호</th>
+					         <th>헬스장 이름</th>
+					         <th>헬스장 주소</th>
+					         <th>연락처</th>
+					         <th width="100">신청일</th>
+					         <th>취소</th>
+					      </tr>
+				      </thead>
+				      <c:forEach items="${registList}" var="regist">
+				      <tr>
+				         <td>${regist.storenum}</td>
+				         <td>${regist.storename}</td>
+				         <td>${regist.storeadr}</td>
+				         <td>${regist.storetel}</td>
+				         <td>${regist.storedate}</td>
+				         <td>					         
+					         	<a class="deleteRegist" href="/user/deleteRegister/${regist.storenum}">삭제</a>
+					      </td>
+				      </tr>
+				      </c:forEach>
+				      <tr>
+				         <td colspan="6"> <a href="/today">홈</a> </td>
+				      </tr>
 				   </table>
 					
 				<!-- 내용물 끝 -->				
@@ -163,5 +172,32 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+	<!-- 신청 목록 삭제 -->
+	<script>
+	$(document).ready(function() {
+		$(".deleteRegist").click(function(event){
+			
+			event.preventDefault();
+			console.log("ajax 호출전");
+			alert("");
+			var trObj = $(this).parent().parent();
+			
+			$.ajax({
+				dataType : "POST",
+				url : $(this).attr("href"),						
+				success : function(result){
+					console.log("ajax 호출-2");
+					console.log(result);
+					if(result == "SUCCESS"){
+						$(trObj).remove();
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			
+		});
+	});
+	</script>
 </body>
 </html>

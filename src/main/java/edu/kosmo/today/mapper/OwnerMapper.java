@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import edu.kosmo.today.vo.OrderListVO;
 import edu.kosmo.today.vo.RegiGymListVO;
 import edu.kosmo.today.vo.RegiGymVO;
+import edu.kosmo.today.vo.TrainerVO;
 
 
 @Mapper
@@ -24,4 +25,10 @@ public interface OwnerMapper {
 
 	public void deleteRegist(int storenum);
 
+	public List<TrainerVO> getTrainer(int gnum); //트레이너목록가져오기
+	
+	public void insertTrainer(TrainerVO vo);//트레이너 등록
+	
+	public void updateTrainer(TrainerVO vo); //트레이너 정보 갱신
+	
 }
