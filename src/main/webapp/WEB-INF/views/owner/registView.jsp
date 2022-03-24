@@ -14,11 +14,10 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}" />
-<meta name="_csrf_header" content="${_csrf.headerName}" />
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <%@ include file="../layout/head_tags.jsp"%>
-
 
 <title>Insert title here</title>
 </head>
@@ -31,27 +30,33 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-					</span>
-					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-					</a>
-					</span>
+									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+									</span>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
+									</span>
 				</c:when>
 				<c:otherwise>
-					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-					</a>
-					</span>
-					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-					</a>
-					</span>
-					<a class="nav-link">${principal.user.memail}</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
+									</span>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -70,8 +75,8 @@
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -82,18 +87,24 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
-									</a>
+									<span class="signUp" style="color: white; margin-right:20px"> 
+										<a href="${pageContext.request.contextPath}/common/signup"> 
+											<i class="fa fa-user-plus">Sign Up</i>
+										</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-									</a>
+									<span class="userinfo" style="color:white">
+											<a href="${pageContext.request.contextPath}/user/memberInfo">
+												<i class="fa fa-user-secret">UserInfo</i>
+											</a>
 									</span>
-									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-									</a>
-									</span>
-									<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color:white; margin-right:20px">
+											<a href="/logout">
+												<i class="fa fa-sign-out">Log Out</i>
+											</a>
+									</span>																			
+										<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -112,33 +123,44 @@
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 				<div class="col-4">
-					<%@ include file="../layout/adminmenu.jsp"%>
+					<%@ include file="../layout/user_owner_menu.jsp"%>
+
 				</div>
 				<!-- 사이드바 끝 -->
-				<!-- 내용물 -->
 				<div class="col-8">
-					<!-- 내용물 시작 -->
-
-
-
-
-
-
-
-
-
-
-					<!-- 내용물 끝 -->
+				<!-- 내용물 -->
+				
+				
+				<table class="text-center"  width="600" cellpadding="0" cellspacing="0" border="1">
+				      <form action="registration" method="post">
+				         <tr>
+				            <td style="color:white"> 헬스장 명</td>
+				            <td> <input type="text" name="storename" size = "50"> </td>
+				         </tr>
+				         <tr>
+				            <td style="color:white"> 헬스장 주소 </td>
+				            <td> <input type="text" name="storeadr" size = "50"> </td>
+				         </tr>
+				         <tr>
+				            <td style="color:white"> 헬스장 전화번호 </td>
+				            <td> <input type="text" name="storetel"  size = "50"></input> </td>
+				         </tr>
+						 <tr >
+				            <td colspan="2"> <button type="submit">등록 신청</button> &nbsp;&nbsp; <button type="button"><a href="/owner/registListView" style="color: black;">목록 보기</a></button></td>
+				         </tr>
+				      </form>
+				   </table>
+					
+				<!-- 내용물 끝 -->				
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
-
-
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
+
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>

@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kosmo.today.vo.OrderListVO;
+import edu.kosmo.today.vo.RegiGymListVO;
+import edu.kosmo.today.vo.RegiGymVO;
 
 
 @Mapper
@@ -16,5 +18,10 @@ public interface OwnerMapper {
 	
 	public void memberDelete(int mnum);               //헬스장 오너페이지 회원 탈퇴
 	
+	public void registration(RegiGymVO regiGymVO);   //헬스장 등록 신청
+	
+	public List<RegiGymListVO> getRegistList();		//헬스장 등록 신청 목록
+
+	public void deleteRegist(int storenum);
 
 }
