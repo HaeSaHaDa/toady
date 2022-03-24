@@ -179,6 +179,7 @@ public class OwnerController {
 		
 		List<TrainerVO> list = ownerService.getTrainer(gnum);
 		
+		
 		mav.setViewName("/owner/manageTrainer");
 		mav.addObject("trainer", list);
 		

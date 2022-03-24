@@ -203,7 +203,6 @@ function month(){
 						</a>
 					</div>
 				</div>
-				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
 			<!-- 메뉴 바  -->
@@ -258,12 +257,13 @@ function month(){
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-2">
+				<div class="col-3" style="margin-left: -100px">
+					<!-- 메뉴 바  -->
 					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="chart-container col-8">
+				<div class="chart-container col-9" >
 					<input id="weekbutton" type="button" value="주간매출" onclick="weekend()"> 				
 					<input id="monthbutton" type="button" value="월간매출" onclick="month()">
 					<div>

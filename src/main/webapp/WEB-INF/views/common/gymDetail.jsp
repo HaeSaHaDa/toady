@@ -163,10 +163,10 @@ option {
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -207,8 +207,8 @@ option {
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo"  style="margin-top:-60px">
-						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
+					<div class="logo" style="margin-top: -60px">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
@@ -259,15 +259,14 @@ option {
 
 	<section class="classes-section spad">
 		<!--시설 상세시작-->
-		<div class="container" id="gympage1">
+		<div class="container" id="gympage1" style=" margin-top: 200px;">
 			<div class="row">
 				<div class="col-md-5">
-					<img class="gym-img" src="${pageContext.request.contextPath}/img/${gym.imagename}"  alt="" />
+					<img class="gym-img" src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="" />
 				</div>
-				<div class="col-md-7">
+				<div class="col-md-7" style="line-align: center">
 					<h1>${gym.gname}</h1>
-					<br />
-					<br />
+					<br /> <br />
 					<h3>${gym.gaddress}</h3>
 					<br />
 					<h3>${gym.gphone}</h3>
@@ -308,80 +307,89 @@ option {
 
 									<div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
 										<div class="container row justify-content-center">
-										<c:forEach items="${trainer}" var="list">
-											<div class="card" style="width: 300px;">
-												<img class="card-img-top" src="${pageContext.request.contextPath}/img/${list.gtimage}"  alt="Card image" style="width: 100%">
-												<div class="card-body text-center">
-													<h4 class="card-title">${list.gtname}</h4>													
-													<h3 class="card-body">${list.gtcareer}</h3>
+											<c:forEach items="${trainer}" var="list">
+												<div class="card" style="width: 300px;">
+													<img class="card-img-top" src="${pageContext.request.contextPath}/img/${list.gtimage}" alt="Card image" style="width: 100%">
+													<div class="card-body text-center">
+														<h4 class="card-title">${list.gtname}</h4>
+														<h3 class="card-body">${list.gtcareer}</h3>
+													</div>
 												</div>
-											</div>
-										</c:forEach>
+											</c:forEach>
 
 										</div>
 									</div>
 
-									 <div class="tab-pane border fade"  id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
-                       	 	<div class="d-flex justify-content-center">
-    						<div class="content text-center">
-       						 <div class="ratings">
-       						 <!-- 평점 나타내는 곳 -->
-       						  <span class="product-rating">${gymstar}</span><span>/5</span>
-           					 <div class="stars">
-           					 <!-- 여기가 평균 별 나타내는 곳 -->
-           					 <c:forEach begin="1"  end="${gymstar2}">
-           					  <i class="fa fa-star"></i> 
-           					  </c:forEach>
-           					  </div>
-           					 <div class="rating-text"> <span>${totalReiew} reviews</span> </div>
-       							 </div>
-    							</div>    
-							</div>
-							<div class="review-list ml-3 mr-2 pt-2" style="background-color:#ebebeb"> 
-        							<ul>
-          					<li>
-            				<div >
-            				<c:forEach items="${gymReview}" var="review">              			
-             			 <div class="right ml-3 mt-3 r-content">
-                		<h4>  ${review.mnickname}  <span class="gig-rating text-body-2">
-                    <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 1792 1792" width="15"  height="15" >
-                      <path   fill="currentColor"  d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
-                      ></path>   </svg>${review.grstar}</span> </h4>                
-                <div class="review-description">
-                  <p>${review.bcontent}</p>
-                </div>
-                <span class="publish py-3 d-inline-block w-100"><fmt:formatDate value="${review.bdate}" pattern="yyyy/MM/dd"/></span>                
-               <!-- 좋아요기능은 이곳에.. -->
-              </div>
-              </c:forEach>
-            </div>
-          </li>
-        </ul>
-      </div>
-     
-      <nav class="pagination-outer mb-2" aria-label="Page navigation">
-     <ul class="pagination justify-content-center text-center">
-      <c:if test="${pageMaker.pre}">
-		<li class="page-item"><a aria-label="Previous" class="page-link" href="${pageContext.request.contextPath}/common/gymdetail/${gym.gnum}${pageMaker.makeQuery(pageMaker.startPage - 1) }">
-		<span aria-hidden="true">«</a></span></li>
-		</c:if>
+									<div class="tab-pane border fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+										<div class="d-flex justify-content-center">
+											<div class="content text-center">
+												<div class="ratings">
+													<!-- 평점 나타내는 곳 -->
+													<span class="product-rating">${gymstar}</span><span>/5</span>
+													<div class="stars">
+														<!-- 여기가 평균 별 나타내는 곳 -->
+														<c:forEach begin="1" end="${gymstar2}">
+															<i class="fa fa-star"></i>
+														</c:forEach>
+													</div>
+													<div class="rating-text">
+														<span>${totalReiew} reviews</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="review-list ml-3 mr-2 pt-2" style="background-color: #ebebeb">
+											<ul>
+												<li>
+													<div>
+														<c:forEach items="${gymReview}" var="review">
+															<div class="right ml-3 mt-3 r-content">
+																<h4>
+																	${review.mnickname} 
+																	<span class="gig-rating text-body-2"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
+                  													<path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>   
+                  													</svg>${review.grstar}</span>
+																</h4>
+																<div class="review-description">
+																	<p>${review.bcontent}</p>
+																</div>
+																<span class="publish py-3 d-inline-block w-100"><fmt:formatDate value="${review.bdate}" pattern="yyyy/MM/dd" /></span>
+																<!-- 좋아요기능은 이곳에.. -->
+															</div>
+														</c:forEach>
+													</div>
+												</li>
+											</ul>
+										</div>
 
-		<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-		<c:forEach var="idx" begin="${pageMaker.startPage}"	end="${pageMaker.endPage}">
-			<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/common/gymdetail/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
-			</c:forEach>
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/common/gymdetail/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}">
-							<span aria-hidden="true">»</span> </a></li>
-				</c:if>					
-		</ul>
-  		</nav>
-  	
-    			</div>
+										<nav class="pagination-outer mb-2" aria-label="Page navigation">
+											<ul class="pagination justify-content-center text-center">
+												<c:if test="${pageMaker.pre}">
+													<li class="page-item"><a aria-label="Previous" class="page-link"
+														href="${pageContext.request.contextPath}/common/gymdetail/${gym.gnum}${pageMaker.makeQuery(pageMaker.startPage - 1) }"> <span aria-hidden="true">«</a></span></li>
+												</c:if>
+
+												<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+												<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+													<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/common/gymdetail/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
+												</c:forEach>
+												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+													<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/common/gymdetail/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}">
+															<span aria-hidden="true">»</span>
+													</a></li>
+												</c:if>
+											</ul>
+										</nav>
+
+									</div>
 								</div>
 							</div>
 						</div>
-						<!--시설 상세 끝-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--시설 상세 끝-->
 	</section>
 
 
@@ -514,7 +522,7 @@ option {
 	$(document).ready(function() {
 
 		check();
-		
+
 		$("#insertWish").on("click", function(e) {
 			var token = $("meta[name='_csrf']").attr("content");
 			var header = $("meta[name='_csrf_header']").attr("content");
@@ -556,28 +564,27 @@ option {
 		});
 
 	})
-	function nolist(){
-	
-	let htmls ="";
-	
-	htmls += '<div class = "text-center pb-5">';
-	htmls += '<h3 style="color:black;">아직 작성한 리뷰가 없습니다. 리뷰를 작성해주세요</h3>';
-	htmls += '</div>'
-	
-	
-	$(".review-list").append(htmls);
-	$(".product-rating").text("0");
-	$(".rating-text span").text("0 reviews");
-}
-function check(){
-	let checkNum = $(".review-description p").text();
-	
-	console.log(checkNum);
-	
-	if(checkNum == ""){
-		nolist();
+	function nolist() {
+
+		let htmls = "";
+
+		htmls += '<div class = "text-center pb-5">';
+		htmls += '<h3 style="color:black;">아직 작성한 리뷰가 없습니다. 리뷰를 작성해주세요</h3>';
+		htmls += '</div>'
+
+		$(".review-list").append(htmls);
+		$(".product-rating").text("0");
+		$(".rating-text span").text("0 reviews");
 	}
-}
+	function check() {
+		let checkNum = $(".review-description p").text();
+
+		console.log(checkNum);
+
+		if (checkNum == "") {
+			nolist();
+		}
+	}
 </script>
 
 

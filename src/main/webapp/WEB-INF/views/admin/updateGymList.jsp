@@ -26,7 +26,6 @@
 <title>Admin-시설추가Page</title>
 
 <!-- Google Font -->
-
 <body>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
@@ -43,26 +42,20 @@
 		<div class="canvas-social">
 			<c:choose>
 				<c:when test="${empty principal}">
-									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
-									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
-									</span>
+					<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
+					</span>
+					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+					</a>
+					</span>
 				</c:when>
 				<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
-									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+					</a>
+					</span>
+					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+					</a>
+					</span>
+					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -74,16 +67,15 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="logo"  style="margin-top:-60px">
-						<a href="${pageContext.request.contextPath}/today">  <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
+					<div class="logo" style="margin-top: -60px">
+						<a href="${pageContext.request.contextPath}/today"> <img src="${pageContext.request.contextPath}/img/logo.png" alt="">
 						</a>
 					</div>
 				</div>
-				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -94,24 +86,18 @@
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
 									</span>
-									<span class="signUp" style="color: white; margin-right:20px"> 
-										<a href="${pageContext.request.contextPath}/common/signup"> 
-											<i class="fa fa-user-plus">Sign Up</i>
-										</a>
+									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
+									</a>
 									</span>
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color:white">
-											<a href="${pageContext.request.contextPath}/user/memberInfo">
-												<i class="fa fa-user-secret">UserInfo</i>
-											</a>
+									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
+									</a>
 									</span>
-									<span class="logout" style="color:white; margin-right:20px">
-											<a href="/logout">
-												<i class="fa fa-sign-out">Log Out</i>
-											</a>
-									</span>																			
-										<a class="nav-link">${principal.user.memail}</a>
+									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
+									</a>
+									</span>
+									<a class="nav-link">${principal.user.memail}</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -124,98 +110,105 @@
 		</div>
 	</header>
 	<!-- Header End -->
-	<section class="classes-section spad"></section>
-	<div class="container-wrapper">
-		<div class="container">
-			<h2>Add Gym</h2>
-			<p class="lead">시설을 추가해주세요.</p>
-
-			<sf:form
-				action="${pageContext.request.contextPath}/admin/gymListInventory/updateGymList"
-				method="post" modelAttribute="gymListVO" enctype="multipart/form-data">
-				<!-- post method 처리하는 것 controller만들어줘야함. -->
-
-
-
-				<sf:hidden path="gnum" />
-				
-				<div class="form group">
-					<label for="gname">회원번호</label>
-					<sf:input path="mnum" id="mnum" class="form-control" />
-					<sf:errors path="mnum" cssStyle="color:#ff0000" />
+	<!--마이페이지 내용물 시작-->
+	<section class="classes-section spad">
+		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
+			<div class="row" style="margin-top: 100px;">
+				<!-- 사이드바 -->
+				<div class="col-3">
+					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
-				
-				
-				<div class="form group">
-					<label for="gname">이름</label>
-					<sf:input path="gname" id="gname" class="form-control" />
-					<sf:errors path="gname" cssStyle="color:#ff0000" />
+				<!-- 사이드바 끝 -->
+				<!-- 내용물 -->
+				<div class="container-wrapper; col-9" style="margin-top: -20px; color:white">
+					<div class="container">
+						<h2 style="color: white">Update Gym</h2>
+						</br>
+						<p class="lead">시설정보를 수정합니다.</p>
+
+						<sf:form action="${pageContext.request.contextPath}/admin/gymListInventory/updateGymList" method="post" modelAttribute="gymListVO" enctype="multipart/form-data">
+							<!-- post method 처리하는 것 controller만들어줘야함. -->
+
+							<sf:hidden path="gnum" />
+
+							<div class="form group">
+								<label for="gname">회원번호</label>
+								<sf:input path="mnum" id="mnum" class="form-control" />
+								<sf:errors path="mnum" cssStyle="color:#ff0000" />
+							</div>
+
+
+							<div class="form group">
+								<label for="gname">이름</label>
+								<sf:input path="gname" id="gname" class="form-control" />
+								<sf:errors path="gname" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gcategory">분류:</label><br />
+								<sf:radiobutton path="gcategory" id="gcategory" value="헬스장" />
+								헬스장 <br />
+								<sf:radiobutton path="gcategory" id="gcategory" value="요가" />
+								요가 <br />
+								<sf:radiobutton path="gcategory" id="gcategory" value="필라테스" />
+								필라테스 <br />
+							</div>
+
+							<div class="form group">
+								<label for="gaddress">주소</label>
+								<sf:input path="gaddress" id="gaddress" class="form-control" />
+								<sf:errors path="gaddress" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gphone">전화번호</label>
+								<sf:input path="gphone" id="gphone" class="form-control" />
+								<sf:errors path="gphone" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="ginform">정보</label>
+								<sf:input path="ginform" id="ginform" class="form-control" />
+								<sf:errors path="ginform" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gtime">운영시간</label>
+								<sf:input path="gtime" id="gtime" class="form-control" />
+								<sf:errors path="gtime" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gfacility">편의시설</label>
+								<sf:input path="gfacility" id="gfacility" class="form-control" />
+								<sf:errors path="gfacility" cssStyle="color:#ff0000" />
+							</div>
+
+
+
+							<div class="form group">
+								<label for="gsns">SNS</label>
+								<sf:input path="gsns" id="gsns" class="form-control" />
+								<sf:errors path="gsns" cssStyle="color:#ff0000" />
+							</div>
+
+							<div class="form group">
+								<label for="gymimage">Upload Picture</label>
+								<sf:input path="gymimage" id="gymimage" name="gymimage" type="file" class="form-control" />
+							</div>
+
+
+							<br />
+							<button type="submit" class="btn btn-primary">submit</button>
+							<a href="<c:url value="/admin/gymListInventory"/>" class="btn btn-dark">Cancle</a>
+						</sf:form>
+						<br />
+					</div>
 				</div>
-
-				<div class="form group">
-					<label for="gcategory">분류:</label><br />
-					<sf:radiobutton path="gcategory" id="gcategory" value="헬스장" />
-					헬스장 <br />
-					<sf:radiobutton path="gcategory" id="gcategory" value="요가" />
-					요가 <br />
-					<sf:radiobutton path="gcategory" id="gcategory" value="필라테스" />
-					필라테스 <br />
-				</div>
-
-				<div class="form group">
-					<label for="gadress">주소</label>
-					<sf:input path="gadress" id="gadress" class="form-control" />
-					<sf:errors path="gadress" cssStyle="color:#ff0000" />
-				</div>
-
-				<div class="form group">
-					<label for="gphone">전화번호</label>
-					<sf:input path="gphone" id="gphone" class="form-control" />
-					<sf:errors path="gphone" cssStyle="color:#ff0000" />
-				</div>
-
-				<div class="form group">
-					<label for="ginform">정보</label>
-					<sf:input path="ginform" id="ginform" class="form-control" />
-					<sf:errors path="ginform" cssStyle="color:#ff0000" />
-				</div>
-
-				<div class="form group">
-					<label for="gtime">운영시간</label>
-					<sf:input path="gtime" id="gtime" class="form-control" />
-					<sf:errors path="gtime" cssStyle="color:#ff0000" />
-				</div>
-
-				<div class="form group">
-					<label for="gfacility">편의시설</label>
-					<sf:input path="gfacility" id="gfacility" class="form-control" />
-					<sf:errors path="gfacility" cssStyle="color:#ff0000" />
-				</div>
-
-
-
-				<div class="form group">
-					<label for="gsns">SNS</label>
-					<sf:input path="gsns" id="gsns" class="form-control" />
-					<sf:errors path="gsns" cssStyle="color:#ff0000" />
-				</div>
-
-				<div class="form group">
-					<label for="gymimage">Upload Picture</label>
-					<sf:input path="gymimage" id="gymimage" name="gymimage" type="file" class="form-control" />
-				</div>
-
-
 				<br />
-				<button type="submit" class="btn btn-primary">submit</button>
-				<a href="<c:url value="/admin/gymListInventory"/>"
-					class="btn btn-dark">Cancle</a>
-			</sf:form>
-			<br />
+			</div>
 		</div>
-	</div>
-	<br />
-
+	</section>
 	<!-- Get In Touch Section Begin -->
 	<div class="gettouch-section">
 		<div class="container">
@@ -257,15 +250,10 @@
 						<div class="fa-logo">
 							<a href="#"><img src="img/logo.png" alt=""></a>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua
-							endisse ultrices gravida lorem.</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
 						<div class="fa-social">
-							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-								class="fa fa-twitter"></i></a> <a href="#"><i
-								class="fa fa-youtube-play"></i></a> <a href="#"><i
-								class="fa fa-instagram"></i></a> <a href="#"><i
-								class="fa  fa-envelope-o"></i></a>
+							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> <a
+								href="#"><i class="fa  fa-envelope-o"></i></a>
 						</div>
 					</div>
 				</div>
@@ -296,8 +284,7 @@
 						<h4>Tips & Guides</h4>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Physical fitness may help prevent depression,
-									anxiety</a>
+								<a href="#">Physical fitness may help prevent depression, anxiety</a>
 							</h6>
 							<ul>
 								<li>3 min read</li>
@@ -306,8 +293,7 @@
 						</div>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Fitness: The best exercise to lose belly fat and
-									tone up...</a>
+								<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
 							</h6>
 							<ul>
 								<li>3 min read</li>
@@ -326,9 +312,7 @@
 							<script>
 								document.write(new Date().getFullYear());
 							</script>
-							All rights reserved | This template is made with <i
-								class="fa fa-heart" aria-hidden="true"></i> by <a
-								href="https://colorlib.com" target="_blank">Colorlib</a>
+							All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
 					</div>
@@ -351,17 +335,12 @@
 
 	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/masonry.pkgd.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.slicknav.js"></script>
 	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-
-
-
-
 </body>
 
 </html>

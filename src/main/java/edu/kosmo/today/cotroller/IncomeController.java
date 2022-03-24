@@ -66,7 +66,12 @@ public class IncomeController {
 
 	}
 	 
+	@RequestMapping(value = "/owner/totalSales_gym", method = RequestMethod.GET)
+	public String gymDateIncome(Locale locale, Model model) {
+		System.out.println("데이트 인컴");
+		return "owner/totalSales_gym";
 
+	}
 
 	
 
