@@ -298,6 +298,53 @@
         margin: 0 0 10px;
     }
 }
+
+
+<!---->
+div.stars {
+    width: 270px;
+    display: inline-block;
+}
+
+.mt-200 {
+    margin-top: 30px;
+}
+
+input.star {
+    display: none;
+}
+
+label.star {
+    float: right;
+    padding: 10px;
+    font-size: 36px;
+    color: #4A148C;
+    transition: all .2s;
+}
+
+input.star:checked~label.star:before {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+}
+
+input.star-5:checked~label.star:before {
+    color: #FE7;
+    text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked~label.star:before {
+    color: #F62;
+}
+
+label.star:hover {
+    transform: rotate(-15deg) scale(1.3);
+}
+
+label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+}
 </style>
 
 </head>
@@ -472,11 +519,26 @@
 												<div class="comment-box text-center">
 													<h4>${myticket.gname}의리뷰를남겨주세요!</h4>
 													<input type="hidden" id="tknum" value="${myticket.tknum}">
-													<div class="rating">
-														<input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input
-															type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio"
-															name="rating" value="1" id="1"><label for="1">☆</label>
-													</div>
+													<div class="container d-flex justify-content-center mt-200">
+    												<div class="row">
+        											<div class="col-md-12">
+            										<div class="stars">
+               											<form action="">
+                    										 <input class="star star-5" id="star-5${status.index}" value="5" type="radio" name="star" /> 
+                     										<label class="star star-5" for="star-5${status.index}"></label> 
+                     										<input class="star star-4" id="star-4${status.index}" value="4" type="radio" name="star" /> 
+                     										<label class="star star-4" for="star-4${status.index}"></label> 
+                     										<input class="star star-3" id="star-3${status.index}" value="3" type="radio" name="star" /> 
+                     										<label class="star star-3" for="star-3${status.index}"></label> 
+                     										<input class="star star-2" id="star-2${status.index}" value="2" type="radio" name="star" /> 
+                     										<label class="star star-2" for="star-2${status.index}"></label> 
+                     										<input class="star star-1" id="star-1${status.index}" value="1" type="radio" name="star" /> 
+                     										<label class="star star-1" for="star-1${status.index}"></label> 
+                     									</form>
+           											 </div>
+        											</div>
+    												</div>
+												</div>
 													<div class="comment-area">
 														<textarea class="form-control" placeholder="what is your view?" rows="4"></textarea>
 													</div>
@@ -655,8 +717,8 @@
 			$('.modal').modal('hide');
 
 		});
-		$(".rating").on("change", function() {
-			var tmp_value = $('input:radio[name=rating]:checked').val();
+		$(".stars").on("change", function() {
+			var tmp_value = $('input:radio[name=star]:checked').val();
 			console.log(tmp_value);
 		});
 
@@ -669,11 +731,13 @@
 			let lastParent = parent3.parent("div");
 
 			let ordernum = Number(lastParent.find("p").eq(2).text());
-			let bcontent = $("textarea").val();
-			let grstar = $('input:radio[name=rating]:checked').val();
+			let bcontent = parent.find("textarea").val();
+			let grstar = $('input:radio[name=star]:checked').val();
 			let gnum = Number($(this).parent("div").find("input").val());
 			let tknum = Number(parent.parent("div").find("input").val());
-
+			
+			console.log(bcontent);
+			
 			let form = {
 				bcontent : bcontent,
 				grstar : grstar,
