@@ -25,7 +25,7 @@ public interface GymListMapper {
 	
 	
 	//@Update("update gympage set mnum = #{mnum}, gname = #{gname}, gcategory = #{gcategory}, "
-	//		+ "gadress = #{gadress}, gphone = #{gphone}, ginform = #{ginform}, gtime = #{gtime}, "
+	//		+ "g: = #{gadress}, gphone = #{gphone}, ginform = #{ginform}, gtime = #{gtime}, "
 	//		+ "gfacility = #{gfacility}, gsns = #{gsns}, imagename = #{imagename} where gnum = #{gnum}")
 	void updateGymList(GymListVO gymlist);
 

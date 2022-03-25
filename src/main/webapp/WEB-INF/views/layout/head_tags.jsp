@@ -18,3 +18,18 @@
 <script src="https://use.fontawesome.com/3f2fcd4ff5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
 <script src="https://kit.fontawesome.com/8e78a63b44.js" crossorigin="anonymous"></script>
+
+<style>
+button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: transparent;
+	color: white;
+	padding: 0;
+	border: none;
+	display: inline;
+}
+
+
+</style>

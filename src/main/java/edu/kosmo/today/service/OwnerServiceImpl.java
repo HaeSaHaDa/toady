@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.kosmo.today.mapper.OwnerMapper;
+import edu.kosmo.today.page.Criteria;
+import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.OrderListVO;
 import edu.kosmo.today.vo.RegiGymListVO;
 import edu.kosmo.today.vo.RegiGymVO;
@@ -31,6 +33,27 @@ public class OwnerServiceImpl implements OwnerService{
 		
 	}
 
+
+	@Override
+	public void insertStore(RegiGymVO regiGymVO) {
+		ownerMapper.registration(regiGymVO);
+		log.info("OwnerServcie");
+		
+	}
+
+	@Override
+	public List<RegiGymListVO> getregistList() {
+		
+		return ownerMapper.getRegistList();
+	}
+
+	@Override
+	public void remove(int storenum) {
+		log.info("OwnerServcie-remove");
+		
+		ownerMapper.deleteRegist(storenum);
+	}
+	
 	@Override
 	public List<TrainerVO> getTrainer(int gnum) {
 		System.out.println("트레이너 목록가져오는 중 - 오너");
@@ -59,26 +82,21 @@ public class OwnerServiceImpl implements OwnerService{
 		System.out.println("트레이너 삭제중..."+vo);
 		
 		ownerMapper.deleteTrainer(vo);
+	}
+
+	@Override
+	public int getGymTotal(int mnum) {
+		System.out.println("오너 소유 헬스장 갯수");
+		return ownerMapper.getGymTotal(mnum);
+	}
+
+	@Override
+	public List<GymListVO> getGym(Criteria criteria,int mnum) {
+		System.out.println("오너 소유 헬스장 ");
+		return ownerMapper.getGym(criteria, mnum);
 	}			
 
-	@Override
-	public void insertStore(RegiGymVO regiGymVO) {
-		ownerMapper.registration(regiGymVO);
-		log.info("OwnerServcie");
-		
-	}
 
-	@Override
-	public List<RegiGymListVO> getregistList() {
-		
-		return ownerMapper.getRegistList();
-	}
-
-	@Override
-	public void remove(int storenum) {
-		log.info("OwnerServcie-remove");
-		
-		ownerMapper.deleteRegist(storenum);
-	}
 	
+
 }

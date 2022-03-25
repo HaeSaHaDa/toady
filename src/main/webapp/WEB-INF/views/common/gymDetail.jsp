@@ -177,6 +177,45 @@ option {
 .tab-content h2,h3,h4{
 	font-family: 'ONE-Mobile-POP';
 }
+.customoverlay {
+position:relative;
+bottom:85px;
+border-radius:6px;
+border: 1px solid #ccc;
+border-bottom:2px solid #ddd;
+float:left;
+}
+.customoverlay:nth-of-type(n) {
+border:0; 
+box-shadow:0px 1px 2px #888;
+}
+.customoverlay a {
+display:block;
+text-decoration:none;
+color:#000;
+text-align:center;
+border-radius:6px;
+font-size:14px;
+font-weight:bold;
+overflow:hidden;
+background: #d95050;
+background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+}
+.customoverlay .title {
+display:block;
+text-align:center;
+background:#fff;
+margin-right:35px;
+padding:10px 15px;
+font-size:14px;
+font-weight:bold;
+}
+.customoverlay:after {
+content:'';position:absolute;
+margin-left:-12px;left:50%;
+bottom:-12px;width:22px;
+height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
 </style>
 <title>시설상세</title>
 </head>
@@ -194,8 +233,10 @@ option {
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
+
 			<!-- 메뉴 바  -->
 			<%@ include file="../layout/menu_bar.jsp"%>
+
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -206,14 +247,21 @@ option {
 					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
 					</a>
 					</span>
+
+
 				</c:when>
 				<c:otherwise>
-					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-					</a>
-					</span>
-					<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-					</a>
-					</span>
+					<form:form action="${pageContext.request.contextPath}/user/memberInf">
+						<button style="background-color: transparent; border: 0; outline: 0">
+							<i class="fa fa-user-secret">UserInfo</i>
+						</button>
+					</form:form>
+					<form:form action="/logout">
+						<button style="background-color: transparent; border: 0; outline: 0" url="">
+							<i class="fa fa-sign-out">Log Out</i>
+						</button>
+					</form:form>
+
 					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
@@ -233,13 +281,15 @@ option {
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
+
 						<!-- 메뉴 바  -->
 						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
 					<div class="top-option">
-						<div class="to-social">
+
+						<div class="to-social" style="margin-left: -20px">
 							<c:choose>
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
@@ -247,16 +297,30 @@ option {
 									<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
 									</a>
 									</span>
+
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-									</a>
-									</span>
-									<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-									</a>
-									</span>
-									<a class="nav-link">${principal.user.memail}</a>
+									<table>
+										<tr>
+											<td>
+											<form:form action="${pageContext.request.contextPath}/user/memberInf">
+											<span class="userinfo" style="color: white; margin-right: 20px"> 
+														<button style="background-color: transparent; border: 0; outline: 0;">
+															<i class="fa fa-user-secret">UserInfo</i>
+														</button>
+													</span>
+													</form:form>
+											</td>
 
+											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+														<button style="background-color: transparent; border: 0; outline: 0" url="">
+															<i class="fa fa-sign-out">Log Out</i>
+														</button>
+													</form:form>
+											</span></td>
+										</tr>
+									</table>
+									<a class="nav-link">${principal.user.memail}</a>
 
 								</c:otherwise>
 							</c:choose>
@@ -319,6 +383,7 @@ option {
 										<h2>소개</h2>
 										<input type="hidden" class="gaddress" value="${gym.gaddress}">
 										<input type="hidden" class="gname" value="${gym.gname}">
+										<input type="hidden" class="gnum" value="${gym.gnum}">
 										<p>${gym.ginform}</p>
 										<h2>편의시설</h2>
 										<p>${gym.gfacility}</p>
@@ -337,11 +402,14 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
+
+
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
 let addres = $(".gaddress").val();
 let gname = $(".gname").val();
+let gnum = $(".gnum").val();
 console.log(addres);
 
 // 주소로 좌표를 검색합니다
@@ -354,22 +422,46 @@ geocoder.addressSearch(addres, function(result, status) {
 
         console.log(coords+".........")
         // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var imageSrc = '${pageContext.request.contextPath}/img/마커배경-removebg-preview.png', // 마커이미지의 주소입니다    
+		imageSize = new kakao.maps.Size(80, 69), // 마커이미지의 크기입니다
+		imageOption = {offset: new kakao.maps.Point(39, 70)};
+        
+                            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                                markerPosition =coords; // 마커가 표시될 위치입니다
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+gname+'</div>'
-        });
-        infowindow.open(map, marker);
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                              position: coords,
+                              image: markerImage // 마커이미지 설정 
+                            });
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-</script>
+                            // 마커가 지도 위에 표시되도록 설정합니다
+                            marker.setMap(map); 
+                           
+                           // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                            var content = '<div class="customoverlay">' +
+                                '  <a href="${pageContext.request.contextPath}/common/gymdetail/'+gnum+'">' +
+                                '    <span class="title">'+gname+'</span>' +
+                                '  </a>' +
+                                '</div>';
+
+                            // 커스텀 오버레이가 표시될 위치입니다 
+                            var position = coords;  
+
+                            // 커스텀 오버레이를 생성합니다
+                            var customOverlay = new kakao.maps.CustomOverlay({
+                                map: map,
+                                position: coords,
+                                content: content,
+                                yAnchor: 1 
+                            });
+
+        					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+       					 	map.setCenter(coords);
+    						} 
+							});    
+					</script>
 									</div>
 
 

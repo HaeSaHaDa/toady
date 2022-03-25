@@ -525,6 +525,9 @@
             	var post = $('#addr1').val(); 
             	var mnum = ${principal.user.mnum};
             	var totalamount =100;/*  parseInt($(".totalprice").text(), 10); */
+            	var startDate = $("#startDate").val();
+            	
+            	console.log("시작 날짜..."+startDate);
             	
             	var IMP = window.IMP; // 생략가능
             	IMP.init('imp01979841');// 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용 i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -534,7 +537,7 @@
 				    pg : 'html5_inicis',
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
-				    name : '인규테스트',
+				    name : '오늘의짐 이용권',
 				    amount :  totalamount,
 				    buyer_email : bEmail,//'test@test',
 				    buyer_name : bName,//'송인규',
@@ -561,7 +564,8 @@
 				        		merchantid: rsp.merchant_uid,
 	                            impid : rsp.imp_uid,
 	                            mnum: mnum,
-	                         	paidamount : rsp.paid_amount		 
+	                         	paidamount : rsp.paid_amount,
+	                         	startDate : startDate
 				        	} /* JSON.stringify(data) */
 				        	
 				        }).done(function(result){
