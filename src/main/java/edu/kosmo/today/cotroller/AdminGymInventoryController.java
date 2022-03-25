@@ -11,36 +11,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
-import edu.kosmo.today.page.Criteria;
-import edu.kosmo.today.page.PageVO;
-import edu.kosmo.today.service.FaqService;
 import edu.kosmo.today.service.GymListService;
-import edu.kosmo.today.service.GymServicce;
-import edu.kosmo.today.service.MemberService;
-import edu.kosmo.today.service.OrderService;
-import edu.kosmo.today.vo.FaqVO;
+import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.vo.GymListVO;
-import edu.kosmo.today.vo.MemberVO;
-import edu.kosmo.today.vo.NoteVO;
+import edu.kosmo.today.vo.TicketVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,6 +34,9 @@ public class AdminGymInventoryController {
 	
 	@Autowired
 	private GymListService gymListService;
+	
+	@Autowired
+	private GymService gymService;
 	
 	@RequestMapping
 	public String adminPage() {
@@ -139,9 +124,9 @@ public class AdminGymInventoryController {
 		
 		GymListVO gymListVO =gymListService.getGymListByGnum(gnum);
 		model.addAttribute("gymListVO", gymListVO);
+
 		return "admin/updateGymList";
 	}
-	//======================경로 설정...... 해주세요....======================	
 	
 	@RequestMapping(value="/gymListInventory/updateGymList", method=RequestMethod.POST) //postmethod
 	public String updateGymListPost(GymListVO gymListVO, HttpServletRequest request) {
@@ -149,7 +134,6 @@ public class AdminGymInventoryController {
 		MultipartFile gymimage = gymListVO.getGymimage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 		Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymimage.getOriginalFilename());
-		
 		if(gymimage.isEmpty()==false) {
 			System.out.println("-------------file upload--------");
 			System.out.println("imagename:"+gymimage.getName());
@@ -177,6 +161,15 @@ public class AdminGymInventoryController {
 		return "redirect:/admin/gymListInventory";
 	}
 
+	//쿠폰 리스트 =====================
+	@RequestMapping(value="/ticketList/{gnum}", method=RequestMethod.GET)
+	public String updateTicket(@PathVariable int gnum, Model model, ModelAndView mav) {//spring에서 gnum 자동으로 넣어줌.
+		
+		List<TicketVO> ticketVO =gymService.getTicketList(gnum);
 
+		model.addAttribute("ticketVO", ticketVO);
+		System.out.println("ticket 정보는??? " + ticketVO);
+		return "admin/ticketList";
+	}
 	
 }

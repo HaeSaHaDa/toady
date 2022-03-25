@@ -29,7 +29,7 @@ import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.page.PageVO2;
-import edu.kosmo.today.service.GymServicce;
+import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.service.WishService;
 import edu.kosmo.today.userservice.UserService;
 import edu.kosmo.today.vo.GymVO;
@@ -47,7 +47,7 @@ import lombok.extern.slf4j.Slf4j;
 public class GymPageController {
 
 	@Autowired
-	private GymServicce service;
+	private GymService service;
 
 	// 시설목록으로 가기
 	@GetMapping("/common/gymlist")

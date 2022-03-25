@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetailService;
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
@@ -128,4 +129,11 @@ public class UserApiController {
 
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	@PostMapping("goPost.do")
+	public ModelAndView go_post(ModelAndView mav){
+		mav.setViewName("/logout");
+	    return mav;
+	}
+
+
 }
