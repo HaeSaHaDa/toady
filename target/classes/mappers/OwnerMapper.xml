@@ -9,43 +9,58 @@
 		resultType="edu.kosmo.today.vo.OrderListVO">
 		SELECT m.mnum, m.memail,m.mnickname, m.mphone,
 		m.mbirth,ol.orderdate, od.cost, t.tname, t.tcost
-		FROM member m, orderlist ol, orderdetail od, ticket t
-		WHERE m.mnum = ol.mnum AND ol.ordernum = od.ordernum AND od.tknum = t.tknum
+		FROM member m,
+		orderlist ol, orderdetail od, ticket t
+		WHERE m.mnum = ol.mnum AND
+		ol.ordernum = od.ordernum AND od.tknum = t.tknum
 		and ol.mnum = #{mnum}
 	</select>
 
 	<!-- 회원 번호 가져오기 -->
 	<select id="getMemberNum" resultType="int">
-		select * from member where
+		select mnum from member
+		where
 		mid = #{mid}
 	</select>
-	
-	<delete id="memberDelete" >
+
+	<delete id="memberDelete">
 	<![CDATA[
 		delete from member where mnum = #{mnum}
 	]]>
 	</delete>
-	
+
 	<!-- 트레이너 목록가져오기 -->
-	<select id="getTrainer" resultType="edu.kosmo.today.vo.TrainerVO">
+	<select id="getTrainer"
+		resultType="edu.kosmo.today.vo.TrainerVO">
 		select * from trainer where gnum = #{gnum}
 	</select>
+
 	<!-- 트레이너 등록 -->
 	<insert id="insertTrainer">
-		insert into trainer (gnum,gtname,gtcareer) values (#{gnum},#{gtname},#{gtcareer})
+		insert into trainer (gnum,gtname,gtcareer) values
+		(#{gnum},#{gtname},#{gtcareer})
 	</insert>
+
 	<!-- 트레이너 정보 수정하기 -->
 	<update id="updateTrainer">
-		UPDATE trainer SET gtcareer = #{gtcareer} WHERE gnum = #{gnum} and gtname = #{gtname}
-
+		UPDATE trainer SET gtcareer = #{gtcareer} WHERE gnum
+		= #{gnum} and gtname = #{gtname}
 	</update>
+
+	<!-- 트레이너 삭제 -->
+	<delete id="deleteTrainer">
+		delete from trainer where gnum = #{gnum} and gtname =
+		#{gtname}
+	</delete>
+
 	<!-- 헬스장 신청 목록 -->
-	<select id="getRegistList" resultType="edu.kosmo.today.vo.RegiGymListVO">
+	<select id="getRegistList"
+		resultType="edu.kosmo.today.vo.RegiGymListVO">
 		<![CDATA[
 		select * from Store order by storenum
 	]]>
 	</select>
-	
+
 	<!-- 헬스장 등록 신청 -->
 	<insert id="registration">
 	<![CDATA[
@@ -53,15 +68,30 @@
 		values (store_seq.nextval, #{storename}, #{storeadr}, #{storetel},sysdate)
       ]]>
 	</insert>
-	
-	<delete id="deleteRegist" >
+
+	<delete id="deleteRegist">
 		<![CDATA[
 			delete from store where storenum = #{storenum}
 		]]>
 	</delete>
-	
-	<!-- 트레이너 삭제 -->
-	<delete id="deleteTrainer">
-	delete from trainer where gnum = #{gnum} and gtname = #{gtname}
-	</delete>
+
+	<select id="getGymTotal" resultType="_int">
+	<![CDATA[
+		select count(*) from gympage where gympage.mnum = #{mnum}
+	]]>
+	</select>
+
+	<select id="getGym" resultType="edu.kosmo.today.vo.GymListVO">
+		<![CDATA[
+		SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM (
+                 SELECT * FROM gympage WHERE gympage.mnum = #{mnum}
+             ) A WHERE ROWNUM <= #{criteria.pageNum} * #{criteria.amount}
+         ) WHERE RNUM > (#{criteria.pageNum}-1) * #{criteria.amount}
+	]]>
+	</select>
+
+
+
+
 </mapper>

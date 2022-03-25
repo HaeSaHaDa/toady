@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
-import edu.kosmo.today.service.GymServicce;
+import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.service.OwnerService;
 import edu.kosmo.today.vo.MemberVO;
-import edu.kosmo.today.vo.RegiGymVO;
 import edu.kosmo.today.vo.TrainerVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +70,7 @@ public class OwnerController {
 	}*/
 
 	@Autowired
-	private GymServicce gymService;
+	private GymService gymService;
 
 	// 리뷰목록보기
 	@GetMapping("/gymreviewlist")
@@ -160,9 +158,27 @@ public class OwnerController {
 		}
 
 		return entity;
-
-
 	}
+
+	//오너의 운영 시설 목록
+	@GetMapping("/manageGym/{mnum}")
+	public ModelAndView getGym(ModelAndView mav, @PathVariable int mnum, Criteria criteria) {
+		System.out.println("mnum은 무엇인가?" + mnum);
+		int total = ownerService.getGymTotal(mnum);
+		log.info("total??" + total);
+		
+		mav.addObject("pageMaker", new PageVO(criteria, total));
+		mav.addObject("gymLists", ownerService.getGym(criteria, mnum));
+		
+		System.out.println("==========" + ownerService.getGym(criteria, mnum));
+		
+		mav.setViewName("/owner/manageGym");
+		
+		return mav;
+		
+	}
+	
+	
 
 	//트레이너 목록보기
 	@GetMapping("/manageTrainer")
@@ -184,6 +200,12 @@ public class OwnerController {
 		
 		return mav;
 	}
+	
+
+
+
+
+	
 	
 	//트레이너 등록
 	@RequestMapping(value = "/insertTrainer", method = RequestMethod.POST)
@@ -208,6 +230,7 @@ public class OwnerController {
 		}
 		return entity;
 	}
+
 	@RequestMapping(value = "/updateCareer", method = RequestMethod.POST)
 	public ResponseEntity<String> updateCareer(@RequestBody TrainerVO vo) {
 		ResponseEntity<String> entity = null;
@@ -230,7 +253,7 @@ public class OwnerController {
 		}
 		return entity;
 	}
-	
+
 	//트레이너 삭제
 	@RequestMapping(value="/deleteTrainer/{gtname}" , method = RequestMethod.POST)
 	@ResponseBody
@@ -255,59 +278,11 @@ public class OwnerController {
 		}
 
 		return entity;
-	}
-	//헬스장 등록 신청 페이지
-	@GetMapping("/registView")
-	public ModelAndView requestView(ModelAndView mv) {
-		System.out.println("owner 컨트롤러");
-		
-		mv.setViewName("/owner/registView");
-		
-		return mv;
-	}
+	}	
+
+ 
 	
-	//헬스장 등록 신청
-	@PostMapping("/registration")
-	public ModelAndView registration(ModelAndView mv,RegiGymVO regigymvo) {
-		System.out.println("owner 컨트롤러");
-		ownerService.insertStore(regigymvo);
-		mv.setViewName("redirect:/today");
-	return mv; 
-	}
-	//헬스장 신청목록 조회 페이지
-	@GetMapping("/registListView")
-	public ModelAndView registlist(ModelAndView mv) {
-			
-	log.info("->owner Controller...");
-	log.info("->registlist()...");
-			
-	mv.addObject("registList",ownerService.getregistList());
-	mv.setViewName("/owner/registListView");	
-	
-	return mv;
-	}	 
-	
-	//@DeleteMapping("/deleteRegister/{storenum}")
-	@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.GET)
-	public ResponseEntity<String> deleteRegister(@PathVariable("storenum")String storenum){
-		log.info("탑니까?-1");
-		ResponseEntity<String> entity = null;
-		int storenum1 = Integer.valueOf(storenum);
-		try {
-			log.info("탑니까?-s2");
-			ownerService.remove(storenum1);
-			// 삭제가 성공하면 성공 상태메시지 저장
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		} catch (Exception e) {
-			log.info("탑니까?-3");
-			e.printStackTrace();
-			// 댓글 삭제가 실패하면 실패 상태메시지 저장
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		// 삭제 처리 HTTP 상태 메시지 리턴
-		return entity;
-	}
-	
+
 	
 
 }

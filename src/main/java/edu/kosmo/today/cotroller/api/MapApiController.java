@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.kosmo.today.service.GymServicce;
+import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.vo.GymVO;
 
 
@@ -19,7 +19,7 @@ import edu.kosmo.today.vo.GymVO;
 public class MapApiController {
 
 	@Autowired
-	private GymServicce service;
+	private GymService service;
 	
 	@GetMapping("/common/findMap")
 	public String findMap() {

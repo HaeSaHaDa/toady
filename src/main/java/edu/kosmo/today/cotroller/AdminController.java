@@ -22,7 +22,7 @@ import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
-import edu.kosmo.today.service.GymServicce;
+import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.vo.FaqVO;
@@ -235,7 +235,7 @@ public class AdminController {
 	private OrderService orderService;
 	
 	//환불요청 및 리뷰삭제 요청보기
-	@GetMapping("/requstpr")
+	@GetMapping("/requestpr")
 	public ModelAndView getRequetList(Criteria cri,ModelAndView mav) {
 		log.info("환불/리뷰삭제요청 목록뽑아내는중");
 		
@@ -252,7 +252,7 @@ public class AdminController {
 	}
 	
 	@Autowired
-	private GymServicce gymService;
+	private GymService gymService;
 	
 	//리뷰목록보기
 	@GetMapping("/manageReivew")

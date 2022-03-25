@@ -20,17 +20,15 @@
 
 <%@ include file="../layout/head_tags.jsp"%>
 
-
-
 <title>오늘의 짐</title>
 </head>
 
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -57,14 +55,18 @@
 
 				</c:when>
 				<c:otherwise>
-					<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-					</a>
-					</span>
-					<body ng-controller="moniteringCtrl" class="pad">
-						<span class="logout" style="color: white; margin-right: 20px"> <a href="/logout"> <i class="fa fa-sign-out">Log Out</i>
-						</a>
-						</span>
-						<a class="nav-link">${principal.user.memail}</a>
+					<form:form action="${pageContext.request.contextPath}/user/memberInf">
+						<button style="background-color: transparent; border: 0; outline: 0">
+							<i class="fa fa-user-secret">UserInfo</i>
+						</button>
+					</form:form>
+					<form:form action="/logout">
+						<button style="background-color: transparent; border: 0; outline: 0" url="">
+							<i class="fa fa-sign-out">Log Out</i>
+						</button>
+					</form:form>
+
+					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -91,7 +93,7 @@
 				<div class="col-lg-3">
 					<div class="top-option">
 
-						<div class="to-social">
+						<div class="to-social" style="margin-left: -20px">
 							<c:choose>
 								<c:when test="${empty principal}">
 									<span class="to-search search-switch"> <i class="fa fa-sign-in">Log In</i>
@@ -102,12 +104,26 @@
 
 								</c:when>
 								<c:otherwise>
-									<span class="userinfo" style="color: white"> <a href="${pageContext.request.contextPath}/user/memberInfo"> <i class="fa fa-user-secret">UserInfo</i>
-									</a>
-									</span>
-									<span class="logout" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/logout"> <i class="fa fa-sign-out">Log Out</i>
-									</a>
-									</span>
+									<table>
+										<tr>
+											<td>
+											<form:form action="${pageContext.request.contextPath}/user/memberInf">
+											<span class="userinfo" style="color: white; margin-right: 20px"> 
+														<button style="background-color: transparent; border: 0; outline: 0;">
+															<i class="fa fa-user-secret">UserInfo</i>
+														</button>
+													</span>
+													</form:form>
+											</td>
+
+											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+														<button style="background-color: transparent; border: 0; outline: 0" url="">
+															<i class="fa fa-sign-out">Log Out</i>
+														</button>
+													</form:form>
+											</span></td>
+										</tr>
+									</table>
 									<a class="nav-link">${principal.user.memail}</a>
 
 								</c:otherwise>
