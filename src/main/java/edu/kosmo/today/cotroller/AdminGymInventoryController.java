@@ -34,7 +34,8 @@ import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
 import edu.kosmo.today.service.GymListService;
-import edu.kosmo.today.service.GymServicce;
+
+import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.vo.FaqVO;
@@ -55,7 +56,7 @@ public class AdminGymInventoryController {
 	private GymListService gymListService;
 	
 	@Autowired
-	private GymServicce gymService;
+	private GymService gymService;
 	
 	@RequestMapping
 	public String adminPage() {
