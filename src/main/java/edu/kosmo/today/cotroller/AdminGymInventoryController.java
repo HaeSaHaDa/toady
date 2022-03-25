@@ -1,6 +1,5 @@
 package edu.kosmo.today.cotroller;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,6 +72,7 @@ public class AdminGymInventoryController {
 	@RequestMapping(value="/gymListInventory/addGymList", method=RequestMethod.GET) //getmethod
 	public String addGymList(Model model) {
 		
+		
 		GymListVO gymListVO =new GymListVO();
 		model.addAttribute("gymListVO", gymListVO);
 		
@@ -81,11 +81,14 @@ public class AdminGymInventoryController {
 	}
 	
 	@RequestMapping(value="/gymListInventory/addGymList", method=RequestMethod.POST) //postmethod
-	public String addGymListPost(GymListVO gymListVO, HttpServletRequest request, Model model) {
-		///today_gym/src/main/resources/img
+	public String addGymListPost(GymListVO gymListVO, HttpServletRequest request,Model model) {
+		///today_gym/src/main/resources/img			
+		
 				MultipartFile gymimage = gymListVO.getGymimage();
-				String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-				Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymimage.getOriginalFilename());
+				
+				Path savePath =Paths.get("C:\\Users\\kosmo\\git\\toady\\src\\main\\resources\\static\\img\\"+gymimage.getOriginalFilename());
+				
+				System.out.println("업로드경로"+savePath);
 				
 				if(gymimage.isEmpty()==false) {
 					System.out.println("-------------file upload--------");
@@ -122,7 +125,9 @@ public class AdminGymInventoryController {
 		GymListVO gymListVO =gymListService.getGymListByGnum(gnum);//gnum을 바탕으로 가져옴. 
 		//delete할 때 사진도 삭제 되어야 하므로 필요함. 
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymListVO.getImagename());
+		Path savePath =Paths.get("C:\\Users\\kosmo\\git\\toady\\src\\main\\resources\\static\\img\\"+gymListVO.getImagename());
+		
+		System.out.println("업로드경로"+savePath);
 		
 		if(Files.exists(savePath)) {
 			try {
@@ -153,7 +158,10 @@ public class AdminGymInventoryController {
 		
 		MultipartFile gymimage = gymListVO.getGymimage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymimage.getOriginalFilename());
+		Path savePath =Paths.get("C:\\Users\\kosmo\\git\\toady\\src\\main\\resources\\static\\img\\"+gymimage.getOriginalFilename());
+		
+		System.out.println("업로드경로"+savePath);
+		
 		if(gymimage.isEmpty()==false) {
 			System.out.println("-------------file upload--------");
 			System.out.println("imagename:"+gymimage.getName());
