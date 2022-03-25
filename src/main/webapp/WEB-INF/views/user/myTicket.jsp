@@ -19,15 +19,289 @@
 
 <%@ include file="../layout/head_tags.jsp"%>
 
-
 <!-- 별점라이브러리 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <title>마이페이지</title>
 
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+.ticket {
+        width: 400px;
+        height: 240px;
+        border: 1px solid #cccc;
+        border-radius: 30px 30px;
+        margin-top: 5px;
+        background-color: white;
+        margin-left: 100px;
+      }
+      .first {
+        display: flex;
+        line-height: 2;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .first p:first-child {
+        margin-right: 100px;
+        margin-left: 30px;
+      }
+      .first p:nth-child(2) {
+        margin-right: 20px;
+      }
+      .second {
+
+        margin-left: 30px;
+        line-height: 8px;
+      }
+      .gogym p{
+        color: rgb(39, 129, 107);
+        text-decoration: none;
+        text-shadow: 0 0 24px;
+      }
+      .last {
+        display: flex;
+      }
+      @import url(https://fonts.googleapis.com/css?family=BenchNine:700);
+	
+	.goback{
+		background-color: #50586C;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "BenchNine", Arial, sans-serif;
+        font-size: 1em;
+        font-size: 10px;
+        outline: none;
+        padding: 12px 30px 10px;
+        position: relative;
+        text-transform: uppercase;
+        margin-left: 25px;
+        margin-bottom: 30px;
+	}
+		
+      .goRivew{
+        background-color: #c47135;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "BenchNine", Arial, sans-serif;
+        font-size: 1em;
+        font-size: 10px;
+        outline: none;
+        padding: 12px 30px 10px;
+        position: relative;
+        text-transform: uppercase;
+        margin-left: 50px;
+        margin-bottom: 30px;
+      }
+      .goRivew:before,
+      .goRivew:after {
+        border-color: transparent;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+        border-style: solid;
+        border-width: 0;
+        content: "";
+        height: 24px;
+        position: absolute;
+        width: 24px;
+      }
+      .goRivew:before {
+        border-color: #c47135;
+        border-right-width: 2px;
+        border-top-width: 2px;
+        right: -5px;
+        top: -5px;
+      }
+      .goRivew:after {
+        border-bottom-width: 2px;
+        border-color: #c47135;
+        border-left-width: 2px;
+        bottom: -5px;
+        left: -5px;
+      }
+      .goRivew:hover,
+      .goRivew.hover {
+        background-color: #c47135;
+      }
+      .goRivew:hover:before,
+      .goRivew.hover:before,
+      .goRivew:hover:after,
+      .goRivew.hover:after {
+        height: 100%;
+        width: 100%;
+      }
+.cross {
+    padding: 10px;
+    color: #d6312d;
+    cursor: pointer;
+    font-size: 23px
+}
+
+.cross i {
+    margin-top: -5px;
+    cursor: pointer
+}
+
+.comment-box {
+    padding: 5px
+}
+
+.comment-area textarea {
+    resize: none;
+    border: 1px solid #ff0000
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 1px rgb(255, 0, 0) !important
+}
+
+.send {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #ff0000
+}
+
+.send:hover {
+    color: #fff;
+    background-color: #f50202;
+    border-color: #f50202
+}
+
+.rating {
+    display: inline-flex;
+    margin-top: -10px;
+    flex-direction: row-reverse
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 28px;
+    font-size: 35px;
+    color: #ff0000;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+ .rating>input:checked~label:before {
+    opacity: 1
+}
+
+.comment-box .rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+
+
+<!--페이지버튼-->
+.pagination-outer{ text-align: center; }
+.pagination{
+    font-family: 'Ubuntu', sans-serif;
+    display: inline-flex;
+    position: relative;
+}
+.pagination li a.page-link{
+    color: #fff;
+    background-color: #333;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 39px;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin: 0 5px;
+    border: none;
+    border-radius: 7px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease 0s;
+}
+.pagination li a.page-link:hover,
+.pagination li a.page-link:focus,
+.pagination li.active a.page-link:hover,
+.pagination li.active a.page-link{
+    color: #fff;
+    background: #2ecc71;
+}
+.pagination li a.page-link:before,
+.pagination li a.page-link:after{
+    content: '';
+    background: #555;
+    height: 100%;
+    width: 7px;
+    border-radius: 10px 0 0 10px;
+    opacity: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.4s ease 0s;
+}
+.pagination li a.page-link:after{
+    border-radius: 0 10px 10px 0;
+    left: auto;
+    right: 0;
+    top: auto;
+    bottom: 0;
+}
+.pagination li a.page-link:hover:before,
+.pagination li a.page-link:focus:before,
+.pagination li.active a.page-link:before{
+    background-color: #27ae60;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 7px;
+}
+.pagination li a.page-link:hover:after,
+.pagination li a.page-link:focus:after,
+.pagination li.active a.page-link:after{
+    background-color: #27ae60;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    height: 7px;
+}
+@media only screen and (max-width: 480px){
+    .pagination{
+        font-size: 0;
+        border: none;
+        display: inline-block;
+    }
+    .pagination li{
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 0 10px;
+    }
+}
+</style>
+
 </head>
+
 
 <body>
 	<!-- Page Preloder -->
@@ -162,7 +436,7 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div class="container ticket-area" style="margin: 0 auto">
 						<h3 style="color: white;" class="mb-3">구매한 이용권</h3>
-						<c:forEach items="${myTicket}" var="myticket">
+						<c:forEach items="${myTicket}" var="myticket" varStatus="status">
 							<div class="ticket">
 								<div class="first">
 									<input type="hidden" id="payid" value="${myticket.payid}">
@@ -183,11 +457,11 @@
 									</p>
 									<div class="last">
 										<p>${myticket.cost}원</p>
-										<button type="button" class="goRivew" data-toggle="modal" data-target="#form">리뷰작성</button>
+										<button type="button" class="goRivew" data-toggle="modal" data-target="#form${status.index}">리뷰작성</button>
 										<button class="goback">환불하기</button>
 									</div>
 								</div>
-								<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal fade" id="form${status.index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
 											<div class="text-right cross">

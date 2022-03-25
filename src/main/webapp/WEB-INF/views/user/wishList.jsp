@@ -362,7 +362,7 @@
                         <div class="quantity">
                             <div class="pro-qty">
                                 <span class="dec qtybtn">-</span>
-                                <input type="text" id="wdate" name="wdate"  value="${wish.wdate}">
+                                <input type="text" class="wdate" name="wdate"  value="${wish.wdate}">
                                 <span class="inc qtybtn">+</span>
                             </div>
                         </div>
@@ -573,8 +573,8 @@ $(document).ready(function(){
        
        var thisRow = $(this).closest('tr');
        //수량 업데이트 중
-       var token = $("meta[name='_csrf']").attr("content");
-       var header = $("meta[name='_csrf_header']").attr("content");
+       //var token = $("meta[name='_csrf']").attr("content");
+       //var header = $("meta[name='_csrf_header']").attr("content");
        
        let wishNum = thisRow.find('[name=wishnum]').val();
        let tval = thisRow.find('[name=wdate]').val();
@@ -590,9 +590,7 @@ $(document).ready(function(){
        $.ajax({
            type : "POST",
            url : "/updateWish",
-           beforeSend : function(xhr){
- 			  xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
- 		},
+          
            cache : false,
            contentType:'application/json; charset=utf-8',
             data: JSON.stringify(form), 
