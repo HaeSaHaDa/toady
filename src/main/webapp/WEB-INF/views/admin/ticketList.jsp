@@ -168,14 +168,14 @@
 									<td>${ticket.tknum}</td>
 									<td>${ticket.tcost}</td>
 									<td>${ticket.tname}</td>
-
-									<td>
-									<a href="<c:url value ="/admin/ticketList/deleteTicket/${ticket.gnum}"/>"> <i class="fa-solid fa-trash"></i></a>
-									 <a href="<c:url value ="/admin/ticketList/updateTicket/${ticket.gnum}"/>"> <i class="fas fa-edit"></i>
+									<td><a href="<c:url value ="/admin/ticketList/deleteTicket/${ticket.tknum}"/>"> <i class="fa-solid fa-trash"></i></a> <a
+										href="<c:url value ="/admin/ticketList/updateTicket/${ticket.gnum}"/>"> <i class="fas fa-edit"></i></a>
 								</tr>
 							</c:forEach>
+
 						</tbody>
 					</table>
+					<a href="<c:url value ="/admin/ticketList/addTicket/${gnum}"/>"> <i class="fa-solid fa-plus"></i></a>
 				</div>
 			</div>
 			<!-- 내용물 끝 -->

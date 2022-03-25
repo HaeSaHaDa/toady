@@ -159,4 +159,34 @@ public class GymService {
 		return list;
 		
 	}
+	
+	
+	//티켓 등록
+	public void addTicket(TicketVO ticketVO) {
+		
+		mapper.addTicket(ticketVO);
+	}
+	
+	//티켓 검색
+	public TicketVO ticket(int tknum) {
+		log.info(tknum + "이용권 가져오는 중");
+
+		TicketVO ticket = mapper.ticket(tknum);
+
+		return ticket;
+	}
+	
+	public void ticketUp(TicketVO ticketVO) {
+		log.info( "이용권 저장 중");
+
+		mapper.ticketUp(ticketVO);
+	}
+	
+	public void ticketDelete(int tknum) {
+		log.info("티켓 삭제중");
+		
+		mapper.ticketDelete(tknum);
+	}
+
+
 }

@@ -183,7 +183,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					s<a href="<c:url value ="/admin/gymListInventory/addGymList"/>" class="btn btn-dark"> Add Gym</a>
+					<a href="<c:url value ="/admin/gymListInventory/addGymList"/>" class="btn btn-dark"> Add Gym</a>
 				</div>
 			</div>
 			<!-- 내용물 끝 -->
