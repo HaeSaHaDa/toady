@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.NoteVO;
+import edu.kosmo.today.vo.TicketVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,6 +54,9 @@ public class AdminGymInventoryController {
 	
 	@Autowired
 	private GymListService gymListService;
+	
+	@Autowired
+	private GymServicce gymService;
 	
 	@RequestMapping
 	public String adminPage() {
@@ -80,7 +85,7 @@ public class AdminGymInventoryController {
 		///today_gym/src/main/resources/img
 				MultipartFile gymimage = gymListVO.getGymimage();
 				String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-				Path savePath =Paths.get(rootDirectory+"\\resources\\static\\img\\"+gymimage.getOriginalFilename());
+				Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymimage.getOriginalFilename());
 				
 				if(gymimage.isEmpty()==false) {
 					System.out.println("-------------file upload--------");
@@ -117,7 +122,7 @@ public class AdminGymInventoryController {
 		GymListVO gymListVO =gymListService.getGymListByGnum(gnum);//gnum을 바탕으로 가져옴. 
 		//delete할 때 사진도 삭제 되어야 하므로 필요함. 
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		Path savePath =Paths.get(rootDirectory+"\\resources\\static\\img\\"+gymListVO.getImagename());
+		Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymListVO.getImagename());
 		
 		if(Files.exists(savePath)) {
 			try {
@@ -139,19 +144,16 @@ public class AdminGymInventoryController {
 		
 		GymListVO gymListVO =gymListService.getGymListByGnum(gnum);
 		model.addAttribute("gymListVO", gymListVO);
+
 		return "admin/updateGymList";
 	}
-	//======================경로 설정...... 해주세요....======================	
 	
 	@RequestMapping(value="/gymListInventory/updateGymList", method=RequestMethod.POST) //postmethod
 	public String updateGymListPost(GymListVO gymListVO, HttpServletRequest request) {
 		
 		MultipartFile gymimage = gymListVO.getGymimage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		Path savePath =Paths.get(rootDirectory+"\\resources\\static\\img\\"+gymimage.getOriginalFilename());
-		
-		System.out.println("이미지 경로는..."+savePath);
-		
+		Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymimage.getOriginalFilename());
 		if(gymimage.isEmpty()==false) {
 			System.out.println("-------------file upload--------");
 			System.out.println("imagename:"+gymimage.getName());
@@ -179,6 +181,15 @@ public class AdminGymInventoryController {
 		return "redirect:/admin/gymListInventory";
 	}
 
+	//쿠폰 리스트 =====================
+	@RequestMapping(value="/ticketList/{gnum}", method=RequestMethod.GET)
+	public String updateTicket(@PathVariable int gnum, Model model, ModelAndView mav) {//spring에서 gnum 자동으로 넣어줌.
+		
+		List<TicketVO> ticketVO =gymService.getTicketList(gnum);
 
+		model.addAttribute("ticketVO", ticketVO);
+		System.out.println("ticket 정보는??? " + ticketVO);
+		return "admin/ticketList";
+	}
 	
 }
