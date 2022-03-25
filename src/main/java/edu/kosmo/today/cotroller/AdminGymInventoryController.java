@@ -80,7 +80,7 @@ public class AdminGymInventoryController {
 		///today_gym/src/main/resources/img
 				MultipartFile gymimage = gymListVO.getGymimage();
 				String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-				Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymimage.getOriginalFilename());
+				Path savePath =Paths.get(rootDirectory+"\\resources\\static\\img\\"+gymimage.getOriginalFilename());
 				
 				if(gymimage.isEmpty()==false) {
 					System.out.println("-------------file upload--------");
@@ -117,7 +117,7 @@ public class AdminGymInventoryController {
 		GymListVO gymListVO =gymListService.getGymListByGnum(gnum);//gnum을 바탕으로 가져옴. 
 		//delete할 때 사진도 삭제 되어야 하므로 필요함. 
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymListVO.getImagename());
+		Path savePath =Paths.get(rootDirectory+"\\resources\\static\\img\\"+gymListVO.getImagename());
 		
 		if(Files.exists(savePath)) {
 			try {
@@ -148,7 +148,9 @@ public class AdminGymInventoryController {
 		
 		MultipartFile gymimage = gymListVO.getGymimage();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		Path savePath =Paths.get(rootDirectory+"\\resources\\img\\"+gymimage.getOriginalFilename());
+		Path savePath =Paths.get(rootDirectory+"\\resources\\static\\img\\"+gymimage.getOriginalFilename());
+		
+		System.out.println("이미지 경로는..."+savePath);
 		
 		if(gymimage.isEmpty()==false) {
 			System.out.println("-------------file upload--------");
