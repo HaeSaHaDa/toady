@@ -153,27 +153,20 @@
 						<h2 style="color: white">Update Gym</h2>
 						<br />
 						<p class="lead">쿠폰을 입력합니다.</p>
-						<form:form items="${ticketVO}" var="ticket" action="/admin/ticketList/updateTicket">
-
-							<table>
+						<form:form action="${pageContext.request.contextPath}/admin/ticketList/addTicket" >
+							<table >
 								<tr>
-									<td><input type="text" value="${ticketVO.gnum}" id="gnum" name="gnum" readonly></td>
+									<td><input type="hidden" name="gnum" id="gnum" value="${gnum}"></td>
 								</tr>
 								<tr>
-									<td><input type="text" value="${ticketVO.tknum}" id="tknum" name="tknum" readonly></td>
+									<td>티켓 가격 <input type="text" name="tcost" id="tcost"></td>
 								</tr>
 								<tr>
-									<td><input type="text" value="${ticketVO.tcost}" id="tcost" name="tcost"></td>
+									<td>티켓 이름 <input type="text" name="tname" id="tname"></td>
 								</tr>
-								<tr>
-									<td><input type="text" value="${ticketVO.tname}" id="tname" name="tname"></td>
-								</tr>
-
 							</table>
 							<input type="submit" class="btn btn-light">
-
 						</form:form>
-
 						<br />
 					</div>
 				</div>

@@ -66,5 +66,13 @@ public interface GymMapper {
 	
 	//시설위치구하기
 	public List<GymVO> gymAdress();
-
+	
+	//티켓 등록
+	public void addTicket(TicketVO ticketVO);
+	//tknum으로 티켓 검색
+	public TicketVO ticket(int tknum);
+	
+	public void ticketUp(TicketVO ticketVO);
+	
+	public void ticketDelete(int tknum);
 }
