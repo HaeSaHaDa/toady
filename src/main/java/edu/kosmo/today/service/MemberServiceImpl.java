@@ -14,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 // 스프링 부트에서는 log4j가 아니라 @Slf4j 사용한다. 개선된 버전
 @Slf4j
 @Service
-public class MemberServiceImpl implements MemberService{
-	
+public class MemberServiceImpl implements MemberService {
+
 	@Autowired
-	private MemberMapper memberMapper ;
-	
+	private MemberMapper memberMapper;
+
 	@Override
 	public List<MemberVO> getList() {
 		log.info("getList()..");
@@ -39,11 +39,10 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int getUserTotalCount() {
-		
-		log.info("getUserTotalCount()..");	
+
+		log.info("getUserTotalCount()..");
 		return memberMapper.getUserTotalCount();
 	}
-
 
 	@Override
 	public List<MemberVO> getListPage(Criteria criteria) {
@@ -51,13 +50,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.getListPage(criteria);
 	}
 
-
 	@Override
 	public void modify(MemberVO memberVO) {
 		memberMapper.update(memberVO);
 	}
 
-	
 	@Override
 	public void nboardRegister(NoteVO noteVO) {
 		memberMapper.nboardinsert(noteVO);
@@ -75,7 +72,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberVO ownerGet(int mnum) {
-		
+
 		return memberMapper.ownerRead(mnum);
 	}
 
@@ -85,5 +82,32 @@ public class MemberServiceImpl implements MemberService{
 		return 0;
 	}
 
+	@Override
+	public List<NoteVO> readReplyList() {
 
+		return memberMapper.getReplyList();
+	}
+
+	@Override
+	public NoteVO readReplyListView(int bid) {
+
+		return memberMapper.getReplyListView(bid);
+	}
+
+	@Override
+	public List<NoteVO> getHelpListPage(Criteria criteria) {
+
+		return memberMapper.getHelpListPage(criteria);
+	}
+
+	@Override
+	public int getHelpListTotalCount() {
+
+		return memberMapper.getHelpListTotalCount();
+	}
+
+	@Override
+	public void insertReply(NoteVO noteVO) {
+		memberMapper.insertReply(noteVO);
+	}
 }

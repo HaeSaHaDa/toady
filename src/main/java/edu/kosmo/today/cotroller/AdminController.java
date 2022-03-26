@@ -23,6 +23,8 @@ import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
 import edu.kosmo.today.service.GymService;
+import edu.kosmo.today.service.HelpBoardService;
+//github.com/HaeSaHaDa/toady.git
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.vo.FaqVO;
@@ -39,6 +41,7 @@ public class AdminController {
 	
 	@Autowired
 	private MemberService memberService;
+	private HelpBoardService helpBoardService;
 
 	@Autowired
 	private FaqService faqService;
@@ -302,51 +305,99 @@ public class AdminController {
 		log.info("Criteria" + cri);
 
 		mav.setViewName("/admin/ownerList");
-		//mav.addObject("ownerMemberList", memberService.getListPage(cri));
+		// mav.addObject("ownerMemberList", memberService.getListPage(cri));
 		mav.addObject("ownerMemberList", memberService.getOwnerList(cri));
 
-		//log.info("memberService.getList(cri)" + memberService.getListPage(cri));
-		
+		// log.info("memberService.getList(cri)" + memberService.getListPage(cri));
+
 		int total = memberService.getOwnerTotalCount();
 		log.info("total" + total);
 		mav.addObject("pageMaker", new PageVO(cri, total));
 		return mav;
 	}
-	
+
 	// 관리자페이지 헬스장오너 회원 상세보기
-		@GetMapping("/ownerList/{mnum}")
-		public ModelAndView ownerMemberDetail(MemberVO memberVO, ModelAndView mav) {
+	@GetMapping("/ownerList/{mnum}")
+	public ModelAndView ownerMemberDetail(MemberVO memberVO, ModelAndView mav) {
 
-			log.info("ownerMemberDetail()..");
+		log.info("ownerMemberDetail()..");
 
-			mav.setViewName("/admin/ownerListView");
-			//mav.addObject("ownerMemberDetail", memberService.get(memberVO.getMnum()));
-			mav.addObject("ownerMemberDetail", memberService.ownerGet(memberVO.getMnum()));
-			
-			log.info("memberService :" + memberService.get(memberVO.getMnum()));
+		mav.setViewName("/admin/ownerListView");
+		// mav.addObject("ownerMemberDetail", memberService.get(memberVO.getMnum()));
+		mav.addObject("ownerMemberDetail", memberService.ownerGet(memberVO.getMnum()));
 
-			return mav;
+		log.info("memberService :" + memberService.get(memberVO.getMnum()));
+
+		return mav;
+	}
+
+	// 관리자페이지 헬스장 오너 회원구분 수정 ex(ROLE_USER -> ROLE_BUSINESS)
+	@PutMapping("/ownerList/{memail}")
+	public ResponseEntity<String> ownerAuthUpdate(@RequestBody MemberVO memberVO, Model model) {
+
+		ResponseEntity<String> entity = null;
+
+		try {
+			memberService.modify(memberVO);
+			// 수정 성공하면 성공 상태메시지 저장
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 업데이트가 실패하면 실패 상태메시지 저장
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+		// 업데이트처리 HTTP 상태 메시지 리턴
+		return entity;
+
+	}
+	
+	
+	//1:1문의 조회 페이지 진입 + 페이징
+	@GetMapping("/helpList")
+	public ModelAndView helpList(ModelAndView mav, Criteria cri) {
+		log.info("1:1 문의 페이지 진입");
+			
 		
-		// 관리자페이지 헬스장 오너 회원구분 수정 ex(ROLE_USER -> ROLE_BUSINESS)
-		@PutMapping("/ownerList/{memail}")
-		public ResponseEntity<String> ownerAuthUpdate(@RequestBody MemberVO memberVO, Model model) {
-
-			ResponseEntity<String> entity = null;
-			
-			try {
-				memberService.modify(memberVO);
-				// 수정 성공하면 성공 상태메시지 저장
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			} catch (Exception e) {
-				e.printStackTrace();
-				// 업데이트가 실패하면 실패 상태메시지 저장
-				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-			}
-			// 업데이트처리 HTTP 상태 메시지 리턴
-			return entity;
-
-		}
+		mav.setViewName("/admin/helpList");
+		mav.addObject("helpReplyList", memberService.getHelpListPage(cri));
+		memberService.readReplyList();
+				
+		int total = memberService.getHelpListTotalCount();
+		
+		mav.addObject("pageMaker", new PageVO(cri, total));
+	
+		return mav;		
+	}
+	
+	//답변 페이지 진입
+	@GetMapping("/helpReview")
+	public ModelAndView helpReview(NoteVO noteVO, ModelAndView mav) {
+		
+	
+		log.info("1:1 문의 답변 페이지 진입");
+		mav.addObject("helpReplyView", memberService.readReplyListView(noteVO.getBid()));
+		
+		log.info("helpReplyView : " + memberService.readReplyListView(noteVO.getBid())); 	
+		mav.setViewName("/admin/helpReview");
+		return mav;	
+		
+	}
+	
+	
+	//답변
+	@PostMapping("/reply")
+	public ModelAndView reply(NoteVO noteVO, ModelAndView mav) {
+		
+		log.info("reply() ..");
+		log.info("noteVO : " + noteVO);
+		memberService.readReplyListView(noteVO.getBid());
+		mav.addObject("helpReplyList", memberService.readReplyList());
+		memberService.insertReply(noteVO);
+		mav.setViewName("redirect:/admin/helpList");
+		
+		return mav;
+		
+	}
 		
 		@GetMapping("/registListView")
 		public ModelAndView registlist(ModelAndView mv) {
@@ -355,7 +406,7 @@ public class AdminController {
 		log.info("->registlist()...");
 				
 		mv.addObject("registList",gymService.getregistList_admin());
-		mv.setViewName("/user/registListView");	
+		mv.setViewName("/admin/registListView");	
 		
 		return mv;
 		}	 
@@ -380,4 +431,5 @@ public class AdminController {
 			// 삭제 처리 HTTP 상태 메시지 리턴
 			return entity;
 		}
+
 }

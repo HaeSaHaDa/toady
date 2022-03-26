@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -21,7 +23,6 @@
 <%@ include file="../layout/head_tags.jsp"%>
 
 
-
 <title>Insert title here</title>
 </head>
 
@@ -37,10 +38,11 @@
 			<i class="fa fa-close"></i>
 		</div>
 
-		<nav class="canvas-menu mobile-menu">
 
+		<nav class="canvas-menu mobile-menu">
 			<!-- 메뉴 바  -->
 			<%@ include file="../layout/menu_bar.jsp"%>
+
 
 		</nav>
 		<div id="mobile-menu-wrap"></div>
@@ -52,8 +54,6 @@
 					<span class="signUp" style="color: white; margin-right: 20px"> <a href="${pageContext.request.contextPath}/common/signup"> <i class="fa fa-user-plus">Sign Up</i>
 					</a>
 					</span>
-
-
 				</c:when>
 				<c:otherwise>
 					<form:form action="${pageContext.request.contextPath}/user/memberInf">
@@ -67,13 +67,13 @@
 						</button>
 					</form:form>
 
+
 					<a class="nav-link">${principal.user.memail}</a>
 				</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
 	<!-- Offcanvas Menu Section End -->
-
 	<!-- Header Section Begin -->
 	<header class="header-section">
 		<div class="container-fluid">
@@ -86,7 +86,6 @@
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-
 						<!-- 메뉴 바  -->
 						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
@@ -152,65 +151,54 @@
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
-					<!-- 내용물 -->
-            <div> 
-            <table class="table table-striped table-light" width="600" border="1" cellpadding="0">
-                     <form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}" >
-                        <input type="hidden" id="mid" name="mid" value="${memberDetail.mid}">
-                         
-                        <thead class="thead-light">                       
-                        <tr>
-                           <th>작성자</th>
-                           <th>제목</th>
-                           <th>내용</th>
-                           <th>작성시간</th>
-                        </tr>
-                        <thead>
+					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+					<div>
+						<table class="table table-striped table-light"  >
 
-                        <c:forEach var="helpBoard" items="${helpBoardList}">
-                        <tr>
-                           <td>${helpBoard.mnum}</td>
-                           <td>${helpBoard.btitle}</td>
-                           <td>${helpBoard.bcontent}</td>
-                           <td>${helpBoard.bdate}</td>
-                        </tr>
-                     </c:forEach>
-                     
-                     <tr class="table-light">
-						<td><a href="/user/helpBoardPost/${helpBoard.mnum}">1:1문의하기</a></td>
-					 </tr>
+							<thead class="thead-light">
+								<tr>
+									<th>TYPE</th>
+									<th>문의 내용</th>	
+									<th>작성일자</th>	
+								</tr>
+							<thead>
 
-                     </form>
-                  </table>
-            
-            </div>
-					<!-- 내용물 끝 -->
+								<c:forEach var="helpBoard" items="${helpBoardList}">
+									<tr>
+										<td>문의</td>
+										
+										<td>${helpBoard.bcontent}</a></td>
+										
+										<td>${helpBoard.bdate}</td>
+									</tr>
+								</c:forEach>
+								</form>
+						</table>
+						
+						<c:if test="${pageMaker.pre}">
+									<a href="/user/helpBoard${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+								</c:if>
+
+								<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+								<c:forEach var="idx" begin="${pageMaker.startPage}"
+									end="${pageMaker.endPage }">
+									<a href="helpBoard${pageMaker.makeQuery(idx)}">${idx}</a>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<a href="helpBoard${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+										» </a>
+								</c:if>
+						
+						<a class="btn btn-primary btn float-right " href="/user/helpBoardPost/${principal.user.mnum}">글 작성</a>		
+						
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<!-- ChoseUs Section End -->
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->

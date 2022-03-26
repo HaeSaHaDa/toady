@@ -1,5 +1,4 @@
 package edu.kosmo.today.vo;
-
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -28,4 +27,10 @@ public class NoteVO {
 	private Date bdate;	
 	private int mnum;	
 	private int tnum;	
+	
+	private int bgroup;	
+	private int bstep;	
+	private int bindent;	
+	
+		
 }

@@ -196,7 +196,6 @@
 		select * from Store order by storenum
 	]]>
 	</select>
-
 	<delete id="registRemove_admin">
 		<![CDATA[
 			delete from store where storenum = #{storenum}
