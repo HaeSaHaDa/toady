@@ -19,95 +19,139 @@
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <%@ include file="../layout/head_tags.jsp"%>
-
 <style type="text/css">
-
-.card-carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.carousel-showmanymoveone .carousel-control {
+  width: 4%;
+  background-image: none;
+}
+.carousel-showmanymoveone .carousel-control.left {
+  margin-left: 15px;
+}
+.carousel-showmanymoveone .carousel-control.right {
+  margin-right: 15px;
+}
+.carousel-showmanymoveone .cloneditem-1,
+.carousel-showmanymoveone .cloneditem-2,
+.carousel-showmanymoveone .cloneditem-3 {
+  display: none;
+}
+@media all and (min-width: 768px) {
+  .carousel-showmanymoveone .carousel-inner > .active.left,
+  .carousel-showmanymoveone .carousel-inner > .prev {
+    left: -50%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .active.right,
+  .carousel-showmanymoveone .carousel-inner > .next {
+    left: 50%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .left,
+  .carousel-showmanymoveone .carousel-inner > .prev.right,
+  .carousel-showmanymoveone .carousel-inner > .active {
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner .cloneditem-1 {
+    display: block;
+  }
+}
+@media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
+  .carousel-showmanymoveone .carousel-inner > .item.active.right,
+  .carousel-showmanymoveone .carousel-inner > .item.next {
+    -webkit-transform: translate3d(50%, 0, 0);
+            transform: translate3d(50%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.active.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev.right,
+  .carousel-showmanymoveone .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+@media all and (min-width: 992px) {
+  .carousel-showmanymoveone .carousel-inner > .active.left,
+  .carousel-showmanymoveone .carousel-inner > .prev {
+    left: -25%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .active.right,
+  .carousel-showmanymoveone .carousel-inner > .next {
+    left: 25%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .left,
+  .carousel-showmanymoveone .carousel-inner > .prev.right,
+  .carousel-showmanymoveone .carousel-inner > .active {
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner .cloneditem-2,
+  .carousel-showmanymoveone .carousel-inner .cloneditem-3 {
+    display: block;
+  }
+}
+@media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
+  .carousel-showmanymoveone .carousel-inner > .item.active.right,
+  .carousel-showmanymoveone .carousel-inner > .item.next {
+    -webkit-transform: translate3d(25%, 0, 0);
+            transform: translate3d(25%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.active.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-25%, 0, 0);
+            transform: translate3d(-25%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev.right,
+  .carousel-showmanymoveone .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+.container {
+  margin-bottom: 50px;
+}
+body {
+  font-family: 'Bitter', sans-serif;
+  color: #E54A41;
+  background-image: url('//static.rtpdesign.co.uk/blog/img/background.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 20%;
+}
+p {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  margin-bottom: 2em;
+}
+h2 {
+  margin: 2em 0 1em;
+}
+.logo {
+  margin: 20px auto;
+  height: 100px;
+}
+@media only screen and (min-width: 768px) {
+  .logo {
+    margin: 28px;
+    float: left;
+  }
+}
+.title {
+  padding: 28px;
+  display: table-cell;
   position: relative;
-  width: 100%
-}
-
-.class-item{
-	height: 320px;
-}
-
-.card-carousel .my-card {
-  height: 20rem;
-  width: 12rem;
-  position: relative;
-  z-index: 1;
-  -webkit-transform: scale(0.6) translateY(-2rem);
-  transform: scale(0.6) translateY(-2rem);
-  opacity: 0;
-  cursor: pointer;
-  pointer-events: none;
- /* background: #2e5266;
-  background: linear-gradient(to top, #2e5266, #6e8898);*/
-  transition: 1s;
-}
-
-.card-carousel .my-card:after {
-  content: '';
-  position: absolute;
-  height: 2px;
-  width: 100%;
-  border-radius: 100%;
-  /*background-color: rgba(0,0,0,0.3);*/
-  bottom: -5rem;
-  -webkit-filter: blur(4px);
-  filter: blur(4px);
-}
-
-.card-carousel .my-card:nth-child(0):before {
-  content: '0';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  font-size: 3rem;
-  font-weight: 300;
-  /*color: #fff;*/
-}
-
-.card-carousel .my-card:nth-child(1):before {
-  
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  font-size: 3rem;
-  font-weight: 300;
-  /*color: #fff;*/
-}
-.card-carousel .my-card.active {
-  z-index: 3;
-  -webkit-transform: scale(1) translateY(0) translateX(0);
-  transform: scale(1) translateY(0) translateX(0);
-  opacity: 1;
-  pointer-events: auto;
-  transition: 1s;
-}
-
-.card-carousel .my-card.prev, .card-carousel .my-card.next {
-  z-index: 2;
-  -webkit-transform: scale(0.8) translateY(-1rem) translateX(0);
-  transform: scale(0.8) translateY(-1rem) translateX(0);
-  opacity: 0.6;
-  pointer-events: auto;
-  transition: 1s;
-}
-
-.ci-pic>img{
-height: 200px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 </style>
-
 
 <title>오늘의 짐</title>
 </head>
@@ -264,22 +308,21 @@ height: 200px;
 				</div>
 			</div>
 		</div>	
-				<div class="card-carousel">
-					<c:forEach items="${gymLists}" var="gym">
-						<div class="my-card">
-							<div class="class-item">
-								<div class="ci-pic">
-									<img src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem">
-								</div>
-								<div class="ci-text">
-									<span>${gym.gcategory}</span>
-									<h5>${gym.gname}</h5>
-									<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
+	
+		<c:forEach items="${gymLists}" var="gym">			
+			<div class="item active">
+	            <div class="col-xs-12 col-sm-6 col-md-3">
+	              <div class="card">
+	                <img class="card-img-top img-fluid img-responsive" src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem" alt="Card image cap">
+	                <div class="card-body">
+	                  <h4 class="card-title">${gym.gcategory}</h4>
+	                  <p class="card-text">${gym.gname}</p>
+	                  <a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+	                </div>
+	              </div>
+	            </div>
+			</div>
+		</c:forEach>		
 			
 	</section>
 	<!-- ChoseUs Section End -->
@@ -407,38 +450,37 @@ height: 200px;
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+	
+	
+	<!-- 메인페이지 carousel 스크립트 -->
 <script>
-$num = $('.my-card').length;
-$even = $num / 2;
-$odd = ($num + 1) / 2;
+(function(){
+	  // setup your carousels as you normally would using JS
+	  // or via data attributes according to the documentation
+	  // https://getbootstrap.com/javascript/#carousel
+	  $('#carousel123').carousel({ interval: 2000 });
+	  $('#carouselABC').carousel({ interval: 3600 });
+	}());
 
-if ($num % 2 == 0) {
-  $('.my-card:nth-child(' + $even + ')').addClass('active');
-  $('.my-card:nth-child(' + $even + ')').prev().addClass('prev');
-  $('.my-card:nth-child(' + $even + ')').next().addClass('next');
-} else {
-  $('.my-card:nth-child(' + $odd + ')').addClass('active');
-  $('.my-card:nth-child(' + $odd + ')').next().addClass('next');
-  $('.my-card:nth-child(' + $odd + ')').prev().addClass('prev');
-}
+	(function(){a
+	  $('.carousel-showmanymoveone .item').each(function(){
+	    var itemToClone = $(this);
 
-$('.my-card').click(function() {
-  $slide = $('.active').width();
-  console.log($('.active').position().left);
-  
-  if ($(this).hasClass('next')) {
-    $('.card-carousel').stop(false, true).animate({left: '-=' + $slide});
-  } else if ($(this).hasClass('prev')) {
-    $('.card-carousel').stop(false, true).animate({left: '+=' + $slide});
-  }
-  
-  $(this).removeClass('prev next');
-  $(this).siblings().removeClass('prev active next');
-  
-  $(this).addClass('active');
-  $(this).prev().addClass('prev');
-  $(this).next().addClass('next');
-});
+	    for (var i=1;i<4;i++) {
+	      itemToClone = itemToClone.next();
+
+	      // wrap around if at end of item collection
+	      if (!itemToClone.length) {
+	        itemToClone = $(this).siblings(':first');
+	      }
+
+	      // grab item, clone, add marker class, add to collection
+	      itemToClone.children(':first-child').clone()
+	        .addClass("cloneditem-"+(i))
+	        .appendTo($(this));
+	    }
+	  });
+	}());
 
 </script>
 
