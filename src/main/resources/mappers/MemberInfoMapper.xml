@@ -38,6 +38,8 @@
 		delete from member where mid = #{mid}
 	]]>
 	</delete>
+	
+	
 
 
 </mapper>

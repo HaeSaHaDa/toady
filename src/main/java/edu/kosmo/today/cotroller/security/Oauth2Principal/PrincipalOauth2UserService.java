@@ -61,7 +61,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		//System.out.println("oAuth2UserInfo.getProviderId() : " + oAuth2UserInfo.getProviderId());
 		//회원가입 정보======================================
 		String email = oAuth2UserInfo.getEmail();
-		String mid = oAuth2UserInfo.getProvider() +"_" + email + "_" + oAuth2UserInfo.getProviderId() ;
+		String mid = oAuth2UserInfo.getProvider() +"_" + email;
 
 		//회원 여부, 구글 아이디 검색=====================================
 		UserVO member = userMapper.getUser(mid);		

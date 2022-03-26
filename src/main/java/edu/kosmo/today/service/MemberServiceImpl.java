@@ -76,5 +76,39 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO ownerGet(int mnum) {
 		
 		return memberMapper.ownerRead(mnum);
-	}	
+	}
+
+	
+	@Override
+	public List<NoteVO> readReplyList() {
+		
+		return memberMapper.getReplyList();
+	}
+	
+
+	@Override
+	public NoteVO readReplyListView(int bid) {
+		
+		return memberMapper.getReplyListView(bid);
+	}
+
+	
+	
+
+	@Override
+	public List<NoteVO> getHelpListPage(Criteria criteria) {
+		
+		return memberMapper.getHelpListPage(criteria);
+	}
+
+	@Override
+	public int getHelpListTotalCount() {		
+		
+		return memberMapper.getHelpListTotalCount();
+	}
+
+	@Override
+	public void insertReply(NoteVO noteVO) {
+		memberMapper.insertReply(noteVO);
+	}
 }

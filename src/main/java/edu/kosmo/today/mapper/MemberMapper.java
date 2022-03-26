@@ -32,5 +32,17 @@ public interface MemberMapper {
 	public MemberVO ownerRead(int mnum);  //관리자 페이지 헬스장 오너회원 상세보기
 	
 	
+	public List<NoteVO> getReplyList();  //관리자 페이지 1:1 문의 답변 리스트 조회
 	
+	public NoteVO getReplyListView(int bid); //답변 남기기 위해서 bid 전달 받기 
+		
+	public void insertReply(NoteVO noteVO); //답변 남기기
+	
+	public List<NoteVO> getHelpListPage(Criteria criteria);//1:1문의 페이지
+	
+	public int getHelpListTotalCount(); //1:1문의 처리를 위한 페이징 갯수 
+	
+	
+	
+
 }
