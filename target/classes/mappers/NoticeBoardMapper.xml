@@ -27,7 +27,18 @@
 		<![CDATA[
 			SELECT * FROM (
 				SELECT ROWNUM AS RNUM, A.* FROM (
-						select b.bid,b.btitle,b.bdate,t.tname from boardlist b, boardtype t where t.tnum = b.tnum and t.tnum = 1
+						select b.bid,b.btitle,b.bdate,t.tname from boardlist b, boardtype t where t.tnum = 1 order by bid desc
+					)A WHERE ROWNUM <= #{pageNum} * #{amount}
+				) WHERE RNUM > (#{pageNum}-1) * #{amount}
+			
+   		]]>
+	</select>
+	<select id="getEventboardList"
+		resultType="edu.kosmo.today.vo.NoteVO">
+		<![CDATA[
+			SELECT * FROM (
+				SELECT ROWNUM AS RNUM, A.* FROM (
+						select b.bid,b.btitle,b.bdate,t.tname from boardlist b, boardtype t where t.tnum = 2 order by bid desc
 					)A WHERE ROWNUM <= #{pageNum} * #{amount}
 				) WHERE RNUM > (#{pageNum}-1) * #{amount}
 			
@@ -59,8 +70,7 @@
 
 	<select id="getContent" resultType="edu.kosmo.today.vo.NoteVO">
    <![CDATA[
-      select * from boardlist where
-      bid = #{bid}
+      select b.bid, b.btitle, b.bcontent,t.tname from boardlist b,boardtype t where b.tnum = t.tnum and b.bid = #{bid}
       ]]>
 	</select>
 

@@ -21,6 +21,9 @@ public interface NoticeBoardMapper {
    //글 목록
    public List<NoteVO> getNoticeboardList(Criteria criteria);
 
+   public List<NoteVO> getEventboardList(Criteria cri);// 이벤트 리스트 가져오기
+
+   
    //작성
    public void insertNoteBoard(NoteVO vo); 
    

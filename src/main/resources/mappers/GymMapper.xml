@@ -55,8 +55,7 @@
 
 	<select id="gymdetail" resultMap="gymList">
 
-		select * from gympage where
-		gnum = #{gnum}
+		select * from gympage where gnum = #{gnum}
 
 	</select>
 

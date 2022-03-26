@@ -26,8 +26,8 @@ public class EventBoardController {
 	private EventService eventService;
 
 	//유저 이벤트/공지 리스트
-	@GetMapping("/user/eventBoard")
-	public ModelAndView getEventList(Criteria cri, ModelAndView mav) {
+	@GetMapping("/user/noticeBoard")
+	public ModelAndView getUserNoticeList(Criteria cri, ModelAndView mav) {
 
 		System.out.println("eventboardlist");
 		log.info("eventList() ..");
@@ -36,6 +36,26 @@ public class EventBoardController {
 		mav.addObject("noteList", eventService.getNoticeboardList(cri));
 
 		log.info("noteList(cri)" + eventService.getNoticeboardList(cri));
+
+		int total = eventService.getTotal();
+		log.info("total" + total);
+		mav.addObject("pageMaker", new PageVO(cri, total));
+		mav.setViewName("user/noticeBoardList");
+
+		return mav;
+	}
+	
+	//유저 이벤트/공지 리스트
+	@GetMapping("/user/eventBoard")
+	public ModelAndView getUserEventList(Criteria cri, ModelAndView mav) {
+
+		System.out.println("eventboardlist");
+		log.info("eventList() ..");
+		log.info("Criteria" + cri);
+
+		mav.addObject("eventList", eventService.getEventboardList(cri));
+
+		log.info("noteList(cri)" + eventService.getEventboardList(cri));
 
 		int total = eventService.getTotal();
 		log.info("total" + total);
@@ -54,6 +74,7 @@ public class EventBoardController {
 		noteVO=eventService.getContent(bid);
 		
 		mav.addObject("getBoard",noteVO);
+		System.out.println("게시판 종류는?? " + noteVO.getTname() );
 		mav.setViewName("user/eventBoardView");
 		
 		
@@ -63,7 +84,7 @@ public class EventBoardController {
 	
 	
 	//관리자 공지/이벤트 리스트
-	@GetMapping("/admin/eventBoard") 
+	@GetMapping("/admin/noticeBoard") 
 	public ModelAndView getnoticeList(Criteria cri, ModelAndView mav) {
 		  
 		System.out.println("noticeboardlist"); log.info("noteList() ..");
@@ -75,10 +96,29 @@ public class EventBoardController {
 				  
 		int total = eventService.getTotal(); log.info("total" + total);
 		mav.addObject("pageMaker", new PageVO(cri, total));
+		mav.setViewName("admin/noticeBoardList");
+		  
+		return mav;
+	}
+	
+	//관리자 공지/이벤트 리스트
+	@GetMapping("/admin/eventBoard") 
+	public ModelAndView geteventList(Criteria cri, ModelAndView mav) {
+		  
+		System.out.println("noticeboardlist"); log.info("noteList() ..");
+		log.info("Criteria" + cri);
+		  
+		mav.addObject("eventList", eventService.getEventboardList(cri));
+		  
+		log.info("noteList(cri)" + eventService.getEventboardList(cri));
+				  
+		int total = eventService.getTotal(); log.info("total" + total);
+		mav.addObject("pageMaker", new PageVO(cri, total));
 		mav.setViewName("admin/eventBoardList");
 		  
 		return mav;
 	}
+	
 	//해당 게시물 글 보기	  
 	@GetMapping("/admin/eventBoardView/{bid}")
 	public ModelAndView adminEventBoardView(@PathVariable int bid,ModelAndView mav) {

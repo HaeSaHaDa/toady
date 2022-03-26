@@ -37,6 +37,13 @@ public class EventServiceImpl implements EventService{
       return mapper.getNoticeboardList(cri);
    }
    
+   @Override
+   public List<NoteVO> getEventboardList(Criteria cri){
+      log.info("noticeList게시판 목록 뽑는중..");
+      
+      return mapper.getEventboardList(cri);
+   }
+   
    //notice작성
    @Override
    public void insertNoticeboard(NoteVO vo) {

@@ -121,29 +121,37 @@
 				<!-- 내용물 -->
 				<div class="col-9">
 					<!-- 내용물 -->
-
 					<table class="table" style="width: 850px; table-layout: fixed;" border="1" cellpadding="1" cellspacing="10" border="1">
-						<input type="hidden" name="bid" value="${getBoard.bid}">
-						<tr>
-							<td class="thead-light">번호</td>
-							<td>${getBoard.bid}</td>
-						</tr>
-						<tr>
-							<td class="thead-light">종류</td>
-							<td>${getBoard.tname}</td>
-						</tr>
-						<tr>
-							<td class="thead-light">제목</td>
-							<td>${getBoard.btitle}</td>
-						</tr>
-						<tr>
-							<td class="thead-light">내용</td>
-							<td>${getBoard.bcontent}</td>
-						</tr>
+						<thead class="thead-light">
+							<tr>
+								<th style="width: 90px">번호</th>
+								<th style="width: 130px">종류</th>
+								<th>제목</th>
+								<th style="width: 150px">날짜</th>
+							</tr>
+						</thead>
+						<c:forEach var="board" items="${noteList}" >
+							<tr>
+								<td>${board.bid}</td>
+								<td>${board.tname}</td>
+								<td><a href="eventBoardView?bid=${board.bid}" >${board.btitle}</a></td>
+								<td>${board.bdate}</td>
+
+							</tr>
+						</c:forEach>
 
 					</table>
+					<c:if test="${pageMaker.pre}">
+						<a href="eventBoard${pageMaker.makeQuery(pageMaker.startPage - 1 )}">«이전 </a>
+					</c:if>
 
+					<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
+						<a href="eventBoard${pageMaker.makeQuery(idx) }">${idx}</a>
+					</c:forEach>
 
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+						<a href="eventBoard${pageMaker.makeQuery(pageMaker.endPage + 1)}"> 다음»</a>
+					</c:if>
 
 					<!-- 내용물 끝 -->
 				</div>
@@ -151,23 +159,6 @@
 		</div>
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<!-- Login model Begin -->

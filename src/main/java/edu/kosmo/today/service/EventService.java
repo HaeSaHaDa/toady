@@ -10,8 +10,11 @@ public interface EventService {
 
 	public int getTotal();// 총 갯수구하기
 
-	public List<NoteVO> getNoticeboardList(Criteria cri);// 리스트 가져오기
+	public List<NoteVO> getNoticeboardList(Criteria cri);// 공지 리스트 가져오기
 
+	public List<NoteVO> getEventboardList(Criteria cri);// 이벤트 리스트 가져오기
+
+	
 	public void insertNoticeboard(NoteVO vo);// notice작성
 
 	public int getMemberNum(String memail);// 회원번호 구하기

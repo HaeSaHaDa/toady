@@ -142,7 +142,7 @@
 				         <th style="width:150px">날짜</th>				         
 				      </tr>
 				      </thead>
-				      <c:forEach var="board" items="${eventList}" >
+				      <c:forEach var="board" items="${noteList}" >
 				         <tr>
 				            <td style="color:black">${board.bid}</td>
 				            <td style="color:black">${board.tname}</td>
