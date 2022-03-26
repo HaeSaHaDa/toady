@@ -177,6 +177,45 @@ option {
 .tab-content h2,h3,h4{
 	font-family: 'ONE-Mobile-POP';
 }
+.customoverlay {
+position:relative;
+bottom:85px;
+border-radius:6px;
+border: 1px solid #ccc;
+border-bottom:2px solid #ddd;
+float:left;
+}
+.customoverlay:nth-of-type(n) {
+border:0; 
+box-shadow:0px 1px 2px #888;
+}
+.customoverlay a {
+display:block;
+text-decoration:none;
+color:#000;
+text-align:center;
+border-radius:6px;
+font-size:14px;
+font-weight:bold;
+overflow:hidden;
+background: #d95050;
+background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+}
+.customoverlay .title {
+display:block;
+text-align:center;
+background:#fff;
+margin-right:35px;
+padding:10px 15px;
+font-size:14px;
+font-weight:bold;
+}
+.customoverlay:after {
+content:'';position:absolute;
+margin-left:-12px;left:50%;
+bottom:-12px;width:22px;
+height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
 </style>
 <title>시설상세</title>
 </head>
@@ -344,6 +383,7 @@ option {
 										<h2>소개</h2>
 										<input type="hidden" class="gaddress" value="${gym.gaddress}">
 										<input type="hidden" class="gname" value="${gym.gname}">
+										<input type="hidden" class="gnum" value="${gym.gnum}">
 										<p>${gym.ginform}</p>
 										<h2>편의시설</h2>
 										<p>${gym.gfacility}</p>
@@ -362,11 +402,14 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
+
+
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
 let addres = $(".gaddress").val();
 let gname = $(".gname").val();
+let gnum = $(".gnum").val();
 console.log(addres);
 
 // 주소로 좌표를 검색합니다
@@ -379,22 +422,46 @@ geocoder.addressSearch(addres, function(result, status) {
 
         console.log(coords+".........")
         // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var imageSrc = '${pageContext.request.contextPath}/img/마커배경-removebg-preview.png', // 마커이미지의 주소입니다    
+		imageSize = new kakao.maps.Size(80, 69), // 마커이미지의 크기입니다
+		imageOption = {offset: new kakao.maps.Point(39, 70)};
+        
+                            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                                markerPosition =coords; // 마커가 표시될 위치입니다
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+gname+'</div>'
-        });
-        infowindow.open(map, marker);
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                              position: coords,
+                              image: markerImage // 마커이미지 설정 
+                            });
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-</script>
+                            // 마커가 지도 위에 표시되도록 설정합니다
+                            marker.setMap(map); 
+                           
+                           // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                            var content = '<div class="customoverlay">' +
+                                '  <a href="${pageContext.request.contextPath}/common/gymdetail/'+gnum+'">' +
+                                '    <span class="title">'+gname+'</span>' +
+                                '  </a>' +
+                                '</div>';
+
+                            // 커스텀 오버레이가 표시될 위치입니다 
+                            var position = coords;  
+
+                            // 커스텀 오버레이를 생성합니다
+                            var customOverlay = new kakao.maps.CustomOverlay({
+                                map: map,
+                                position: coords,
+                                content: content,
+                                yAnchor: 1 
+                            });
+
+        					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+       					 	map.setCenter(coords);
+    						} 
+							});    
+					</script>
 									</div>
 
 
@@ -451,14 +518,14 @@ geocoder.addressSearch(addres, function(result, status) {
 													<div>
 														<c:forEach items="${gymReview}" var="review">
 															<div class="right ml-3 mt-3 r-content">
-																<h4>
+																<h4 style="font-size: 30px;">
 																	${review.mnickname} 
 																	<span class="gig-rating text-body-2"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792" width="15" height="15">
                   													<path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>   
                   													</svg>${review.grstar}</span>
 																</h4>
 																<div class="review-description">
-																	<p>${review.bcontent}</p>
+																	<p style="font-size: 25px;">${review.bcontent}</p>
 																</div>
 																<span class="publish py-3 d-inline-block w-100"><fmt:formatDate value="${review.bdate}" pattern="yyyy/MM/dd" /></span>
 																<!-- 좋아요기능은 이곳에.. -->

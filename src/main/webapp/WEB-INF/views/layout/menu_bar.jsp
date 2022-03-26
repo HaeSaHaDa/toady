@@ -4,7 +4,7 @@
 <ul>
 	<li class="active"><a href="${pageContext.request.contextPath}/today">Home</a></li>
 	<li><a href="${pageContext.request.contextPath}/common/gymLists">시설찾기</a></li>
-	<li><a href="${pageContext.request.contextPath}/common/findMap">지도</a></li>
+	<li><a href="${pageContext.request.contextPath}/common/findMap">내 주변에서 찾기</a></li>
 	<li><a href="${pageContext.request.contextPath}/common/faqboard">FAQ</a></li>
 	<sec:authorize access="hasRole('USER')">
 		<li><a href="#">mypage</a>

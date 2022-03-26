@@ -74,16 +74,18 @@
 	</select>
 
 	<insert id="inserReview">
+	<![CDATA[
 		insert all
 		into boardlist (bid,bcontent,mnum,tnum)
-		values (BOARD_SEQ.nextval,#{bcontent},#{mnum},5)
+		values (BOARD_SEQ.nextval,#{bcontent},#{mnum},7)
 		into gymreview values
 		(#{grstar},#{gnum},BOARD_SEQ.currval,#{ordernum})
 		select * from dual
+	]]>
 	</insert>
 
 	<select id="checkReview" resultType="_int">
-		select count(gymreview.bid)
+		select count(*)
 		from
 		gymreview ,orderdetail , ticket WHERE
 		gymreview.ordernum=orderdetail.ordernum and orderdetail.tknum =
@@ -139,8 +141,26 @@
 	<insert id="insertcomplete">
 		<![CDATA[
 		insert into orderlist (ordernum,mnum,payid) values
-		(9848,#{mnum},#{oscpayid})
+		(#{oscnum},#{mnum},#{oscpayid})
 		]]>
 	</insert>
-
+	
+	<select id="wishNumList" resultType="_int">
+		select * from wish where mnum = #{mnum}
+	</select>
+	
+	<insert id="insertOrderDtl">
+		INSERT INTO ORDERDETAIL  VALUES (#{tknum},#{cost},#{ordernum},#{startdate},#{tdate})
+	</insert>
+	
+	<delete id="deleteWishTable">
+		DELETE wish WHERE wishnum = #{wishnum}
+	</delete>
+	
+	<select id="getWish" resultType="edu.kosmo.today.vo.WishVO">
+	<![CDATA[
+		select w.wishnum,w.mnum,w.tknum,w.wdate,t.tcost,t.tname
+ 		from wish w, ticket t where w.tknum=t.tknum and w.wishnum = #{wishnum}
+	]]>	
+	</select>
 </mapper>

@@ -11,6 +11,7 @@ import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.OrderVO;
 import edu.kosmo.today.vo.ReviewVO;
+import edu.kosmo.today.vo.WishVO;
 
 /*
  * 0314 이용권
@@ -60,4 +61,10 @@ public interface OrderMapper {
 	// 이용권 목록======================================
 	public List<OrderVO> adminnGetTicketList(@Param("criteria") Criteria criteria, @Param("mnum") int mnum);
 
+	
+	//주문상세 넣기
+	public List<Integer> wishNumList(int mnum); //찜번호구하기
+	public WishVO getWish(int wishnum);
+	public void insertOrderDtl(OrderVO vo); //상세 넣기
+	public void deleteWishTable(int wishnum); //결제 후 찜지우기
 }

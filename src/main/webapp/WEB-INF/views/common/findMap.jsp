@@ -43,6 +43,48 @@
 @media only screen and (max-width: 767px){
     .btn{ margin-bottom: 20px; }
 }
+
+.customoverlay {
+position:relative;
+bottom:85px;
+border-radius:6px;
+border: 1px solid #ccc;
+border-bottom:2px solid #ddd;
+float:left;
+}
+.customoverlay:nth-of-type(n) {
+border:0; 
+box-shadow:0px 1px 2px #888;
+}
+.customoverlay a {
+display:block;
+text-decoration:none;
+color:#000;
+text-align:center;
+border-radius:6px;
+font-size:14px;
+font-weight:bold;
+overflow:hidden;
+background: #d95050;
+background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+}
+.customoverlay .title {
+display:block;
+text-align:center;
+background:#fff;
+margin-right:35px;
+padding:10px 15px;
+font-size:14px;
+font-weight:bold;
+}
+.customoverlay:after {
+content:'';position:absolute;
+margin-left:-12px;left:50%;
+bottom:-12px;width:22px;
+height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+
 </style>
 
 <title>Insert title here</title>
@@ -196,7 +238,6 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>                     
 <script>   
-
 var mapContainer = document.getElementById('map1'), // 지도를 표시할 div 
 mapOption = {
     center : new kakao.maps.LatLng(37.478864,
@@ -205,13 +246,16 @@ mapOption = {
  // 지도의 확대 레벨
  };
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+var imageSrc = '${pageContext.request.contextPath}/img/마커배경-removebg-preview.png', // 마커이미지의 주소입니다    
+imageSize = new kakao.maps.Size(80, 69), // 마커이미지의 크기입니다
+imageOption = {offset: new kakao.maps.Point(39, 70)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+
 //주소-좌표 변환 객체를 생성합니다
 var geocoder1 = new kakao.maps.services.Geocoder();  
 //지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
 var bounds = new kakao.maps.LatLngBounds();
-
-
-
  
     function getMapList() {
     	
@@ -232,6 +276,42 @@ var bounds = new kakao.maps.LatLngBounds();
                         if (status === kakao.maps.services.Status.OK) {
                             console.log("되따!!");
                             var coords = new kakao.maps.LatLng(rs[0].y, rs[0].x);
+                           
+                            
+                         // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+                            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+                                markerPosition =coords; // 마커가 표시될 위치입니다
+
+                            // 마커를 생성합니다
+                            var marker = new kakao.maps.Marker({
+                              position: coords,
+                              image: markerImage // 마커이미지 설정 
+                            });
+
+                            // 마커가 지도 위에 표시되도록 설정합니다
+                            marker.setMap(map);  
+
+                            // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                            var content = '<div class="customoverlay">' +
+                                '  <a href="${pageContext.request.contextPath}/common/gymdetail/'+item.gnum+'">' +
+                                '    <span class="title">'+item.gname+'</span>' +
+                                '  </a>' +
+                                '</div>';
+
+                            // 커스텀 오버레이가 표시될 위치입니다 
+                            var position = coords;  
+
+                            // 커스텀 오버레이를 생성합니다
+                            var customOverlay = new kakao.maps.CustomOverlay({
+                                map: map,
+                                position: coords,
+                                content: content,
+                                yAnchor: 1 
+                            });
+                            
+                            
+                            
+                           /* 
                             console.log(coords + ".........")
                             marker = new kakao.maps.Marker({ position : coords });
    							marker.setMap(map);
@@ -253,7 +333,7 @@ var bounds = new kakao.maps.LatLngBounds();
                             kakao.maps.event.addListener(marker,
                                   'mouseout',
                                   makeOutListener(infowindow));      
-					
+					*/
    						
                         }
                     });
@@ -287,12 +367,10 @@ var bounds = new kakao.maps.LatLngBounds();
 		new daum.Postcode({
 			oncomplete : function(data) {
 				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
 				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
 				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
 				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
@@ -311,11 +389,9 @@ var bounds = new kakao.maps.LatLngBounds();
 				if (fullRoadAddr !== '') {
 					fullRoadAddr += extraRoadAddr;
 				}
-
 				// 우편번호와 주소 정보를 해당 필드에 넣는다.
 				console.log(data.zonecode);
 				console.log(fullRoadAddr);
-
 				$("[name=addr1]").val(data.zonecode);
 				$("[name=addr2]").val(fullRoadAddr);
 				
@@ -323,14 +399,11 @@ var bounds = new kakao.maps.LatLngBounds();
 				
 				// 주소로 좌표를 검색합니다
 				geocoder1.addressSearch(fullRoadAddr, function(result, status) {
-
 				    // 정상적으로 검색이 완료됐으면 
 				     if (status === kakao.maps.services.Status.OK) {
 				    	 console.log("되따!!");
 				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
 				      
-
 				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				        map.setCenter(coords);
 				        
@@ -351,6 +424,42 @@ var bounds = new kakao.maps.LatLngBounds();
 				                        if (status === kakao.maps.services.Status.OK) {
 				                            console.log("되따!!");
 				                            var coords = new kakao.maps.LatLng(rs[0].y, rs[0].x);
+				                           
+				                            
+				                         // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+				                            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+				                                markerPosition =coords; // 마커가 표시될 위치입니다
+
+				                            // 마커를 생성합니다
+				                            var marker = new kakao.maps.Marker({
+				                              position: coords,
+				                              image: markerImage // 마커이미지 설정 
+				                            });
+
+				                            // 마커가 지도 위에 표시되도록 설정합니다
+				                            marker.setMap(map);  
+
+				                            // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+				                            var content = '<div class="customoverlay">' +
+				                                '  <a href="${pageContext.request.contextPath}/common/gymdetail/'+item.gnum+'">' +
+				                                '    <span class="title">'+item.gname+'</span>' +
+				                                '  </a>' +
+				                                '</div>';
+
+				                            // 커스텀 오버레이가 표시될 위치입니다 
+				                            var position = coords;  
+
+				                            // 커스텀 오버레이를 생성합니다
+				                            var customOverlay = new kakao.maps.CustomOverlay({
+				                                map: map,
+				                                position: coords,
+				                                content: content,
+				                                yAnchor: 1 
+				                            });
+				                            
+				                            
+				                            
+				                           /* 
 				                            console.log(coords + ".........")
 				                            marker = new kakao.maps.Marker({ position : coords });
 				   							marker.setMap(map);
@@ -372,18 +481,17 @@ var bounds = new kakao.maps.LatLngBounds();
 				                            kakao.maps.event.addListener(marker,
 				                                  'mouseout',
 				                                  makeOutListener(infowindow));      
-									
+									*/
 				   						
 				                        }
 				                    });
-				                }); //each end    
+				                }); //each end  
 				            },error : function(e) {
 								console.log(e);
 							}
 				        })
 				    } 
 				});		
-
 				/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
 				document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
 				document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
