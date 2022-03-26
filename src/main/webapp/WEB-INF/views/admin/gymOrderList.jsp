@@ -170,6 +170,36 @@
 		</div>
 	</section>
 	<!-- Get In Touch Section Begin -->
+	<div class="gettouch-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="gt-text">
+						<i class="fa fa-map-marker"></i>
+						<p>
+							333 Middle Winchendon Rd, Rindge,<br /> NH 03461
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="gt-text">
+						<i class="fa fa-mobile"></i>
+						<ul>
+							<li>125-711-811</li>
+							<li>125-668-886</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="gt-text email">
+						<i class="fa fa-envelope"></i>
+						<p>Support.gymcenter@gmail.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Get In Touch Section End -->
 
 	<!-- Footer Section Begin -->
 	<section class="footer-section">
@@ -180,7 +210,7 @@
 						<div class="fa-logo">
 							<a href="#"><img src="/img/logo.png" alt=""></a>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+						<p>오늘의 짐은 운동을 원하는 고객을 Gym 운영자와 연결해 주는 서비스를 제공합니다.</p>
 						<div class="fa-social">
 							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> <a
 								href="#"><i class="fa  fa-envelope-o"></i></a>
@@ -189,23 +219,22 @@
 				</div>
 				<div class="col-lg-2 col-md-3 col-sm-6">
 					<div class="fs-widget">
-						<h4>Useful links</h4>
+						<h4>오늘의</h4>
 						<ul>
-							<li><a href="#">About</a></li>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">Classes</a></li>
-							<li><a href="#">Contact</a></li>
+							<li><a href="#">오금환</a></li>
+							<li><a href="#">김보람</a></li>
+							<li><a href="#">마성주</a></li>
+
 						</ul>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-3 col-sm-6">
 					<div class="fs-widget">
-						<h4>Support</h4>
+						<h4>GYM</h4>
 						<ul>
-							<li><a href="#">Login</a></li>
-							<li><a href="#">My account</a></li>
-							<li><a href="#">Subscribe</a></li>
-							<li><a href="#">Contact</a></li>
+							<li><a href="#">문지윤</a></li>
+							<li><a href="#">송인규</a></li>
+							<li><a href="#">윤정아</a></li>			
 						</ul>
 					</div>
 				</div>
@@ -214,20 +243,18 @@
 						<h4>Tips & Guides</h4>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Physical fitness may help prevent depression, anxiety</a>
+								<a href="#">운동을 위해 시간을 내지 않는다면 병때문에 시간을 내게될지 모른다.</a>
 							</h6>
 							<ul>
-								<li>3 min read</li>
-								<li>20 Comment</li>
+								<li>로빈 샤머</li>
 							</ul>
 						</div>
 						<div class="fw-recent">
 							<h6>
-								<a href="#">Fitness: The best exercise to lose belly fat and tone up...</a>
+								<a href="#">우리가 늙어서 운동을 그만 두는 거싱 아니라, 우리가 운동을 그만두기 때문에 늙는 것이다. </a>
 							</h6>
 							<ul>
-								<li>3 min read</li>
-								<li>20 Comment</li>
+								<li>케너스 쿠퍼</li>
 							</ul>
 						</div>
 					</div>
@@ -251,7 +278,6 @@
 		</div>
 	</section>
 	<!-- Footer Section End -->
-	</div>
 
 
 	<!-- Login model Begin -->

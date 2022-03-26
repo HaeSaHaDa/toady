@@ -359,7 +359,7 @@ public class AdminController {
 		log.info("->registlist()...");
 				
 		mv.addObject("registList",gymService.getregistList_admin());
-		mv.setViewName("/user/registListView");	
+		mv.setViewName("/admin/registListView");	
 		
 		return mv;
 		}	 

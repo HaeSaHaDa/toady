@@ -3,6 +3,7 @@ package edu.kosmo.today.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.EventVO;
@@ -36,4 +37,10 @@ public interface NoticeBoardMapper {
    //글 삭제
    public void deleteBoard(int bid);
 
+   
+   @Select("select max(bid)from boardlist where tnum=1")
+   public int eventFirstNum();
+   
+   @Select("select max(bid)from boardlist where bid not in(select max(bid)from boardlist where tnum=1) and tnum=1")
+   public int eventSecondNum();
 }

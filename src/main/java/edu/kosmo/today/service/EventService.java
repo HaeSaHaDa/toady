@@ -24,4 +24,9 @@ public interface EventService {
 	public void updateBoard(NoteVO noteVO);//글 업데이트
 
 	public void deleteBoard(int bid);// 글 삭제
+	
+	public int eventNum();
+	
+	public int eventSecond();
+
 }

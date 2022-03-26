@@ -88,6 +88,13 @@ public class EventServiceImpl implements EventService{
       
       mapper.deleteBoard(bid);
       
-      
+   }
+   @Override
+	public int eventNum() {
+	   return mapper.eventFirstNum();
+   }
+   @Override
+	public int eventSecond() {
+	   return mapper.eventSecondNum();
    }
 }
