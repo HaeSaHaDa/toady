@@ -9,6 +9,7 @@ import edu.kosmo.today.mapper.GymMapper;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
 import edu.kosmo.today.vo.GymVO;
+import edu.kosmo.today.vo.RegiGymListVO;
 import edu.kosmo.today.vo.ReviewVO;
 import edu.kosmo.today.vo.TicketVO;
 import edu.kosmo.today.vo.TrainerVO;
@@ -188,5 +189,13 @@ public class GymService {
 		mapper.ticketDelete(tknum);
 	}
 
-
+	public List<RegiGymListVO> getregistList_admin(){
+		log.info("신청한 헬스장 목록보기 - admin");//신청한 헬스장목록보기
+		
+		return mapper.getregistList_admin();
+	}
+	public void registRemove_admin(int storenum){//신청목록 삭제
+		log.info("신청 목록 삭제 - admin");
+		mapper.registRemove_admin(storenum);
+	}
 }

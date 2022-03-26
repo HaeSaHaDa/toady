@@ -173,18 +173,34 @@
 
 	<!-- tknum으로 티켓 검색 -->
 	<select id="ticket" resultMap="ticket">
-		select * from ticket where tknum=#{tknum}
+		select * from ticket where
+		tknum=#{tknum}
 	</select>
 
 	<!-- tknum에 해당하는 티켓 업데이트 -->
 	<update id="ticketUp">
-		update ticket set tcost=#{tcost}, tname=#{tname} where tknum=#{tknum} and
+		update ticket set tcost=#{tcost}, tname=#{tname}
+		where tknum=#{tknum} and
 		gnum=#{gnum}
 	</update>
 
 	<!-- tknum에 해당하는 티켓 삭제 -->
 	<delete id="ticketDelete">
 		delete from ticket where tknum=#{tknum}
+	</delete>
+
+	<!-- 헬스장 신청 목록 -->
+	<select id="getregistList_admin"
+		resultType="edu.kosmo.today.vo.RegiGymListVO">
+		<![CDATA[
+		select * from Store order by storenum
+	]]>
+	</select>
+
+	<delete id="registRemove_admin">
+		<![CDATA[
+			delete from store where storenum = #{storenum}
+		]]>
 	</delete>
 
 </mapper>

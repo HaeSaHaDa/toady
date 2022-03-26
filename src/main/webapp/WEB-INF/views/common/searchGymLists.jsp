@@ -25,30 +25,31 @@
 	height: 200px;
 }
 
-.forSearch {
-	height: 40px;
-	width: 500px;
-	border: 1px solid #1b5ac2;
-	background: #ffffff;
-	margin: 0 auto;
+.forSearch{
+height: 40px;
+width: 500px;
+border: 1px solid #1b5ac2;
+background: #ffffff;
+margin: 0 auto;
 }
 
-.searchInput {
-	font-size: 16px;
-	width: 352px;
-	padding: 10px;
-	border: 0px;
-	float: left;
+.searchInput{
+font-size: 16px;
+width: 352px;
+padding: 10px;
+border: 0px;
+float: left;
 }
 
-.searchButton {
-	width: 50px;
-	height: 100%;
-	border: 0px;
-	background: #1b5ac2;
-	outline: none;
-	float: right;
-	color: #ffffff;
+.searchButton{
+width: 50px;
+height: 100%;
+border: 0px;
+background: #1b5ac2;
+outline: none;
+float: right;
+color:f#ffffff;
+
 }
 </style>
 
@@ -187,9 +188,8 @@
 				<button class="searchButton">검색</button>
 			</form:form>
 		</div>
-
-		<br />
-		<br />
+			
+				<br/><br/>			
 		<div class="container">
 
 			<div class="row">
@@ -208,24 +208,7 @@
 					</div>
 				</c:forEach>
 			</div>
-			<nav class="pagination-outer mb-2" aria-label="Page navigation">
-				<ul class="pagination justify-content-center text-center">
-					<c:if test="${pageMaker.pre}">
-						<li class="page-item"><a aria-label="Previous" class="page-link" href="${pageContext.request.contextPath}/common/gymLists/${gym.gnum}${pageMaker.makeQuery(pageMaker.startPage - 1) }"> <span
-								aria-hidden="true">«</a></span></li>
-					</c:if>
 
-					<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-					<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/common/gymLists/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
-					</c:forEach>
-					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/common/gymLists/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}"> <span
-								aria-hidden="true">»</span>
-						</a></li>
-					</c:if>
-				</ul>
-			</nav>
 		</div>
 	</section>
 	<!-- 시설목록끝 -->

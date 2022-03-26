@@ -15,7 +15,7 @@
 				<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/registView">시설 등록 신청</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/registListView">시설 등록 신청 내역</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/registListView/${principal.user.mnum}">시설 등록 신청 내역</a></li>
 				<sec:authorize access="hasRole('USER')">
 					<li><a href="${pageContext.request.contextPath}/owner/manageGym/${principal.user.mnum}">시설 등록 내역</a></li>
 					<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
@@ -31,7 +31,7 @@
 				<li><a href="${pageContext.request.contextPath}/admin/manageMember">회원 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/ownerList">헬스장 사장님 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/gymListInventory">헬스장 관리</a></li>
-				<li><a href="${pageContext.request.contextPath}/admin/registerGym">헬스장 신청서 목록</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/registListView">헬스장 신청서 목록</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/helpList">1:1 답변 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/noticeBoard">공지/이벤트 관리</a></li>

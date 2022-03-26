@@ -24,10 +24,11 @@ public class RegiGymVO {
 	/*
 	 * private int Storenum; //헬스장 등록 번호
 	 */	
+	private int mnum;
 	private String storename;//헬스장 등록 명
 	private String storeadr;//헬스장 등록 주소
 	private String storetel;//헬스장 등록 연락처
-	private Date storedate;//헬스장 등록 날짜
+	private String storedate;//헬스장 등록 날짜
 
 	
 }

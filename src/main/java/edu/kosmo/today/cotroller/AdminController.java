@@ -347,4 +347,37 @@ public class AdminController {
 			return entity;
 
 		}
+		
+		@GetMapping("/registListView")
+		public ModelAndView registlist(ModelAndView mv) {
+				
+		log.info("->owner Controller...");
+		log.info("->registlist()...");
+				
+		mv.addObject("registList",gymService.getregistList_admin());
+		mv.setViewName("/user/registListView");	
+		
+		return mv;
+		}	 
+		
+		//@DeleteMapping("/deleteRegister/{storenum}")
+		@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.GET)
+		public ResponseEntity<String> deleteRegister(@PathVariable("storenum")String storenum){
+			log.info("탑니까?-1");
+			ResponseEntity<String> entity = null;
+			int storenum1 = Integer.valueOf(storenum);
+			try {
+				log.info("탑니까?-s2");
+				gymService.registRemove_admin(storenum1);
+				// 삭제가 성공하면 성공 상태메시지 저장
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			} catch (Exception e) {
+				log.info("탑니까?-3");
+				e.printStackTrace();
+				// 댓글 삭제가 실패하면 실패 상태메시지 저장
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			// 삭제 처리 HTTP 상태 메시지 리턴
+			return entity;
+		}
 }

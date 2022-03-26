@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.Criteria2;
 import edu.kosmo.today.vo.GymVO;
+import edu.kosmo.today.vo.RegiGymListVO;
 import edu.kosmo.today.vo.ReviewVO;
 import edu.kosmo.today.vo.TicketVO;
 import edu.kosmo.today.vo.TrainerVO;
@@ -75,4 +76,7 @@ public interface GymMapper {
 	public void ticketUp(TicketVO ticketVO);
 	
 	public void ticketDelete(int tknum);
+	
+	public List<RegiGymListVO> getregistList_admin();	//신청한 헬스장목록보기
+	public void registRemove_admin(int storenum);	//신청목록 삭제
 }

@@ -42,6 +42,7 @@ public class GymVO {
 	private String gsns;  //sns주소
 	private String imagename; //시설사진
 
-	
+	private String keyword;
+
 	
 }

@@ -42,9 +42,9 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public List<RegiGymListVO> getregistList() {
+	public List<RegiGymListVO> getregistList(int mnum) {
 		
-		return ownerMapper.getRegistList();
+		return ownerMapper.getRegistList(mnum);
 	}
 
 	@Override

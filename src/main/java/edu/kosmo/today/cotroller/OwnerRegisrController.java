@@ -65,13 +65,13 @@ public class OwnerRegisrController {
 	return mv; 
 	}
 	//헬스장 신청목록 조회 페이지
-	@GetMapping("/registListView")
-	public ModelAndView registlist(ModelAndView mv) {
-			
+	@GetMapping("/registListView/{mnum}")
+	public ModelAndView registlist(ModelAndView mv, @PathVariable int mnum) {
+	System.out.println(mnum);		
 	log.info("->owner Controller...");
 	log.info("->registlist()...");
 			
-	mv.addObject("registList",ownerService.getregistList());
+	mv.addObject("registList",ownerService.getregistList(mnum));
 	mv.setViewName("/user/registListView");	
 	
 	return mv;

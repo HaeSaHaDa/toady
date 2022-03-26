@@ -14,10 +14,41 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <%@ include file="../layout/head_tags.jsp"%>
+<script>
+	$(document).ready(function() {
+		$(".deleteRegist").click(function(event){
+			
+			event.preventDefault();
+			console.log("ajax 호출전");
+			alert("");
+			var trObj = $(this).parent().parent();
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$.ajax({
+				dataType : "GET",
+				url : $(this).attr("href"),	
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
+				},
+				success : function(result){
+					console.log("ajax 호출-2");
+					console.log(result);
+					if(result == "SUCCESS"){
+						$(trObj).remove();
+					}
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			
+		});
+	});
+	</script>
+
 
 <title>Insert title here</title>
 </head>
@@ -103,17 +134,15 @@
 								<c:otherwise>
 									<table>
 										<tr>
-											<td>
-											<form:form action="${pageContext.request.contextPath}/user/memberInf">
-											<span class="userinfo" style="color: white; margin-right: 20px"> 
+											<td><form:form action="${pageContext.request.contextPath}/user/memberInf">
+													<span class="userinfo" style="color: white; margin-right: 20px">
 														<button style="background-color: transparent; border: 0; outline: 0;">
 															<i class="fa fa-user-secret">UserInfo</i>
 														</button>
 													</span>
-													</form:form>
-											</td>
+												</form:form></td>
 
-											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+											<td><span class="logout" style="color: white;"> <form:form action="/logout">
 														<button style="background-color: transparent; border: 0; outline: 0" url="">
 															<i class="fa fa-sign-out">Log Out</i>
 														</button>
@@ -141,39 +170,43 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-				<div class="col-3">
+				<div class="col-4">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
 
 				</div>
 				<!-- 사이드바 끝 -->
-				<div class="col-9">
-				<!-- 내용물 -->
-				
-				
-				<table class="text-center"  width="600" cellpadding="0" cellspacing="0" border="1">
-				      <form action="registration" method="post">
-				      		<th colspan="2"><h3 style="color:white">헬스장 신청</h3></th>
-				         <tr>
-				            <td> <input type="hidden" name="mnum" size = "50" value="${principal.user.mnum}"> </td>	
-				         <tr>
-				            <td style="color:white"> 헬스장 명</td>
-				            <td> <input type="text" name="storename" size = "50"> </td>
-				         </tr>
-				         <tr>
-				            <td style="color:white"> 헬스장 주소 </td>
-				            <td> <input type="text" name="storeadr" size = "50"> </td>
-				         </tr>
-				         <tr>
-				            <td style="color:white"> 헬스장 전화번호 </td>
-				            <td> <input type="text" name="storetel"  size = "50"></input> </td>
-				         </tr>
-						 <tr >
-				            <td colspan="2"> <button type="submit">등록 신청</button> &nbsp;&nbsp; <button type="button"><a href="/user/registListView" style="color: black;">목록 보기</a></button></td>
-				         </tr>
-				      </form>
-				   </table>
-					
-				<!-- 내용물 끝 -->				
+				<div class="col-8">
+					<!-- 내용물 -->
+
+					<table class="table table-striped table-light text-center" style="width: 800px" border="1" cellpadding="0">
+						<thead class="thead-light">
+							<tr>
+								<th width="70">번호</th>
+								<th>신청인 아이디 번호</th>
+								<th>헬스장 이름</th>
+								<th>헬스장 주소</th>
+								<th>연락처</th>
+								<th width="100">신청일</th>
+								<th>취소</th>
+							</tr>
+						</thead>
+						<c:forEach items="${registList}" var="regist">
+							<tr>
+								<td>${regist.mnum}</td>
+								<td>${regist.storenum}</td>
+								<td>${regist.storename}</td>
+								<td>${regist.storeadr}</td>
+								<td>${regist.storetel}</td>
+								<td>${regist.storedate}</td>
+								<td><a class="deleteRegist" href="/admin/deleteRegister/${regist.storenum}">삭제</a></td>
+							</tr>
+						</c:forEach>
+						<tr>
+							<td colspan="6"><a href="/today">홈</a></td>
+						</tr>
+					</table>
+
+					<!-- 내용물 끝 -->
 				</div>
 			</div>
 		</div>
@@ -185,5 +218,7 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+	<!-- 신청 목록 삭제 -->
+
 </body>
 </html>

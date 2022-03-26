@@ -29,9 +29,6 @@ public interface GymListMapper {
 	//		+ "gfacility = #{gfacility}, gsns = #{gsns}, imagename = #{imagename} where gnum = #{gnum}")
 	void updateGymList(GymListVO gymlist);
 
-
-
-	
-
+	List<GymListVO> search(String keyword);
 
 }

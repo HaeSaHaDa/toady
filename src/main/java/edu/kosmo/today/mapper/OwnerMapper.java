@@ -21,7 +21,7 @@ public interface OwnerMapper {
 
 	public void registration(RegiGymVO regiGymVO); // 헬스장 등록 신청
 
-	public List<RegiGymListVO> getRegistList(); // 헬스장 등록 신청 목록
+	public List<RegiGymListVO> getRegistList(int mnum); // 헬스장 등록 신청 목록
 
 	public void deleteRegist(int storenum);
 

@@ -31,7 +31,5 @@ button {
 	display: inline;
 }
 
-form {
-	display: inline;
-}
+
 </style>

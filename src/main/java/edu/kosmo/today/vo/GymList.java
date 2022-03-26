@@ -23,7 +23,8 @@ public class GymList { // 빈칸이나 Min Max 나중 구현 아직 안했음. �
 	private String gfacility;
 	private String gsns;
 	
-	
+	private String keyword;
+
 	//private String gimagename;
 }// hibernate = jpa+ native
 

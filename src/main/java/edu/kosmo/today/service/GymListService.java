@@ -16,5 +16,6 @@ public interface GymListService {
 	GymListVO getGymListByGnum(int gnum); // update단에서 필요로 함.
 
 	void updateGymList(GymListVO gymListVO);
-
+	
+	List<GymListVO> search(String keyword);
 }
