@@ -104,17 +104,15 @@
 								<c:otherwise>
 									<table>
 										<tr>
-											<td>
-											<form:form action="${pageContext.request.contextPath}/user/memberInf">
-											<span class="userinfo" style="color: white; margin-right: 20px"> 
+											<td><form:form action="${pageContext.request.contextPath}/user/memberInf">
+													<span class="userinfo" style="color: white; margin-right: 20px">
 														<button style="background-color: transparent; border: 0; outline: 0;">
 															<i class="fa fa-user-secret">UserInfo</i>
 														</button>
 													</span>
-													</form:form>
-											</td>
+												</form:form></td>
 
-											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+											<td><span class="logout" style="color: white;"> <form:form action="/logout">
 														<button style="background-color: transparent; border: 0; outline: 0" url="">
 															<i class="fa fa-sign-out">Log Out</i>
 														</button>
@@ -141,18 +139,57 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-3">
+				<div class="col-3">
 					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
 					<!-- 내용물 시작 -->
+					<div>
 
+						<table class="table table-striped table-light">
 
+							<thead class="thead-light">
+								<tr>
+									<th>TYPE</th>
+									<th>문의 내용</th>
+									<th>작성일자</th>
+								</tr>
+								<thead>
 
-					<!-- 내용물 끝 -->
+								<c:forEach var="helpBoard" items="${helpReplyList}">
+									<tr>
+										<td>문의</td>
+										<td><a href="/admin/adminReview?bid=${helpBoard.bid}">${helpBoard.bcontent }</a></td>
+										<td>${helpBoard.bdate}</td>
+									</tr>
+								</c:forEach>	
+								</form>
+						
+						</table>
+						
+						<c:if test="${pageMaker.pre}">
+									<a href="/admin/helpList${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
+								</c:if>
+
+								<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+								<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
+									<a href="helpList${pageMaker.makeQuery(idx)}">${idx}</a>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<a href="helpList${pageMaker.makeQuery(pageMaker.endPage + 1) }">
+										» </a>
+								</c:if>
+
+					</div>
+
 				</div>
+
+
+					<!-- 내용물 끝 --></div>
+							
 			</div>
 		</div>
 	</section>

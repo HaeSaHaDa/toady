@@ -12,6 +12,7 @@ import edu.kosmo.today.vo.CompleteVO;
 import edu.kosmo.today.vo.FaqVO;
 import edu.kosmo.today.vo.OrderVO;
 import edu.kosmo.today.vo.ReviewVO;
+import edu.kosmo.today.vo.WishVO;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -132,5 +133,27 @@ public class OrderService {
 		   
 		   
 		mapper.insertcomplete(complete);
+	}
+	
+	//주문상세관련
+	public List<Integer> getWishnum(int mnum){
+		System.out.println("찜번호리스트구하는중");
+		
+		return mapper.wishNumList(mnum);
+	}
+	public void insertDetail(OrderVO vo) {
+		System.out.println("주문상세 넣는중...");
+		
+		mapper.insertOrderDtl(vo);		
+	}
+	public void deleteWishTable(int wishnum) {
+		System.out.println("찜 삭제중...");
+		
+		mapper.deleteWishTable(wishnum);
+	}
+	public WishVO getWishTable(int wishnum) {
+		System.out.println(wishnum+"..의 찜 품목구하는중..");
+		
+		return mapper.getWish(wishnum);
 	}
 }

@@ -22,4 +22,8 @@ public class NoteVO {
 	private int tnum;	
 	private String mname;// 작성 회원 이름
 	private String tname;//게시판 종류
+	
+	private int bgroup;	
+	private int bstep;	
+	private int bindent;	
 }

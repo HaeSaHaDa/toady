@@ -121,11 +121,12 @@ public class UserController {
 				.getPrincipal();
 		
 		int mnum = faqService.getMemberNum(member.getUsername());
+		System.out.println("회원번호..."+mnum);
 		
 		log.info("insert review.."+vo);
 		
 		try {
-			vo.setBid(mnum);
+			vo.setMnum(mnum);
 			
 			int success = orderService.insertReivew(vo);
 			

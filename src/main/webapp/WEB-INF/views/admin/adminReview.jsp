@@ -8,7 +8,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Gym Template">
@@ -21,10 +20,8 @@
 <%@ include file="../layout/head_tags.jsp"%>
 
 
-
 <title>Insert title here</title>
 </head>
-
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -107,17 +104,15 @@
 								<c:otherwise>
 									<table>
 										<tr>
-											<td>
-											<form:form action="${pageContext.request.contextPath}/user/memberInf">
-											<span class="userinfo" style="color: white; margin-right: 20px"> 
+											<td><form:form action="${pageContext.request.contextPath}/user/memberInf">
+													<span class="userinfo" style="color: white; margin-right: 20px">
 														<button style="background-color: transparent; border: 0; outline: 0;">
 															<i class="fa fa-user-secret">UserInfo</i>
 														</button>
 													</span>
-													</form:form>
-											</td>
+												</form:form></td>
 
-											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+											<td><span class="logout" style="color: white;"> <form:form action="/logout">
 														<button style="background-color: transparent; border: 0; outline: 0" url="">
 															<i class="fa fa-sign-out">Log Out</i>
 														</button>
@@ -139,53 +134,47 @@
 		</div>
 	</header>
 	<!-- Header End -->
-	<!-- ChoseUs Section End -->
-
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-3">
-					<%@ include file="../layout/user_owner_menu.jsp"%>
+				<div class="col-3">
+					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
-					<!-- 내용물 -->
-            <div> 
-            <table class="table table-striped table-light" width="600" border="1" cellpadding="0">
-                     <form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}" >
-                        <input type="hidden" id="mid" name="mid" value="${memberDetail.mid}">
-                         
-                        <thead class="thead-light">                       
-                        <tr>
-                           <th>작성자</th>
-                           <th>제목</th>
-                           <th>내용</th>
-                           <th>작성시간</th>
-                        </tr>
-                        <thead>
+					<!-- 내용물 시작 -->
+					<div>
+						<h6 class="text-white">
 
-                        <c:forEach var="helpBoard" items="${helpBoardList}">
-                        <tr>
-                           <td>${helpBoard.mnum}</td>
-                           <td>${helpBoard.btitle}</td>
-                           <td>${helpBoard.bcontent}</td>
-                           <td>${helpBoard.bdate}</td>
-                        </tr>
-                     </c:forEach>
-                     
-                     <tr class="table-light">
-						<td><a href="/user/helpBoardPost/${principal.user.mnum}">1:1문의하기</a></td>
-					 </tr>
+							<table class="table table-striped table-light" width="600" border="1" cellpadding="0">
+								<form action="reply" method="post">
+									<input type="hidden" name="bid" value="${helpReplyView.bid}"> 
+									<input type="hidden" name="mnum" value="${helpReplyView.mnum}"> 
+									<input type="hidden" name="bgroup"	value="${helpReplyView.bgroup}"> 
+									<input type="hidden" name="bstep" value="${helpReplyView.bstep}"> 
+									<input type="hidden" name="bindent" value="${helpReplyView.bindent}">
+									<thead class="thead-light">
+										<tr>
+											<th width="100%">문의</th>
+										</tr>
+									</thead>
 
-                     </form>
-                  </table>
-            
-            </div>
+									<tr>
+										<td><textarea class="form-control" rows="10" cols="200" name="bcontent" width="100%">[관리자 답변]</textarea></td>
+									</tr>
+
+									<td colspan="2"><input class="btn btn-primary " type="submit" value="답변 남기기"></td>
+								</form>
+							</table>
+					</div>
+
+
 					<!-- 내용물 끝 -->
 				</div>
+
 			</div>
 		</div>
 	</section>
@@ -206,17 +195,10 @@
 
 
 
-
-
-
-
-
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
-
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
-
 </html>
