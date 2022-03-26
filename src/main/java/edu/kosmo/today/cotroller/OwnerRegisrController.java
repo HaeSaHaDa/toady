@@ -27,6 +27,7 @@ import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.service.OwnerService;
 import edu.kosmo.today.vo.FaqVO;
+import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.RegiGymListVO;
 import edu.kosmo.today.vo.RegiGymVO;
@@ -64,18 +65,20 @@ public class OwnerRegisrController {
 		mv.setViewName("redirect:/today");
 	return mv; 
 	}
-	//헬스장 신청목록 조회 페이지
 	@GetMapping("/registListView/{mnum}")
 	public ModelAndView registlist(ModelAndView mv, @PathVariable int mnum) {
 	System.out.println(mnum);		
 	log.info("->owner Controller...");
 	log.info("->registlist()...");
 			
-	mv.addObject("registList",ownerService.getregistList(mnum));
+	List<RegiGymListVO> registGym = ownerService.getregistList(mnum);
+	System.out.println("이 어찌 된 영문인가.???" + registGym);
+	mv.addObject("registList",registGym);
 	mv.setViewName("/user/registListView");	
 	
 	return mv;
 	}	 
+	
 	
 	//@DeleteMapping("/deleteRegister/{storenum}")
 	@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.GET)

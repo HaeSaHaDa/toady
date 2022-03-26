@@ -9,7 +9,7 @@
 			<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지/이벤트</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/eventBoard">공지/이벤트</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/registView">시설 등록 신청</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/registListView">시설 등록 신청 내역</a></li>
 			<sec:authorize access="hasRole('USER')">

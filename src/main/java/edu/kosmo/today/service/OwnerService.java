@@ -19,7 +19,7 @@ public interface OwnerService {
 	public void updateTrainer(TrainerVO vo); //트레이너 정보수정
 	public void deleteTrainer(TrainerVO vo);
 	public void insertStore(RegiGymVO regigymVO); //헬스장 등록신청
-	List<RegiGymListVO> getregistList(int mnum);	//신청한 헬스장목록보기
+	public List<RegiGymListVO> getregistList(int mnum);	//신청한 헬스장목록보기
 	public void remove(int storenum);	//신청목록 삭제
 	public int getGymTotal(int mnum);
 	public List<GymListVO> getGym(Criteria criteria,int mnum);//헬스장 페이징

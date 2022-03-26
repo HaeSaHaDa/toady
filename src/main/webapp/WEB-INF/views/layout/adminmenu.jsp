@@ -9,7 +9,7 @@
 			<li><a href="${pageContext.request.contextPath}/admin/registerGym">헬스장 신청서 목록</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/faqpage">FAQ 관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/helpList">1:1 답변 관리</a></li>
-			<li><a href="${pageContext.request.contextPath}/admin/noticeBoard">공지/이벤트 관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/eventBoard">공지/이벤트 관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/requestpr">환불요청/리뷰삭제요청</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/manageReivew">리뷰관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/totalSales">매출 관리</a></li>

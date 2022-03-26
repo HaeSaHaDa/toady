@@ -1,8 +1,6 @@
 package edu.kosmo.today.vo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
@@ -21,14 +19,13 @@ TNUM	NUMBER
 @Builder
 public class RegiGymVO {
 
-	/*
-	 * private int Storenum; //헬스장 등록 번호
-	 */	
+
 	private int mnum;
+	//private int storenum;
 	private String storename;//헬스장 등록 명
 	private String storeadr;//헬스장 등록 주소
 	private String storetel;//헬스장 등록 연락처
-	private String storedate;//헬스장 등록 날짜
+	private Date storedate;//헬스장 등록 날짜
 
 	
 }

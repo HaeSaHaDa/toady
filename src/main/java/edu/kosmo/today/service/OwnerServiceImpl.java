@@ -43,7 +43,7 @@ public class OwnerServiceImpl implements OwnerService{
 
 	@Override
 	public List<RegiGymListVO> getregistList(int mnum) {
-		
+		System.out.println("헬스장 신청 목록");
 		return ownerMapper.getRegistList(mnum);
 	}
 

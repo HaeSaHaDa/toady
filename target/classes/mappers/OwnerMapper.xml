@@ -56,7 +56,7 @@
 	<select id="getRegistList"
 		resultType="edu.kosmo.today.vo.RegiGymListVO">
 		<![CDATA[
-		select * from Store where mnum=#{mnum} order by storenum
+		select * from store where mnum=#{mnum} order by storenum
 	]]>
 	</select>
 

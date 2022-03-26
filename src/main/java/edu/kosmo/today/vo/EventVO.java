@@ -13,13 +13,12 @@ BDATE             DATE
 MNUM              NUMBER         
 TNUM              NUMBER */
 @Data
-public class NoteVO {
+public class EventVO {
 	private int bid;
 	private String btitle;	
 	private String bcontent;	
 	private Date bdate;	
 	private int mnum;	
 	private int tnum;	
-	private String mname;// 작성 회원 이름
-	private String tname;//게시판 종류
+
 }
