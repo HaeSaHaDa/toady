@@ -38,7 +38,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/user/")
-public class OwnerRegisrController {
+public class OwnerRegisrtController {
 
 	@Autowired
 	NoteService noteService;
@@ -77,12 +77,15 @@ public class OwnerRegisrController {
 	return mv;
 	}	 
 	
-	//@DeleteMapping("/deleteRegister/{storenum}")
-	@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.POST)
-	public ResponseEntity<String> deleteRegister(@PathVariable("storenum")String storenum){
+
+	//@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.POST)
+	@DeleteMapping("/deleteRegister/{storenum}")
+	public ResponseEntity<String> deleteRegister(@PathVariable String storenum){
 		log.info("탑니까?-1");
+		log.info(storenum);
 		ResponseEntity<String> entity = null;
-		int storenum1 = Integer.valueOf(storenum);
+		
+		int storenum1=Integer.valueOf(storenum);
 		try {
 			log.info("탑니까?-s2");
 			ownerService.remove(storenum1);

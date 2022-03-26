@@ -20,6 +20,93 @@
 
 <%@ include file="../layout/head_tags.jsp"%>
 
+<style type="text/css">
+
+.card-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%
+}
+
+.class-item{
+	height: 320px;
+}
+
+.card-carousel .my-card {
+  height: 20rem;
+  width: 12rem;
+  position: relative;
+  z-index: 1;
+  -webkit-transform: scale(0.6) translateY(-2rem);
+  transform: scale(0.6) translateY(-2rem);
+  opacity: 0;
+  cursor: pointer;
+  pointer-events: none;
+ /* background: #2e5266;
+  background: linear-gradient(to top, #2e5266, #6e8898);*/
+  transition: 1s;
+}
+
+.card-carousel .my-card:after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  border-radius: 100%;
+  /*background-color: rgba(0,0,0,0.3);*/
+  bottom: -5rem;
+  -webkit-filter: blur(4px);
+  filter: blur(4px);
+}
+
+.card-carousel .my-card:nth-child(0):before {
+  content: '0';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 3rem;
+  font-weight: 300;
+  /*color: #fff;*/
+}
+
+.card-carousel .my-card:nth-child(1):before {
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 3rem;
+  font-weight: 300;
+  /*color: #fff;*/
+}
+.card-carousel .my-card.active {
+  z-index: 3;
+  -webkit-transform: scale(1) translateY(0) translateX(0);
+  transform: scale(1) translateY(0) translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+  transition: 1s;
+}
+
+.card-carousel .my-card.prev, .card-carousel .my-card.next {
+  z-index: 2;
+  -webkit-transform: scale(0.8) translateY(-1rem) translateX(0);
+  transform: scale(0.8) translateY(-1rem) translateX(0);
+  opacity: 0.6;
+  pointer-events: auto;
+  transition: 1s;
+}
+
+.ci-pic>img{
+height: 200px;
+}
+
+</style>
 
 
 <title>오늘의 짐</title>
@@ -176,46 +263,24 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-1.jpg" alt="">
+		</div>	
+				<div class="card-carousel">
+					<c:forEach items="${gymLists}" var="gym">
+						<div class="my-card">
+							<div class="class-item">
+								<div class="ci-pic">
+									<img src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem">
+								</div>
+								<div class="ci-text">
+									<span>${gym.gcategory}</span>
+									<h5>${gym.gname}</h5>
+									<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+								</div>
+							</div>
 						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Weightlifting</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-2.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>Cardio</span>
-							<h5>Indoor cycling</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
+			
 	</section>
 	<!-- ChoseUs Section End -->
 
@@ -342,7 +407,40 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+<script>
+$num = $('.my-card').length;
+$even = $num / 2;
+$odd = ($num + 1) / 2;
 
+if ($num % 2 == 0) {
+  $('.my-card:nth-child(' + $even + ')').addClass('active');
+  $('.my-card:nth-child(' + $even + ')').prev().addClass('prev');
+  $('.my-card:nth-child(' + $even + ')').next().addClass('next');
+} else {
+  $('.my-card:nth-child(' + $odd + ')').addClass('active');
+  $('.my-card:nth-child(' + $odd + ')').next().addClass('next');
+  $('.my-card:nth-child(' + $odd + ')').prev().addClass('prev');
+}
+
+$('.my-card').click(function() {
+  $slide = $('.active').width();
+  console.log($('.active').position().left);
+  
+  if ($(this).hasClass('next')) {
+    $('.card-carousel').stop(false, true).animate({left: '-=' + $slide});
+  } else if ($(this).hasClass('prev')) {
+    $('.card-carousel').stop(false, true).animate({left: '+=' + $slide});
+  }
+  
+  $(this).removeClass('prev next');
+  $(this).siblings().removeClass('prev active next');
+  
+  $(this).addClass('active');
+  $(this).prev().addClass('prev');
+  $(this).next().addClass('next');
+});
+
+</script>
 
 </body>
 

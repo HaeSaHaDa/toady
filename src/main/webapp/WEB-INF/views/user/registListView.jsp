@@ -151,7 +151,7 @@
 				         <td>${regist.storetel}</td>
 				         <td>${regist.storedate}</td>
 				         <td>					         
-					         	<a class="deleteRegist" href="/user/deleteRegister/${regist.storenum}">삭제</a>
+					         	<a class="deleteRegist" href="${pageContext.request.contextPath}/user/deleteRegister/${regist.storenum}">삭제</a>
 					      </td>
 				      </tr>
 				      </c:forEach>
@@ -183,7 +183,7 @@
 			var trObj = $(this).parent().parent();
 			
 			$.ajax({
-				dataType : "POST",
+				type : "DELETE",
 				url : $(this).attr("href"),						
 				success : function(result){
 					console.log("ajax 호출-2");
@@ -196,6 +196,7 @@
 					console.log(e);
 				}
 			
+		});
 		});
 	});
 	</script>
