@@ -207,36 +207,36 @@
 				<div class="col-9">
 					<!-- 내용물 시작 -->
 					<div>
-						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
+						<table class="table" style="width: 850px; table-layout: fixed;" border="1" cellpadding="1" cellspacing="10" border="1">
 							<form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mid}">
 								<input type="hidden" id="mid" name="mid" value="${memberDetail.mid}">
 
 								<thead class="thead-light">
 									<tr>
-										<th class="text-dark">회원번호
+										<th class="text-dark" width="20%">회원번호
 										</td>
-										<th class="text-dark">${memberDetail.mnum}</th>
-										<th class="text-dark">닉네임</th>
-										<th class="text-dark">${memberDetail.mnickname}</th>
+										<th class="text-dark" width="20%">${memberDetail.mnum}</th>
+										<th class="text-dark" width="20%">아이디</th>
+										<th class="text-dark" width="40%">${memberDetail.mid}</th>
 									</tr>
 								<thead>
 
-									<tr class="table-light">
+									<tr>
 										<td>이메일</td>
 										<td colspan="3">${memberDetail.memail}</td>
 									</tr>
 
-									<tr class="table-light">
+									<tr>
 										<td>연락처</td>
 										<td colspan="3">${memberDetail.mphone}</td>
 									</tr>
 
-									<tr class="table-light">
+									<tr>
 										<td>생년월일</td>
 										<td colspan="3">${memberDetail.mbirth}</td>
 									</tr>
 
-									<tr class="table-light">
+									<tr>
 										<td>회원구분</td>
 										<td colspan="3"><input type="text" id="auth" name="auth" value="${memberDetail.auth}"></td>
 									</tr>

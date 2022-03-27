@@ -153,17 +153,15 @@
 								<c:otherwise>
 									<table>
 										<tr>
-											<td>
-											<form:form action="${pageContext.request.contextPath}/user/memberInf">
-											<span class="userinfo" style="color: white; margin-right: 20px"> 
+											<td><form:form action="${pageContext.request.contextPath}/user/memberInf">
+													<span class="userinfo" style="color: white; margin-right: 20px">
 														<button style="background-color: transparent; border: 0; outline: 0;">
 															<i class="fa fa-user-secret">UserInfo</i>
 														</button>
 													</span>
-													</form:form>
-											</td>
+												</form:form></td>
 
-											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+											<td><span class="logout" style="color: white;"> <form:form action="/logout">
 														<button style="background-color: transparent; border: 0; outline: 0" url="">
 															<i class="fa fa-sign-out">Log Out</i>
 														</button>
@@ -195,62 +193,60 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-3">
+				<div class="col-3">
 					<%@ include file="../layout/adminmenu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
 					<div>
-						<table class="table table table-bordered" width="600" border="1" cellpadding="0">
+						<table class="table" style="width: 850px; table-layout: fixed;" border="1" cellpadding="1" cellspacing="10" border="1">
 							<form id="updateAuth" action="${pageContext.request.contextPath}/admin/ownerList/${ownerMemberDetail.mid}">
 								<input type="hidden" id="mid" name="mid" value="${ownerMemberDetail.mid}">
 
 								<thead class="thead-light">
 									<tr>
-										<th>회원번호 </td>
-									<th>${ownerMemberDetail.mnum}</th>
-									<th>닉네임</th>
-                           			<th>${ownerMemberDetail.mnickname}</th>
-								</tr>
-								
+										<th>회원번호
+										</td>
+										<th>${ownerMemberDetail.mnum}</th>
+										<th>닉네임</th>
+										<th>${ownerMemberDetail.mnickname}</th>
+									</tr>
 								<thead>
 
-								<tr class="table-light">
-									<td>이메일</td>
-									<td colspan="3">${ownerMemberDetail.memail}</td>
-								</tr>
-
-								<tr class="table-light">
-									<td>연락처</td>
-									<td colspan="3">${ownerMemberDetail.mphone}</td>
-								</tr>
-
-								<tr class="table-light">
-									<td>생년월일</td>
-									<td colspan="3">${ownerMemberDetail.mbirth}</td>
-								</tr>
-
-								<tr class="table-light">
-									<td>회원구분</td>
-									<td colspan="3"><input type="text" id="auth" name="auth" value="${ownerMemberDetail.auth}"></td>
-								</tr>
-
-								<tr class="table-light">
-									<td colspan="4"><input type="submit" value="수정하기"> &nbsp;&nbsp; 
-								
+									<tr>
+										<td>이메일</td>
+										<td colspan="3">${ownerMemberDetail.memail}</td>
 									</tr>
-							
+
+									<tr >
+										<td>연락처</td>
+										<td colspan="3">${ownerMemberDetail.mphone}</td>
+									</tr>
+
+									<tr>
+										<td>생년월일</td>
+										<td colspan="3">${ownerMemberDetail.mbirth}</td>
+									</tr>
+
+									<tr >
+										<td>회원구분</td>
+										<td colspan="3"><input type="text" id="auth" name="auth" value="${ownerMemberDetail.auth}"></td>
+									</tr>
+
+									<tr>
+										<td colspan="4"><input type="submit" value="수정하기"> &nbsp;&nbsp;
+									</tr>
 							</form>
 						</table>
 					</div>
 
-				<!-- 내용물 끝 -->
+					<!-- 내용물 끝 -->
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<!-- 마이페이지 내용물 끝 -->
+	</section>
+	<!-- 마이페이지 내용물 끝 -->
 	<!-- Footer Section Begin -->
 	<%@ include file="../layout/footer.jsp"%>
 	<!-- Footer Section End -->
@@ -265,6 +261,6 @@
 
 
 
-										</body>
+</body>
 
 </html>
