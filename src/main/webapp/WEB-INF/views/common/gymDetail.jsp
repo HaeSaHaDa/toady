@@ -592,6 +592,7 @@ geocoder.addressSearch(addres, function(result, status) {
 
 			if (login == "") {
 				confirm("로그인이 필요합니다.");
+				$(".fa-sign-in").trigger("click"); //로그인 모달창을 띄우게 하기위한 trigger함수사용
 			} else {
 
 				let ticketNumber = $("#order option:selected").val();
