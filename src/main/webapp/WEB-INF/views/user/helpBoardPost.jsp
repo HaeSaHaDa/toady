@@ -104,17 +104,15 @@
 								<c:otherwise>
 									<table>
 										<tr>
-											<td>
-											<form:form action="${pageContext.request.contextPath}/user/memberInf">
-											<span class="userinfo" style="color: white; margin-right: 20px"> 
+											<td><form:form action="${pageContext.request.contextPath}/user/memberInf">
+													<span class="userinfo" style="color: white; margin-right: 20px">
 														<button style="background-color: transparent; border: 0; outline: 0;">
 															<i class="fa fa-user-secret">UserInfo</i>
 														</button>
 													</span>
-													</form:form>
-											</td>
+												</form:form></td>
 
-											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+											<td><span class="logout" style="color: white;"> <form:form action="/logout">
 														<button style="background-color: transparent; border: 0; outline: 0" url="">
 															<i class="fa fa-sign-out">Log Out</i>
 														</button>
@@ -144,39 +142,29 @@
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
-					<div class="col-3">
+				<div class="col-3">
 					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
 					<!-- 내용물 -->
-					<table class="table table-striped table-light" width="600" border="1" cellpadding="0">
-						<form id="updateAuth" action="${pageContext.request.contextPath}/admin/manageMember/${memberDetail.mnum}">
-							<input type="hidden" id="mid" name="mid" value="${memberDetail.mid}">
-							<thead class="thead-light">
-								<tr>
-									<th>작성자</th>
-									<th>제목</th>
-									<th>내용</th>
-									<th>작성시간</th>
-								</tr>
-							</thead>
+					<div class="col-8">
+						<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
+						<div>
 
-							<c:forEach var="helpBoard" items="${helpBoardList}">
-								<tr>
-									<td>${helpBoard.mnum}</td>
-									<td>${helpBoard.btitle}</td>
-									<td>${helpBoard.bcontent}</td>
-									<td>${helpBoard.bdate}</td>
-								</tr>
+							<c:url value="/user/helpBoardPost" var="hbEnrollUrl" />
 
-								<tr class="table-light">
-									<td><a href="/user/notePost/${helpBoard.mnum}">1:1문의하기</a></td>
-								</tr>
-							</c:forEach>
-						</form>
-					</table>
+							<form:form name="hbenrollForm" action="${hbEnrollUrl}" method="POST">
+								<input type="number" id="mnum" name="mnum" value="${HelpMemberList.mnum}" disabled="disabled">
+								<input type="text" class="form-control" id="btitle" name="btitle" value="문의" readonly="readonly">
+								<br>
+								<textarea class="form-control" rows="10" cols="84" id="bcontent" name="bcontent"></textarea>
+								<br>
+								<input class="btn btn-primary" type="submit" value="문의하기">
+							</form:form>
+						</div>
+					</div>
 					<!-- 내용물 끝 -->
 				</div>
 			</div>

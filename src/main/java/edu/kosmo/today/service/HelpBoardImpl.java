@@ -30,7 +30,29 @@ public class HelpBoardImpl implements HelpBoardService{
 		return helpBoardMapper.getBoardList(mnum);
 	}
 
-	
+	@Override
+	public MemberVO HelpBoardMemberRead(int mnum) {
+		// TODO Auto-generated method stub
+		return helpBoardMapper.HelpBoardMemberRead(mnum);
+	}
+
+	@Override
+	public void hboardRegister(NoteVO NoteVO) {
+		helpBoardMapper.hboardinsert(NoteVO);
+		
+	}
+
+	@Override
+	public List<NoteVO> getHelpBoardPage(Criteria criteria) {
+		
+		return helpBoardMapper.getHelpBoardPage(criteria);
+	}
+
+	@Override
+	public int getHelpBoardTotalCount() {
+		
+		return helpBoardMapper.getHelpBoardTotalCount();
+	}
 		
 		
 

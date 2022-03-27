@@ -44,6 +44,13 @@ public class GymListServiceImpl implements GymListService {
 		gymListMapper.updateGymList(gymListVO);
 		
 	}
+	
+	@Override
+	public List<GymListVO> search(String keyword) {
+		
+		return gymListMapper.search(keyword);
+	}
+
 
 }
 	

@@ -24,6 +24,7 @@ import edu.kosmo.today.service.GymService;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.service.OwnerService;
 import edu.kosmo.today.vo.MemberVO;
+import edu.kosmo.today.vo.RegiGymListVO;
 import edu.kosmo.today.vo.TrainerVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,7 +55,9 @@ public class OwnerController {
 
 		return mav;
 	}
+	//헬스장 신청목록 조회 페이지
 
+	
 /*	@GetMapping("/gymMemberList/{mnum}") // 회원 상세보기
 	public ModelAndView ownerMemberDetail(MemberVO memberVO, ModelAndView mav) {
 

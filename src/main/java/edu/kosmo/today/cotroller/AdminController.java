@@ -23,6 +23,7 @@ import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.page.PageVO;
 import edu.kosmo.today.service.FaqService;
 import edu.kosmo.today.service.GymService;
+import edu.kosmo.today.service.HelpBoardService;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.vo.FaqVO;
@@ -42,6 +43,9 @@ public class AdminController {
 
 	@Autowired
 	private FaqService faqService;
+	
+	@Autowired
+	private HelpBoardService helpBoardService;
 
 
 	/*
@@ -346,5 +350,86 @@ public class AdminController {
 			// 업데이트처리 HTTP 상태 메시지 리턴
 			return entity;
 
+		}
+		
+		@GetMapping("/registListView")
+		public ModelAndView registlist(ModelAndView mv) {
+				
+		log.info("->owner Controller...");
+		log.info("->registlist()...");
+				
+		mv.addObject("registList",gymService.getregistList_admin());
+		mv.setViewName("/admin/registListView");	
+		
+		return mv;
+		}	 
+		
+		//등록 신청 삭제
+		@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.GET)
+		public ResponseEntity<String> deleteRegister(@PathVariable("storenum")String storenum){
+			log.info("탑니까?-1");
+			ResponseEntity<String> entity = null;
+			int storenum1 = Integer.valueOf(storenum);
+			try {
+				log.info("탑니까?-s2");
+				gymService.registRemove_admin(storenum1);
+				// 삭제가 성공하면 성공 상태메시지 저장
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			} catch (Exception e) {
+				log.info("탑니까?-3");
+				e.printStackTrace();
+				// 댓글 삭제가 실패하면 실패 상태메시지 저장
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			// 삭제 처리 HTTP 상태 메시지 리턴
+			return entity;
+		}
+		
+		//1:1문의 조회 페이지 진입 + 페이징
+		@GetMapping("/helpList")
+		public ModelAndView helpList(ModelAndView mav, Criteria cri) {
+			log.info("1:1 문의 페이지 진입");
+				
+			
+			mav.setViewName("/admin/helpList");
+			mav.addObject("helpReplyList", memberService.getHelpListPage(cri));
+			memberService.readReplyList();
+					
+			int total = memberService.getHelpListTotalCount();
+			
+			mav.addObject("pageMaker", new PageVO(cri, total));
+		
+			return mav;		
+		}
+		
+		//답변 페이지 진입
+		@GetMapping("/adminReview")
+		public ModelAndView adminReview(NoteVO noteVO, ModelAndView mav) {
+			
+		
+			log.info("1:1 문의 답변 페이지 진입");
+			mav.addObject("helpReplyView", memberService.readReplyListView(noteVO.getBid()));
+			
+			log.info("helpReplyView : " + memberService.readReplyListView(noteVO.getBid())); 	
+			mav.setViewName("/admin/adminReview");
+			return mav;	
+			
+		}
+		
+		
+		//답변
+		@PostMapping("/reply")
+		public ModelAndView reply(NoteVO noteVO, ModelAndView mav) {
+			
+			log.info("reply() ..");
+			log.info("noteVO : " + noteVO);
+			memberService.readReplyListView(noteVO.getBid());
+			mav.addObject("helpReplyList", memberService.readReplyList());
+				
+			memberService.insertReply(noteVO);
+			mav.setViewName("redirect:/admin/helpList");
+			
+			return mav;
+			
 		}
 }

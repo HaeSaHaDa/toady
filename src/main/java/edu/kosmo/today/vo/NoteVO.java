@@ -2,11 +2,7 @@ package edu.kosmo.today.vo;
 
 import java.sql.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 
 /*
@@ -16,11 +12,7 @@ BCONTENT          VARCHAR2(2000)
 BDATE             DATE           
 MNUM              NUMBER         
 TNUM              NUMBER */
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
-@ToString
+@Data
 public class NoteVO {
 	private int bid;
 	private String btitle;	
@@ -28,4 +20,10 @@ public class NoteVO {
 	private Date bdate;	
 	private int mnum;	
 	private int tnum;	
+	private String mname;// 작성 회원 이름
+	private String tname;//게시판 종류
+	
+	private int bgroup;	
+	private int bstep;	
+	private int bindent;	
 }

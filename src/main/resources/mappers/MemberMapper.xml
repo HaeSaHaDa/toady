@@ -107,5 +107,59 @@
 		select * from member,authority where member.mid = authority.mid and mnum = #{mnum}
 	]]>
 	</select>
+	<!-- 답변 남기기 위해서 아이디로 helpboard 불러오기 -->
+	<select id="readHelpBoard" resultType="edu.kosmo.today.vo.NoteVO">
+	<![CDATA[
+		select * from boardlist where tnum = 8 and boardlist.mnum = #{mnum}
+	]]>
+	</select>
+	
+	<!-- 관리자 페이지 진입 시 1:1 문의 답변 리스트 조회 -->
+	<select id="getReplyList" resultType="edu.kosmo.today.vo.NoteVO">
+	<![CDATA[
+		select * from boardlist where boardlist.tnum = 8
+	]]>
+	</select>
+	
+	 
+	
+	<!-- 답변을 남기기 위한  -->
+	<select id="getReplyListView" resultType="edu.kosmo.today.vo.NoteVO">
+	<![CDATA[ 
+		
+		select * from boardlist where bid =  #{bid}
+		
+	]]>
+	</select>
+	
+	<!-- 관리자페이지 쪽지 작성하기 -->
+	<insert id="insertReply">
+	<![CDATA[
+		 
+		insert into boardlist (bid, bcontent, bgroup, bstep, bindent, mnum, tnum) values (board_seq.nextval, #{bcontent}, #{bgroup}, #{bstep}+1, #{bindent}+1, #{mnum}, 8)  
+	]]>
+	</insert>
+	
+	
+	<!--페이징 -->
+	<select id="getHelpListPage"
+		resultType="edu.kosmo.today.vo.NoteVO">
+	<![CDATA[
+ 		          SELECT * FROM (
+              SELECT ROWNUM AS RNUM, A.* FROM ( 
+             	select bid , btitle, bcontent, bdate , mnum, tnum from boardlist where tnum = 8 order by bgroup desc, bstep asc
+             ) A WHERE ROWNUM <= #{pageNum} * #{amount}
+         ) WHERE RNUM > (#{pageNum}-1) * #{amount}
+			
+	]]>
+	</select>
+	
+	
+	<!-- 1:1 문의 페이징을 위한 갯수 -->
+	<select id="getHelpListTotalCount" resultType="int">
+	<![CDATA[
+		select count (*) from boardlist where tnum = 8 
+	]]>
+	</select>
 
 </mapper>
