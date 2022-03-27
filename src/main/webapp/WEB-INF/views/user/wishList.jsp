@@ -345,7 +345,7 @@
 											<tr id="select">
 												<input type="hidden" id="wishnum" name="wishnum" value="${wish.wishnum}">
 												<td class="cart-pic first-row">
-													<!-- 여기는 나중에 이미지이름넣기 --> <img class="cart-img" src="${pageContext.request.contextPath}/img/hero/hero-2.jpg" alt="" />
+													<!-- 여기는 나중에 이미지이름넣기 --> <img class="cart-img" src="${pageContext.request.contextPath}/img/${wish.imagename}" alt="" />
 												</td>
 												<td class="cart-title first-row">
 													<h5>${wish.gname}</h5>
