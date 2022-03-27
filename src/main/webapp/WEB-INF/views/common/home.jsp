@@ -19,6 +19,13 @@
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <%@ include file="../layout/head_tags.jsp"%>
+<script src="http://cdnjs.cloudflare.com/ajax/lobs/jquery/2.1.3/jquery.mis.js"></script>
+
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script src="http://cdpn.io/cpe/boomboom/pen.js?key=pen.js-e5b57579-8298-bbae-887e-d7c8c9f2f443" crossorigin></script>
+
+
 <style type="text/css">
 .carousel-showmanymoveone .carousel-control {
   width: 4%;
@@ -114,9 +121,9 @@
     left: 0;
   }
 }
-.container {
+/* .container {
   margin-bottom: 50px;
-}
+} */
 body {
   font-family: 'Bitter', sans-serif;
   color: #E54A41;
@@ -152,7 +159,36 @@ h2 {
 }
 
 </style>
+<script>
+(function(){
+	  // setup your carousels as you normally would using JS
+	  // or via data attributes according to the documentation
+	  // https://getbootstrap.com/javascript/#carousel
+	  $('#carousel123').carousel({ interval: 2000 });
+	  $('#carouselABC').carousel({ interval: 3600 });
+	}());
 
+	(function(){a
+	  $('.carousel-showmanymoveone .item').each(function(){
+	    var itemToClone = $(this);
+
+	    for (var i=1;i<4;i++) {
+	      itemToClone = itemToClone.next();
+
+	      // wrap around if at end of item collection
+	      if (!itemToClone.length) {
+	        itemToClone = $(this).siblings(':first');
+	      }
+
+	      // grab item, clone, add marker class, add to collection
+	      itemToClone.children(':first-child').clone()
+	        .addClass("cloneditem-"+(i))
+	        .appendTo($(this));
+	    }
+	  });
+	}());
+
+</script>
 <title>오늘의 짐</title>
 </head>
 
@@ -298,7 +334,7 @@ h2 {
 
 	<!-- Classes Section Begin -->
 	<section class="classes-section spad">
-		<div class="container">
+		<div class="container"><!-- container start-->	
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
@@ -307,23 +343,46 @@ h2 {
 					</div>
 				</div>
 			</div>
-		</div>	
-	
-		<c:forEach items="${gymLists}" var="gym">			
-			<div class="item active">
-	            <div class="col-xs-12 col-sm-6 col-md-3">
-	              <div class="card">
-	                <img class="card-img-top img-fluid img-responsive" src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem" alt="Card image cap">
-	                <div class="card-body">
-	                  <h4 class="card-title">${gym.gcategory}</h4>
-	                  <p class="card-text">${gym.gname}</p>
-	                  <a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
-	                </div>
-	              </div>
-	            </div>
-			</div>
-		</c:forEach>		
 			
+		 <div class="row">
+		    <div class="col-md-12">
+		      <div class="carousel carousel-showmanymoveone slide" id="carouselABC">
+		        <div class="carousel-inner">
+		
+						<div class="item active" >
+				            <div class="col-xs-12 col-sm-6 col-md-3">
+				              <div class="card">
+				                <img class="card-img-top img-fluid img-responsive" src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem" alt="Card image cap">
+				                <div class="card-body">
+				                  <h4 class="card-title">${gym.gname}</h4>
+				                  <p class="card-text">${gym.gcategory}</p>
+				                  <a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+				                </div>
+				              </div>
+				            </div>
+						</div>
+					<c:forEach items="${gymLists}" var="gym">			
+						<div class="item" >
+				            <div class="col-xs-12 col-sm-6 col-md-3">
+				              <div class="card">
+				                <img class="card-img-top img-fluid img-responsive" src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem" alt="Card image cap">
+				                <div class="card-body">
+				                  <h4 class="card-title">${gym.gname}</h4>
+				                  <p class="card-text">${gym.gcategory}</p>
+				                  <a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+				                </div>
+				              </div>
+				            </div>
+						</div>
+					</c:forEach>
+				</div>
+			        <a class="left carousel-control" href="#carouselABC" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+			        <a class="right carousel-control" href="#carouselABC" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+			      </div>
+			    </div>
+			  </div>
+										
+		</div><!-- container end-->		
 	</section>
 	<!-- ChoseUs Section End -->
 
@@ -453,36 +512,7 @@ h2 {
 	
 	
 	<!-- 메인페이지 carousel 스크립트 -->
-<script>
-(function(){
-	  // setup your carousels as you normally would using JS
-	  // or via data attributes according to the documentation
-	  // https://getbootstrap.com/javascript/#carousel
-	  $('#carousel123').carousel({ interval: 2000 });
-	  $('#carouselABC').carousel({ interval: 3600 });
-	}());
 
-	(function(){a
-	  $('.carousel-showmanymoveone .item').each(function(){
-	    var itemToClone = $(this);
-
-	    for (var i=1;i<4;i++) {
-	      itemToClone = itemToClone.next();
-
-	      // wrap around if at end of item collection
-	      if (!itemToClone.length) {
-	        itemToClone = $(this).siblings(':first');
-	      }
-
-	      // grab item, clone, add marker class, add to collection
-	      itemToClone.children(':first-child').clone()
-	        .addClass("cloneditem-"+(i))
-	        .appendTo($(this));
-	    }
-	  });
-	}());
-
-</script>
 
 </body>
 
