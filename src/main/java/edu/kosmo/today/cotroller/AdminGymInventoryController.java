@@ -201,4 +201,14 @@ public class AdminGymInventoryController {
 		return "admin/ticketList";
 	}
 	
+	@RequestMapping(value="/search", method=RequestMethod.POST)
+	public String search(Criteria cri, GymListVO gymListVO, Model model) {
+		System.out.println("검색어 : " + gymListVO.getKeyword());
+		String keyword = '%' + gymListVO.getKeyword()+'%';
+		List<GymListVO> search = gymListService.search(keyword);
+		model.addAttribute("gymLists", search);
+		
+		return "admin/searchGymListInventory";
+	}
+	
 }

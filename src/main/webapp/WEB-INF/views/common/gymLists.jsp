@@ -39,6 +39,7 @@
 	padding: 10px;
 	border: 0px;
 	float: left;
+	height: 35px;
 }
 
 .searchButton {

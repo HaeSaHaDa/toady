@@ -1,6 +1,8 @@
 package edu.kosmo.today.cotroller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,7 @@ import edu.kosmo.today.service.HelpBoardService;
 import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.OrderService;
 import edu.kosmo.today.vo.FaqVO;
+import edu.kosmo.today.vo.GymListVO;
 import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.NoteVO;
 import lombok.AllArgsConstructor;
@@ -433,4 +436,6 @@ public class AdminController {
 			return mav;
 			
 		}
+		
+
 }
