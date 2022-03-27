@@ -5,7 +5,7 @@
 	<div class="so-categories">
 		<h5 class="title">MyPage</h5>
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/memberInf">내 정보</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>

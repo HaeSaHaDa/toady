@@ -43,7 +43,7 @@
 </head>
 <body  style="background-color: dark">
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="/today">오늘의 짐</a>
+		<a class="navbar-brand" href="/today">오늘의 GYM</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>z
 		</button>

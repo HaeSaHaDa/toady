@@ -27,7 +27,7 @@
 		<![CDATA[
 			SELECT * FROM (
 				SELECT ROWNUM AS RNUM, A.* FROM (
-						select t.tname, b.bid, b.btitle, b.bcontent from boardlist b, boardtype t where b.tnum = 1 and b.tnum = t.tnum order by bid desc				
+						select t.tname, b.bid, b.btitle, b.bcontent, b.bdate from boardlist b, boardtype t where b.tnum = 1 and b.tnum = t.tnum order by bid desc				
 					)A WHERE ROWNUM <= #{pageNum} * #{amount}
 				) WHERE RNUM > (#{pageNum}-1) * #{amount}
 			

@@ -148,8 +148,7 @@
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
 				<div class="col-9">
-					<!-- 내용물 -->
-					<div class="col-8">
+
 						<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 						<div>
 
@@ -168,9 +167,11 @@
 					<!-- 내용물 끝 -->
 				</div>
 			</div>
-		</div>
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
+	<!-- Footer Section Begin -->
+	<%@ include file="../layout/footer.jsp"%>
+	<!-- Footer Section End -->
 
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>

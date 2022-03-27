@@ -98,4 +98,6 @@
 			
 </script>
 <script src="/js/user.js"></script>
-<%@ include file="../layout/footer.jsp"%>
+	<!-- Footer Section Begin -->
+	<%@ include file="../layout/footer.jsp"%>
+	<!-- Footer Section End -->

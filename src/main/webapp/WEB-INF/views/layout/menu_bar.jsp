@@ -10,7 +10,7 @@
 		<li><a href="#">mypage</a>
 			<ul class="dropdown">
 				<li><a href="${pageContext.request.contextPath}/user/myTicket">내 이용권</a></li>
-				<li><a href="${pageContext.request.contextPath}/user/memberInfo">내 정보</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/memberInf">내 정보</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/note">쪽지</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/helpBoard">1:1문의</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/noticeBoard">공지</a></li>

@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,22 @@ public class MemberInfoController {
 	MemberInfoService memberInfoService;
 	
 	//마이페이지 내정보 페이지 진입
-	@GetMapping("/memberInfo") 
+	@PostMapping("/memberInf") 
 	public ModelAndView memberInfo(ModelAndView mav) {
+		
+		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		int mnum = memberInfoService.getInfoNum(member.getUsername()); // 회원 번호 가져오기
+
+		System.out.println("memberInfo 회원번호 " + mnum);
+
+		mav.setViewName("/user/memberInfo");
+		mav.addObject("memberInfoList", memberInfoService.getInfoList(mnum));
+
+		return mav;
+	}
+	//마이페이지 내정보 페이지 진입
+	@GetMapping("/memberInf") 
+	public ModelAndView memberInfoMenu(ModelAndView mav) {
 		
 		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int mnum = memberInfoService.getInfoNum(member.getUsername()); // 회원 번호 가져오기
