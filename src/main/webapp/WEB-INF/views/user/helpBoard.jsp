@@ -158,7 +158,6 @@
 
 								<thead class="thead-light">
 									<tr>
-										<th width="10%">작성자</th>
 										<th width="20%">제목</th>
 										<th width="60%">내용</th>
 										<th width="20%">작성시간</th>
@@ -167,7 +166,6 @@
 
 									<c:forEach var="helpBoard" items="${helpBoardList}">
 										<tr>
-											<td>${helpBoard.mnum}</td>
 											<td>${helpBoard.btitle}</td>
 											<td>${helpBoard.bcontent}</td>
 											<td>${helpBoard.bdate}</td>

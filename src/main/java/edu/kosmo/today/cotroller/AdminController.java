@@ -56,7 +56,7 @@ public class AdminController {
 	 * memberService.getList()); return mav; }
 	 */
 
-
+	// 페이징 + 관리자페이지 회원조회
 	@GetMapping("/manageMember")
 	public ModelAndView getListPage(Criteria cri, ModelAndView mav) {
 
@@ -352,6 +352,7 @@ public class AdminController {
 
 		}
 		
+		//등록 신청 뷰
 		@GetMapping("/registListView")
 		public ModelAndView registlist(ModelAndView mv) {
 				

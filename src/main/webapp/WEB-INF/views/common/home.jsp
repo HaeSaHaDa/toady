@@ -19,7 +19,163 @@
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <%@ include file="../layout/head_tags.jsp"%>
-
+<style type="text/css">
+.carousel-showmanymoveone .carousel-control {
+  width: 4%;
+  background-image: none;
+}
+.carousel-showmanymoveone .carousel-control.left {
+  margin-left: 15px;
+}
+.carousel-showmanymoveone .carousel-control.right {
+  margin-right: 15px;
+}
+.carousel-showmanymoveone .cloneditem-1,
+.carousel-showmanymoveone .cloneditem-2,
+.carousel-showmanymoveone .cloneditem-3 {
+  display: none;
+}
+@media all and (min-width: 768px) {
+  .carousel-showmanymoveone .carousel-inner > .active.left,
+  .carousel-showmanymoveone .carousel-inner > .prev {
+    left: -50%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .active.right,
+  .carousel-showmanymoveone .carousel-inner > .next {
+    left: 50%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .left,
+  .carousel-showmanymoveone .carousel-inner > .prev.right,
+  .carousel-showmanymoveone .carousel-inner > .active {
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner .cloneditem-1 {
+    display: block;
+  }
+}
+@media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
+  .carousel-showmanymoveone .carousel-inner > .item.active.right,
+  .carousel-showmanymoveone .carousel-inner > .item.next {
+    -webkit-transform: translate3d(50%, 0, 0);
+            transform: translate3d(50%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.active.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev.right,
+  .carousel-showmanymoveone .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+@media all and (min-width: 992px) {
+  .carousel-showmanymoveone .carousel-inner > .active.left,
+  .carousel-showmanymoveone .carousel-inner > .prev {
+    left: -25%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .active.right,
+  .carousel-showmanymoveone .carousel-inner > .next {
+    left: 25%;
+  }
+  .carousel-showmanymoveone .carousel-inner > .left,
+  .carousel-showmanymoveone .carousel-inner > .prev.right,
+  .carousel-showmanymoveone .carousel-inner > .active {
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner .cloneditem-2,
+  .carousel-showmanymoveone .carousel-inner .cloneditem-3 {
+    display: block;
+  }
+}
+@media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
+  .carousel-showmanymoveone .carousel-inner > .item.active.right,
+  .carousel-showmanymoveone .carousel-inner > .item.next {
+    -webkit-transform: translate3d(25%, 0, 0);
+            transform: translate3d(25%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.active.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev {
+    -webkit-transform: translate3d(-25%, 0, 0);
+            transform: translate3d(-25%, 0, 0);
+    left: 0;
+  }
+  .carousel-showmanymoveone .carousel-inner > .item.left,
+  .carousel-showmanymoveone .carousel-inner > .item.prev.right,
+  .carousel-showmanymoveone .carousel-inner > .item.active {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    left: 0;
+  }
+}
+/* .container {
+  margin-bottom: 50px;
+} */
+body {
+  font-family: 'Bitter', sans-serif;
+  color: #E54A41;
+  background-image: url('//static.rtpdesign.co.uk/blog/img/background.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 20%;
+}
+p {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  margin-bottom: 2em;
+}
+h2 {
+  margin: 2em 0 1em;
+}
+.logo {
+  margin: 20px auto;
+  height: 100px;
+}
+@media only screen and (min-width: 768px) {
+  .logo {
+    margin: 28px;
+    float: left;
+  }
+}
+.title {
+  padding: 28px;
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+}
+</style>
+<script>
+(function(){
+	  // setup your carousels as you normally would using JS
+	  // or via data attributes according to the documentation
+	  // https://getbootstrap.com/javascript/#carousel
+	  $('#carousel123').carousel({ interval: 2000 });
+	  $('#carouselABC').carousel({ interval: 3600 });
+	}());
+	(function(){a
+	  $('.carousel-showmanymoveone .item').each(function(){
+	    var itemToClone = $(this);
+	    for (var i=1;i<4;i++) {
+	      itemToClone = itemToClone.next();
+	      // wrap around if at end of item collection
+	      if (!itemToClone.length) {
+	        itemToClone = $(this).siblings(':first');
+	      }
+	      // grab item, clone, add marker class, add to collection
+	      itemToClone.children(':first-child').clone()
+	        .addClass("cloneditem-"+(i))
+	        .appendTo($(this));
+	    }
+	  });
+	}());
+</script>
 <title>오늘의 짐</title>
 </head>
 
@@ -162,11 +318,9 @@
 	<!-- Hero Section End -->
 
 
-	<!-- ChoseUs Section End -->
-
-	<!-- Classes Section Begin -->
+		<!-- Classes Section Begin -->
 	<section class="classes-section spad">
-		<div class="container">
+		<div class="container"><!-- container start-->	
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
@@ -175,46 +329,46 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-1.jpg" alt="">
+			
+		 <div class="row">
+		    <div class="col-md-12">
+		      <div class="carousel carousel-showmanymoveone slide" id="carouselABC">
+		        <div class="carousel-inner">
+		
+						<div class="item active" >
+				            <div class="col-xs-12 col-sm-6 col-md-3">
+				              <div class="card">
+				                <img class="card-img-top img-fluid img-responsive" src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem" alt="Card image cap">
+				                <div class="card-body">
+				                  <h4 class="card-title">${gym.gname}</h4>
+				                  <p class="card-text">${gym.gcategory}</p>
+				                  <a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+				                </div>
+				              </div>
+				            </div>
 						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Weightlifting</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
+					<c:forEach items="${gymLists}" var="gym">			
+						<div class="item" >
+				            <div class="col-xs-12 col-sm-6 col-md-3">
+				              <div class="card">
+				                <img class="card-img-top img-fluid img-responsive" src="${pageContext.request.contextPath}/img/${gym.imagename}" style="heigh:10rem" alt="Card image cap">
+				                <div class="card-body">
+				                  <h4 class="card-title">${gym.gname}</h4>
+				                  <p class="card-text">${gym.gcategory}</p>
+				                  <a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+				                </div>
+				              </div>
+				            </div>
 						</div>
-					</div>
+					</c:forEach>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-2.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>Cardio</span>
-							<h5>Indoor cycling</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
+			        <a class="left carousel-control" href="#carouselABC" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+			        <a class="right carousel-control" href="#carouselABC" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+			      </div>
+			    </div>
+			  </div>
+										
+		</div><!-- container end-->		
 	</section>
 	<!-- ChoseUs Section End -->
 
