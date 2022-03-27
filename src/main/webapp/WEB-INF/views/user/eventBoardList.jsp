@@ -23,7 +23,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
 	<!-- Offcanvas Menu Section Begin -->
 	<div class="offcanvas-menu-overlay"></div>
 	<div class="offcanvas-menu-wrapper">
@@ -33,7 +32,7 @@
 
 		<nav class="canvas-menu mobile-menu">
 						<!-- 메뉴 바  -->
-						<%@ include file="../layout/menu_bar.jsp"%>
+						<%@ include file="../layout/menu_bar.jsp"%>l>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -119,7 +118,8 @@
 		</div>
 	</header>
 	<!-- Header End -->
-	<!-- ChoseUs Section End -->
+	
+		<!-- ChoseUs Section End -->
 
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
@@ -133,28 +133,55 @@
 				<!-- 내용물 -->
 				<div class="col-9">
 				<!-- 내용물 -->
+				   <table class="table table-striped table-light text-center" style="width:800px" border="1" cellpadding="0">
+				      <thead class="thead-light">   
+				      <tr>
+				         <th style="width:90px">번호</th>
+				         <th style="width:130px">종류</th>
+				         <th>제목</th>
+				         <th style="width:150px">이름</th>
+				         <th style="width:150px">날짜</th>				         
+				      </tr>
+				      </thead>
+				      <c:forEach var="board" items="${noteList}" >
+				         <tr>
+				            <td style="color:black">${board.bid}</td>
+				            <td style="color:black">${board.tname}</td>
+				            <td style="color:black">
+				               <a href="eventBoardView?bid=${board.bid}">${board.btitle}</a></td>
+				            <td style="color:black">${board.mname}</td>
+				            <td style="color:black">${board.bdate}</td>
+				            
+				         </tr>
+				      </c:forEach>
+				   
+				   </table>
+				   		<c:if test="${pageMaker.pre}">
+							<a href="eventBoard${pageMaker.makeQuery(pageMaker.startPage - 1 )}">«이전 </a>
+						</c:if>
 				
+						<c:forEach var="idx" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage }">
+							<a href="eventBoard${pageMaker.makeQuery(idx) }">${idx}</a>
+						</c:forEach>
 				
-				
-				
-				
-				
-				
-				
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+							<a href="eventBoard${pageMaker.makeQuery(pageMaker.endPage + 1)}"> 다음»</a>
+						</c:if>
+								
 				<!-- 내용물 끝 -->				
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
-
-
+	
+	
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
-
 </body>
 </html>

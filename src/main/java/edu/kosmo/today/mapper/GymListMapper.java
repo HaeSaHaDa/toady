@@ -10,6 +10,8 @@ import edu.kosmo.today.vo.GymListVO;
 public interface GymListMapper {
 	//@Select("select * from gympage")
 	List<GymListVO> getGymLists();//gympage조회
+	
+	List<GymListVO> getAdGymList();//home페이지 헬스장 광고 리스트
 
 	GymListVO read(int gnum);
 

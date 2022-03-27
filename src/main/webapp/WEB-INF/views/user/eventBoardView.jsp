@@ -134,19 +134,33 @@
 				<div class="col-9">
 				<!-- 내용물 -->
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				  <table width="500" cellpadding="0" cellspacing="0" border="1">
+         <input type="hidden" name="bid" value="${content_view.bid}">
+         <tr>
+            <td> 번호 </td>
+            <td> ${content_view.bid} </td>
+         </tr>
+         <tr>
+            <td> 종류 </td>
+            <td> ${content_view.tname} </td>
+         </tr>
+         <tr>
+            <td> 제목 </td>
+            <td> ${content_view.btitle}"></td>
+         </tr>
+         <tr>
+            <td> 작성자 </td>
+            <td> ${content_view.mnum}"></td>
+         </tr>
+         <tr>
+            <td> 내용 </td>
+            <td>내용잉 나와라 </td>
+         </tr>
+         
+   </table>
+			
+
+
 				<!-- 내용물 끝 -->				
 				</div>
 			</div>

@@ -14,8 +14,8 @@
 <meta name="keywords" content="Gym, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="_csrf" content="${_csrf.token}" />
-<meta name="_csrf_header" content="${_csrf.headerName}" />
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <%@ include file="../layout/head_tags.jsp"%>
 
@@ -31,8 +31,8 @@
 		</div>
 
 		<nav class="canvas-menu mobile-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>l>
 		</nav>
 		<div id="mobile-menu-wrap"></div>
 		<div class="canvas-social">
@@ -76,8 +76,8 @@
 				</div>
 				<div class="col-lg-6">
 					<nav class="nav-menu">
-			<!-- 메뉴 바  -->
-			<%@ include file="../layout/menu_bar.jsp"%>
+						<!-- 메뉴 바  -->
+						<%@ include file="../layout/menu_bar.jsp"%>
 					</nav>
 				</div>
 				<div class="col-lg-3">
@@ -118,44 +118,66 @@
 		</div>
 	</header>
 	<!-- Header End -->
+	
+		<!-- ChoseUs Section End -->
+
 	<!--마이페이지 내용물 시작-->
 	<section class="classes-section spad">
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
 					<div class="col-3">
-					<%@ include file="../layout/adminmenu.jsp"%>
+					<%@ include file="../layout/user_owner_menu.jsp"%>
 				</div>
 				<!-- 사이드바 끝 -->
 				<!-- 내용물 -->
-				<div class="col-9">
-					<!-- 내용물 시작 -->
-
-
-
-					<!-- 내용물 끝 -->
+				
+				  <table width="500" cellpadding="0" cellspacing="0" border="1">
+         <input type="hidden" name="bid" value="${content_view.bid}">
+         <tr>
+            <td> 번호 </td>
+            <td> ${content_view.bid} </td>
+         </tr>
+         <tr>
+            <td> 종류 </td>
+            <td> ${content_view.bhit} </td>
+         </tr>
+         <tr>
+            <td> 제목 </td>
+            <td> <input type="text" name="bname" value="${content_view.bname}"></td>
+         </tr>
+         <tr>
+            <td> 작성자 </td>
+            <td> <input type="text" name="btitle" value="${content_view.btitle}"></td>
+         </tr>
+         <tr>
+            <td> 내용 </td>
+            <td> <textarea rows="10" name="bcontent" >${content_view.bcontent}</textarea></td>
+         </tr>
+         <tr >
+            <td colspan="2"> <input type="submit" value="수정"> 
+            &nbsp;&nbsp; <a href="list">목록보기</a> 
+            &nbsp;&nbsp; <a href="delete?bid=${content_view.bid}">삭제</a> 
+            &nbsp;&nbsp; <a href="reply_view?bid=${content_view.bid}">답변</a></td>
+         </tr>
+   </table>
+	
+				
+				
+				
+				<!-- 내용물 끝 -->				
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- 마이페이지 내용물 끝 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
+
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>

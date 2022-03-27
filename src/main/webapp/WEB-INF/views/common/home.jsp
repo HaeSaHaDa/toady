@@ -176,43 +176,21 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-1.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Weightlifting</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
+			<div class="row row-cols-1 row-cols-md-3 g-4">
+				<c:forEach items="${gymAdList}" var="gym" end="4">
+					<div class="col">						
+						<div class="class-item">
+							<div class="ci-pic">
+								<img src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="">
+							</div>
+							<div class="ci-text">
+								<span>${gym.gcategory}</span>
+								<h5>${gym.gname}</h5>
+								<a href="/common/gymdetail/${gym.gnum}"><i class="fa fa-angle-right"></i></a>
+							</div>
+						</div>						
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-2.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>Cardio</span>
-							<h5>Indoor cycling</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="class-item">
-						<div class="ci-pic">
-							<img src="/img/classes/class-3.jpg" alt="">
-						</div>
-						<div class="ci-text">
-							<span>STRENGTH</span>
-							<h5>Kettlebell power</h5>
-							<a href="#"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 
 			</div>
 		</div>

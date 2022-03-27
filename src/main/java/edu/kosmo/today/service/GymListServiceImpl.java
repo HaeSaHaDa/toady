@@ -20,6 +20,10 @@ public class GymListServiceImpl implements GymListService {
 	public List<GymListVO> getGymLists() { //메소드 호출 
 		return gymListMapper.getGymLists();
 	}
+	@Override
+	public List<GymListVO> getAdGymList(){
+		return gymListMapper.getAdGymList();
+	}
 
 	@Override
 	public void addGymList(GymListVO gymListVO) {

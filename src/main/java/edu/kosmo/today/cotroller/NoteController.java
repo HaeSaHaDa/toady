@@ -1,15 +1,14 @@
 package edu.kosmo.today.cotroller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import edu.kosmo.today.cotroller.security.principal.UserCustomDetails;
-import edu.kosmo.today.service.MemberService;
 import edu.kosmo.today.service.NoteService;
 import edu.kosmo.today.vo.NoteVO;
 import lombok.AllArgsConstructor;

@@ -9,6 +9,12 @@
 		select * from gympage
 	]]>
 	</select>
+	
+		<select id="getAdGymList" resultType="edu.kosmo.today.vo.GymListVO">
+	<![CDATA[
+		select * from gympage where ad = 1 
+	]]>
+	</select>
 
 	<select id="read" resultType="edu.kosmo.today.vo.GymListVO">
 	<![CDATA[

@@ -22,10 +22,17 @@ TNUM              NUMBER */
 @Getter
 @ToString
 public class NoteVO {
+	
+	//boardlist
 	private int bid;
 	private String btitle;	
 	private String bcontent;	
 	private Date bdate;	
 	private int mnum;	
-	private int tnum;	
+	private int tnum;
+	
+	//boardtype
+	private String mname;// 작성 회원 이름
+	private String tname;//게시판 종류
+	
 }

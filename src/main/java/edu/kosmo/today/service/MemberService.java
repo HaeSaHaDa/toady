@@ -5,7 +5,6 @@ import java.util.List;
 import edu.kosmo.today.page.Criteria;
 import edu.kosmo.today.vo.MemberVO;
 import edu.kosmo.today.vo.NoteVO;
-import edu.kosmo.today.vo.OrderVO;
 
 
 
