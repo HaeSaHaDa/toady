@@ -545,7 +545,7 @@ label.star:before {
 													<div class="text-center mt-4">
 														<input type="hidden" id="gnum" value="${myticket.gnum}">
 														<button class="btn btn-success send px-5">
-															Send message <i class="fa fa-long-arrow-right ml-1"></i>
+															리뷰 작성 <i class="fa fa-long-arrow-right ml-1"></i>
 														</button>
 													</div>
 												</div>
@@ -556,19 +556,27 @@ label.star:before {
 							</div>
 						</c:forEach>
 					</div>
-					<c:if test="${pageMaker.pre}">
-						<a href="${pageContext.request.contextPath}/user/myTicket${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>
-					</c:if>
+					<div class="container">
+					<nav class="pagination-outer mb-2" aria-label="Page navigation">
+							<ul class="pagination justify-content-center text-center">
+									<c:if test="${pageMaker.pre}">
+										<li class="page-item"><a aria-label="Previous" class="page-link"
+											href="${pageContext.request.contextPath}/user/myTicket/${pageMaker.makeQuery(pageMaker.startPage - 1) }"> <span aria-hidden="true">«</a></span></li>
+									</c:if>
 
-					<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
-					<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-						<a href="${pageContext.request.contextPath}/user/myTicket${pageMaker.makeQuery(idx)}">${idx}</a>
-					</c:forEach>
-
-					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						<a href="${pageContext.request.contextPath}/user/myTicket${pageMaker.makeQuery(pageMaker.endPage + 1)}"> » </a>
-					</c:if>
-					<br>
+								<!-- 링크를 걸어준다 1-10페이지까지 페이지를 만들어주는것  -->
+								<c:forEach var="idx" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+										<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/user/myTicket/${gym.gnum}${pageMaker.makeQuery(idx)}">${idx}</a></li>
+									</c:forEach>
+									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+										<li class="page-item"><a aria-label="Next" class="page-link" href="${pageContext.request.contextPath}/user/myTicket/${gym.gnum}${pageMaker.makeQuery(pageMaker.endPage + 1)}">
+											<span aria-hidden="true">»</span>
+										</a></li>
+										</c:if>
+										</ul>
+									</nav>
+									</div>
+					
 
 				</div>
 			</div>

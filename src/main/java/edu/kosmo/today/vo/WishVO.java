@@ -30,4 +30,6 @@ public class WishVO {
 	private int tcost; //이용권 가격
 	private int tdate; //이용권 기간
 	
+	private String imagename; //이미지 이름
+	
 }
