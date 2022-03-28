@@ -29,7 +29,7 @@
 			var token = $("meta[name='_csrf']").attr("content");
 			var header = $("meta[name='_csrf_header']").attr("content");
 			$.ajax({
-				dataType : "GET",
+				data: "DELETE",
 				url : $(this).attr("href"),	
 				beforeSend : function(xhr) {
 					xhr.setRequestHeader("X-CSRF-Token", "${_csrf.token}");
@@ -46,6 +46,7 @@
 				}
 			
 		});
+	});
 	});
 	</script>
 

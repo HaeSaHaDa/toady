@@ -80,8 +80,8 @@ public class OwnerRegisrController {
 	}	 
 	
 	
-	//@DeleteMapping("/deleteRegister/{storenum}")
-	@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.GET)
+	@DeleteMapping("/deleteRegister/{storenum}")
+	//@RequestMapping(value="/deleteRegister/{storenum}", method=RequestMethod.GET)
 	public ResponseEntity<String> deleteRegister(@PathVariable("storenum")String storenum){
 		log.info("탑니까?-1");
 		ResponseEntity<String> entity = null;
