@@ -223,11 +223,11 @@
 
 							<div class="form group">
 								<label for="gcategory">광고:</label><br />
-								<sf:radiobutton path="ad" id="ad" value="0" />
+								<sf:radiobutton path="pr" id="pr" value="0" />
 								광고 없음
-								<sf:radiobutton path="ad" id="ad" value="1" />
+								<sf:radiobutton path="pr" id="pr" value="1" />
 								광고 있음
-								<sf:radiobutton path="ad" id="ad" value="2" />
+								<sf:radiobutton path="pr" id="pr" value="2" />
 								파워 광고
 							</div>
 

@@ -1,9 +1,7 @@
-<!-- spring web form 사용 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -22,10 +20,9 @@
 <%@ include file="../layout/head_tags.jsp"%>
 
 
-
-<title>Admin-시설추가Page</title>
+<title>헬스장 목록</title>
 </head>
-<!-- Google Font -->
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -138,7 +135,12 @@
 		</div>
 	</header>
 	<!-- Header End -->
+	<!-- ChoseUs Section End -->
 	<!--마이페이지 내용물 시작-->
+	<section class="classes-section spad">
+
+
+		<!--마이페이지 내용물 시작-->
 		<div class="container" style="padding-bottom: 300px; margin-top: 200px;">
 			<div class="row" style="margin-top: 100px;">
 				<!-- 사이드바 -->
@@ -152,8 +154,8 @@
 						<h2 style="color: white">Update Gym</h2>
 						<br />
 						<p class="lead">쿠폰을 입력합니다.</p>
-						<form:form action="${pageContext.request.contextPath}/admin/ticketList/addTicket" >
-							<table >
+						<form:form action="${pageContext.request.contextPath}/admin/ticketList/addTicket">
+							<table>
 								<tr>
 									<td><input type="hidden" name="gnum" id="gnum" value="${gnum}"></td>
 								</tr>
@@ -173,10 +175,10 @@
 			</div>
 		</div>
 	</section>
+	<!-- 마이페이지 내용물 끝 -->
 	<!-- Footer Section Begin -->
 	<%@ include file="../layout/footer.jsp"%>
 	<!-- Footer Section End -->
-
 
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
@@ -184,6 +186,10 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
+
+
+
+
 </body>
 
 </html>

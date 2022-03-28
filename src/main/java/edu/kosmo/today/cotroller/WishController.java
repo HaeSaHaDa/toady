@@ -184,8 +184,7 @@ public class WishController {
 		int tamount = Integer.valueOf(tamount1);
 		LocalDate now = LocalDate.now();
 		System.out.println(now);
-		//String startDate = request.getParameter("startDate")+" 00:00:00";
-		String startDate = String.valueOf(now)+" 00:00:00";
+		String startDate = request.getParameter("startDate")+" 00:00:00";
 		System.out.println("시작날짜/////" + startDate);
 		Timestamp start = Timestamp.valueOf(startDate);
 		System.out.println("시작날짜/////" + start);

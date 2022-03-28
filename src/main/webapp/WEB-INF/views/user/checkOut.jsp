@@ -231,6 +231,7 @@
 									<input type="text" placeholder="이름을 입력해주세요" id="buyer_name">
 									 <input	type="text" placeholder="핸드폰번호" id="buyer_tel"> 
 									 <input type="email"  placeholder="이메일주소" id="buyer_email">
+									 <input type="date" id="startDate" >
 								</div>
 								<div class="col-md-8">
 									<div class="form-group">
@@ -383,6 +384,7 @@
             	var post = $('#addr1').val(); 
             	var mnum = ${principal.user.mnum};
             	var totalamount =100;/*  parseInt($(".totalprice").text(), 10); */
+            	var startDate = $("#startDate").val();//빈 값이 넘어오네
             	
             	console.log("시작 날짜..."+startDate);
             	

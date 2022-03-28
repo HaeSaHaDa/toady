@@ -160,17 +160,15 @@
 								<c:otherwise>
 									<table>
 										<tr>
-											<td>
-											<form:form action="${pageContext.request.contextPath}/user/memberInf">
-											<span class="userinfo" style="color: white; margin-right: 20px"> 
+											<td><form:form action="${pageContext.request.contextPath}/user/memberInf">
+													<span class="userinfo" style="color: white; margin-right: 20px">
 														<button style="background-color: transparent; border: 0; outline: 0;">
 															<i class="fa fa-user-secret">UserInfo</i>
 														</button>
 													</span>
-													</form:form>
-											</td>
+												</form:form></td>
 
-											<td><span class="logout" style="color: white; "> <form:form action="/logout">
+											<td><span class="logout" style="color: white;"> <form:form action="/logout">
 														<button style="background-color: transparent; border: 0; outline: 0" url="">
 															<i class="fa fa-sign-out">Log Out</i>
 														</button>
@@ -256,25 +254,27 @@
 
 							</c:when>
 							<c:otherwise>
-								<table class="table table table-bordered" width="600" border="1" cellpadding="0" var="my" items="${myTicket}">
-									<thead class="thead-light">
-										<tr>
-											<th>회원번호</th>
-											<th>${my.mnum}</th>
-											<th>이용권 번호</th>
-											<th>${my.tknum}</th>
-											<th>구매 번호</th>
-											<th>${my.ordernum}</th>
-										</tr>
-										<tr>
-											<th>구매날짜</th>
-											<th>${my.orderdate}</th>
-											<th>금액</th>
-											<th>${my.cost}</th>
-											<th>이용기간</th>
-											<th>${my.tdate}개월</th>
-										</tr>
-									<thead>
+								<table class="table table table-bordered" width="600" border="1" cellpadding="0">
+									<c:forEach  var="my" items="${myTicket}">
+										<thead class="thead-light">
+											<tr>
+												<th>회원번호</th>
+												<th>${my.mnum}</th>
+												<th>이용권 번호</th>
+												<th>${my.tknum}</th>
+												<th>구매 번호</th>
+												<th>${my.ordernum}</th>
+											</tr>
+											<tr>
+												<th>구매날짜</th>
+												<th>${my.orderdate}</th>
+												<th>금액</th>
+												<th>${my.cost}</th>
+												<th>이용기간</th>
+												<th>${my.tdate}개월</th>
+											</tr>
+										<thead>
+									</c:forEach>
 								</table>
 								<c:if test="${pageMaker.pre}">
 									<a href="${pageContext.request.contextPath}/user/myTicket${pageMaker.makeQuery(pageMaker.startPage - 1) }">«</a>

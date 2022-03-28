@@ -200,7 +200,50 @@ public class AdminGymInventoryController {
 		System.out.println("ticket 정보는??? " + ticketVO);
 		return "admin/ticketList";
 	}
-	
+	// 쿠폰 등록 페이지===========================
+	@RequestMapping(value = "/ticketList/addTicket/{gnum}", method = RequestMethod.GET)
+	public String addTicket(@PathVariable int gnum, Model model) {// spring에서 gnum 자동으로 넣어줌.
+		System.out.println("gnum" + gnum);
+		model.addAttribute("gnum", gnum);
+		return "admin/addTicket";
+	}
+
+	@RequestMapping(value = "/ticketList/addTicket", method = RequestMethod.POST)
+	public String addTicket(TicketVO ticketVO) {// spring에서 gnum 자동으로 넣어줌.
+		System.out.println("gnum");
+
+		gymService.addTicket(ticketVO);
+		return "redirect:/admin/gymListInventory";
+	}
+
+	@RequestMapping(value = "/ticketList/updateTicket/{tknum}", method = RequestMethod.GET)
+	public String updateTicket(@PathVariable int tknum, Model model) {// spring에서 gnum 자동으로 넣어줌.
+
+		TicketVO ticketVO = gymService.ticket(tknum);
+		model.addAttribute("ticketVO", ticketVO);
+		System.out.println("ticket 정보는??? " + ticketVO);
+		return "admin/updateTicket";
+	}
+
+	@PostMapping("/ticketList/updateTicket")
+	public String updateTicket(TicketVO ticketVO) {// spring에서 gnum 자동으로 넣어줌.
+		System.out.println("ticket 정보는??? " + ticketVO);
+
+		gymService.ticketUp(ticketVO);
+
+		System.out.println("저장 완료");
+		return "redirect:/admin/gymListInventory";
+	}
+
+	@GetMapping("/ticketList/deleteTicket/{tknum}")
+	public String deleteTicket(@PathVariable int tknum) {// spring에서 gnum 자동으로 넣어줌.
+		System.out.println("ticket 정보는??? " + tknum);
+
+		gymService.ticketDelete(tknum);
+
+		System.out.println("저장 완료");
+		return "redirect:/admin/gymListInventory";
+	}
 	@RequestMapping(value="/search", method=RequestMethod.POST)
 	public String search(Criteria cri, GymListVO gymListVO, Model model) {
 		System.out.println("검색어 : " + gymListVO.getKeyword());
