@@ -61,6 +61,9 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 			.authorizeRequests() 	//요청이 들어오면
 				.antMatchers("/common/**","/js/**","/css/**", "/img/**", "/fonts/**","/Source/**","/gethersource/**")
 				.permitAll()
+				.antMatchers("/user/**").authenticated()
+				.antMatchers("/owner/**").access("hasAnyRole('ROLE_BUSI')")
+				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and() 
 				.logout()
 				.logoutSuccessUrl("/today")
