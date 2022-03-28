@@ -28,33 +28,10 @@
 	cursor:pointer;
 	transform:scale(1.1);
     transition: transform .35s;
+   
 }
 </style>
-<script>
-(function(){
-	  // setup your carousels as you normally would using JS
-	  // or via data attributes according to the documentation
-	  // https://getbootstrap.com/javascript/#carousel
-	  $('#carousel123').carousel({ interval: 2000 });
-	  $('#carouselABC').carousel({ interval: 3600 });
-	}());
-	(function(){a
-	  $('.carousel-showmanymoveone .item').each(function(){
-	    var itemToClone = $(this);
-	    for (var i=1;i<4;i++) {
-	      itemToClone = itemToClone.next();
-	      // wrap around if at end of item collection
-	      if (!itemToClone.length) {
-	        itemToClone = $(this).siblings(':first');
-	      }
-	      // grab item, clone, add marker class, add to collection
-	      itemToClone.children(':first-child').clone()
-	        .addClass("cloneditem-"+(i))
-	        .appendTo($(this));
-	    }
-	  });
-	}());
-</script>
+
 <title>오늘의 짐</title>
 </head>
 
@@ -204,7 +181,7 @@
 				<div class="col-lg-12">
 					<div class="section-title">
 						<span>오늘의 짐</span>
-						<h2>인기 헬스장</h2>
+						<h2>요즘 <strong style="color:red">HOT</strong> GYM</h2>
 					</div>
 				</div>
 			</div>

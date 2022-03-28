@@ -157,7 +157,7 @@
 					<!-- 내용물 넣을 것 이 div안에 넣으시면 됩니다. -->
 					<div>
 						<h2 style="color: white;">회원 목록</h2>
-						<table class="table" style="width: 850px; table-layout:fixed;" border="1" cellpadding="1" cellspacing="10" border="1">
+						<table class="table" style="width: 850px; table-layout: fixed;" border="1" cellpadding="1" cellspacing="10" border="1">
 							<thead class="thead-light">
 								<tr>
 									<th scope="col">회원번호</th>
@@ -168,7 +168,7 @@
 							</thead>
 
 							<c:forEach var="member" items="${gymMemberList}">
-								<tr class="table-light">
+								<tr>
 									<td>${member.mnum}</td>
 									<td>${member.memail}</td>
 									<td><a href="/owner/gymMemberList/${member.mnum}">${member.tname}</a></td>
