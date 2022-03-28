@@ -27,6 +27,7 @@ public class TrainerVO {
 	private String gtimage; //트레이너이미지
 	private String gtcareer; //트레이너 경력
 
+	private String gname; //시설이름
 	
 	
 }

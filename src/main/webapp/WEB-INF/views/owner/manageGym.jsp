@@ -159,13 +159,13 @@
 						<div class="container text-center" style="margin-top: -100px; margin-bottom: 80px;">
 							<h1 style="color: white;">헬스장 리스트</h1>
 						</div>
-						<div class="container">v
+						<div class="container">
 							<div class="row">
 								<c:forEach items="${gymLists}" var="gym">
 									<div class="col-lg-4 col-md-6">
 										<div class="class-item">
 											<div class="ci-pic">
-												<img src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="">
+												<img  style="width: 250px; height: 200px;" src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="">
 											</div>
 											<div class="ci-text">
 												<span>${gym.gcategory}</span>

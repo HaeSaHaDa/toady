@@ -55,10 +55,10 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 	
 	@Override
-	public List<TrainerVO> getTrainer(int gnum) {
+	public List<TrainerVO> getTrainer(int mnum) {
 		System.out.println("트레이너 목록가져오는 중 - 오너");
 		
-		List<TrainerVO> list = ownerMapper.getTrainer(gnum);
+		List<TrainerVO> list = ownerMapper.getTrainer(mnum);
 		
 		return list;
 	}
@@ -94,6 +94,15 @@ public class OwnerServiceImpl implements OwnerService{
 	public List<GymListVO> getGym(Criteria criteria,int mnum) {
 		System.out.println("오너 소유 헬스장 ");
 		return ownerMapper.getGym(criteria, mnum);
+	}
+
+	@Override
+	public int getGnum(String gname) {
+		System.out.println("헬스장 번호 구하는중...오너");
+		
+		String serch = "%"+gname+"%";
+		
+		return ownerMapper.getGnum(serch);
 	}			
 
 
