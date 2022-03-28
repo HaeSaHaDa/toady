@@ -27,8 +27,8 @@
 
 	<insert id="addGymList">
 	<![CDATA[
-		insert into gympage (gnum, mnum, gname, gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, ad, imagename) 
-		values (gnum_seq.nextval, #{mnum}, #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns},#{ad}, #{imagename})
+		insert into gympage (gnum, mnum, gname, gcategory, gaddress, gphone, ginform, gtime, gfacility, gsns, pr, imagename) 
+		values (gnum_seq.nextval, #{mnum}, #{gname}, #{gcategory}, #{gaddress}, #{gphone}, #{ginform}, #{gtime}, #{gfacility}, #{gsns},#{pr}, #{imagename})
 		
 	]]>
 	</insert>
@@ -57,7 +57,7 @@
 	<update id="updateGymList">
 	<![CDATA[
 	update gympage set mnum=#{mnum}, gname = #{gname}, gcategory = #{gcategory}, gaddress = #{gaddress},
-	gphone = #{gphone}, ginform = #{ginform}, gtime = #{gtime}, gfacility = #{gfacility}, gsns = #{gsns}, ad = #{ad}, imagename=#{imagename} where gnum = #{gnum}
+	gphone = #{gphone}, ginform = #{ginform}, gtime = #{gtime}, gfacility = #{gfacility}, gsns = #{gsns}, pr = #{pr}, imagename=#{imagename} where gnum = #{gnum}
 
 	]]>
 	</update>

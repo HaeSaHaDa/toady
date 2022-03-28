@@ -16,6 +16,8 @@
 		<result property="gfacility" column="gfacility" />
 		<result property="gsns" column="gsns" />
 		<result property="imagename" column="imagename" />
+		<result property="pr" column="pr" />
+
 	</resultMap>
 
 	<resultMap id="ticket" type="edu.kosmo.today.vo.TicketVO">
@@ -55,7 +57,8 @@
 
 	<select id="gymdetail" resultMap="gymList">
 
-		select * from gympage where gnum = #{gnum}
+		select * from gympage where
+		gnum = #{gnum}
 
 	</select>
 
