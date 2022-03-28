@@ -21,7 +21,7 @@ public class GymListController { //con->ser->dao
 	@Autowired
 	private GymListService gymListService;
 	
-	//@RequestMapping("/gymLists")
+/*	//@RequestMapping("/gymLists")
 	@RequestMapping(value="/common/gymLists", method=RequestMethod.GET)
 	public ModelAndView getGymLists(Model model, ModelAndView mav) {
 		
@@ -30,8 +30,8 @@ public class GymListController { //con->ser->dao
 		mav.setViewName("/common/gymLists");
 		return mav;
 		
-	}
-	
+	}*/
+/*
 	//@RequestMapping("/viewGym/{gnum}")
 	@RequestMapping(value="/common/gymdetail/{gnum}", method=RequestMethod.POST)
 	public String viewGym(@PathVariable int gnum, Model model) {
@@ -41,7 +41,7 @@ public class GymListController { //con->ser->dao
 		
 		return "common/gymdetail";
 	}
-
+*/
 	@RequestMapping(value="/common/search", method=RequestMethod.POST)
 	public String search(Criteria cri, GymListVO gymListVO, Model model) {
 		System.out.println("검색어 : " + gymListVO.getKeyword());

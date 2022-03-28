@@ -194,7 +194,7 @@
 		<div class="container">
 
 			<div class="row">
-				<c:forEach items="${gymLists}" var="gym">
+				<c:forEach items="${gymList}" var="gym">
 					<div class="col-lg-4 col-md-6">
 						<div class="class-item">
 							<div class="ci-pic">

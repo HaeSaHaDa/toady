@@ -50,13 +50,13 @@ public class GymPageController {
 	private GymService service;
 
 	// 시설목록으로 가기
-	@GetMapping("/common/gymlist")
+	@GetMapping("/common/gymLists")
 	public ModelAndView gymList(Criteria cri, ModelAndView mav) {
 		log.info("시설목록으로 들어가는 중");
 
 		List<GymVO> list = service.gymList(cri);
 
-		mav.setViewName("/common/gymList");
+		mav.setViewName("/common/gymLists");
 		mav.addObject("gymList", list);
 
 		int total = service.getGymTotal();
