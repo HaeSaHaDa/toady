@@ -136,7 +136,7 @@ public class AdminController {
 
 
 	// 관리자페이지 회원구분 수정 ex(ROLE_USER -> ROLE_BUSINESS)
-	@PutMapping("/manageMember/{memail}")
+	@PutMapping("/manageMember/{mid}")
 	public ResponseEntity<String> authUpdate(@RequestBody MemberVO memberVO, Model model) {
 
 		ResponseEntity<String> entity = null;
@@ -155,7 +155,25 @@ public class AdminController {
 		return entity;
 
 	}
-	
+	// 관리자페이지 헬스장 오너 회원구분 수정 ex(ROLE_USER -> ROLE_BUSINESS)
+	@PutMapping("/ownerList/{mid}")
+	public ResponseEntity<String> ownerAuthUpdate(@RequestBody MemberVO memberVO, Model model) {
+
+		ResponseEntity<String> entity = null;
+		
+		try {
+			memberService.modify(memberVO);
+			// 수정 성공하면 성공 상태메시지 저장
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 업데이트가 실패하면 실패 상태메시지 저장
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		// 업데이트처리 HTTP 상태 메시지 리턴
+		return entity;
+
+	}
 	
 	// 관리자페이지 쪽지 작성 페이지 진입
 	@GetMapping("/notePost/{mnum}")
@@ -335,25 +353,7 @@ public class AdminController {
 			return mav;
 		}
 		
-		// 관리자페이지 헬스장 오너 회원구분 수정 ex(ROLE_USER -> ROLE_BUSINESS)
-		@PutMapping("/ownerList/{memail}")
-		public ResponseEntity<String> ownerAuthUpdate(@RequestBody MemberVO memberVO, Model model) {
 
-			ResponseEntity<String> entity = null;
-			
-			try {
-				memberService.modify(memberVO);
-				// 수정 성공하면 성공 상태메시지 저장
-				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-			} catch (Exception e) {
-				e.printStackTrace();
-				// 업데이트가 실패하면 실패 상태메시지 저장
-				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-			}
-			// 업데이트처리 HTTP 상태 메시지 리턴
-			return entity;
-
-		}
 		
 		//등록 신청 뷰
 		@GetMapping("/registListView")
