@@ -503,6 +503,9 @@ label.star:before {
 										시작날짜<span><fmt:formatDate value="${myticket.startdate}" pattern="yyyy/MM/dd" /></span>
 									</p>
 									<div class="last">
+									<input type="hidden" class="payid" name="payid" value="${myticket.payid}">
+									<input type="hidden" class="ordernum" name="ordernum" value="${myticket.ordernum}">
+									<input type="hidden" class="tknum" name="tknum" value="${myticket.tknum}">
 										<p>${myticket.cost}원</p>
 										<button type="button" class="goRivew" data-toggle="modal" data-target="#form${status.index}">리뷰작성</button>
 										<button class="goback">환불하기</button>
@@ -665,9 +668,49 @@ label.star:before {
 			})
 
 		});
+		
+		$(".goback").on("click",function(){
+	    	  console.log("환불신청버튼누름");
+	    	  
+	    	  let payid = $(this).parent("div").find(".payid").val();
+	    	  console.log("페이아이디......."+payid);
+	    	  let ordernum = $(this).parent("div").find(".ordernum").val();
+	    	  let tknum = $(this).parent("div").find(".tknum").val();
+	    	  
+	    	  console.log("페이아이디.."+payid);
+	    	  
+	    	  let data = {
+	    			  payid : payid,
+	    			  ordernum : ordernum,
+					  tknum : tknum
+			  }
+	    	   
+	    	  console.log(payid+"..."+ordernum);
+	    	  
+	    	  $.ajax({
+		           type : "POST",
+		           url : "/insertBack",	               
+		           cache : false,
+		          	contentType:'application/json; charset=utf-8',
+		           data: JSON.stringify(data), 
+		           success: function (result) { 	   
+                    
+		        	   if(result=="ok"){                     
+		        		   alert("환불신청완료");
+		        	   }else{
+		        		   alert("이미 신청하셨습니다.");
+		        	   }               
+		                                   
+		           },
+		           error: function (e) {
+		               console.log(e);
+		               console.log("실패");
+		           }
+		       })    	  
 
 	});
 
+	})
 	function closeModal() {
 		$('.modal').modal('hide');
 	}
