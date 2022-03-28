@@ -371,7 +371,7 @@
 						<div class="row">
 							<div class="col-lg-4">
 								<div class="cart-buttons">
-									<a href="/deletewishall" class="primary-btn .continue-shop">찜 비우기</a> <a href="#" class="primary-btn continue-shop">더 둘러보기</a>
+									<a href="/deletewishall" class="primary-btn .continue-shop">찜 비우기</a> <a href="${pageContext.request.contextPath}/common/gymLists" class="primary-btn continue-shop">더 둘러보기</a>
 								</div>
 
 							</div>

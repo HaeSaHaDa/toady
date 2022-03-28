@@ -30,9 +30,10 @@
 	</delete>
 
 	<!-- 트레이너 목록가져오기 -->
-	<select id="getTrainer"
-		resultType="edu.kosmo.today.vo.TrainerVO">
-		select * from trainer where gnum = #{gnum}
+	<select id="getTrainer"	resultType="edu.kosmo.today.vo.TrainerVO">
+	<![CDATA[
+		select * from trainer t,gympage g where t.gnum = g.gnum and mnum = #{mnum}
+	 ]]>
 	</select>
 
 	<!-- 트레이너 등록 -->
@@ -90,7 +91,9 @@
 	]]>
 	</select>
 
-
+	<select id="getGnum" resultType="_int">
+		select gnum from gympage where gname like #{serch}
+	</select>
 
 
 </mapper>

@@ -193,10 +193,10 @@ public class OwnerController {
 		Integer mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
 		
 
-			Integer gnum = gymService.getGnum(mnum);
+			//Integer gnum = gymService.getGnum(mnum);
 
-			List<TrainerVO> list = ownerService.getTrainer(gnum);
-			System.out.println(mnum+"의 시설번호 구하는중");
+			List<TrainerVO> list = ownerService.getTrainer(mnum);
+			System.out.println(mnum+"의 트레이너 목록 구하는 중");
 			mav.setViewName("/owner/manageTrainer");
 			mav.addObject("trainer", list);
 
@@ -218,8 +218,8 @@ public class OwnerController {
 		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
-		System.out.println(mnum+"의 시설번호 구하는중");
-		int gnum = gymService.getGnum(mnum);
+		System.out.println(vo.getGname()+"의 시설번호 구하는중");
+		int gnum = ownerService.getGnum(vo.getGname());
 		System.out.println("......."+gnum);
 
 		try {
@@ -237,16 +237,13 @@ public class OwnerController {
 	@RequestMapping(value = "/updateCareer", method = RequestMethod.POST)
 	public ResponseEntity<String> updateCareer(@RequestBody TrainerVO vo) {
 		ResponseEntity<String> entity = null;
-		System.out.println("트레이너 등록중..."+vo);
+		System.out.println("트레이너 수정..."+vo);
 		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
-		System.out.println(mnum+"의 시설번호 구하는중");
-		int gnum = gymService.getGnum(mnum);
-		System.out.println("......."+gnum);
+		
 
 		try {
-			vo.setGnum(gnum);
 			ownerService.updateTrainer(vo);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
@@ -258,21 +255,19 @@ public class OwnerController {
 	}
 
 	//트레이너 삭제
-	@RequestMapping(value="/deleteTrainer/{gtname}" , method = RequestMethod.POST)
+	@RequestMapping(value="/deleteTrainer" , method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<String> deleteTrainer(@PathVariable("gtname") String gtname,TrainerVO vo) {
+	public ResponseEntity<String> deleteTrainer(@RequestBody TrainerVO vo1,TrainerVO vo) {
 		ResponseEntity<String> entity = null;
-		System.out.println("찜 하나 삭제중..." + gtname + ">>이용권번호");
+		System.out.println("트레이너 삭제중......" + vo1 + ">>트레이너");
 		UserCustomDetails member = (UserCustomDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		int mnum = noteService.getMemberNum(member.getUsername()); // 회원 번호 가져오기
-		System.out.println(mnum+"의 시설번호 구하는중");
-		int gnum = gymService.getGnum(mnum);
-		System.out.println("......."+gnum);
+		
 
 		try {
-			vo.setGnum(gnum);
-			vo.setGtname(gtname);			
+			vo.setGnum(vo1.getGnum());
+			vo.setGtname(vo1.getGtname());			
 			ownerService.deleteTrainer(vo);
 			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
 		} catch (Exception e) {

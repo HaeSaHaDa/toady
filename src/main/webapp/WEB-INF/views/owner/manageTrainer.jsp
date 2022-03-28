@@ -167,6 +167,7 @@
 						
 						 <c:forEach items="${trainer}" var="trainer">
 						 	<tr style="color: white;">
+						 	<input type="hidden" id="gnum" value="${trainer.gnum}">
 						 		<td class="trainer-name">${trainer.gtname}</td>
 						 		<td style="word-break:break-all;" class="trainer-career">${trainer.gtcareer}</td>
 						 		<td class="updateTrainer">수정</td>
@@ -181,7 +182,11 @@
 					<table class="text-white" width="700" border="1" cellpadding="0" cellspacing="0" border="1">
 							<form id="insertTrainer" action="${pageContext.request.contextPath}/insertTrainer" method="post">
 								<tr>
-									<td style="width: 140px;">트레이너 이름</td>
+									<td style="width: 140px;">시설 이름</td>
+									<td><input width="200" type="text" id="gname" name="gname"></td>
+								</tr>
+								<tr>
+									<td style="width: 140px;">트레이너 이름</td>									
 									<td><input width="200" type="text" id="gtname" name="gtname"></td>
 								</tr>
 								<tr>
@@ -219,6 +224,7 @@ $(document).ready(function(){
 		
 		var gtname = $("#gtname").val();
 		var gtcareer = $("#gtcareer").val();
+		var gname = $("#gname").val();
 
 		console.log(gtcareer);
 
@@ -226,10 +232,13 @@ $(document).ready(function(){
 			alert("이름을 입력해주세요!");
 		}else if(gtcareer==""){
 			alert("내용을 입력해주세요!");
+		}else if(gname==""){
+			alert("내용을 입력해주세요!");
 		}else{
 			var form = {
 					gtname : gtname,
-					gtcareer : gtcareer
+					gtcareer : gtcareer,
+					gname : gname
 			}
 			console.log(JSON.stringify(form));
 			
@@ -264,6 +273,8 @@ $(document).ready(function(){
 			console.log(name);
 			let check = $(this).parent("tr").next("tr").find("input").val();
 			console.log(check);
+			let gnum = $(this).parent("tr").find("input").val();
+			
 			if(name != check){
 				let num = $("tbody .update-tr").length;
 				
@@ -274,6 +285,7 @@ $(document).ready(function(){
 					htmls +='<tr class = "update-tr">';
 					htmls +='<form id="update-tr">';
 					htmls +='<input type="hidden" id="name" value = "'+name+'">';
+					htmls +='<input type="hidden" id="gymnum" value = "'+gnum+'">';
 					htmls += '<td colspan="3"><textarea id="career" class="career" cols="80" ></textarea></td>';
 					htmls +='</form>';
 					htmls += '<td><button id="go" onclick= "goUpdate()" class="btn btn-light">수정</button></td>';
@@ -291,14 +303,23 @@ $(document).ready(function(){
 		console.log("트레이너 삭제버튼 누르는중");		
 		
 		let name=$(this).parent("tr").find(".trainer-name").text();
-		
+		let gnum = $(this).parent("tr").find("input").val();
 		
 		console.log("트레이너이름..."+name);
+		console.log("시설번호..."+gnum);
+		
+		var form = {
+				gtname : name,
+				gnum : gnum,
+		}
+		console.log(JSON.stringify(form));
 		
 		$.ajax({
 			type : "POST",
-			url : "/owner/deleteTrainer/"+name,
+			url : "/owner/deleteTrainer",
 			cache : false,
+			contentType : 'application/json; charset=utf-8',
+			data : JSON	.stringify(form),
 			success : function(	result) {
 				if (result == "ok") {
 					alert("삭제완료!");             
@@ -318,12 +339,14 @@ function goUpdate(){
 	
 	var gtname = $("#name").val();
 	var gtcareer = $("#career").val();
-
+	var gnum = $("#gymnum").val();
+	
 	console.log(gtname,gtcareer);
 
 	var form = {
 			gtname : gtname,
-			gtcareer : gtcareer
+			gtcareer : gtcareer,
+			gnum : gnum
 	}
 
 	console.log(JSON.stringify(form));

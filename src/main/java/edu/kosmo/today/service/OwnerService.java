@@ -14,7 +14,7 @@ public interface OwnerService {
 	public List<OrderListVO> getOrderList(int mnum);
 	public void memberRemove(int mnum); //회원 목록삭제
 	
-	public List<TrainerVO> getTrainer(int gnum);//트레이너 목록보기
+	public List<TrainerVO> getTrainer(int mnum);//트레이너 목록보기
 	public void registerTrainer(TrainerVO vo);//트레이너 등록하기
 	public void updateTrainer(TrainerVO vo); //트레이너 정보수정
 	public void deleteTrainer(TrainerVO vo);
@@ -23,5 +23,6 @@ public interface OwnerService {
 	public void remove(int storenum);	//신청목록 삭제
 	public int getGymTotal(int mnum);
 	public List<GymListVO> getGym(Criteria criteria,int mnum);//헬스장 페이징
-
+	
+	public int getGnum(String gname);
 }

@@ -25,7 +25,7 @@ public interface OwnerMapper {
 
 	public void deleteRegist(int storenum);
 
-	public List<TrainerVO> getTrainer(int gnum); // 트레이너목록가져오기
+	public List<TrainerVO> getTrainer(int mnum); // 트레이너목록가져오기
 
 	public void insertTrainer(TrainerVO vo);// 트레이너 등록
 
@@ -37,5 +37,5 @@ public interface OwnerMapper {
 
 	public List<GymListVO> getGym(@Param("criteria") Criteria criteria, @Param("mnum") int mnum);//헬스장 페이징
 
-
+	public int getGnum(String serch);
 }
