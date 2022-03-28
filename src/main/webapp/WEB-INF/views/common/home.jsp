@@ -23,6 +23,24 @@
 
 
 <title>오늘의 짐</title>
+
+
+<style>
+
+.ci-pic img {
+	width: 150px;
+	height: 200px;
+
+}
+
+#Adcard:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+    transition: transform .35s;
+}
+</style>
+
+
 </head>
 
 
@@ -167,7 +185,7 @@
 
 	<!-- Classes Section Begin -->
 	<section class="classes-section spad">
-		<div class="container">
+		<!-- <div class="container"> -->
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
@@ -176,9 +194,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="row row-cols-1 row-cols-md-5 g-4">
 				<c:forEach items="${gymAdList}" var="gym" end="4">
-					<div class="col">						
+					<div id="Adcard" class="col">						
 						<div class="class-item">
 							<div class="ci-pic">
 								<img src="${pageContext.request.contextPath}/img/${gym.imagename}" alt="">
@@ -193,7 +211,7 @@
 				</c:forEach>
 
 			</div>
-		</div>
+		<!-- </div> -->
 	</section>
 	<!-- ChoseUs Section End -->
 
@@ -203,7 +221,7 @@
 
 	<!-- Get In Touch Section Begin -->
 	<div class="gettouch-section">
-		<div class="container">
+		<div class="container"> 
 			<div class="row">
 				<div class="col-md-4">
 					<div class="gt-text">
