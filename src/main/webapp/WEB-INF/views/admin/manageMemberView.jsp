@@ -256,23 +256,23 @@
 
 							</c:when>
 							<c:otherwise>
-								<table class="table table table-bordered" width="600" border="1" cellpadding="0">
+								<table class="table table table-bordered" width="600" border="1" cellpadding="0" var="my" items="${myTicket}">
 									<thead class="thead-light">
 										<tr>
 											<th>회원번호</th>
-											<th>${myTicket.mnum}</th>
+											<th>${my.mnum}</th>
 											<th>이용권 번호</th>
-											<th>${myTicket.tknum}</th>
+											<th>${my.tknum}</th>
 											<th>구매 번호</th>
-											<th>${myTicket.ordernum}</th>
+											<th>${my.ordernum}</th>
 										</tr>
 										<tr>
 											<th>구매날짜</th>
-											<th>${myTicket.orderdate}</th>
+											<th>${my.orderdate}</th>
 											<th>금액</th>
-											<th>${myTicket.cost}</th>
+											<th>${my.cost}</th>
 											<th>이용기간</th>
-											<th>${myTicket.tdate}개월</th>
+											<th>${my.tdate}개월</th>
 										</tr>
 									<thead>
 								</table>

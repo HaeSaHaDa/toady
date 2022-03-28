@@ -21,6 +21,13 @@ public class GymListServiceImpl implements GymListService {
 		return gymListMapper.getGymLists();
 	}
 
+	//광고 이미지
+	@Override
+	public List<GymListVO> getPrGymList(){
+		return gymListMapper.getPrGymList();
+	}
+
+	
 	@Override
 	public void addGymList(GymListVO gymListVO) {
 		log.info("addGymList()...");

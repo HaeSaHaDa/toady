@@ -44,7 +44,6 @@
 	font-weight: 400;
 	margin-bottom: 50px;
 }
-
 .checkout-form input[type=text], .checkout-form input[type=email],
 	.checkout-form input[type=password], .checkout-form select {
 	width: 100%;
@@ -56,14 +55,12 @@
 	color: #414141;
 	padding: 5px 20px;
 }
-
 .order-card {
 	margin-top: 30px;
 	background: #ebebeb;
 	padding: 34px 40px;
 	border: 2px solid #f4f2f8;
 }
-
 .order-card .btn-full {
 	width: 100%;
 	font-size: 16px;
@@ -71,39 +68,31 @@
 	padding: 20px 30px;
 	margin-top: 32px;
 }
-
 .order-details {
 	padding: 38px 19px 24px;
 	background: #fff;
 }
-
 .od-warp {
 	padding: 0 26px;
 }
-
 .order-table {
 	width: 100%;
 }
-
 .order-table th {
 	font-size: 14px;
 	font-weight: 400;
 	color: #414141;
 }
-
 .order-table td {
 	font-size: 14px;
 	color: #7e7e7e;
 }
-
 .order-table thead th {
 	padding-bottom: 40px;
 }
-
 .order-table tbody td {
 	padding-bottom: 40px;
 }
-
 .site-btn {
 	display: inline-block;
 	text-align: center;
@@ -120,7 +109,6 @@
 	-o-transition: all 0.3s ease 0s;
 	transition: all 0.3s ease 0s;
 }
-
 .checkout-form {
 	margin-top: 100px;
 	background-color: grey;
@@ -243,7 +231,6 @@
 									<input type="text" placeholder="이름을 입력해주세요" id="buyer_name">
 									 <input	type="text" placeholder="핸드폰번호" id="buyer_tel"> 
 									 <input type="email"  placeholder="이메일주소" id="buyer_email">
-									 <input type="date" id="startDate" >
 								</div>
 								<div class="col-md-8">
 									<div class="form-group">
@@ -309,14 +296,16 @@
 	</section>
 	<!-- ChoseUs Section End -->
 
+	
+
 	<!-- Footer Section Begin -->
 	<%@ include file="../layout/footer.jsp"%>
-	<!-- Footer Section End -->
 
 	<!-- Login model Begin -->
 	<%@ include file="../layout/login_model.jsp"%>
 	<!-- Login model end -->
-	<!-- Js Plugins -->
+
+		<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 
 
@@ -324,13 +313,9 @@
 		$(document).ready(
 				function() {
 					let arr = $(".price").length;
-
 					console.log(arr);
-
 					let arr2 = new Array(arr);
-
 					let sum = 0;
-
 					for (let i = 0; i < arr; i++) {
 						arr2[i] = Number($(".price").eq(i).text());
 						console.log(i + "번째 텍스트" + arr2[i]);
@@ -339,29 +324,22 @@
 								arr2[i] * Number($(".wdate").eq(i).text()));
 					}
 					console.log(sum);
-
 					$(".totalprice").text(sum);
-
 				});//ready끝
-
 		$('#startDate').change(function() {
 			var date = $('#startDate').val();
 			console.log(date);
 		});
-
 		//출처: https:
 		//minaminaworld.tistory.com/13 [미나미 블로그]
-
 		function execPostCode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
 					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
 					// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
 					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 					var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
 					var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-
 					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
 					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
 					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
@@ -380,14 +358,11 @@
 					if (fullRoadAddr !== '') {
 						fullRoadAddr += extraRoadAddr;
 					}
-
 					// 우편번호와 주소 정보를 해당 필드에 넣는다.
 					console.log(data.zonecode);
 					console.log(fullRoadAddr);
-
 					$("[name=addr1]").val(data.zonecode);
 					$("[name=addr2]").val(fullRoadAddr);
-
 					/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
 					document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
 					document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
@@ -408,7 +383,6 @@
             	var post = $('#addr1').val(); 
             	var mnum = ${principal.user.mnum};
             	var totalamount =100;/*  parseInt($(".totalprice").text(), 10); */
-            	var startDate = $("#startDate").val();
             	
             	console.log("시작 날짜..."+startDate);
             	
@@ -476,5 +450,4 @@
 	<!-- Js Plugins -->
 	<%@ include file="../layout/foot_tags.jsp"%>
 </body>
-
 </html>

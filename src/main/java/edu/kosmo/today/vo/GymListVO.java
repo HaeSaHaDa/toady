@@ -27,7 +27,7 @@ public class GymListVO {
 	private String gsns;
 	private MultipartFile gymimage;
 	private String imagename; 
-	private String ad;
+	private String pr;
 	
 	private String keyword;
 }

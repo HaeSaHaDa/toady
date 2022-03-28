@@ -29,8 +29,8 @@ public class MainController {
 		System.out.println("컨트롤러를 타는가?'");
 		System.out.println("principal" + principal);
 		
-		List<GymListVO> gymLists =gymListService.getGymLists();
-		mav.addObject("gymLists", gymLists);
+		List<GymListVO> gymLists =gymListService.getPrGymList();
+		mav.addObject("gymPrList", gymLists);
 		mav.setViewName("/common/home");
 		
 		
@@ -53,14 +53,6 @@ public class MainController {
 		System.out.println("admin notePost진입");
 		return "admin/notePost";
 	}
-	@GetMapping("/user/evnetBoardView")
-	public ModelAndView evnetFirstLink(ModelAndView mav) {
-		System.out.println("event");
-		int first = service.eventNum();
-		String eventPath = "/user/eventBoardView?bid=" + String.valueOf(first);
-		System.out.println(eventPath);
-		mav.setViewName(eventPath);
-		return mav;
-	}
+
 	
 }

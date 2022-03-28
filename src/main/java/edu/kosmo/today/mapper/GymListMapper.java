@@ -31,4 +31,6 @@ public interface GymListMapper {
 
 	List<GymListVO> search(String keyword);
 
+	List<GymListVO> getPrGymList();//home페이지 헬스장 광고 리스트
+	
 }

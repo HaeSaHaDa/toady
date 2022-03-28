@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,7 +61,8 @@ public class MemberInfoController {
 
 
 	//마이페이지 회원정보 수정하기
-	@PutMapping("/memberInfo")
+	//@PutMapping("/memberInfo")
+	 @RequestMapping(value="/memberInfo", method=RequestMethod.PUT)
 	public ResponseEntity<String> memberInfoUpdate(@RequestBody MemberVO memberVO, Model model) {
 
 		ResponseEntity<String> entity = null;

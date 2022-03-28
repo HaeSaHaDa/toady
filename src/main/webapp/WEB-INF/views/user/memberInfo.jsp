@@ -79,7 +79,7 @@
 																$(location)
 																		.attr(
 																				'href',
-																				'${pageContext.request.contextPath}/user/memberInfo');
+																				'${pageContext.request.contextPath}/user/memberInf');
 															}
 														},
 														error : function(e) {

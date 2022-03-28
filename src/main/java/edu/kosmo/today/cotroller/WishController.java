@@ -2,6 +2,7 @@ package edu.kosmo.today.cotroller;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -181,8 +182,10 @@ public class WishController {
 		String tamount1 = request.getParameter("paidamount");
 		int mnum = Integer.valueOf(mnum1);
 		int tamount = Integer.valueOf(tamount1);
-
-		String startDate = request.getParameter("startDate")+" 00:00:00";
+		LocalDate now = LocalDate.now();
+		System.out.println(now);
+		//String startDate = request.getParameter("startDate")+" 00:00:00";
+		String startDate = String.valueOf(now)+" 00:00:00";
 		System.out.println("시작날짜/////" + startDate);
 		Timestamp start = Timestamp.valueOf(startDate);
 		System.out.println("시작날짜/////" + start);
@@ -253,6 +256,7 @@ public class WishController {
 		log.info("*********************controller - success22");
 		return result.toString();
 	}
+
 
 	@RequestMapping("/user/complete")
 	public ModelAndView complete(ModelAndView mav) {

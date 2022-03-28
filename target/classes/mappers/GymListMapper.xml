@@ -17,7 +17,13 @@
 	]]>
 	</select>
 
-
+	<!-- 광고 -->
+	<select id="getPrGymList"
+		resultType="edu.kosmo.today.vo.GymListVO">
+	<![CDATA[
+		select * from gympage where pr = 1 
+	]]>
+	</select>
 
 	<insert id="addGymList">
 	<![CDATA[

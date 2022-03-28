@@ -9,6 +9,9 @@ public interface GymListService {
 	// savePath);
 	List<GymListVO> getGymLists();
 
+	//광고 겟짐
+	List<GymListVO> getPrGymList();	
+	
 	void addGymList(GymListVO gymListVO);
 
 	void deleteGymList(int gnum);
