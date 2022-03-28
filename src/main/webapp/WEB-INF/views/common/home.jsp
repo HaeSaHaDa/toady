@@ -189,8 +189,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="section-title">
-						<span>오늘의 짐</span>
-						<h2>인기 헬스장</h2>
+						<span>오늘의 GYM</span>
+						<h2>요즘 <strong style="color:red">HOT</strong> GYM</h2>
 					</div>
 				</div>
 			</div>
@@ -227,7 +227,7 @@
 					<div class="gt-text">
 						<i class="fa fa-map-marker"></i>
 						<p>
-							333 Middle Winchendon Rd, Rindge,<br /> NH 03461
+							서울시 금천구 가산동 어딘가<br />210928
 						</p>
 					</div>
 				</div>
@@ -235,15 +235,15 @@
 					<div class="gt-text">
 						<i class="fa fa-mobile"></i>
 						<ul>
-							<li>125-711-811</li>
-							<li>125-668-886</li>
+							<li>02-123-456</li>
+							<li>010-1234-5678</li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="gt-text email">
 						<i class="fa fa-envelope"></i>
-						<p>Support.gymcenter@gmail.com</p>
+						<p>todayGym@dumbbell.babel</p>
 					</div>
 				</div>
 			</div>
@@ -260,7 +260,7 @@
 						<div class="fa-logo">
 							<a href="#"><img src="/img/logo.png" alt=""></a>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+						<p>오늘의 GYM 은 회원과 헬스장의 중개사이트로,회원은 여러 헬스장의 정보를 비교하고 이용권을 결제할수있고 , </p>
 						<div class="fa-social">
 							<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-youtube-play"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> <a
 								href="#"><i class="fa  fa-envelope-o"></i></a>
