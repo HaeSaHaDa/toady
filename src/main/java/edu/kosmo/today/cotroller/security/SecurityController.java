@@ -62,7 +62,7 @@ public class SecurityController extends WebSecurityConfigurerAdapter {
 				.antMatchers("/common/**","/js/**","/css/**", "/img/**", "/fonts/**","/Source/**","/gethersource/**")
 				.permitAll()
 				.antMatchers("/user/**").authenticated()
-				.antMatchers("/owner/**").access("hasAnyRole('ROLE_BUSI')")
+				.antMatchers("/owner/**").access("hasAnyRole('ROLE_BUSINESS')")
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.and() 
 				.logout()

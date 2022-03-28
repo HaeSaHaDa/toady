@@ -6,7 +6,7 @@
 	<li><a href="${pageContext.request.contextPath}/common/gymLists">시설찾기</a></li>
 	<li><a href="${pageContext.request.contextPath}/common/findMap">내 주변에서 찾기</a></li>
 	<li><a href="${pageContext.request.contextPath}/common/faqboard">FAQ</a></li>
-	<sec:authorize access="hasAnyRole('ROLE_USER','ROLE_BUSI','ROLE_ADMIN')">
+	<sec:authorize access="hasAnyRole('ROLE_USER','ROLE_BUSINESS','ROLE_ADMIN')">
 		<li><a href="${pageContext.request.contextPath}/user/wishlist">찜</a></li>
 		<li><a href="#">mypage</a>
 			<ul class="dropdown">
@@ -19,7 +19,7 @@
 				<li><a href="${pageContext.request.contextPath}/user/registView">시설 등록 신청</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/registListView/${principal.user.mnum}">시설 등록 신청 내역</a></li>
 				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_BUSI')">
+				<sec:authorize access="hasRole('ROLE_BUSINESS')">
 					<li><a href="${pageContext.request.contextPath}/owner/manageGym/${principal.user.mnum}">시설 등록 내역</a></li>
 					<li><a href="${pageContext.request.contextPath}/owner/manageTrainer">트레이너 관리</a></li>
 					<li><a href="${pageContext.request.contextPath}/owner/gymMemberList">회원 목록 보기</a></li>
